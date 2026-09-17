@@ -1,0 +1,42 @@
+# Exclude reference template folder
+template/
+template
+
+# Dependencies
+**/node_modules/
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+
+# Next.js build outputs
+**/.next/
+.next/
+**/out/
+out/
+**/build/
+build/
+
+# Testing / Coverage
+/coverage
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment files
+.env*
+!.env.example
+
+# Vercel
+.vercel/
+
+# TypeScript cache
+*.tsbuildinfo
+**/next-env.d.ts
