@@ -33,6 +33,16 @@
     }
   },
   {
+    "id": "farhan",
+    "name": "Farhan Azad",
+    "role": "Software Developer",
+    "bio": "Farhan is a software developer with a strong foundation in full-stack development, specializing in MERN and .NET technologies. He enjoys building efficient, user-friendly applications and turning ideas into practical solutions through clean development, problem-solving, and continuous learning.",
+    "image": "/images/team/farhan.webp",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/farhan-azad-958595257/"
+    }
+  },
+  {
     "id": "saqib",
     "name": "Saqib",
     "role": "Design Lead",
@@ -41,6 +51,16 @@
     "socials": {
       "linkedin": "https://www.linkedin.com/feed/",
       "twitter": "https://twitter.com/home"
+    }
+  },
+  {
+    "id": "mubashir",
+    "name": "Mubashir Masoodi",
+    "role": "Senior Developer & Team Lead",
+    "bio": "Mubashir leads engineering initiatives with a focus on scalable architecture, code quality, and team mentorship. He guides development cycles from concept to deployment, ensuring technical solutions remain robust and aligned with product goals.",
+    "image": "/images/team/mubashir.webp",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/feed/"
     }
   }
 ]
