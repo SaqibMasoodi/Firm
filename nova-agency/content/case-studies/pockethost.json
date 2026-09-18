@@ -1,0 +1,22 @@
+{
+  "id": "pockethost",
+  "title": "PocketHost",
+  "description": "A mobile platform that lets users host dedicated Minecraft servers directly from Android devices without port forwarding or desktop hardware.",
+  "image": "/images/case-studies/pockethost/gemini_generated_image_g5d2tog5d2tog5d2.png",
+  "slug": "pockethost",
+  "siteUrl": "https://pockethost.online",
+  "tags": [
+    "Mobile App",
+    "Automation",
+    "UI/UX"
+  ],
+  "client": "PocketHost",
+  "challenge": "Minecraft server hosting is typically tied to desktop hardware, manual Java setup, and router port forwarding, making self-hosting difficult on Android devices and cellular networks.",
+  "solution": "Built a native Android app with Kotlin and Jetpack Compose that launches bundled ARM64 OpenJDK runtimes through a JNI launcher, paired with a Node.js TCP/UDP relay network for zero-configuration connectivity and Geyser integration for Bedrock cross-play.",
+  "results": [
+    "Enabled dedicated Minecraft server hosting directly on Android devices",
+    "Eliminated the need for router port forwarding through a relay network",
+    "Integrated Bedrock cross-play support with Geyser",
+    "Delivered a mobile-first hosting experience with a native Android interface"
+  ]
+}

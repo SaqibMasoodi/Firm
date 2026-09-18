@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { services } from "@/lib/constants";
+import type { Service } from "@/types";
 
 function PlusIcon() {
   return (
@@ -15,7 +15,13 @@ function PlusIcon() {
   );
 }
 
-export default function ServicesAccordion() {
+interface ServicesAccordionProps {
+  services?: Service[];
+}
+
+export default function ServicesAccordion({
+  services = [],
+}: ServicesAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (

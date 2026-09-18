@@ -1,0 +1,18 @@
+{
+  "name": "Nova",
+  "description": "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
+  "url": "https://nova.agency",
+  "email": "info@nova.agency",
+  "phone": "01234 567 890",
+  "address": {
+    "line1": "Nova Office Complex",
+    "line2": "13 Imaginary Street",
+    "city": "Manchester"
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/",
+    "twitter": "https://twitter.com/home",
+    "linkedin": "https://www.linkedin.com/feed/"
+  }
+}

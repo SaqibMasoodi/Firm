@@ -1,0 +1,13 @@
+{
+  "id": "business-automation-ai",
+  "title": "Business Automation & AI",
+  "description": "Streamline your operations with intelligent automation. We set up WhatsApp automation, CRM systems, invoice automation, and custom workflow solutions that save time and reduce human error.",
+  "image": "/images/services/business-automation-ai/cover.webp",
+  "slug": "business-automation-ai",
+  "features": [
+    "WhatsApp automation",
+    "CRM setup",
+    "Invoice automation",
+    "Workflow automation"
+  ]
+}

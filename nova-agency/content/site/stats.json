@@ -1,0 +1,38 @@
+[
+  {
+    "value": "98%",
+    "label": "Satisfaction rate",
+    "description": "Nova boasts an impressive client satisfaction rate of 98%, reflecting our commitment to excellence and the effectiveness of our strategies in meeting client objectives.",
+    "variant": "dark"
+  },
+  {
+    "value": "236+",
+    "label": "Happy clients",
+    "description": "We've had the privilege of partnering with a diverse range of businesses, from startups to established enterprises, each with their unique challenges and aspirations.",
+    "variant": "green"
+  },
+  {
+    "value": "100%",
+    "label": "Hard work",
+    "description": "We will 100% produce hard work no matter what. In an industry where dedication and results speak volumes, Nova stands out by delivering an unprecedented 100% hard work rate.",
+    "variant": "dark"
+  },
+  {
+    "value": "10+",
+    "label": "Years of experience",
+    "description": "Celebrating a decade of excellence, Nova has been at the forefront of the technology and creative industry. Our extensive experience has established us as trusted partners for brands looking to make an impact.",
+    "variant": "green"
+  },
+  {
+    "value": "21",
+    "label": "Countries with clients",
+    "description": "With clients spread across 21+ countries, Nova combines global reach with local expertise. This unique approach enables us to tailor solutions that resonate on a global scale.",
+    "variant": "dark"
+  },
+  {
+    "value": "24/7",
+    "label": "Support from our team",
+    "description": "Our commitment to our clients extends beyond regular business hours. Nova offers 24/7 customer support to ensure that our clients always have access to the assistance and guidance they need.",
+    "variant": "green"
+  }
+]

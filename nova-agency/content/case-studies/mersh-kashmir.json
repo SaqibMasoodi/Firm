@@ -1,0 +1,27 @@
+{
+  "id": "mersh-kashmir",
+  "title": "Mersh Kashmir",
+  "description": "A modern e-commerce catalog for authentic Kashmiri products, showcasing wearables, shawls, dry fruits, saffron, and handcrafted goods through a streamlined shopping experience.",
+  "image": "/images/case-studies/mersh-kashmir/screenshot-2026-09-18-220913.png",
+  "slug": "mersh-kashmir",
+  "siteUrl": "https://mershkashmir.in",
+  "tags": [
+    "Website",
+    "Web App",
+    "UI/UX",
+    "Automation",
+    "SEO"
+  ],
+  "client": "Mersh Kashmir",
+  "challenge": "Create a lightweight online storefront that could showcase authentic Kashmiri products, organize an expanding catalog without a traditional database, and provide a simple ordering experience through WhatsApp rather than a full e-commerce checkout.",
+  "solution": "Built a static HTML, Tailwind CSS, and vanilla JavaScript storefront featuring category-based browsing, product detail modals, cart and wishlist functionality, WhatsApp-powered checkout, PDF order receipt generation, and a Python automation script that rebuilds the catalog by scanning the products directory.",
+  "results": [
+    "Responsive e-commerce catalog delivered",
+    "Filesystem-driven product catalog implemented",
+    "Cart and wishlist interactions completed",
+    "WhatsApp-based ordering workflow integrated",
+    "PDF order receipt generation implemented",
+    "Product gallery and detail modal experience built",
+    "SEO and social sharing metadata included"
+  ]
+}

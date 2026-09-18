@@ -66,7 +66,7 @@ export default function CompanySnapshot() {
                     {/* Item 2: Skyline Meeting Image */}
                     <div className="stat-image-wrapper">
                       <Image
-                        src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/663a3ea4795361db872d7652_ant-rozetsky-HXOllTSwrpM-unsplash%20(3).webp"
+                        src="/images/about/snapshot-1.webp"
                         alt="City view office"
                         width={800}
                         height={533}
@@ -114,7 +114,7 @@ export default function CompanySnapshot() {
                     {/* Item 5: Whiteboard Meeting Image */}
                     <div className="stat-image-wrapper">
                       <Image
-                        src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/66386a9c5a29d081bf4e6f7e_adrian-cuj-o_9YmCY0bag-unsplash-5.webp"
+                        src="/images/about/snapshot-2.webp"
                         alt="Meeting room brainstorming"
                         width={800}
                         height={533}

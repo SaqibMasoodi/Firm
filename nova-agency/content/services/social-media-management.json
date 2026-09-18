@@ -1,0 +1,14 @@
+{
+  "id": "social-media-management",
+  "title": "Social Media Management",
+  "description": "Stay ahead of the curve with strategic social media management. We handle content calendars, create engaging reels, write compelling captions, track analytics, and build your community — so you can focus on your business.",
+  "image": "/images/services/social-media-management/cover.webp",
+  "slug": "social-media-management",
+  "features": [
+    "Content calendars",
+    "Reels",
+    "Captions",
+    "Analytics",
+    "Community management"
+  ]
+}

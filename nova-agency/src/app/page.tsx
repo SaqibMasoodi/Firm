@@ -5,17 +5,25 @@ import Team from "@/components/sections/team";
 import FAQ from "@/components/sections/faq";
 import CaseStudiesPreview from "@/components/sections/case-studies-preview";
 import Testimonials from "@/components/sections/testimonials";
+import { getFeaturedCaseStudies, getServices, getSiteHeader, getTestimonials } from "@/lib/content";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [featuredStudies, services, homeHeader, testimonialsData] = await Promise.all([
+    getFeaturedCaseStudies(),
+    getServices(),
+    getSiteHeader("home"),
+    getTestimonials(),
+  ]);
+
   return (
     <div className="page-wrapper">
-      <Hero />
+      <Hero header={homeHeader} />
       <ClientLogos />
-      <ServicesAccordion />
+      <ServicesAccordion services={services} />
       <Team />
       <FAQ />
-      <CaseStudiesPreview />
-      <Testimonials />
+      <CaseStudiesPreview caseStudies={featuredStudies} />
+      <Testimonials data={testimonialsData} />
     </div>
   );
 }

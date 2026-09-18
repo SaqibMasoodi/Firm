@@ -49,7 +49,7 @@ export default function Navbar() {
       <div className="navbar-container">
         <Link href="/" className="navbar-logo-link" onClick={() => setIsOpen(false)}>
           <Image
-            src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/66386a9c5a29d081bf4e6f71_Nova_Logo.svg"
+            src="/images/brand/logo.svg"
             alt={siteConfig.name}
             width={152}
             height={44}

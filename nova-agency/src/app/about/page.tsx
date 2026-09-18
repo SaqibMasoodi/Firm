@@ -8,13 +8,17 @@ import Team from "@/components/sections/team";
 import CoreValues from "@/components/sections/core-values";
 import CtaCard from "@/components/sections/cta-card";
 
+import { getSiteHeader } from "@/lib/content";
+
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "We're not just a social media marketing agency—we're your ticket to digital excellence and engagement growth.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const header = await getSiteHeader("about");
+
   return (
     <div className="page-wrapper">
       {/* 1. Subpage Hero */}
@@ -65,13 +69,14 @@ export default function AboutPage() {
                 <ScrollReveal delay={0.2}>
                   <div className="subpage-header-image-wrapper">
                     <Image
-                      src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/663a271ff7fe587abea1f9a9_darshan-patel-DfzzpBRZCT0-unsplash%20(1).webp"
-                      alt="Modern office lobby"
+                      src={header.image || "/images/about/team-culture.webp"}
+                      alt={header.alt || "Modern office lobby"}
                       width={1440}
                       height={960}
                       className="subpage-header-image"
                       priority
                       sizes="(max-width: 991px) 90vw, 45vw"
+                      style={{ objectPosition: header.objectPosition || "50% 50%" }}
                     />
                   </div>
                 </ScrollReveal>

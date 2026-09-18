@@ -1,0 +1,28 @@
+{
+  "id": "dashit",
+  "title": "DASHit",
+  "description": "A hyperlocal quick-commerce platform delivering groceries and daily essentials across Anantnag, Kashmir through a fast, mobile-first ordering experience.",
+  "image": "/images/case-studies/dashit/screenshot-2026-09-18-220732.png",
+  "slug": "dashit",
+  "siteUrl": "https://dashit.co.in",
+  "tags": [
+    "Website",
+    "Web App",
+    "Mobile App",
+    "Dashboard",
+    "UI/UX",
+    "SEO",
+    "Branding"
+  ],
+  "client": "DASHit Quick Commerce",
+  "challenge": "Build a cost-effective hyperlocal delivery platform that could support fast grocery ordering, regional delivery operations, and cross-platform access while minimizing recurring infrastructure costs for maps and related services.",
+  "solution": "Built a Next.js and Capacitor platform for web, Android, and iOS, powered by Firebase Firestore for real-time order management, OpenStreetMap-based driver tracking, an Open Food Facts product importer, and a comprehensive dark-store admin dashboard for operations.",
+  "results": [
+    "Cross-platform web, Android, and iOS experience delivered",
+    "Real-time order management and driver tracking implemented",
+    "Admin dashboard for store operations and order processing built",
+    "OpenStreetMap integration reduced dependency on paid mapping services",
+    "Automated product catalog import workflow integrated",
+    "PWA support and SEO foundations implemented with sitemap generation"
+  ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "step": 1,
+    "title": "Lead",
+    "description": "Initial contact and inquiry from potential client."
+  },
+  {
+    "step": 2,
+    "title": "Discovery Call",
+    "description": "In-depth conversation to understand your needs, goals, and challenges."
+  },
+  {
+    "step": 3,
+    "title": "Proposal",
+    "description": "Detailed project proposal with scope, timeline, and investment."
+  },
+  {
+    "step": 4,
+    "title": "Design",
+    "description": "Creative design phase with wireframes, mockups, and brand assets."
+  },
+  {
+    "step": 5,
+    "title": "Development",
+    "description": "Building your solution with clean, scalable code."
+  },
+  {
+    "step": 6,
+    "title": "Testing",
+    "description": "Rigorous QA testing across devices and scenarios."
+  },
+  {
+    "step": 7,
+    "title": "Launch",
+    "description": "Deploying your project and going live."
+  },
+  {
+    "step": 8,
+    "title": "Support",
+    "description": "Ongoing maintenance, updates, and growth support."
+  }
+]

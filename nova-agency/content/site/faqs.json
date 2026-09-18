@@ -1,0 +1,27 @@
+[
+  {
+    "id": "faq-1",
+    "question": "What services do you offer?",
+    "answer": "We offer a comprehensive range of services including software development (websites, SaaS, mobile apps), UI/UX design, branding & creative design, social media management, video editing & production, digital marketing, business automation & AI, and IT consulting. We tailor our services to meet the unique needs of each client."
+  },
+  {
+    "id": "faq-2",
+    "question": "How do you approach new projects?",
+    "answer": "Our proven workflow starts with a discovery call to understand your needs, followed by a detailed proposal. We then move through design, development, and testing phases before launch. Post-launch, we provide ongoing support and maintenance to ensure long-term success."
+  },
+  {
+    "id": "faq-3",
+    "question": "What industries do you work with?",
+    "answer": "We work with a diverse range of industries including hospitals, schools, restaurants, retail businesses, real estate companies, startups, manufacturing companies, NGOs, and government organizations. Our adaptable approach allows us to deliver results across any sector."
+  },
+  {
+    "id": "faq-4",
+    "question": "What makes your agency different from others?",
+    "answer": "What sets us apart is our end-to-end approach — we handle everything from branding and design to development and marketing under one roof. Our team combines creativity with technical expertise and data-driven strategies to deliver results. We prioritize transparency and communication at every step."
+  },
+  {
+    "id": "faq-5",
+    "question": "How do we get started?",
+    "answer": "Getting started is easy! Simply reach out through our contact form, email, or give us a call. We'll schedule a discovery call to discuss your goals, target audience, and current challenges. From there, we'll propose a customized strategy tailored to your needs and kick off your project."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "label": "About us",
+    "href": "/about"
+  },
+  {
+    "label": "Services",
+    "href": "/services"
+  },
+  {
+    "label": "Case studies",
+    "href": "/case-studies"
+  },
+  {
+    "label": "Blog",
+    "href": "/blog"
+  }
+]

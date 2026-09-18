@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { caseStudies } from "@/lib/constants";
+import { getCaseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Case studies — Nova",
@@ -18,7 +18,8 @@ function ArrowIcon() {
   );
 }
 
-export default function CaseStudiesPage() {
+export default async function CaseStudiesPage() {
+  const caseStudies = await getCaseStudies();
   return (
     <div className="page-wrapper">
       {/* Hero Header */}
@@ -75,54 +76,91 @@ export default function CaseStudiesPage() {
               <div className="section-padding-large">
                 <div className="projects-component">
                   <div className="case-studies-list">
-                    {caseStudies.map((study, index) => (
-                      <ScrollReveal key={study.id} delay={index * 0.1}>
-                        <div className="case-study-item">
-                          <Link
-                            href={`/case-studies/${study.slug}`}
-                            className="case-study-item-link"
-                          >
-                            <div className="case-study-image-wrapper">
-                              <Image
-                                src={study.image}
-                                alt={study.title}
-                                width={720}
-                                height={450}
-                                className="case-study-image"
-                                sizes="(max-width: 479px) 76vw, (max-width: 767px) 77vw, (max-width: 991px) 37vw, 39vw"
-                              />
-                            </div>
-                            <div className="case-study-title-wrapper">
-                              <div className="margin-bottom margin-xxsmall">
-                                <h2 className="heading-style-h5">
-                                  {study.title}
-                                </h2>
-                              </div>
-                              <div className="text-size-regular">
-                                {study.description}
-                              </div>
-                              <div className="project-tag-list">
-                                {study.tags.map((tag) => (
-                                  <div key={tag} className="project-tag">
-                                    <div>{tag}</div>
+                    {caseStudies.map((study, index) => {
+                      const displayTags = study.tags.slice(0, 3);
+                      const extraTags = study.tags.length - 3;
+                      return (
+                        <ScrollReveal
+                          key={study.id}
+                          delay={index * 0.1}
+                          style={{ height: "100%", display: "flex", flexDirection: "column" }}
+                        >
+                          <div className="case-study-item">
+                            <div className="case-study-item-link">
+                              <Link
+                                href={`/case-studies/${study.slug}`}
+                                style={{ display: "block", textDecoration: "none", color: "inherit" }}
+                              >
+                                <div className="case-study-image-wrapper">
+                                  <Image
+                                    src={study.image}
+                                    alt={study.title}
+                                    width={720}
+                                    height={450}
+                                    className="case-study-image"
+                                    sizes="(max-width: 479px) 76vw, (max-width: 767px) 77vw, (max-width: 991px) 37vw, 39vw"
+                                  />
+                                </div>
+                              </Link>
+                              <div className="case-study-title-wrapper">
+                                <div className="project-item-content-top">
+                                  <div className="margin-bottom margin-xxsmall">
+                                    <h2 className="heading-style-h5">
+                                      <Link
+                                        href={`/case-studies/${study.slug}`}
+                                        style={{ textDecoration: "none", color: "inherit" }}
+                                      >
+                                        {study.title}
+                                      </Link>
+                                    </h2>
                                   </div>
-                                ))}
-                              </div>
-                              <div className="project-button-wrapper">
-                                <div className="button-link">
-                                  <div className="button-text-item">
-                                    View project
+                                  <div className="text-size-regular">
+                                    {study.description}
                                   </div>
-                                  <div className="button-arrow">
-                                    <ArrowIcon />
+                                  <div className="project-tag-list">
+                                    {displayTags.map((tag) => (
+                                      <div key={tag} className="project-tag">
+                                        <div>{tag}</div>
+                                      </div>
+                                    ))}
+                                    {extraTags > 0 && (
+                                      <div className="project-tag is-count">
+                                        <div>+{extraTags}</div>
+                                      </div>
+                                    )}
                                   </div>
+                                </div>
+                                <div className="project-button-wrapper" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: "1rem" }}>
+                                  <Link href={`/case-studies/${study.slug}`} className="button-link">
+                                    <div className="button-text-item">
+                                      View case study
+                                    </div>
+                                    <div className="button-arrow">
+                                      <ArrowIcon />
+                                    </div>
+                                  </Link>
+                                  {study.siteUrl && (
+                                    <a
+                                      href={study.siteUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="button-link"
+                                    >
+                                      <div className="button-text-item">
+                                        Visit site
+                                      </div>
+                                      <div className="button-arrow">
+                                        <ArrowIcon />
+                                      </div>
+                                    </a>
+                                  )}
                                 </div>
                               </div>
                             </div>
-                          </Link>
-                        </div>
-                      </ScrollReveal>
-                    ))}
+                          </div>
+                        </ScrollReveal>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -169,7 +207,7 @@ export default function CaseStudiesPage() {
                     </div>
                     <div className="cta-image-wrapper">
                       <Image
-                        src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/663a26437b9503c0b4170be5_austin-distel-wawEfYdpkag-unsplash%20(1)%20(1).webp"
+                        src="/images/cta/cta-banner.webp"
                         alt="Collaboration"
                         width={700}
                         height={500}

@@ -21,7 +21,7 @@ export default function CtaCard({
   buttonHref = "/contact",
   secondaryButtonText = "Book a call",
   secondaryButtonHref = "/contact",
-  imageSrc = "https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/663a26437b9503c0b4170be5_austin-distel-wawEfYdpkag-unsplash%20(1)%20(1).webp",
+  imageSrc = "/images/cta/cta-banner.webp",
 }: CtaCardProps) {
   return (
     <section className="section-cta">

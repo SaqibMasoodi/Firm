@@ -67,7 +67,7 @@ export default function Footer() {
                   <div className="margin-bottom margin-small">
                     <Link href="/" className="footer-logo-link">
                       <Image
-                        src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/66386a9c5a29d081bf4e6f71_Nova_Logo.svg"
+                        src="/images/brand/logo.svg"
                         alt={siteConfig.name}
                         width={120}
                         height={34}
@@ -115,10 +115,11 @@ export default function Footer() {
                     <Link href="/about" className="footer-link">About us</Link>
                     <Link href="/services" className="footer-link">Services</Link>
                     <Link href="/case-studies" className="footer-link">Case studies</Link>
-                    <Link href="/case-studies/glowessence-skincare" className="footer-link">Case studies CMS</Link>
+                    <Link href="/case-studies/wolf-adventures-kashmir" className="footer-link">Case study sample</Link>
                     <Link href="/blog" className="footer-link">Blog</Link>
-                    <Link href="/blog/social-commerce" className="footer-link">Blog post CMS</Link>
+                    <Link href="/blog/social-commerce-trends" className="footer-link">Blog post sample</Link>
                     <Link href="/contact" className="footer-link">Contact</Link>
+                    <Link href="/sitemap" className="footer-link">Sitemap</Link>
                   </div>
 
                   <div className="footer-link-list">
@@ -144,21 +145,21 @@ export default function Footer() {
                     <div className="margin-bottom margin-xsmall">
                       <div className="weight-semibold">Follow us</div>
                     </div>
-                    <a href={siteConfig.socials.facebook} target="_blank" rel="noopener noreferrer" className="footer-social-link">
-                      <div className="social-icon"><FacebookIcon /></div>
-                      <span className="text-size-small">Facebook</span>
+                    <a href={siteConfig.socials.facebook} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                      <div className="social-icon w-embed"><FacebookIcon /></div>
+                      <div className="text-size-small text-colour-black">Facebook</div>
                     </a>
-                    <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="footer-social-link">
-                      <div className="social-icon"><InstagramIcon /></div>
-                      <span className="text-size-small">Instagram</span>
+                    <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                      <div className="social-icon w-embed"><InstagramIcon /></div>
+                      <div className="text-size-small text-colour-black">Instagram</div>
                     </a>
-                    <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer" className="footer-social-link">
-                      <div className="social-icon"><XIcon /></div>
-                      <span className="text-size-small">X</span>
+                    <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                      <div className="social-icon w-embed"><XIcon /></div>
+                      <div className="text-size-small text-colour-black">X</div>
                     </a>
-                    <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" className="footer-social-link">
-                      <div className="social-icon"><LinkedInIcon /></div>
-                      <span className="text-size-small">LinkedIn</span>
+                    <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                      <div className="social-icon w-embed"><LinkedInIcon /></div>
+                      <div className="text-size-small text-colour-black">LinkedIn</div>
                     </a>
                   </div>
                 </div>
@@ -168,10 +169,10 @@ export default function Footer() {
             <div className="padding-vertical padding-medium">
               <div className="footer-bottom">
                 <div className="footer-credit-text">
-                  © 2024 Nova X - <Link href="/contact">Licensing</Link>
+                  © {new Date().getFullYear()} Nova. All rights reserved.
                 </div>
                 <div className="footer-credit-text">
-                  Designed by <a href="https://www.influxdigital.com/" target="_blank" rel="noopener noreferrer">Influx®</a> - Powered by <a href="https://webflow.com/" target="_blank" rel="noopener noreferrer">Webflow</a>
+                  Designed &amp; built by the team at Nova
                 </div>
               </div>
             </div>

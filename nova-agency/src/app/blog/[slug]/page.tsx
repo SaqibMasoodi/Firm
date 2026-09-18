@@ -3,21 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { blogPosts } from "@/lib/constants";
+import ReactMarkdown from "react-markdown";
+import { getBlogPosts, getBlogPostBySlug } from "@/lib/content";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Not Found" };
   return {
     title: post.title,
@@ -27,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -90,43 +92,46 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="padding-global">
           <div className="container-small">
             <ScrollReveal>
-              <div
-                className="blog-post-content"
-                style={{ paddingBottom: "5rem" }}
-              >
-                {post.content.split("\n\n").map((paragraph, index) => {
-                  if (paragraph.startsWith("## ")) {
-                    return (
-                      <h2
-                        key={index}
-                        className="heading-style-h3 weight-medium"
-                        style={{ marginTop: "2.5rem", marginBottom: "1rem" }}
-                      >
-                        {paragraph.replace("## ", "")}
-                      </h2>
-                    );
-                  }
-                  if (paragraph.startsWith("### ")) {
-                    return (
-                      <h3
-                        key={index}
-                        className="heading-style-h5 weight-medium"
-                        style={{ marginTop: "2rem", marginBottom: "0.75rem" }}
-                      >
-                        {paragraph.replace("### ", "")}
-                      </h3>
-                    );
-                  }
-                  return (
-                    <p
-                      key={index}
-                      className="text-size-medium"
-                      style={{ marginBottom: "1.25rem", color: "var(--text-secondary)" }}
-                    >
-                      {paragraph}
-                    </p>
-                  );
-                })}
+                <div
+                  className="blog-post-content prose"
+                  style={{ paddingBottom: "5rem" }}
+                >
+                  <ReactMarkdown
+                    components={{
+                      h2: ({ ...props }) => (
+                        <h2
+                          className="heading-style-h3 weight-medium"
+                          style={{ marginTop: "2.5rem", marginBottom: "1rem" }}
+                          {...props}
+                        />
+                      ),
+                      h3: ({ ...props }) => (
+                        <h3
+                          className="heading-style-h5 weight-medium"
+                          style={{ marginTop: "2rem", marginBottom: "0.75rem" }}
+                          {...props}
+                        />
+                      ),
+                      p: ({ ...props }) => (
+                        <p
+                          className="text-size-medium"
+                          style={{ marginBottom: "1.25rem", color: "var(--text-secondary)", lineHeight: 1.7 }}
+                          {...props}
+                        />
+                      ),
+                      ul: ({ ...props }) => (
+                        <ul
+                          style={{ marginBottom: "1.25rem", paddingLeft: "1.5rem", listStyleType: "disc", color: "var(--text-secondary)" }}
+                          {...props}
+                        />
+                      ),
+                      li: ({ ...props }) => (
+                        <li style={{ marginBottom: "0.5rem" }} {...props} />
+                      ),
+                    }}
+                  >
+                    {post.content}
+                  </ReactMarkdown>
 
                 <div style={{ marginTop: "3rem" }} className="button-group">
                   <Link href="/blog" className="button-secondary">

@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
+import ClientLogos from "@/components/sections/client-logos";
 import ServicesAccordion from "@/components/sections/services-accordion";
 import CaseStudiesPreview from "@/components/sections/case-studies-preview";
-import ClientLogos from "@/components/sections/client-logos";
 import { stats } from "@/lib/constants";
+import { getServices, getFeaturedCaseStudies, getSiteHeader } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -13,7 +14,12 @@ export const metadata: Metadata = {
     "Explore our comprehensive range of services including software development, UI/UX design, branding, digital marketing, and business automation.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [services, featuredStudies, header] = await Promise.all([
+    getServices(),
+    getFeaturedCaseStudies(),
+    getSiteHeader("services"),
+  ]);
   return (
     <div className="page-wrapper">
       {/* Subpage Hero */}
@@ -61,13 +67,14 @@ export default function ServicesPage() {
                 <ScrollReveal delay={0.2}>
                   <div className="subpage-header-image-wrapper">
                     <Image
-                      src="https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/663a26437b9503c0b4170be5_austin-distel-wawEfYdpkag-unsplash%20(1)%20(1).webp"
-                      alt="Our services"
+                      src={header.image || "/images/cta/cta-banner.webp"}
+                      alt={header.alt || "Our services"}
                       width={720}
                       height={540}
                       className="subpage-header-image"
                       priority
                       sizes="(max-width: 991px) 90vw, 42vw"
+                      style={{ objectPosition: header.objectPosition || "50% 50%" }}
                     />
                   </div>
                 </ScrollReveal>
@@ -78,10 +85,10 @@ export default function ServicesPage() {
       </header>
 
       <ClientLogos />
-      <ServicesAccordion />
+      <ServicesAccordion services={services} />
 
       {/* Case Studies */}
-      <CaseStudiesPreview />
+      <CaseStudiesPreview caseStudies={featuredStudies} />
 
       {/* Stats Section */}
       <div className="section-stats">

@@ -1,0 +1,17 @@
+{
+  "home": {
+    "image": "/images/hero/hero-banner.jpg",
+    "objectPosition": "53% 43%",
+    "alt": "Nova Creative Office"
+  },
+  "about": {
+    "image": "/images/headers/chatgpt-image-sep-18,-2026,-10_24_03-pm.png",
+    "objectPosition": "46% 36%",
+    "alt": "Modern office lobby"
+  },
+  "services": {
+    "image": "/images/headers/gemini_generated_image_ys9r8uys9r8uys9r.png",
+    "objectPosition": "75% 53%",
+    "alt": "Our services"
+  }
+}

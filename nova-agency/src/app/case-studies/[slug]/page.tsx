@@ -3,21 +3,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { caseStudies } from "@/lib/constants";
+import { getCaseStudies, getCaseStudyBySlug } from "@/lib/content";
+
+function ArrowIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256">
+      <path fill="currentColor" d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z" />
+    </svg>
+  );
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return caseStudies.map((study) => ({
+  const studies = await getCaseStudies();
+  return studies.map((study) => ({
     slug: study.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const study = caseStudies.find((s) => s.slug === slug);
+  const study = await getCaseStudyBySlug(slug);
   if (!study) return { title: "Not Found" };
   return {
     title: study.title,
@@ -27,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
-  const study = caseStudies.find((s) => s.slug === slug);
+  const study = await getCaseStudyBySlug(slug);
 
   if (!study) {
     notFound();
@@ -65,6 +74,23 @@ export default async function CaseStudyPage({ params }: Props) {
                       ))}
                     </div>
                   </ScrollReveal>
+                  {study.siteUrl && (
+                    <ScrollReveal delay={0.4}>
+                      <div className="project-button-wrapper" style={{ marginTop: "2rem" }}>
+                        <a
+                          href={study.siteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="button-link"
+                        >
+                          <div className="button-text-item">Visit site</div>
+                          <div className="button-arrow">
+                            <ArrowIcon />
+                          </div>
+                        </a>
+                      </div>
+                    </ScrollReveal>
+                  )}
                 </div>
                 <ScrollReveal delay={0.2}>
                   <div className="subpage-header-image-wrapper">

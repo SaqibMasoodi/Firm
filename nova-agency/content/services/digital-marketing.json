@@ -1,0 +1,14 @@
+{
+  "id": "digital-marketing",
+  "title": "Digital Marketing",
+  "description": "Drive targeted traffic and convert visitors into customers. Our data-driven marketing strategies span SEO, Google Ads, Facebook Ads, email marketing, and lead generation to maximize your ROI.",
+  "image": "/images/services/digital-marketing/cover.webp",
+  "slug": "digital-marketing",
+  "features": [
+    "SEO",
+    "Google Ads",
+    "Facebook Ads",
+    "Email marketing",
+    "Lead generation"
+  ]
+}

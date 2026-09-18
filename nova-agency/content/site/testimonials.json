@@ -1,0 +1,26 @@
+{
+  "image": "/images/testimonials/testimonials/476f2f9d0991e62b989589fe0a450978.jpg",
+  "testimonials": [
+    {
+      "id": "wolf-testimonial",
+      "quote": "Nova transformed how we present Wolf Adventures Kashmir. Every detail from brand presence to ski packages was handled with speed and precision.",
+      "author": "Mubashir Riyaz",
+      "role": "Founder, Wolf Adventures Kashmir",
+      "rating": 5
+    },
+    {
+      "id": "dreamcabs-testimonial",
+      "quote": "Our goal was to make cab booking simple and reliable. Nova built a polished digital presence that consistently impresses our customers.",
+      "author": "Uzair Zargar",
+      "role": "Executive Head, Dream Lines",
+      "rating": 4
+    },
+    {
+      "id": "marshkashmir-testimonial",
+      "quote": "They captured the identity of MershKashmir flawlessly. Thoughtful design decisions and smooth execution made the entire process effortless.",
+      "author": "Rouf Shah",
+      "role": "Owner, MershKashmir",
+      "rating": 5
+    }
+  ]
+}

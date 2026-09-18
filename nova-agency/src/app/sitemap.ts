@@ -1,7 +1,11 @@
 import type { MetadataRoute } from "next";
-import { caseStudies, blogPosts } from "@/lib/constants";
+import { getCaseStudies, getBlogPosts } from "@/lib/content";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [caseStudies, blogPosts] = await Promise.all([
+    getCaseStudies(),
+    getBlogPosts(),
+  ]);
   const baseUrl = "https://nova.agency";
 
   const staticPages = [
@@ -11,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/case-studies",
     "/blog",
     "/contact",
+    "/sitemap",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
