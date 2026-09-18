@@ -1,8 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: 1280,
+};
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,6 +50,36 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function updateViewport() {
+                  var w = window.screen.width;
+                  if (w < 1280) {
+                    var scale = (w / 1280).toFixed(4);
+                    var meta = document.querySelector('meta[name="viewport"]');
+                    var content = 'width=1280, initial-scale=' + scale + ', minimum-scale=' + scale + ', maximum-scale=3.0, user-scalable=yes';
+                    if (meta) {
+                      meta.setAttribute('content', content);
+                    } else {
+                      var m = document.createElement('meta');
+                      m.name = 'viewport';
+                      m.content = content;
+                      document.head.appendChild(m);
+                    }
+                  }
+                }
+                updateViewport();
+                window.addEventListener('orientationchange', function() {
+                  setTimeout(updateViewport, 100);
+                });
+              })();
+            `,
+          }}
+        />
+      </head>
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
