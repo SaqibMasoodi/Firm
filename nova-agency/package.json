@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "validate": "node scripts/validate-content.js",
-    "open:all": "open-all-pages.bat"
+    "open:all": "open-all-pages.bat",
+    "push": "push.bat"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
