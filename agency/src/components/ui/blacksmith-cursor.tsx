@@ -110,8 +110,8 @@ export default function BlacksmithCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (hammerEl) {
-        hammerEl.style.transform = `translate3d(${mouseX - 8}px, ${mouseY - 24}px, 0) rotate(${
-          isStrikingRef.current ? "-20deg" : "15deg"
+        hammerEl.style.transform = `translate3d(${mouseX - 6}px, ${mouseY - 26}px, 0) rotate(${
+          isStrikingRef.current ? "-6deg" : "22deg"
         })`;
       }
     };
@@ -159,7 +159,7 @@ export default function BlacksmithCursor() {
     const onMouseDown = (e: MouseEvent) => {
       isStrikingRef.current = true;
       if (hammerEl) {
-        hammerEl.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 24}px, 0) rotate(-20deg) scale(0.95)`;
+        hammerEl.style.transform = `translate3d(${e.clientX - 6}px, ${e.clientY - 26}px, 0) rotate(-6deg) scale(0.96)`;
       }
       spawnSparks(e.clientX, e.clientY);
     };
@@ -167,7 +167,7 @@ export default function BlacksmithCursor() {
     const onMouseUp = (e: MouseEvent) => {
       isStrikingRef.current = false;
       if (hammerEl) {
-        hammerEl.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 24}px, 0) rotate(15deg)`;
+        hammerEl.style.transform = `translate3d(${e.clientX - 6}px, ${e.clientY - 26}px, 0) rotate(22deg)`;
       }
     };
 
@@ -212,7 +212,7 @@ export default function BlacksmithCursor() {
             height: "36px",
             pointerEvents: "none",
             zIndex: 9999999,
-            transformOrigin: "8px 24px",
+            transformOrigin: "bottom right",
             transition: "transform 0.08s ease-out",
             willChange: "transform",
           }}
