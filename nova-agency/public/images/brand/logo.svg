@@ -1,6 +1,6 @@
 <svg width="210" height="45" viewBox="0 0 210 45" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="210" height="45" rx="22.5" fill="#171717"/>
-  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="18" letter-spacing="-0.025em">
+  <text x="50%" y="52%" dominant-baseline="central" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="18" letter-spacing="-0.025em">
     <tspan fill="#CBFB45">Northforge</tspan>
     <tspan fill="#FFFFFF"> Labs.</tspan>
   </text>
