@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 
 interface LogoProps {
@@ -16,6 +16,31 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
   const textRef = useRef<HTMLSpanElement>(null);
   const sparksRef = useRef<HTMLSpanElement>(null);
   const isAnimatingRef = useRef(false);
+
+  const [isMobileCollapsed, setIsMobileCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (variant !== "navbar") return;
+
+    const isSplashActive = () => {
+      try {
+        return (
+          sessionStorage.getItem("northforge_splash_viewed") !== "true" &&
+          !document.documentElement.classList.contains("splash-viewed")
+        );
+      } catch {
+        return false;
+      }
+    };
+
+    const delay = isSplashActive() ? 3400 : 1600;
+
+    const timer = setTimeout(() => {
+      setIsMobileCollapsed(true);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [variant]);
 
   const handleHover = () => {
     if (variant !== "navbar") return;
@@ -122,6 +147,12 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
   };
 
   const isNavbar = variant === "navbar";
+  const collapseClass = isNavbar
+    ? isMobileCollapsed
+      ? "is-mobile-collapsed"
+      : "is-mobile-expanded"
+    : "";
+
   const variantClass = isNavbar
     ? "is-navbar"
     : variant === "footer"
@@ -132,7 +163,7 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
 
   return (
     <span
-      className={`brand-logo-pill ${variantClass} ${className}`.trim()}
+      className={`brand-logo-pill ${variantClass} ${collapseClass} ${className}`.trim()}
       title="Northforge Labs"
       onMouseEnter={handleHover}
       onTouchStart={handleHover}
