@@ -7,7 +7,6 @@ import { BlogPostSchema } from "@/lib/schemas/blog";
 import {
   TeamMemberSchema,
   FAQSchema,
-  TestimonialSchema,
   TestimonialsSectionSchema,
   StatSchema,
   SiteConfigSchema,

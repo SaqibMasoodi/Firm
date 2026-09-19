@@ -22,18 +22,19 @@ export default function SplashScreen() {
   const textWrapRef = useRef<HTMLDivElement>(null);
   const textInnerRef = useRef<HTMLDivElement>(null);
 
-  const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return sessionStorage.getItem("northforge_splash_viewed") === "true";
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // Check if splash has already been viewed in this session
-    try {
-      if (sessionStorage.getItem("northforge_splash_viewed") === "true") {
-        setIsComplete(true);
-        return;
-      }
-    } catch (e) {
-      // Ignore private mode or storage errors
-    }
+    if (isComplete) return;
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -50,7 +51,7 @@ export default function SplashScreen() {
           try {
             sessionStorage.setItem("northforge_splash_viewed", "true");
             document.documentElement.classList.add("splash-viewed");
-          } catch (e) {}
+          } catch {}
           document.body.style.overflow = originalOverflow;
           setIsComplete(true);
         },
@@ -284,7 +285,7 @@ export default function SplashScreen() {
       document.body.style.overflow = originalOverflow;
       ctx.revert();
     };
-  }, []);
+  }, [isComplete]);
 
   if (isComplete) return null;
 

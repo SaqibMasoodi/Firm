@@ -29,7 +29,7 @@ function AnimatedHamburger({ isOpen }: { isOpen: boolean }) {
           backgroundColor: "var(--black, #171717)",
           borderRadius: "2px",
           transformOrigin: "center",
-          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+          transition: "transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
           transform: isOpen ? "translateY(7px) rotate(45deg)" : "none",
         }}
       />
@@ -40,7 +40,7 @@ function AnimatedHamburger({ isOpen }: { isOpen: boolean }) {
           width: "100%",
           backgroundColor: "var(--black, #171717)",
           borderRadius: "2px",
-          transition: "opacity 0.2s ease, transform 0.25s ease",
+          transition: "opacity 0.18s ease, transform 0.2s ease",
           opacity: isOpen ? 0 : 1,
           transform: isOpen ? "scaleX(0)" : "scaleX(1)",
         }}
@@ -53,7 +53,7 @@ function AnimatedHamburger({ isOpen }: { isOpen: boolean }) {
           backgroundColor: "var(--black, #171717)",
           borderRadius: "2px",
           transformOrigin: "center",
-          transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+          transition: "transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
           transform: isOpen ? "translateY(-7px) rotate(-45deg)" : "none",
         }}
       />
@@ -64,12 +64,14 @@ function AnimatedHamburger({ isOpen }: { isOpen: boolean }) {
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const navRef = useRef<HTMLDivElement>(null);
 
   // Close menu on route change
-  useEffect(() => {
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setIsOpen(false);
-  }, [pathname]);
+  }
 
   // Close on Escape key & click outside
   useEffect(() => {

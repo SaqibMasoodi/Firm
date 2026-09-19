@@ -74,7 +74,7 @@ export default function CaseStudiesPreview({
                               >
                                 <div className="project-image-wrapper">
                                   <Image
-                                    src={study.image}
+                                    src={study.image || "/images/og/og-image.png"}
                                     alt={study.title}
                                     width={600}
                                     height={338}

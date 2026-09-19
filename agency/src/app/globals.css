@@ -21,6 +21,12 @@ html.splash-viewed .splash-overlay {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background-color: var(--black, #171717);
+  color: var(--green, #cbfb45);
 }
 
 html {
@@ -456,7 +462,7 @@ body {
   font-weight: 500;
   color: var(--black);
   text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.22s ease, color 0.22s ease;
 }
 
 .navbar-link:hover,
@@ -479,7 +485,7 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.35s ease;
+  transition: color 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s cubic-bezier(0.22, 1, 0.36, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -567,8 +573,8 @@ body {
     visibility: hidden;
     transform: translateY(-8px) scale(0.98);
     pointer-events: none;
-    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
                 visibility 0.25s ease;
     will-change: opacity, transform;
   }
@@ -684,6 +690,29 @@ body {
 
 
 /* ===== BUTTONS ===== */
+/* ===== BUTTONS & INTERACTIVE CONTROLS (NO BLUE TAP HIGHLIGHT OR TEXT SELECTION) ===== */
+button,
+.button,
+.button-secondary,
+.button-link,
+.button.is-navbar,
+.button-text-item,
+.button-group,
+.navbar-link,
+.navbar-menu-button,
+.tagline-pill,
+.project-tag,
+.accordion-icon-wrapper,
+.faq-question,
+.service-name,
+.cta-card,
+.brand-logo-pill {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -698,7 +727,7 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.35s ease, background-color 0.35s ease;
+  transition: color 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -722,7 +751,7 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.3s ease, border-color 0.35s ease, background-color 0.35s ease;
+  transition: color 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -960,23 +989,44 @@ body {
   width: 100%;
 }
 
+/* Prevent browser scroll-anchoring jumps during accordion expand */
+.section-services,
+.services-component-wrapper,
+.services-component,
+.services-list,
+.service-accordion,
+.service-description,
+.section-faq,
+.faq-component,
+.faq-list,
+.faq-accordion,
+.faq-answer {
+  overflow-anchor: none !important;
+}
+
 .services-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
   align-items: stretch;
+  justify-content: flex-start;
 }
 
 .service-accordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   border: 1px solid var(--black);
   border-radius: 3rem;
   background-color: var(--white);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.24s ease;
   overflow: hidden;
   width: 100%;
   align-self: stretch;
   box-sizing: border-box;
+  transform-origin: top center;
 }
 
 .service-accordion:hover {
@@ -1298,7 +1348,7 @@ body {
   background-color: var(--light-grey);
   border-radius: 2rem;
   padding: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.24s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1333,7 +1383,7 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 1.5rem;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   display: block;
 }
 
@@ -2452,7 +2502,7 @@ body {
 
 .testimonials-featured-image {
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 
@@ -2481,7 +2531,7 @@ body {
   height: 100%;
   min-height: 180px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.24s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .testimonial-stack-card:hover {
@@ -2973,7 +3023,7 @@ body {
 /* ===== HERO CROWD CARD (IDENTICAL 4:3 CARD TO ABOUT HERO IMAGE) ===== */
 .hero-crowd-card {
   position: relative;
-  background-color: var(--grey, #f2f2f2);
+  background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 2.5rem;
   overflow: hidden;
@@ -2995,6 +3045,7 @@ body {
 
   .hero-crowd-card {
     border-radius: 1.75rem !important;
+    background-color: #ffffff !important;
   }
 }
 

@@ -65,39 +65,35 @@ export const CrowdCanvas = ({
 
     // TWEEN FACTORIES
     const resetPeep = ({
-        stage,
-        peep,
-      }: {
-        stage: { width: number; height: number };
-        peep: Peep;
-      }) => {
-        const direction = Math.random() > 0.5 ? 1 : -1;
-        // Scale peeps down proportionally on smaller screens so full body is visible
-        const scale = stage.height < 420 ? Math.max(0.42, stage.height / 480) : 1;
-        const scaledHeight = peep.height * scale;
-        const scaledWidth = peep.width * scale;
-        const offsetY = (30 - 80 * gsap.parseEase("power2.in")(Math.random())) * scale;
-        const startY = stage.height - scaledHeight + offsetY;
-        let startX: number;
-        let endX: number;
-        if (direction === 1) {
-          startX = -scaledWidth;
-          endX = stage.width;
-          peep.scaleX = scale;
-        } else {
-          startX = stage.width + scaledWidth;
-          endX = 0;
-          peep.scaleX = -scale;
-        }
-        peep.x = startX;
-        peep.y = startY;
-        peep.anchorY = startY;
-        return {
-          startX,
-          startY,
-          endX,
-        };
+      stage,
+      peep,
+    }: {
+      stage: { width: number; height: number };
+      peep: Peep;
+    }) => {
+      const direction = Math.random() > 0.5 ? 1 : -1;
+      const offsetY = 100 - 250 * gsap.parseEase("power2.in")(Math.random());
+      const startY = stage.height - peep.height + offsetY;
+      let startX: number;
+      let endX: number;
+      if (direction === 1) {
+        startX = -peep.width;
+        endX = stage.width;
+        peep.scaleX = 1;
+      } else {
+        startX = stage.width + peep.width;
+        endX = 0;
+        peep.scaleX = -1;
+      }
+      peep.x = startX;
+      peep.y = startY;
+      peep.anchorY = startY;
+      return {
+        startX,
+        startY,
+        endX,
       };
+    };
 
     const normalWalk = ({
       peep,
@@ -106,11 +102,11 @@ export const CrowdCanvas = ({
       peep: Peep;
       props: { startX: number; startY: number; endX: number };
     }) => {
-      const { startX, startY, endX } = props;
+      const { startY, endX } = props;
       const xDuration = 10;
       const yDuration = 0.25;
       const tl = gsap.timeline();
-      peep.baseTimeScale = randomRange(0.6, 1.4);
+      peep.baseTimeScale = randomRange(0.5, 1.5);
       tl.timeScale(peep.baseTimeScale * speedMultiplier.current);
       tl.to(
         peep,
@@ -163,23 +159,22 @@ export const CrowdCanvas = ({
           peep.drawArgs = [peep.image, ...rect, 0, 0, peep.width, peep.height];
         },
         render: (targetCtx: CanvasRenderingContext2D) => {
-            targetCtx.save();
-            targetCtx.translate(peep.x, peep.y);
-            const scaleY = Math.abs(peep.scaleX);
-            targetCtx.scale(peep.scaleX > 0 ? scaleY : -scaleY, scaleY);
-            targetCtx.drawImage(
-              peep.image,
-              peep.rect[0],
-              peep.rect[1],
-              peep.rect[2],
-              peep.rect[3],
-              0,
-              0,
-              peep.width,
-              peep.height
-            );
-            targetCtx.restore();
-          },
+          targetCtx.save();
+          targetCtx.translate(peep.x, peep.y);
+          targetCtx.scale(peep.scaleX, 1);
+          targetCtx.drawImage(
+            peep.image,
+            peep.rect[0],
+            peep.rect[1],
+            peep.rect[2],
+            peep.rect[3],
+            0,
+            0,
+            peep.width,
+            peep.height
+          );
+          targetCtx.restore();
+        },
       };
       peep.setRect(rect);
       return peep;
@@ -219,14 +214,14 @@ export const CrowdCanvas = ({
     };
 
     const initCrowd = () => {
-        // On mobile, reduce crowd count so characters are charming and readable rather than an overwhelming clump
-        const mobileMax = stage.width < 500 ? 12 : (stage.width < 800 ? 24 : availablePeeps.length);
-        const maxCount = config.maxPeeps ?? mobileMax;
-        while (availablePeeps.length && crowd.length < maxCount) {
-          const peep = addPeepToCrowd();
-          if (!peep) break;
+      const maxCount = config.maxPeeps ?? availablePeeps.length;
+      while (availablePeeps.length && crowd.length < maxCount) {
+        const peep = addPeepToCrowd();
+        if (peep && peep.walk) {
+          peep.walk.progress(Math.random());
         }
-      };
+      }
+    };
 
     const addPeepToCrowd = (): Peep | null => {
       if (!availablePeeps.length) return null;
@@ -391,7 +386,7 @@ export const CrowdCanvas = ({
         if (peep.walk) peep.walk.kill();
       });
     };
-  }, [src, rows, cols]);
+  }, [src, rows, cols, maxPeeps]);
 
   return (
     <canvas

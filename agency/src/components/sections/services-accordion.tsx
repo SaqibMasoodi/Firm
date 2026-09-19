@@ -80,7 +80,7 @@ export default function ServicesAccordion({
                                 openIndex === index
                                   ? "rotate(45deg)"
                                   : "rotate(0deg)",
-                              transition: "transform 0.3s ease",
+                              transition: "transform 0.26s cubic-bezier(0.22, 1, 0.36, 1)",
                             }}
                           >
                             <div className="accordion-icon">
@@ -88,14 +88,18 @@ export default function ServicesAccordion({
                             </div>
                           </div>
                         </div>
-                        <AnimatePresence>
+                        <AnimatePresence initial={false}>
                           {openIndex === index && (
                             <motion.div
+                              key="content"
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.35, ease: "easeInOut" }}
-                              style={{ overflow: "hidden" }}
+                              transition={{
+                                height: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+                                opacity: { duration: 0.22, ease: "easeOut" },
+                              }}
+                              style={{ overflow: "hidden", transformOrigin: "top" }}
                             >
                               <div className="service-description">
                                 <div className="service-component">

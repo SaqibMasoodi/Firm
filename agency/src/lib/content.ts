@@ -6,7 +6,6 @@ import { BlogPostSchema, type BlogPost } from "@/lib/schemas/blog";
 import {
   TeamMemberSchema,
   FAQSchema,
-  TestimonialSchema,
   TestimonialsSectionSchema,
   StatSchema,
   WorkflowStepSchema,
@@ -17,7 +16,6 @@ import {
   SiteHeadersSchema,
   type TeamMember,
   type FAQ,
-  type Testimonial,
   type TestimonialsSectionData,
   type Stat,
   type WorkflowStep,
@@ -44,7 +42,8 @@ async function readDirectoryJson<T>(
       jsonFiles.map(async (filename) => {
         const filePath = path.join(dirPath, filename);
         const fileContent = await fs.readFile(filePath, "utf-8");
-        const parsed = JSON.parse(fileContent);
+        const cleanContent = fileContent.replace(/^\uFEFF/, "").trim();
+        const parsed = JSON.parse(cleanContent);
         return schema.parse(parsed);
       })
     );
@@ -63,7 +62,8 @@ async function readFileJson<T>(
   const filePath = path.join(CONTENT_DIR, relFilePath);
   try {
     const fileContent = await fs.readFile(filePath, "utf-8");
-    const parsed = JSON.parse(fileContent);
+    const cleanContent = fileContent.replace(/^\uFEFF/, "").trim();
+    const parsed = JSON.parse(cleanContent);
     return schema.parse(parsed);
   } catch (error) {
     console.error(`Error reading content file ${relFilePath}:`, error);

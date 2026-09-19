@@ -118,7 +118,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 <ScrollReveal delay={0.2}>
                   <div className="subpage-header-image-wrapper">
                     <Image
-                      src={study.image}
+                      src={study.image || "/images/og/og-image.png"}
                       alt={study.title}
                       width={720}
                       height={540}
