@@ -424,11 +424,89 @@ body {
   font-size: 1.1rem;
 }
 
+/* Brand Logo Pill Inner Wrappers */
+.brand-logo-icon-wrap {
+  display: none;
+}
+
+.brand-logo-text-wrap {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 991px) {
   .brand-logo-pill.is-navbar {
     height: 2.45rem;
-    padding: 0 1.15rem;
     font-size: 1rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                padding 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.2s ease,
+                opacity 0.2s ease;
+  }
+
+  .brand-logo-pill.is-navbar.is-mobile-expanded {
+    width: 168px;
+    padding: 0 1.15rem;
+    justify-content: flex-start;
+  }
+
+  .brand-logo-pill.is-navbar.is-mobile-expanded .brand-logo-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    opacity: 0;
+    transform: scale(0.5) translateX(-8px);
+    pointer-events: none;
+    overflow: hidden;
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease,
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .brand-logo-pill.is-navbar.is-mobile-expanded .brand-logo-text-wrap {
+    max-width: 150px;
+    opacity: 1;
+    transform: translateX(0);
+    white-space: nowrap;
+    transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .brand-logo-pill.is-navbar.is-mobile-collapsed {
+    width: 2.45rem;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .brand-logo-pill.is-navbar.is-mobile-collapsed .brand-logo-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease,
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .brand-logo-pill.is-navbar.is-mobile-collapsed .brand-logo-text-wrap {
+    max-width: 0;
+    opacity: 0;
+    transform: translateX(-15px);
+    overflow: hidden;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
@@ -3056,3 +3134,4 @@ button,
   text-align: left;
   width: 100%;
 }
+
