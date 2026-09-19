@@ -104,6 +104,8 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  if (pathname === "/the-foundry") return null;
+
   return (
     <>
       {/* Dimmed backdrop when mobile menu is open */}

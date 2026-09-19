@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { siteConfig } from "@/lib/constants";
 import Logo from "@/components/ui/logo";
@@ -38,6 +39,7 @@ function LinkedInIcon() {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -55,6 +57,8 @@ export default function Footer() {
       // Handle error silently
     }
   };
+
+  if (pathname === "/the-foundry") return null;
 
   return (
     <footer className="footer-component">

@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function DeveloperHud() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [fps, setFps] = useState(60);
   const [scrollVelocity, setScrollVelocity] = useState(0);
@@ -137,7 +139,7 @@ export default function DeveloperHud() {
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen || pathname === "/the-foundry") return null;
 
   return (
     <aside

@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import ScrollReveal from "@/components/ui/scroll-reveal";
 import SplashScreen from "@/components/ui/splash-screen";
 
 interface HistoryItem {
@@ -16,6 +15,9 @@ export default function FoundryPage() {
   const router = useRouter();
   const [inputVal, setInputVal] = useState("");
   const [isPlayingSplash, setIsPlayingSplash] = useState(false);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+
   const [history, setHistory] = useState<HistoryItem[]>([
     {
       id: "init-1",
@@ -26,29 +28,60 @@ export default function FoundryPage() {
           </div>
           <div>All subsystems operational. Anvil calibrated to 120fps.</div>
           <div>
-            Type <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>help</span> to list available commands, or <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>agartha</span> for subterranean archives.
+            Type <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>help</span> to list available commands, or <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>exit</span> to return home.
           </div>
         </div>
       ),
     },
   ]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalEndRef = useRef<HTMLDivElement>(null);
 
+  const scrollToBottom = useCallback(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+    terminalEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, []);
+
+  // Auto focus and auto scroll on history change
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [history]);
+    scrollToBottom();
+  }, [history, scrollToBottom]);
+
+  // Global keystroke listener: typing anywhere focuses terminal input
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // Don't capture modifier combinations (Ctrl, Alt, Meta)
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+      if (document.activeElement !== inputRef.current) {
+        if (e.key.length === 1 || e.key === "Enter" || e.key === "Backspace") {
+          inputRef.current?.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, []);
 
   const handleCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
     const id = Date.now().toString();
 
+    // Add to command history stack if not empty
+    if (trimmed) {
+      setCommandHistory((prev) => [...prev, cmd.trim()]);
+      setHistoryIndex(-1);
+    }
+
     if (!trimmed) {
+      // Pressing enter on empty line creates prompt newline and scrolls down
       setHistory((prev) => [...prev, { id, command: "", output: null }]);
       return;
     }
@@ -58,7 +91,7 @@ export default function FoundryPage() {
       return;
     }
 
-    if (trimmed === "exit") {
+    if (trimmed === "exit" || trimmed === "home") {
       router.push("/");
       return;
     }
@@ -81,7 +114,7 @@ export default function FoundryPage() {
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>splash</span>   - Replay master splash sequence & hammer strike</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>strike</span>   - Execute anvil impact sequence</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>craft</span>    - Review Northforge engineering pillars</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>agartha</span>  - Access classified subterranean directory</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>agartha</span>  - Access subterranean archives</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>clear</span>    - Clear terminal buffer</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>exit</span>     - Return to surface (Home)</div>
           </div>
@@ -157,11 +190,47 @@ export default function FoundryPage() {
     if (e.key === "Enter") {
       handleCommand(inputVal);
       setInputVal("");
+      setTimeout(scrollToBottom, 10);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+      const nextIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+      setHistoryIndex(nextIndex);
+      setInputVal(commandHistory[nextIndex] || "");
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (historyIndex === -1) return;
+      const nextIndex = historyIndex + 1;
+      if (nextIndex >= commandHistory.length) {
+        setHistoryIndex(-1);
+        setInputVal("");
+      } else {
+        setHistoryIndex(nextIndex);
+        setInputVal(commandHistory[nextIndex] || "");
+      }
     }
   };
 
   return (
-    <div className="page-wrapper">
+    <div
+      ref={containerRef}
+      onClick={() => inputRef.current?.focus()}
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        height: "100vh",
+        backgroundColor: "var(--black, #0A0A0A)",
+        color: "var(--white, #FFFFFF)",
+        fontFamily: "var(--font-inter), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        fontSize: "clamp(0.875rem, 1.5vw, 0.9375rem)",
+        padding: "clamp(1rem, 2.5vw, 2.5rem)",
+        display: "flex",
+        flexDirection: "column",
+        overflowY: "auto",
+        boxSizing: "border-box",
+        cursor: "text",
+      }}
+    >
       {isPlayingSplash && (
         <SplashScreen
           forcePlay={true}
@@ -178,145 +247,96 @@ export default function FoundryPage() {
                 ),
               },
             ]);
+            setTimeout(scrollToBottom, 50);
           }}
         />
       )}
-      {/* 1. Subpage Hero Header */}
-      <header className="section-subpage-hero-header">
-        <div className="padding-global">
-          <div className="container-large">
-            <div className="section-padding-large">
-              <div className="subpage-header-component">
-                <div className="header-content">
-                  <ScrollReveal>
-                    <div className="tagline-pill">
-                      <div>Terminal OS</div>
-                    </div>
-                  </ScrollReveal>
-                  <div className="margin-bottom margin-small">
-                    <ScrollReveal delay={0.1}>
-                      <h1 className="heading-style-h1">The Foundry</h1>
-                    </ScrollReveal>
-                  </div>
-                  <ScrollReveal delay={0.15}>
-                    <p className="text-size-medium max-width-small">
-                      Command-line interface to the Northforge engine. Run diagnostics, execute strikes,
-                      and query subterranean archives.
-                    </p>
-                  </ScrollReveal>
-                </div>
-              </div>
-            </div>
-          </div>
+
+      {/* Terminal Minimal Top Status Bar */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "0.75rem",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+          paddingBottom: "1rem",
+          marginBottom: "1.5rem",
+          userSelect: "none",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+          <span
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "100rem",
+              backgroundColor: "var(--green, #CBFB45)",
+            }}
+          />
+          <span style={{ fontWeight: 600, color: "var(--white)", fontSize: "0.875rem", letterSpacing: "0.02em" }}>
+            NORTHFORGE // THE FOUNDRY OS [v4.2.0]
+          </span>
         </div>
-      </header>
-
-      {/* 2. Terminal Container using standard card corners & brand surface */}
-      <section style={{ paddingBottom: "6rem" }}>
-        <div className="padding-global">
-          <div className="container-large">
-            <div
-              onClick={() => inputRef.current?.focus()}
-              style={{
-                backgroundColor: "var(--black)",
-                borderRadius: "2.5rem",
-                padding: "clamp(1.5rem, 4vw, 3rem)",
-                color: "var(--white)",
-                fontFamily: "var(--font-inter), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-                fontSize: "0.9375rem",
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "520px",
-                cursor: "text",
-                boxSizing: "border-box",
-              }}
-            >
-              {/* Terminal Header Bar */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                  gap: "0.75rem",
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                  paddingBottom: "1rem",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                  <span
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "100rem",
-                      backgroundColor: "var(--green, #CBFB45)",
-                    }}
-                  />
-                  <span style={{ fontWeight: 600, color: "var(--white)", fontSize: "0.875rem" }}>
-                    NORTHFORGE // THE FOUNDRY
-                  </span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem", fontSize: "0.8125rem" }}>
-                  <Link
-                    href="/agartha"
-                    style={{ color: "var(--green, #CBFB45)", textDecoration: "none", fontWeight: 500 }}
-                  >
-                    [Access Agartha]
-                  </Link>
-                  <Link
-                    href="/"
-                    style={{ color: "var(--grey-text)", textDecoration: "none" }}
-                  >
-                    [← Return Home]
-                  </Link>
-                </div>
-              </div>
-
-              {/* Terminal History */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem", overflowY: "auto" }}>
-                {history.map((item) => (
-                  <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-                    {item.command !== undefined && (
-                      <div style={{ display: "flex", gap: "0.5rem", color: "var(--green, #CBFB45)" }}>
-                        <span>northforge@foundry:~$</span>
-                        <span style={{ color: "var(--white)" }}>{item.command}</span>
-                      </div>
-                    )}
-                    {item.output && <div>{item.output}</div>}
-                  </div>
-                ))}
-
-                {/* Active Prompt */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--green, #CBFB45)" }}>
-                  <span>northforge@foundry:~$</span>
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={inputVal}
-                    onChange={(e) => setInputVal(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    autoFocus
-                    spellCheck={false}
-                    autoComplete="off"
-                    style={{
-                      flex: 1,
-                      background: "transparent",
-                      border: "none",
-                      outline: "none",
-                      color: "var(--white)",
-                      fontFamily: "inherit",
-                      fontSize: "inherit",
-                      padding: 0,
-                    }}
-                  />
-                </div>
-                <div ref={terminalEndRef} />
-              </div>
-            </div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", fontSize: "0.8125rem" }}>
+          <Link
+            href="/agartha"
+            style={{ color: "var(--green, #CBFB45)", textDecoration: "none", fontWeight: 500 }}
+          >
+            [agartha]
+          </Link>
+          <Link
+            href="/"
+            style={{ color: "var(--grey-text)", textDecoration: "none" }}
+          >
+            [exit]
+          </Link>
         </div>
-      </section>
+      </div>
+
+      {/* Terminal History & Prompts */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+        {history.map((item) => (
+          <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            {item.command !== undefined && (
+              <div style={{ display: "flex", gap: "0.5rem", color: "var(--green, #CBFB45)" }}>
+                <span>northforge@foundry:~$</span>
+                <span style={{ color: "var(--white)" }}>{item.command}</span>
+              </div>
+            )}
+            {item.output && <div>{item.output}</div>}
+          </div>
+        ))}
+
+        {/* Active Command Input */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--green, #CBFB45)" }}>
+          <span style={{ flexShrink: 0 }}>northforge@foundry:~$</span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={inputVal}
+            onChange={(e) => setInputVal(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            spellCheck={false}
+            autoComplete="off"
+            style={{
+              flex: 1,
+              background: "transparent",
+              border: "none",
+              outline: "none",
+              color: "var(--white)",
+              caretColor: "var(--green, #CBFB45)",
+              fontFamily: "inherit",
+              fontSize: "inherit",
+              padding: 0,
+              margin: 0,
+            }}
+          />
+        </div>
+        <div ref={terminalEndRef} />
+      </div>
     </div>
   );
 }
