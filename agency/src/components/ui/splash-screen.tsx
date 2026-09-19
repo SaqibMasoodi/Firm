@@ -61,7 +61,7 @@ export default function SplashScreen() {
 
       const wordEls = wordsContainerRef.current?.querySelectorAll(".splash-word");
 
-      // Initial States: force GPU layer promotion with translateZ(0)
+      // Initial States: ensure GSAP is explicitly aligned with initial CSS
       gsap.set(stageRef.current, { opacity: 0, scale: 0.95, force3D: true });
       gsap.set(pillRef.current, { width: 82, height: 82, borderRadius: "100rem", force3D: true });
       gsap.set(hammerRef.current, {
@@ -190,8 +190,7 @@ export default function SplashScreen() {
         });
       }
 
-      // - The anvil DOES NOT MOVE (solid, immovable rock)
-      // - The hammer soft rebound and steady settle
+      // - Hammer soft rebound and steady settle
       tl.to(
         hammerRef.current,
         {
@@ -238,7 +237,6 @@ export default function SplashScreen() {
       );
 
       // 8. Traversing wave across letters appearing on strike!
-      // Each letter reveals and undulates upward in a fluid wave, settling smoothly to place
       if (letterEls && letterEls.length > 0) {
         tl.to(
           letterEls,
@@ -336,7 +334,7 @@ export default function SplashScreen() {
         ))}
       </div>
 
-      {/* 2. Brand Circle -> Pill Stage */}
+      {/* 2. Brand Circle -> Pill Stage: Starts hidden (opacity: 0) to prevent initial render flash */}
       <div
         ref={stageRef}
         style={{
@@ -346,8 +344,9 @@ export default function SplashScreen() {
           justifyContent: "center",
           zIndex: 10,
           overflow: "visible",
+          opacity: 0,
+          transform: "scale(0.95) translateZ(0)",
           willChange: "transform, opacity",
-          transform: "translateZ(0)",
         }}
       >
         {/* The Brand Pill: Starts as an 82px circle, expands smoothly on strike */}
@@ -359,6 +358,7 @@ export default function SplashScreen() {
             alignItems: "center",
             justifyContent: "flex-start",
             backgroundColor: "#171717",
+            width: "82px",
             height: "82px",
             borderRadius: "100rem",
             boxSizing: "border-box",
@@ -403,7 +403,7 @@ export default function SplashScreen() {
               <path d="M5 20a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1" />
             </svg>
 
-            {/* Green Hammer (#CBFB45): lands flat on top of the anvil */}
+            {/* Green Hammer (#CBFB45): starts hidden outside the pill */}
             <div
               ref={hammerRef}
               style={{
@@ -413,8 +413,9 @@ export default function SplashScreen() {
                 zIndex: 25,
                 pointerEvents: "none",
                 transformOrigin: "4px 12px",
-                willChange: "transform",
-                transform: "translateZ(0)",
+                opacity: 0,
+                transform: "translate(-8px, -70px) rotate(-45deg) translateZ(0)",
+                willChange: "transform, opacity",
               }}
             >
               <svg
@@ -469,7 +470,7 @@ export default function SplashScreen() {
             </div>
           </div>
 
-          {/* Unveiled Brand Logo Text with individual letters for traversing wave appearance */}
+          {/* Unveiled Brand Logo Text: starts with width: 0 and opacity: 0 */}
           <div
             ref={textWrapRef}
             style={{
@@ -478,6 +479,8 @@ export default function SplashScreen() {
               display: "flex",
               alignItems: "center",
               borderRadius: "0 100rem 100rem 0",
+              width: 0,
+              opacity: 0,
               willChange: "width, opacity",
               transform: "translateZ(0)",
             }}
@@ -504,7 +507,12 @@ export default function SplashScreen() {
                   <span
                     key={`g-${i}`}
                     className="splash-letter"
-                    style={{ display: "inline-block", willChange: "transform, opacity" }}
+                    style={{
+                      display: "inline-block",
+                      opacity: 0,
+                      transform: "translateY(6px) translateZ(0)",
+                      willChange: "transform, opacity",
+                    }}
                   >
                     {char}
                   </span>
@@ -513,7 +521,12 @@ export default function SplashScreen() {
               <span style={{ color: "#FFFFFF" }}>
                 <span
                   className="splash-letter"
-                  style={{ display: "inline-block", willChange: "transform, opacity" }}
+                  style={{
+                    display: "inline-block",
+                    opacity: 0,
+                    transform: "translateY(6px) translateZ(0)",
+                    willChange: "transform, opacity",
+                  }}
                 >
                   &nbsp;
                 </span>
@@ -521,7 +534,12 @@ export default function SplashScreen() {
                   <span
                     key={`w-${i}`}
                     className="splash-letter"
-                    style={{ display: "inline-block", willChange: "transform, opacity" }}
+                    style={{
+                      display: "inline-block",
+                      opacity: 0,
+                      transform: "translateY(6px) translateZ(0)",
+                      willChange: "transform, opacity",
+                    }}
                   >
                     {char}
                   </span>
