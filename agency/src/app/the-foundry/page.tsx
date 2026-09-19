@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ScrollReveal from "@/components/ui/scroll-reveal";
+import SplashScreen from "@/components/ui/splash-screen";
 
 interface HistoryItem {
   id: string;
@@ -14,6 +15,7 @@ interface HistoryItem {
 export default function FoundryPage() {
   const router = useRouter();
   const [inputVal, setInputVal] = useState("");
+  const [isPlayingSplash, setIsPlayingSplash] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([
     {
       id: "init-1",
@@ -76,6 +78,7 @@ export default function FoundryPage() {
               AVAILABLE SYSTEM COMMANDS:
             </div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>status</span>   - Run live hardware & forge diagnostics</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>splash</span>   - Replay master splash sequence & hammer strike</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>strike</span>   - Execute anvil impact sequence</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>craft</span>    - Review Northforge engineering pillars</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>agartha</span>  - Access classified subterranean directory</div>
@@ -94,6 +97,16 @@ export default function FoundryPage() {
             <div>Hydraulic Cycle:      <span style={{ color: "var(--green, #CBFB45)" }}>Synchronized at 120Hz</span></div>
             <div>Active Workers:       11 Turbopack static workers</div>
             <div>Subterranean Tunnel:  Secure (/agartha)</div>
+          </div>
+        );
+        break;
+
+      case "splash":
+        setIsPlayingSplash(true);
+        output = (
+          <div style={{ color: "var(--green, #CBFB45)", lineHeight: 1.6 }}>
+            <div>[FORGE] Initializing master cinematic splash sequence...</div>
+            <div style={{ color: "var(--grey-text)" }}>Press any key or wait for the sequence to complete.</div>
           </div>
         );
         break;
@@ -149,6 +162,25 @@ export default function FoundryPage() {
 
   return (
     <div className="page-wrapper">
+      {isPlayingSplash && (
+        <SplashScreen
+          forcePlay={true}
+          onComplete={() => {
+            setIsPlayingSplash(false);
+            setHistory((prev) => [
+              ...prev,
+              {
+                id: Date.now().toString(),
+                output: (
+                  <div style={{ color: "var(--green, #CBFB45)" }}>
+                    [OK] Splash sequence complete. System tempered.
+                  </div>
+                ),
+              },
+            ]);
+          }}
+        />
+      )}
       {/* 1. Subpage Hero Header */}
       <header className="section-subpage-hero-header">
         <div className="padding-global">

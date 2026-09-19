@@ -14,7 +14,12 @@ const WORDS = [
 const GREEN_LETTERS = "Northforge".split("");
 const WHITE_LETTERS = "Labs.".split("");
 
-export default function SplashScreen() {
+interface SplashScreenProps {
+  forcePlay?: boolean;
+  onComplete?: () => void;
+}
+
+export default function SplashScreen({ forcePlay = false, onComplete }: SplashScreenProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wordsContainerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -24,8 +29,13 @@ export default function SplashScreen() {
   const sparksRef = useRef<HTMLDivElement>(null);
   const textWrapRef = useRef<HTMLDivElement>(null);
   const textInnerRef = useRef<HTMLDivElement>(null);
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   const [isComplete, setIsComplete] = useState(() => {
+    if (forcePlay) return false;
     if (typeof window !== "undefined") {
       try {
         return sessionStorage.getItem("northforge_splash_viewed") === "true";
@@ -55,6 +65,7 @@ export default function SplashScreen() {
           } catch {}
           document.body.style.overflow = originalOverflow;
           setIsComplete(true);
+          onCompleteRef.current?.();
         },
       });
 
