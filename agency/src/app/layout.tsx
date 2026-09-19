@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import "./globals.css";
 import { OrganizationSchema } from "@/components/seo/schemas";
+import SplashScreen from "@/components/ui/splash-screen";
 
 export const viewport: Viewport = {
   width: 1280,
@@ -112,6 +113,7 @@ export default function RootLayout({
         />
       </head>
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+        <SplashScreen />
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
