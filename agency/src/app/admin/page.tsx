@@ -1092,7 +1092,7 @@ export default function AdminPage() {
                                 </div>
                                 {study?.data?.image && (
                                   <div style={{ width: "54px", height: "36px", borderRadius: "8px", overflow: "hidden", position: "relative", backgroundColor: "#e5e5e5" }}>
-                                    <Image src={study.data.image} alt="" fill style={{ objectFit: "cover" }} />
+                                    <Image src={study.data.image} alt="" fill sizes="54px" style={{ objectFit: "cover" }} />
                                   </div>
                                 )}
                                 <div>
@@ -1185,7 +1185,7 @@ export default function AdminPage() {
                           >
                             <div style={{ height: "140px", position: "relative", backgroundColor: "#f3f4f6" }}>
                               {item.data.image && (
-                                <Image src={item.data.image} alt={item.data.title || item.slug} fill style={{ objectFit: "cover" }} />
+                                <Image src={item.data.image} alt={item.data.title || item.slug} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: "cover" }} />
                               )}
                               {isFeatured && (
                                 <span style={{
@@ -1999,7 +1999,7 @@ export default function AdminPage() {
                           </div>
                           {editForm.image && (
                             <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
-                              <Image src={editForm.image} alt="Preview" fill style={{ objectFit: "cover" }} />
+                              <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
                             </div>
                           )}
                         </div>
@@ -2145,7 +2145,7 @@ export default function AdminPage() {
                           </div>
                           {editForm.image && (
                             <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
-                              <Image src={editForm.image} alt="Preview" fill style={{ objectFit: "cover" }} />
+                              <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
                             </div>
                           )}
                         </div>
@@ -2317,7 +2317,7 @@ export default function AdminPage() {
                             </div>
                             {editForm?.image && (
                               <div style={{ marginTop: "0.85rem", borderRadius: "18px", overflow: "hidden", width: "200px", height: "120px", position: "relative", border: "1px solid #e5e7eb" }}>
-                                <Image src={editForm.image} alt="Testimonial Hero Preview" fill style={{ objectFit: "cover" }} />
+                                <Image src={editForm.image} alt="Testimonial Hero Preview" fill sizes="200px" style={{ objectFit: "cover" }} />
                               </div>
                             )}
                           </div>
