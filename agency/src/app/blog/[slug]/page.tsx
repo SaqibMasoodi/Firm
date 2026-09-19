@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,6 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
   };
 }
 
@@ -37,6 +46,8 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="page-wrapper">
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${slug}` }]} />
+      <ArticleSchema title={post.title} description={post.excerpt} image={post.image} datePublished={post.date} url={`/blog/${slug}`} />
       <article>
         <header>
           <div className="padding-global">

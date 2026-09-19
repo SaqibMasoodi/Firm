@@ -5,6 +5,7 @@ import Team from "@/components/sections/team";
 import FAQ from "@/components/sections/faq";
 import CaseStudiesPreview from "@/components/sections/case-studies-preview";
 import Testimonials from "@/components/sections/testimonials";
+import { FAQPageSchema } from "@/components/seo/schemas";
 import { getFeaturedCaseStudies, getServices, getSiteHeader, getTestimonials } from "@/lib/content";
 
 export default async function HomePage() {
@@ -17,6 +18,7 @@ export default async function HomePage() {
 
   return (
     <div className="page-wrapper">
+      <FAQPageSchema />
       <Hero header={homeHeader} />
       <ClientLogos />
       <ServicesAccordion services={services} />

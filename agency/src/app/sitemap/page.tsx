@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Sitemap",
   description:
     "Complete directory of all pages, case studies, services, and articles across Northforge Labs.",
+  alternates: {
+    canonical: "/sitemap",
+  },
 };
 
 function ArrowDiagonalIcon() {

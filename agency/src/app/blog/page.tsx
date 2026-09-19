@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Our latest news and trending topics. Every brand has a story worth telling.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 function ArrowIcon() {
@@ -22,6 +26,7 @@ export default async function BlogPage() {
   const blogPosts = await getBlogPosts();
   return (
     <div className="page-wrapper">
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Blog", href: "/blog" }]} />
       <header className="section-hero-header">
         <div className="padding-global">
           <div className="container-large">

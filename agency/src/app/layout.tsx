@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import "./globals.css";
+import { OrganizationSchema } from "@/components/seo/schemas";
 
 export const viewport: Viewport = {
   width: 1280,
@@ -30,12 +31,23 @@ export const metadata: Metadata = {
     siteName: "Northforge Labs",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/hero/hero-banner.webp",
+        width: 1920,
+        height: 1080,
+        alt: "Northforge Labs - Technology & Creative Agency",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Northforge Labs — Technology & Creative Agency",
     description:
       "Build digital products, grow your online presence, and automate operations.",
+  },
+  alternates: {
+    canonical: "/",
   },
   robots: {
     index: true,
@@ -51,6 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
       <head>
+        <OrganizationSchema />
         <script
           dangerouslySetInnerHTML={{
             __html: `

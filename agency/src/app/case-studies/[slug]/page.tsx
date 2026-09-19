@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -44,6 +45,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <div className="page-wrapper">
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Case Studies", href: "/case-studies" }, { name: study.title, href: `/case-studies/${slug}` }]} />
       <header className="section-subpage-hero-header">
         <div className="padding-global">
           <div className="container-large">

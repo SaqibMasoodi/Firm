@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
   title: "Case Studies",
   description:
     "Explore our portfolio of successful projects. See how we bring brands to life with cutting-edge digital strategies.",
+  alternates: {
+    canonical: "/case-studies",
+  },
 };
 
 function ArrowIcon() {
@@ -22,6 +26,7 @@ export default async function CaseStudiesPage() {
   const caseStudies = await getCaseStudies();
   return (
     <div className="page-wrapper">
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Case Studies", href: "/case-studies" }]} />
       {/* Hero Header */}
       <header className="section-hero-header">
         <div className="padding-global">

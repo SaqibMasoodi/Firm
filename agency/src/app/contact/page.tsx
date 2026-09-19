@@ -1,4 +1,5 @@
 "use client";
+import { BreadcrumbSchema } from "@/components/seo/schemas";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -77,6 +78,7 @@ export default function ContactPage() {
 
   return (
     <div className="page-wrapper">
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]} />
       <section className="section-contact">
         <div className="padding-global">
           <div className="container-large">

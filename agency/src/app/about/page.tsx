@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/scroll-reveal";
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "We're not just a social media marketing agency—we're your ticket to digital excellence and engagement growth.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default async function AboutPage() {
@@ -21,6 +25,7 @@ export default async function AboutPage() {
 
   return (
     <div className="page-wrapper">
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
       {/* 1. Subpage Hero */}
       <header className="section-subpage-hero-header">
         <div className="padding-global">
