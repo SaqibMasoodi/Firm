@@ -5,6 +5,7 @@ import Footer from "@/components/layout/footer";
 import "./globals.css";
 import { OrganizationSchema } from "@/components/seo/schemas";
 import SplashScreen from "@/components/ui/splash-screen";
+import BlacksmithCursor from "@/components/ui/blacksmith-cursor";
 
 
 export const viewport: Viewport = {
@@ -94,6 +95,7 @@ export default function RootLayout({
       </head>
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <SplashScreen />
+        <BlacksmithCursor />
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
