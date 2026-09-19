@@ -7,10 +7,10 @@ cd /d "%~dp0"
 :: If launched as the background browser opener worker
 if "%~1"=="--open-browser" goto :browser_worker
 
-title Nova Agency - Development Server
+title Northforge Labs - Development Server
 
 echo ================================================================
-echo               NOVA AGENCY - DEV ENVIRONMENT
+echo             NORTHFORGE LABS - DEV ENVIRONMENT
 echo ================================================================
 echo.
 echo Target URLs:

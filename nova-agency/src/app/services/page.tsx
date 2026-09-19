@@ -43,7 +43,7 @@ export default async function ServicesPage() {
                   </div>
                   <ScrollReveal delay={0.2}>
                     <p className="text-size-medium">
-                      At Nova, we&apos;re not just about creating content;
+                      At Northforge Labs, we&apos;re not just about creating content;
                       we&apos;re about crafting a digital experience that
                       resonates with your audience and drives tangible results.
                       Our team of experts employs cutting-edge strategies and
@@ -112,7 +112,7 @@ export default async function ServicesPage() {
                     </div>
                     <ScrollReveal delay={0.2}>
                       <p className="text-size-medium">
-                        Nova is a cutting-edge technology and creative agency
+                        Northforge Labs is a cutting-edge technology and creative agency
                         that empowers brands with tailored solutions, driving
                         unparalleled growth in the digital realm.
                       </p>

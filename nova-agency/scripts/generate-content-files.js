@@ -12,7 +12,7 @@ dirs.forEach(d => fs.mkdirSync(path.resolve(d), { recursive: true }));
 
 // 1. Site Config
 const siteConfig = {
-  name: "Nova",
+  name: "Northforge Labs",
   description: "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
   url: "https://firm.org",
   email: "info@firm.org",
@@ -162,7 +162,7 @@ const teamMembers = [
     id: "peter",
     name: "Peter",
     role: "CEO",
-    bio: "Peter is the founder of Nova, and passionate about helping businesses grow through Social Media.",
+    bio: "Peter is the founder of Northforge Labs, and passionate about helping businesses grow through Social Media.",
     image: "/images/team/peter.webp",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
@@ -411,7 +411,7 @@ const stats = [
   {
     value: "98%",
     label: "Satisfaction rate",
-    description: "Nova boasts an impressive client satisfaction rate of 98%, reflecting our commitment to excellence and the effectiveness of our strategies in meeting client objectives.",
+    description: "Northforge Labs boasts an impressive client satisfaction rate of 98%, reflecting our commitment to excellence and the effectiveness of our strategies in meeting client objectives.",
     variant: "dark"
   },
   {
@@ -423,25 +423,25 @@ const stats = [
   {
     value: "100%",
     label: "Hard work",
-    description: "We will 100% produce hard work no matter what. In an industry where dedication and results speak volumes, Nova stands out by delivering an unprecedented 100% hard work rate.",
+    description: "We will 100% produce hard work no matter what. In an industry where dedication and results speak volumes, Northforge Labs stands out by delivering an unprecedented 100% hard work rate.",
     variant: "dark"
   },
   {
     value: "10+",
     label: "Years of experience",
-    description: "Celebrating a decade of excellence, Nova has been at the forefront of the technology and creative industry. Our extensive experience has established us as trusted partners for brands looking to make an impact.",
+    description: "Celebrating a decade of excellence, Northforge Labs has been at the forefront of the technology and creative industry. Our extensive experience has established us as trusted partners for brands looking to make an impact.",
     variant: "green"
   },
   {
     value: "21",
     label: "Countries with clients",
-    description: "With clients spread across 21+ countries, Nova combines global reach with local expertise. This unique approach enables us to tailor solutions that resonate on a global scale.",
+    description: "With clients spread across 21+ countries, Northforge Labs combines global reach with local expertise. This unique approach enables us to tailor solutions that resonate on a global scale.",
     variant: "dark"
   },
   {
     value: "24/7",
     label: "Support from our team",
-    description: "Our commitment to our clients extends beyond regular business hours. Nova offers 24/7 customer support to ensure that our clients always have access to the assistance and guidance they need.",
+    description: "Our commitment to our clients extends beyond regular business hours. Northforge Labs offers 24/7 customer support to ensure that our clients always have access to the assistance and guidance they need.",
     variant: "green"
   }
 ];

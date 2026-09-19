@@ -6,7 +6,7 @@ import { getCaseStudies, getBlogPosts, getServices } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Sitemap",
   description:
-    "Complete directory of all pages, case studies, services, and articles across Nova Agency.",
+    "Complete directory of all pages, case studies, services, and articles across Northforge Labs.",
 };
 
 function ArrowDiagonalIcon() {
@@ -71,7 +71,7 @@ export default async function SitemapPage() {
                   <ScrollReveal delay={0.2}>
                     <p className="text-size-medium" style={{ maxWidth: "42rem" }}>
                       A complete, accessible overview of all pages, case studies,
-                      services, and resources across Nova Agency.
+                      services, and resources across Northforge Labs.
                     </p>
                   </ScrollReveal>
                 </div>

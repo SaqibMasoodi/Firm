@@ -1,18 +1,18 @@
 {
-  "name": "Nova",
+  "name": "Northforge Labs",
   "description": "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
-  "url": "https://nova.agency",
-  "email": "info@nova.agency",
+  "url": "https://northforgelabs.com",
+  "email": "contact@northforgelabs.com",
   "phone": "01234 567 890",
   "address": {
-    "line1": "Nova Office Complex",
+    "line1": "Northforge Labs HQ",
     "line2": "13 Imaginary Street",
     "city": "Manchester"
   },
   "socials": {
-    "facebook": "https://www.facebook.com/",
-    "instagram": "https://www.instagram.com/",
-    "twitter": "https://twitter.com/home",
-    "linkedin": "https://www.linkedin.com/feed/"
+    "facebook": "https://www.facebook.com/northforgelabs",
+    "instagram": "https://www.instagram.com/northforgelabs",
+    "twitter": "https://x.com/northforgelabs",
+    "linkedin": "https://www.linkedin.com/company/northforgelabs"
   }
 }

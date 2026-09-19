@@ -332,8 +332,72 @@ body {
   align-items: center;
   text-decoration: none;
   border-radius: 100rem;
-  overflow: hidden;
   padding-left: 0;
+}
+
+/* ===== BRAND LOGO PILL (CSS-RENDERED) ===== */
+.brand-logo-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black, #171717);
+  border-radius: 100rem;
+  padding: 0.5rem 1.4rem;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.brand-logo-green {
+  color: var(--green, #cbfb45);
+}
+
+.brand-logo-white {
+  color: #ffffff;
+}
+
+.brand-logo-pill.is-navbar {
+  height: 2.75rem;
+  padding: 0 1.4rem;
+  font-size: 1.15rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.brand-logo-pill.is-navbar:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.brand-logo-pill.is-footer {
+  height: 2.5rem;
+  padding: 0 1.3rem;
+  font-size: 1.05rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.brand-logo-pill.is-footer:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.brand-logo-pill.is-admin {
+  height: 2.4rem;
+  padding: 0 1.25rem;
+  font-size: 1.1rem;
+}
+
+@media screen and (max-width: 991px) {
+  .brand-logo-pill.is-navbar {
+    height: 2.45rem;
+    padding: 0 1.15rem;
+    font-size: 1rem;
+  }
 }
 
 .navbar-logo {
@@ -2566,7 +2630,7 @@ body {
   opacity: 0.95;
 }
 
-/* ===== SITEMAP PAGE (NOVA BRAND STYLING) ===== */
+/* ===== SITEMAP PAGE (NORTHFORGE LABS BRAND STYLING) ===== */
 .section-sitemap {
   margin-left: 5%;
   margin-right: 5%;

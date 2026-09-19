@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 :: Navigate to script directory
 cd /d "%~dp0"
-title Nova Agency - Open All Site Pages
+title Northforge Labs - Open All Site Pages
 
 :: -----------------------------------------------------------------
 :: 1. Configuration & All 15 Site URLs
@@ -42,7 +42,7 @@ set "ALL_URLS=%CORE_URLS% %CASE_URLS% %BLOG_URLS%"
 :: 2. Check Next.js Development Server
 :: -----------------------------------------------------------------
 echo ================================================================
-echo               NOVA AGENCY - ALL PAGES LAUNCHER
+echo            NORTHFORGE LABS - ALL PAGES LAUNCHER
 echo ================================================================
 echo.
 echo [1/3] Checking Next.js dev server on %BASE_URL%...
@@ -51,7 +51,7 @@ curl.exe -s --connect-timeout 1 -o nul "%BASE_URL%"
 if %errorlevel% neq 0 (
     echo [!] Server is not running on %BASE_URL%.
     echo [^>] Launching Next.js development server in background...
-    start "Nova Agency Dev Server" cmd /c "npm run dev"
+    start "Northforge Labs Dev Server" cmd /c "npm run dev"
     echo [^>] Waiting for dev server to become responsive...
     :wait_server_loop
     ping 127.0.0.1 -n 3 >nul

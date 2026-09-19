@@ -41,7 +41,7 @@ export default function CaseStudiesPreview({
                 </div>
                 <ScrollReveal delay={0.2}>
                   <p className="text-size-medium">
-                    Welcome to the spotlight, where Nova&apos;s magic touches
+                    Welcome to the spotlight, where Northforge Labs&apos; magic touches
                     down, turning the ordinary into the extraordinary.
                   </p>
                 </ScrollReveal>

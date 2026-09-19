@@ -193,7 +193,7 @@ export async function getSiteHeaders(): Promise<SiteHeaders> {
     home: {
       image: "/images/hero/hero-banner.jpg",
       objectPosition: "50% 50%",
-      alt: "Nova Creative Office",
+      alt: "Northforge Labs Creative Office",
     },
     about: {
       image: "/images/about/team-culture.webp",

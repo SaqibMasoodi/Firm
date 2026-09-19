@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { siteConfig } from "@/lib/constants";
+import Logo from "@/components/ui/logo";
 
 function FacebookIcon() {
   return (
@@ -65,14 +65,8 @@ export default function Footer() {
               <div className="w-layout-grid footer-top-wrapper">
                 <div className="footer-left-wrapper">
                   <div className="margin-bottom margin-small">
-                    <Link href="/" className="footer-logo-link">
-                      <Image
-                        src="/images/brand/logo.svg"
-                        alt={siteConfig.name}
-                        width={120}
-                        height={34}
-                        className="footer-logo"
-                      />
+                    <Link href="/" className="footer-logo-link" aria-label="Northforge Labs Home">
+                      <Logo variant="footer" />
                     </Link>
                   </div>
                   <div className="newsletter-footer-wrapper">
@@ -169,10 +163,10 @@ export default function Footer() {
             <div className="padding-vertical padding-medium">
               <div className="footer-bottom">
                 <div className="footer-credit-text">
-                  © {new Date().getFullYear()} Nova. All rights reserved.
+                  © {new Date().getFullYear()} Northforge Labs. All rights reserved.
                 </div>
                 <div className="footer-credit-text">
-                  Designed &amp; built by the team at Nova
+                  Designed &amp; built by the team at Northforge Labs
                 </div>
               </div>
             </div>

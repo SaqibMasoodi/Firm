@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ui/scroll-reveal";
 import { getBlogPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Blogs — Nova",
+  title: "Blogs — Northforge Labs",
   description:
     "Our latest news and trending topics. Every brand has a story worth telling.",
 };

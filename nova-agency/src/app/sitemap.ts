@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getCaseStudies(),
     getBlogPosts(),
   ]);
-  const baseUrl = "https://nova.agency";
+  const baseUrl = "https://northforgelabs.com";
 
   const staticPages = [
     "",

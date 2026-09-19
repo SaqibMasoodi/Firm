@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { navLinks, siteConfig } from "@/lib/constants";
+import { navLinks } from "@/lib/constants";
+import Logo from "@/components/ui/logo";
 
 function HamburgerIcon() {
   return (
@@ -47,15 +47,8 @@ export default function Navbar() {
   return (
     <div className={`navbar-component ${isOpen ? "is-open" : ""}`}>
       <div className="navbar-container">
-        <Link href="/" className="navbar-logo-link" onClick={() => setIsOpen(false)}>
-          <Image
-            src="/images/brand/logo.svg"
-            alt={siteConfig.name}
-            width={152}
-            height={44}
-            className="navbar-logo"
-            priority
-          />
+        <Link href="/" className="navbar-logo-link" onClick={() => setIsOpen(false)} aria-label="Northforge Labs Home">
+          <Logo variant="navbar" />
         </Link>
 
         <nav className={`navbar-menu ${isOpen ? "is-open" : ""}`}>

@@ -210,9 +210,9 @@
     "semantic_hash": ""
   },
   "src/app/admin/page.tsx": {
-    "mtime": 1789792915.997162,
-    "seen": 1789792952.8573916,
-    "ast_hash": "5d1846bfed02da217840a89b6fc7a40a",
+    "mtime": 1789792533.1168587,
+    "seen": 1789792661.904932,
+    "ast_hash": "895b52660497a3518c3442afda2b7d7e",
     "semantic_hash": ""
   },
   "src/app/api/admin/content/route.ts": {
@@ -312,15 +312,15 @@
     "semantic_hash": ""
   },
   "src/components/layout/footer.tsx": {
-    "mtime": 1789792900.083212,
-    "seen": 1789792952.8573916,
-    "ast_hash": "7a5ff76a27cfd7f6b4a80e2e0bdddc3d",
+    "mtime": 1789792575.7066498,
+    "seen": 1789792661.904932,
+    "ast_hash": "8527c0ea92026507c423163d3f9a8113",
     "semantic_hash": ""
   },
   "src/components/layout/navbar.tsx": {
-    "mtime": 1789792880.63308,
-    "seen": 1789792952.8573916,
-    "ast_hash": "8c76f8f1440286604fbb43497cf6a995",
+    "mtime": 1789646344.8640485,
+    "seen": 1789746504.9193058,
+    "ast_hash": "26a532b8027ef431a547f12ec552f76d",
     "semantic_hash": ""
   },
   "src/components/sections/case-studies-preview.tsx": {
@@ -510,9 +510,9 @@
     "semantic_hash": ""
   },
   "public/images/brand/logo.svg": {
-    "mtime": 1789792925.6196716,
-    "seen": 1789792952.8573916,
-    "ast_hash": "13834e66c8cbfd2ae367fe8dd1b0d13e",
+    "mtime": 1789646264.4355412,
+    "seen": 1789746504.9193058,
+    "ast_hash": "11d4e8689f1abb16d5ff1e8353fa41a3",
     "semantic_hash": ""
   },
   "public/images/case-studies/brewzen-coffee-retailer/cover.webp": {
@@ -819,12 +819,6 @@
     "mtime": 1789748753.2770033,
     "seen": 1789792661.904932,
     "ast_hash": "4355bce960873d3d9cedc947d9284ddd",
-    "semantic_hash": ""
-  },
-  "src/components/ui/logo.tsx": {
-    "mtime": 1789792850.882247,
-    "seen": 1789792952.8573916,
-    "ast_hash": "6ff61589cd808d49f42063527081d2f7",
     "semantic_hash": ""
   }
 }

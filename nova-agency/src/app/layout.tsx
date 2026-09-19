@@ -16,24 +16,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nova — Technology & Creative Agency",
-    template: "%s | Nova",
+    default: "Northforge Labs — Technology & Creative Agency",
+    template: "%s | Northforge Labs",
   },
   description:
     "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
-  metadataBase: new URL("https://nova.agency"),
+  metadataBase: new URL("https://northforgelabs.com"),
   openGraph: {
-    title: "Nova — Technology & Creative Agency",
+    title: "Northforge Labs — Technology & Creative Agency",
     description:
       "Build digital products, grow your online presence, and automate operations.",
-    url: "https://nova.agency",
-    siteName: "Nova",
+    url: "https://northforgelabs.com",
+    siteName: "Northforge Labs",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nova — Technology & Creative Agency",
+    title: "Northforge Labs — Technology & Creative Agency",
     description:
       "Build digital products, grow your online presence, and automate operations.",
   },

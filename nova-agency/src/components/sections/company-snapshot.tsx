@@ -14,7 +14,7 @@ export default function CompanySnapshot() {
                   <div className="max-width-large">
                     <ScrollReveal>
                       <div className="tagline-pill">
-                        <div>About Nova</div>
+                        <div>About Northforge Labs</div>
                       </div>
                     </ScrollReveal>
                     <div className="margin-bottom margin-small">
@@ -26,7 +26,7 @@ export default function CompanySnapshot() {
                     </div>
                     <ScrollReveal delay={0.2}>
                       <p className="text-size-medium">
-                        Founded in Manchester in 2011, Nova is a cutting-edge
+                        Founded in Manchester in 2011, Northforge Labs is a cutting-edge
                         social media marketing agency that empowers brands with
                         tailored strategies, driving unparalleled engagement and
                         growth in the digital realm.
@@ -84,7 +84,7 @@ export default function CompanySnapshot() {
                         <h3 className="heading-style-h6">Satisfaction rate</h3>
                         <div className="margin-top margin-xxsmall">
                           <p className="text-size-regular">
-                            Nova boasts an impressive client satisfaction rate of
+                            Northforge Labs boasts an impressive client satisfaction rate of
                             98%, reflecting our commitment to excellence and the
                             effectiveness of our strategies in meeting client
                             objectives.

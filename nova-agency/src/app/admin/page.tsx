@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Logo from "@/components/ui/logo";
 
 type Tab = "case-studies" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
 
@@ -12,7 +13,7 @@ interface ContentItem {
   data: any;
 }
 
-/* ===== Outline Icons Matching Nova Aesthetic ===== */
+/* ===== Outline Icons Matching Northforge Aesthetic ===== */
 function FolderIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -130,7 +131,7 @@ export default function AdminPage() {
     about: { image: string; objectPosition: string; alt?: string };
     services: { image: string; objectPosition: string; alt?: string };
   }>({
-    home: { image: "/images/hero/hero-banner.jpg", objectPosition: "50% 50%", alt: "Nova Creative Office" },
+    home: { image: "/images/hero/hero-banner.jpg", objectPosition: "50% 50%", alt: "Northforge Labs Creative Office" },
     about: { image: "/images/about/team-culture.webp", objectPosition: "50% 50%", alt: "Modern office lobby" },
     services: { image: "/images/cta/cta-banner.webp", objectPosition: "50% 50%", alt: "Our services" },
   });
@@ -346,7 +347,7 @@ export default function AdminPage() {
         excerpt: "A short teaser of the article.",
         content: "# Post Title\n\nWrite markdown body content here.",
         image: `/images/blog/${newSlug}/cover.webp`,
-        author: "Nova Team",
+        author: "Northforge Labs Team",
         date: new Date().toISOString().split("T")[0],
         category: "Insights",
         readTime: "4 min read",
@@ -619,19 +620,7 @@ export default function AdminPage() {
       }}>
         {/* Left branding */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <div style={{
-            backgroundColor: "#171717",
-            color: "#ffffff",
-            borderRadius: "100rem",
-            padding: "0.42rem 1.35rem",
-            fontWeight: 700,
-            fontSize: "1.15rem",
-            letterSpacing: "-0.02em",
-            display: "inline-flex",
-            alignItems: "center"
-          }}>
-            Nova.
-          </div>
+          <Logo variant="admin" />
 
           <div style={{
             backgroundColor: "var(--green, #cbfb45)",

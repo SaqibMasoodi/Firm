@@ -2,14 +2,14 @@
 setlocal enabledelayedexpansion
 
 :: Set script title and color
-title Nova Agency - Push to GitHub ^& Auto-Deploy Vercel
+title Northforge Labs - Push to GitHub ^& Auto-Deploy Vercel
 color 0A
 
 :: Navigate to script directory
 cd /d "%~dp0"
 
 echo ================================================================
-echo          NOVA AGENCY - PUSH TO GITHUB ^& AUTO-DEPLOY
+echo       NORTHFORGE LABS - PUSH TO GITHUB ^& AUTO-DEPLOY
 echo ================================================================
 echo.
 

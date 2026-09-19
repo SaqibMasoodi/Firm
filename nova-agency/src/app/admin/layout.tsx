@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Nova Studio — Local Content & Asset Manager",
-  description: "Dev-only local content management dashboard for Nova Agency.",
+  title: "Northforge Studio — Local Content & Asset Manager",
+  description: "Dev-only local content management dashboard for Northforge Labs.",
 };
 
 export default function AdminLayout({

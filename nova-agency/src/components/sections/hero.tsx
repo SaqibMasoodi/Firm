@@ -11,7 +11,7 @@ interface HeroProps {
 export default function Hero({ header }: HeroProps) {
   const imageSrc = header?.image || "/images/hero/hero-banner.jpg";
   const objectPosition = header?.objectPosition || "50% 50%";
-  const imageAlt = header?.alt || "Nova Creative Office";
+  const imageAlt = header?.alt || "Northforge Labs Creative Office";
 
   return (
     <header className="section-hero-header">
@@ -24,7 +24,7 @@ export default function Hero({ header }: HeroProps) {
               <div className="hero-split-content">
                 <ScrollReveal>
                   <div className="tagline-pill">
-                    <div>Welcome to Nova!</div>
+                    <div>Welcome to Northforge Labs!</div>
                   </div>
                 </ScrollReveal>
                 <div className="margin-bottom margin-small">

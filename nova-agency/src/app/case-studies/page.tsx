@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ui/scroll-reveal";
 import { getCaseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Case studies — Nova",
+  title: "Case studies — Northforge Labs",
   description:
     "Explore our portfolio of successful projects. See how we bring brands to life with cutting-edge digital strategies.",
 };
@@ -44,7 +44,7 @@ export default async function CaseStudiesPage() {
                     </div>
                     <ScrollReveal delay={0.2}>
                       <p className="text-size-medium">
-                        Welcome to the spotlight, where Nova&apos;s magic touches
+                        Welcome to the spotlight, where Northforge Labs&apos; magic touches
                         down, turning the ordinary into the extraordinary.
                       </p>
                     </ScrollReveal>
