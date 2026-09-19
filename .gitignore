@@ -13,6 +13,9 @@ README.md
 scratch/
 .system_generated/
 
+# Local utility scripts
+*.bat
+
 # Dependencies
 **/node_modules/
 node_modules/
