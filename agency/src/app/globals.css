@@ -3133,3 +3133,35 @@ button,
   width: 100%;
 }
 
+
+/* Navbar Accent Color Trigger Button */
+.navbar-accent-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  color: var(--black, #171717);
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-accent-button:hover {
+  background-color: var(--grey, #f2f2f2);
+  border-color: var(--black, #171717);
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-accent-button {
+    margin: 0.75rem auto 0 auto;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+}

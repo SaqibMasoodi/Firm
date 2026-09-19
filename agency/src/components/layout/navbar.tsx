@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { navLinks } from "@/lib/constants";
 import Logo from "@/components/ui/logo";
+import { Palette } from "lucide-react";
+import AccentColorModal from "@/components/ui/accent-color-modal";
 
 function AnimatedHamburger({ isOpen }: { isOpen: boolean }) {
   return (
@@ -65,6 +67,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
+  const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   // Close menu on route change
@@ -139,6 +142,15 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+                            <button
+                type="button"
+                className="navbar-accent-button"
+                onClick={() => setIsColorModalOpen(true)}
+                title="Customize Accent Color"
+                aria-label="Customize Accent Color"
+              >
+                <Palette size={16} strokeWidth={2} />
+              </button>
               <div className="navbar-button-wrapper">
                 <Link
                   href="/contact"
@@ -163,6 +175,10 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+      <AccentColorModal
+        isOpen={isColorModalOpen}
+        onClose={() => setIsColorModalOpen(false)}
+      />
     </>
   );
 }

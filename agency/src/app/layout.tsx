@@ -5,7 +5,7 @@ import Footer from "@/components/layout/footer";
 import "./globals.css";
 import { OrganizationSchema } from "@/components/seo/schemas";
 import SplashScreen from "@/components/ui/splash-screen";
-import AccentColorWidget from "@/components/ui/accent-color-widget";
+
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -97,7 +97,6 @@ export default function RootLayout({
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
-        <AccentColorWidget />
       </body>
     </html>
   );
