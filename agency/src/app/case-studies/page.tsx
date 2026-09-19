@@ -6,22 +6,21 @@ import ScrollReveal from "@/components/ui/scroll-reveal";
 import { getCaseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Case Studies",
-  description:
-    "Explore our portfolio of successful projects. See how we bring brands to life with cutting-edge digital strategies.",
+  title: "Work",
+  description: "Selected projects and digital products.",
   alternates: {
     canonical: "/case-studies",
   },
   openGraph: {
-    title: "Case Studies & Client Work | Northforge Labs",
-    description: "Explore our portfolio of digital products, web platforms, and automated solutions built for growing businesses.",
+    title: "Work | Northforge Labs",
+    description: "Selected projects and digital products.",
     url: "/case-studies",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Studies & Client Work | Northforge Labs",
-    description: "Explore our portfolio of digital products, web platforms, and automated solutions built for growing businesses.",
+    title: "Work | Northforge Labs",
+    description: "Selected projects and digital products.",
     images: ["/images/og/og-image.png"],
   },
 };

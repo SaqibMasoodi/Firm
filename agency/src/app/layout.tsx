@@ -23,11 +23,10 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 export const metadata: Metadata = {
   title: {
-    default: "Northforge Labs - Technology & Creative Agency",
+    default: "Northforge Labs",
     template: "%s | Northforge Labs",
   },
-  description:
-    "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
+  description: "Software, design, and AI.",
   metadataBase: new URL(siteUrl),
   icons: {
     icon: [
@@ -42,9 +41,8 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: "Northforge Labs - Technology & Creative Agency",
-    description:
-      "Build digital products, grow your online presence, and automate operations.",
+    title: "Northforge Labs",
+    description: "Software, design, and AI.",
     url: siteUrl,
     siteName: "Northforge Labs",
     locale: "en_US",
@@ -52,18 +50,18 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/og/og-image.png",
+        secureUrl: "/images/og/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Northforge Labs - Technology & Creative Agency",
+        alt: "Northforge Labs",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Northforge Labs - Technology & Creative Agency",
-    description:
-      "Build digital products, grow your online presence, and automate operations.",
+    title: "Northforge Labs",
+    description: "Software, design, and AI.",
     images: ["/images/og/og-image.png"],
   },
   alternates: {

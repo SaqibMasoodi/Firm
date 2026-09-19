@@ -6,22 +6,21 @@ import ScrollReveal from "@/components/ui/scroll-reveal";
 import { getBlogPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Our latest news and trending topics. Every brand has a story worth telling.",
+  title: "Insights",
+  description: "Notes on technology, design, and automation.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "Blog & Insights | Northforge Labs",
-    description: "Insights, guides, and trends on AI automation, software engineering, branding, and digital product strategy.",
+    title: "Insights | Northforge Labs",
+    description: "Notes on technology, design, and automation.",
     url: "/blog",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog & Insights | Northforge Labs",
-    description: "Insights, guides, and trends on AI automation, software engineering, branding, and digital product strategy.",
+    title: "Insights | Northforge Labs",
+    description: "Notes on technology, design, and automation.",
     images: ["/images/og/og-image.png"],
   },
 };

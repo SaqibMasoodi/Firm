@@ -12,22 +12,21 @@ import CtaCard from "@/components/sections/cta-card";
 import { getSiteHeader } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "We're not just a social media marketing agency—we're your ticket to digital excellence and engagement growth.",
+  title: "About",
+  description: "Technology and design studio.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Us | Northforge Labs",
-    description: "Learn about Northforge Labs, our mission, values, and the team driving digital excellence and business automation.",
+    title: "About | Northforge Labs",
+    description: "Technology and design studio.",
     url: "/about",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Us | Northforge Labs",
-    description: "Learn about Northforge Labs, our mission, values, and the team driving digital excellence and business automation.",
+    title: "About | Northforge Labs",
+    description: "Technology and design studio.",
     images: ["/images/og/og-image.png"],
   },
 };

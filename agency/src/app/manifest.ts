@@ -2,10 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Northforge Labs - Technology & Creative Agency",
-    short_name: "Northforge Labs",
-    description:
-      "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
+    name: "Northforge Labs",
+    short_name: "Northforge",
+    description: "Software, design, and AI.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0b0e",

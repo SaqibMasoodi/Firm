@@ -11,21 +11,20 @@ import { getServices, getFeaturedCaseStudies, getSiteHeader } from "@/lib/conten
 
 export const metadata: Metadata = {
   title: "Services",
-  description:
-    "Explore our comprehensive range of services including software development, UI/UX design, branding, digital marketing, and business automation.",
+  description: "Engineering, brand design, and AI systems.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
     title: "Services | Northforge Labs",
-    description: "Explore our services across software engineering, product design, AI automation, branding, and digital strategy.",
+    description: "Engineering, brand design, and AI systems.",
     url: "/services",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Services | Northforge Labs",
-    description: "Explore our services across software engineering, product design, AI automation, branding, and digital strategy.",
+    description: "Engineering, brand design, and AI systems.",
     images: ["/images/og/og-image.png"],
   },
 };
