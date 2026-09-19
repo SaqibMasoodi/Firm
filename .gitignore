@@ -1,6 +1,17 @@
-# Exclude reference template folder
+# Reference / Design ideas
 template/
-template
+Ideas/
+ideas/
+
+# Local AI, Agents, Knowledge Graph & Non-Production Docs
+.agents/
+graphify-out/
+ai/
+AGENTS.md
+CLAUDE.md
+README.md
+scratch/
+.system_generated/
 
 # Dependencies
 **/node_modules/
@@ -9,7 +20,7 @@ node_modules/
 .pnp.*
 .yarn/*
 
-# Next.js build outputs
+# Next.js build outputs & cache
 **/.next/
 .next/
 **/out/
@@ -20,15 +31,20 @@ build/
 # Testing / Coverage
 /coverage
 
-# Misc
+# Misc & OS
 .DS_Store
+Thumbs.db
 *.pem
+.idea/
+.vscode/
 
 # Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
+*.tmp
 
 # Environment files
 .env*
