@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
@@ -25,9 +25,9 @@ const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 export const metadata: Metadata = {
   title: {
     default: "Northforge Labs",
-    template: "%s | Northforge Labs",
+    template: "%s — Northforge Labs",
   },
-  description: "Software, design, and AI.",
+  description: "Software. Design. AI.",
   metadataBase: new URL(siteUrl),
   icons: {
     icon: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Northforge Labs",
-    description: "Software, design, and AI.",
+    description: "Software. Design. AI.",
     url: siteUrl,
     siteName: "Northforge Labs",
     locale: "en_US",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Northforge Labs",
-    description: "Software, design, and AI.",
+    description: "Software. Design. AI.",
     images: ["/images/og/og-image.png"],
   },
   alternates: {

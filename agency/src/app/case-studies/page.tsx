@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,20 +7,20 @@ import { getCaseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Selected projects and digital products.",
+  description: "Selected projects. Digital systems.",
   alternates: {
     canonical: "/case-studies",
   },
   openGraph: {
-    title: "Work | Northforge Labs",
-    description: "Selected projects and digital products.",
+    title: "Work — Northforge Labs",
+    description: "Selected projects. Digital systems.",
     url: "/case-studies",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Work | Northforge Labs",
-    description: "Selected projects and digital products.",
+    title: "Work — Northforge Labs",
+    description: "Selected projects. Digital systems.",
     images: ["/images/og/og-image.png"],
   },
 };

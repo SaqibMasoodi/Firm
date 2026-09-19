@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,20 +11,20 @@ import { getServices, getFeaturedCaseStudies, getSiteHeader } from "@/lib/conten
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Engineering, brand design, and AI systems.",
+  description: "Engineering. Brand design. AI systems.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Services | Northforge Labs",
-    description: "Engineering, brand design, and AI systems.",
+    title: "Services — Northforge Labs",
+    description: "Engineering. Brand design. AI systems.",
     url: "/services",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services | Northforge Labs",
-    description: "Engineering, brand design, and AI systems.",
+    title: "Services — Northforge Labs",
+    description: "Engineering. Brand design. AI systems.",
     images: ["/images/og/og-image.png"],
   },
 };

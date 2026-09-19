@@ -1,24 +1,24 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import { getCaseStudies, getBlogPosts, getServices } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Sitemap",
-  description: "Index of pages.",
+  description: "Index of pages and routes.",
   alternates: {
     canonical: "/sitemap",
   },
   openGraph: {
-    title: "Sitemap | Northforge Labs",
-    description: "Index of pages.",
+    title: "Sitemap — Northforge Labs",
+    description: "Index of pages and routes.",
     url: "/sitemap",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sitemap | Northforge Labs",
-    description: "Index of pages.",
+    title: "Sitemap — Northforge Labs",
+    description: "Index of pages and routes.",
     images: ["/images/og/og-image.png"],
   },
 };

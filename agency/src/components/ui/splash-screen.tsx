@@ -3,23 +3,36 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-const WORDS = ["BUILD", "INNOVATE", "AUTOMATE", "SCALE", "FORGE"];
+const WORDS = [
+  { text: "Build", color: "#171717" },
+  { text: "Innovate", color: "#CBFB45" },
+  { text: "Automate", color: "#71717A" },
+  { text: "Scale", color: "#171717" },
+  { text: "Forge", color: "#CBFB45" },
+];
 
 export default function SplashScreen() {
   const containerRef = useRef<HTMLDivElement>(null);
   const wordsContainerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const hammerRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
-  const textRevealRef = useRef<HTMLDivElement>(null);
+  const anvilWrapRef = useRef<HTMLDivElement>(null);
+  const hammerRef = useRef<HTMLDivElement>(null);
   const sparksRef = useRef<HTMLDivElement>(null);
+  const textWrapRef = useRef<HTMLDivElement>(null);
+  const textInnerRef = useRef<HTMLDivElement>(null);
 
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Lock scroll during splash
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    // Pre-calculate intrinsic text width for continuous, pixel-perfect GSAP interpolation
+    const textInnerEl = textInnerRef.current;
+    const rawTextWidth = textInnerEl ? textInnerEl.getBoundingClientRect().width || textInnerEl.scrollWidth : 270;
+    const targetTextWidth = Math.ceil(rawTextWidth) + 4;
+    const targetPillWidth = 82 + targetTextWidth;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -31,86 +44,110 @@ export default function SplashScreen() {
 
       const wordEls = wordsContainerRef.current?.querySelectorAll(".splash-word");
 
-      // Initial states
-      gsap.set(stageRef.current, { opacity: 0, scale: 0.8 });
-      gsap.set(hammerRef.current, { opacity: 0, y: -130, rotate: -45, transformOrigin: "20% 90%" });
-      gsap.set(textRevealRef.current, { width: 0, opacity: 0 });
-      gsap.set(pillRef.current, { width: "62px", padding: "0 18px" });
+      // Initial States: force GPU layer promotion with translateZ(0) to eliminate any reflow/rasterization lag
+      gsap.set(stageRef.current, { opacity: 0, scale: 0.95, force3D: true });
+      gsap.set(pillRef.current, { width: 82, height: 82, borderRadius: "100rem", force3D: true });
+      gsap.set(hammerRef.current, {
+        opacity: 0,
+        y: -70,
+        x: -8,
+        rotate: -45,
+        transformOrigin: "4px 12px",
+        force3D: true,
+      });
+      gsap.set(textWrapRef.current, { width: 0, opacity: 0, force3D: true });
+      gsap.set(textInnerRef.current, { x: -25, opacity: 0, force3D: true });
 
-      // 1. Rapid Text Phrases transitioning upwards
+      // 1. Rapid Text Phrases transitioning upwards (GPU accelerated: pure translate + opacity + subtle scale, NO heavy blur filters)
       if (wordEls && wordEls.length > 0) {
         wordEls.forEach((el, index) => {
           const isLast = index === wordEls.length - 1;
           tl.fromTo(
             el,
-            { y: 55, opacity: 0, filter: "blur(4px)" },
+            { y: 30, opacity: 0, scale: 0.95, force3D: true },
             {
               y: 0,
               opacity: 1,
-              filter: "blur(0px)",
-              duration: isLast ? 0.32 : 0.22,
+              scale: 1,
+              duration: isLast ? 0.28 : 0.2,
               ease: "power2.out",
+              force3D: true,
             }
           );
           tl.to(
             el,
             {
-              y: isLast ? -75 : -55,
+              y: isLast ? -45 : -30,
               opacity: 0,
-              filter: "blur(4px)",
-              duration: isLast ? 0.28 : 0.18,
+              scale: 0.96,
+              duration: isLast ? 0.22 : 0.16,
               ease: "power2.in",
+              force3D: true,
             },
-            isLast ? "+=0.28" : "+=0.18"
+            isLast ? "+=0.22" : "+=0.14"
           );
         });
       }
 
-      // 2. Anvil icon appears in center as FORGE leaves
+      // Hide words container once finished to free memory
+      tl.set(wordsContainerRef.current, { display: "none" });
+
+      // 2. Dark Circle with White Anvil emerges smoothly in center
       tl.to(
         stageRef.current,
         {
           opacity: 1,
           scale: 1,
           duration: 0.38,
-          ease: "back.out(1.5)",
+          ease: "back.out(1.2)",
+          force3D: true,
         },
-        "-=0.1"
+        "-=0.08"
       );
 
-      // 3. Hammer drops in from above
+      // 3. Green Hammer comes in smoothly from outside the pill (fully visible, GPU accelerated)
       tl.to(
         hammerRef.current,
         {
           opacity: 1,
-          y: -80,
-          rotate: -35,
-          duration: 0.28,
+          y: -35,
+          x: -4,
+          rotate: -32,
+          duration: 0.35,
           ease: "power2.out",
+          force3D: true,
         },
         "+=0.06"
       );
 
-      // 4. Hammer wind-up (anticipation)
+      // 4. Hammer wind-up anticipation (smooth, deliberate arc)
       tl.to(hammerRef.current, {
-        y: -105,
-        rotate: -55,
-        duration: 0.18,
+        y: -52,
+        x: -7,
+        rotate: -50,
+        duration: 0.28,
         ease: "power1.inOut",
+        force3D: true,
       });
 
-      // 5. HAMMER STRIKE DOWN ONTO ANVIL! (High impact velocity)
+      // 5. STRIKE! Lands flat on the top of the anvil
       tl.to(hammerRef.current, {
-        y: -14,
-        rotate: 15,
-        duration: 0.14,
-        ease: "power4.in",
+        y: 0,
+        x: 0,
+        rotate: 0,
+        duration: 0.18,
+        ease: "power3.in",
+        force3D: true,
       });
 
-      // 6. MOMENT OF IMPACT (Spark burst + Anvil squash + Hammer recoil)
+      // Exactly at the impact moment:
+      tl.addLabel("impact");
+
+      // 6. Impact moment:
+      // - Tiny crisp lime & white sparks burst
       const sparkEls = sparksRef.current?.querySelectorAll(".splash-spark");
       if (sparkEls && sparkEls.length > 0) {
-        tl.set(sparkEls, { opacity: 1, scale: 1 }, "<");
+        tl.set(sparkEls, { opacity: 1, scale: 1 }, "impact");
         sparkEls.forEach((spark) => {
           const el = spark as HTMLElement;
           const targetX = parseFloat(el.dataset.x || "0");
@@ -124,76 +161,113 @@ export default function SplashScreen() {
               opacity: 0,
               duration: 0.35,
               ease: "power3.out",
+              force3D: true,
             },
-            "<"
+            "impact"
           );
         });
       }
 
-      // Anvil squash & spring
-      tl.to(
-        pillRef.current,
-        {
-          y: 7,
-          scaleX: 1.16,
-          scaleY: 0.86,
-          duration: 0.08,
-          ease: "power2.in",
-        },
-        "<"
-      );
-      tl.to(pillRef.current, {
-        y: 0,
-        scaleX: 1,
-        scaleY: 1,
-        duration: 0.3,
-        ease: "elastic.out(1.2, 0.4)",
-      });
-
-      // Hammer recoils back upwards and vanishes
+      // - The anvil DOES NOT MOVE (solid, immovable rock)
+      // - The hammer REBOUNDS and STEADIES ITSELF smoothly
       tl.to(
         hammerRef.current,
         {
-          y: -100,
-          rotate: -20,
-          opacity: 0,
-          duration: 0.38,
-          ease: "power3.out",
+          y: -7,
+          x: -1,
+          rotate: -8,
+          duration: 0.12,
+          ease: "power2.out",
+          force3D: true,
         },
-        "<+=0.04"
+        "impact"
+      );
+      tl.to(
+        hammerRef.current,
+        {
+          y: 0,
+          x: 0,
+          rotate: 0,
+          duration: 0.14,
+          ease: "power2.in",
+          force3D: true,
+        }
+      );
+      tl.to(
+        hammerRef.current,
+        {
+          y: -1.5,
+          x: -0.2,
+          rotate: -1.5,
+          duration: 0.1,
+          ease: "power1.out",
+          force3D: true,
+        }
+      );
+      tl.to(
+        hammerRef.current,
+        {
+          y: 0,
+          x: 0,
+          rotate: 0,
+          duration: 0.12,
+          ease: "power1.inOut",
+          force3D: true,
+        }
       );
 
-      // 7. Impact reveals "Northforge Labs." text by expanding the pill
+      // 7. Pill ENLARGES SLOWLY AND SMOOTHLY with the appearing text!
+      // Continuous numeric tween with force3D ensures silky 60/120fps hardware acceleration
       tl.to(
         pillRef.current,
         {
-          width: "auto",
-          padding: "0 24px",
-          duration: 0.55,
-          ease: "power3.out",
+          width: targetPillWidth,
+          duration: 1.25,
+          ease: "power2.out",
+          force3D: true,
+          onComplete: () => {
+            if (pillRef.current) pillRef.current.style.width = "auto";
+          },
         },
-        "<+=0.05"
+        "impact"
       );
 
       tl.to(
-        textRevealRef.current,
+        textWrapRef.current,
         {
-          width: "auto",
+          width: targetTextWidth,
           opacity: 1,
-          duration: 0.5,
+          duration: 1.25,
           ease: "power2.out",
+          force3D: true,
+          onComplete: () => {
+            if (textWrapRef.current) textWrapRef.current.style.width = "auto";
+          },
         },
-        "<"
+        "impact"
       );
 
-      // 8. Savor the brand mark (nonchalant pause)
-      tl.to({}, { duration: 0.85 });
+      tl.to(
+        textInnerRef.current,
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.15,
+          ease: "power2.out",
+          force3D: true,
+        },
+        "impact+=0.04"
+      );
 
-      // 9. Plain white canvas slides up smoothly to unveil website
+      // 8. Savor the brand lockup (calm, confident pause)
+      tl.to({}, { duration: 1.0 });
+
+      // 9. Transition out: Smooth quick fade directly into homepage
       tl.to(containerRef.current, {
-        yPercent: -100,
-        duration: 0.75,
-        ease: "power3.inOut",
+        opacity: 0,
+        duration: 0.45,
+        ease: "power2.inOut",
+        force3D: true,
       });
     }, containerRef);
 
@@ -222,9 +296,11 @@ export default function SplashScreen() {
         flexDirection: "column",
         overflow: "hidden",
         pointerEvents: "all",
+        contain: "paint layout",
+        willChange: "opacity",
       }}
     >
-      {/* 1. Rapid Words Ticker */}
+      {/* 1. Rapid Words Ticker - Cycling through brand colors with layout containment */}
       <div
         ref={wordsContainerRef}
         style={{
@@ -232,143 +308,97 @@ export default function SplashScreen() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "90px",
+          width: "100%",
+          maxWidth: "600px",
+          height: "100px",
           overflow: "hidden",
+          zIndex: 5,
+          pointerEvents: "none",
+          contain: "layout paint",
         }}
       >
-        {WORDS.map((word) => (
+        {WORDS.map((item) => (
           <div
-            key={word}
+            key={item.text}
             className="splash-word"
             style={{
               position: "absolute",
-              fontFamily: "var(--font-inter), system-ui, -apple-system, sans-serif",
-              fontSize: "clamp(2.4rem, 5vw, 4rem)",
-              fontWeight: 800,
-              color: "#171717",
-              letterSpacing: "-0.04em",
-              textTransform: "uppercase",
+              fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: "clamp(2.4rem, 5.5vw, 4rem)",
+              fontWeight: 600,
+              color: item.color,
+              letterSpacing: "-0.025em",
               lineHeight: 1,
               opacity: 0,
+              willChange: "transform, opacity",
+              transform: "translateZ(0)",
+              textShadow: item.color === "#CBFB45" ? "0 1px 2px rgba(23, 23, 23, 0.08)" : "none",
             }}
           >
-            {word}
+            {item.text}
           </div>
         ))}
       </div>
 
-      {/* 2. Anvil, Hammer & Reveal Stage */}
+      {/* 2. Brand Circle -> Pill Stage */}
       <div
         ref={stageRef}
         style={{
           position: "relative",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          zIndex: 10,
+          overflow: "visible",
+          willChange: "transform, opacity",
+          transform: "translateZ(0)",
         }}
       >
-        {/* Hammer */}
-        <div
-          ref={hammerRef}
-          style={{
-            position: "absolute",
-            top: "-32px",
-            zIndex: 10,
-            pointerEvents: "none",
-          }}
-        >
-          <svg
-            width="58"
-            height="58"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#171717"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9" fill="#999999" stroke="#171717" />
-            <path d="m18 15 4-4" />
-            <path
-              d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"
-              fill="#171717"
-            />
-          </svg>
-        </div>
-
-        {/* Impact Sparks */}
-        <div
-          ref={sparksRef}
-          style={{
-            position: "absolute",
-            top: "-10px",
-            zIndex: 12,
-            pointerEvents: "none",
-          }}
-        >
-          {[
-            { x: -38, y: -28, color: "#CBFB45" },
-            { x: 38, y: -30, color: "#CBFB45" },
-            { x: -48, y: -6, color: "#171717" },
-            { x: 48, y: -8, color: "#171717" },
-            { x: -22, y: -48, color: "#CBFB45" },
-            { x: 22, y: -48, color: "#CBFB45" },
-          ].map((s, idx) => (
-            <div
-              key={idx}
-              className="splash-spark"
-              data-x={s.x}
-              data-y={s.y}
-              style={{
-                position: "absolute",
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                backgroundColor: s.color,
-                opacity: 0,
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Brand Pill with Anvil and Revealing Text */}
+        {/* The Brand Pill: Starts as an 82px circle, expands smoothly on strike */}
         <div
           ref={pillRef}
           style={{
+            position: "relative",
             display: "inline-flex",
             alignItems: "center",
-            justifyContent: "center",
-            height: "62px",
+            justifyContent: "flex-start",
             backgroundColor: "#171717",
+            height: "82px",
             borderRadius: "100rem",
             boxSizing: "border-box",
             whiteSpace: "nowrap",
-            overflow: "hidden",
+            overflow: "visible",
             cursor: "default",
+            willChange: "width",
+            transform: "translateZ(0)",
           }}
         >
-          {/* Anvil Icon inside pill */}
+          {/* Anvil Anchor: 82px x 82px, dead-centers the ANVIL on the circle/pill */}
           <div
+            ref={anvilWrapRef}
             style={{
+              position: "relative",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               flexShrink: 0,
-              width: "28px",
-              height: "28px",
+              width: "82px",
+              height: "82px",
+              overflow: "visible",
+              transform: "translateZ(0)",
             }}
           >
+            {/* White Anvil Icon centered dead in the middle of the 82px circle */}
             <svg
-              width="26"
-              height="26"
+              width="44"
+              height="44"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#CBFB45"
+              stroke="#FFFFFF"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              style={{ display: "block" }}
             >
               <path d="M7 10H6a4 4 0 0 1-4-4 1 1 0 0 1 1-1h4" />
               <path d="M7 5a1 1 0 0 1 1-1h13a1 1 0 0 1 1 1 7 7 0 0 1-7 7H8a1 1 0 0 1-1-1z" />
@@ -376,25 +406,108 @@ export default function SplashScreen() {
               <path d="M15 12v5" />
               <path d="M5 20a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1" />
             </svg>
+
+            {/* Green Hammer (#CBFB45): fully visible inside & outside the pill, lands flat on top of the anvil */}
+            <div
+              ref={hammerRef}
+              style={{
+                position: "absolute",
+                top: "3.5px",
+                left: "14px",
+                zIndex: 25,
+                pointerEvents: "none",
+                transformOrigin: "4px 12px",
+                willChange: "transform",
+                transform: "translateZ(0)",
+              }}
+            >
+              <svg
+                width="44"
+                height="35"
+                viewBox="0 0 50 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Green handle extending to the left */}
+                <rect x="2" y="12" width="30" height="4.5" rx="2.25" fill="#CBFB45" />
+                {/* Green head: flat striking face at bottom */}
+                <rect x="30" y="2" width="14" height="24" rx="2" fill="#CBFB45" />
+                <rect x="29" y="23" width="16" height="3" rx="1" fill="#CBFB45" />
+              </svg>
+            </div>
+
+            {/* Impact Sparks */}
+            <div
+              ref={sparksRef}
+              style={{
+                position: "absolute",
+                top: "26px",
+                left: "46px",
+                zIndex: 30,
+                pointerEvents: "none",
+              }}
+            >
+              {[
+                { x: -22, y: -16, color: "#CBFB45" },
+                { x: 22, y: -18, color: "#CBFB45" },
+                { x: -28, y: -4, color: "#FFFFFF" },
+                { x: 28, y: -6, color: "#FFFFFF" },
+                { x: -14, y: -24, color: "#CBFB45" },
+                { x: 14, y: -24, color: "#CBFB45" },
+              ].map((s, idx) => (
+                <div
+                  key={idx}
+                  className="splash-spark"
+                  data-x={s.x}
+                  data-y={s.y}
+                  style={{
+                    position: "absolute",
+                    width: "4.5px",
+                    height: "4.5px",
+                    borderRadius: "50%",
+                    backgroundColor: s.color,
+                    opacity: 0,
+                    transform: "translate(-50%, -50%)",
+                    willChange: "transform, opacity",
+                  }}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Unvealed Text */}
+          {/* Unvealed Brand Logo Text with generous padding and its own overflow: hidden */}
           <div
-            ref={textRevealRef}
+            ref={textWrapRef}
             style={{
+              overflow: "hidden",
+              whiteSpace: "nowrap",
               display: "flex",
               alignItems: "center",
-              overflow: "hidden",
-              paddingLeft: "10px",
-              fontFamily: "var(--font-inter), system-ui, -apple-system, sans-serif",
-              fontWeight: 600,
-              fontSize: "1.28rem",
-              lineHeight: 1,
-              letterSpacing: "-0.02em",
+              borderRadius: "0 100rem 100rem 0",
+              willChange: "width, opacity",
+              transform: "translateZ(0)",
             }}
           >
-            <span style={{ color: "#CBFB45" }}>Northforge</span>
-            <span style={{ color: "#FFFFFF" }}>&nbsp;Labs.</span>
+            <div
+              ref={textInnerRef}
+              style={{
+                fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(1.7rem, 3.4vw, 2.15rem)",
+                lineHeight: 1.4,
+                letterSpacing: "-0.025em",
+                paddingLeft: "4px",
+                paddingRight: "32px",
+                boxSizing: "border-box",
+                display: "inline-flex",
+                alignItems: "center",
+                willChange: "transform, opacity",
+                transform: "translateZ(0)",
+              }}
+            >
+              <span style={{ color: "#CBFB45" }}>Northforge</span>
+              <span style={{ color: "#FFFFFF" }}>&nbsp;Labs.</span>
+            </div>
           </div>
         </div>
       </div>

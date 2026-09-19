@@ -1,10 +1,10 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Northforge Labs",
     short_name: "Northforge",
-    description: "Software, design, and AI.",
+    description: "Software. Design. AI.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0b0e",

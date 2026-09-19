@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         canonical: `/blog/${slug}`,
       },
       openGraph: {
-        title: `${post.title} | Blog | Northforge Labs`,
+        title: `${post.title} — Northforge Labs`,
         description: post.excerpt,
         url: `/blog/${slug}`,
         images: [
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       twitter: {
         card: "summary_large_image",
-        title: `${post.title} | Blog | Northforge Labs`,
+        title: `${post.title} — Northforge Labs`,
         description: post.excerpt,
         images: [ogImage],
       },

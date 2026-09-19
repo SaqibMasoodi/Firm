@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/case-studies/${slug}`,
     },
     openGraph: {
-      title: `${study.title} | Case Study | Northforge Labs`,
+      title: `${study.title} — Northforge Labs`,
       description: study.description,
       url: `/case-studies/${slug}`,
       images: [
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${study.title} | Case Study | Northforge Labs`,
+      title: `${study.title} — Northforge Labs`,
       description: study.description,
       images: [ogImage],
     },

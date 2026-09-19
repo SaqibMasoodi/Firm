@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,20 +13,20 @@ import { getSiteHeader } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Technology and design studio.",
+  description: "Craft. Code. Systems.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About | Northforge Labs",
-    description: "Technology and design studio.",
+    title: "About — Northforge Labs",
+    description: "Craft. Code. Systems.",
     url: "/about",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About | Northforge Labs",
-    description: "Technology and design studio.",
+    title: "About — Northforge Labs",
+    description: "Craft. Code. Systems.",
     images: ["/images/og/og-image.png"],
   },
 };

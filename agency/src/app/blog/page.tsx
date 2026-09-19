@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,20 +7,20 @@ import { getBlogPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Insights",
-  description: "Notes on technology, design, and automation.",
+  description: "Technology. Design. Automation.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "Insights | Northforge Labs",
-    description: "Notes on technology, design, and automation.",
+    title: "Insights — Northforge Labs",
+    description: "Technology. Design. Automation.",
     url: "/blog",
     images: ["/images/og/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Insights | Northforge Labs",
-    description: "Notes on technology, design, and automation.",
+    title: "Insights — Northforge Labs",
+    description: "Technology. Design. Automation.",
     images: ["/images/og/og-image.png"],
   },
 };
