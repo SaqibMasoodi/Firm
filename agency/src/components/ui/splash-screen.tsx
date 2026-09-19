@@ -278,7 +278,26 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
       });
     }, containerRef);
 
+    let canSkip = false;
+    const skipTimer = setTimeout(() => {
+      canSkip = true;
+    }, 200);
+
+    const handleSkip = () => {
+      if (!canSkip) return;
+      ctx.revert();
+      document.body.style.overflow = originalOverflow;
+      setIsComplete(true);
+      onCompleteRef.current?.();
+    };
+
+    window.addEventListener("keydown", handleSkip);
+    window.addEventListener("click", handleSkip);
+
     return () => {
+      clearTimeout(skipTimer);
+      window.removeEventListener("keydown", handleSkip);
+      window.removeEventListener("click", handleSkip);
       document.body.style.overflow = originalOverflow;
       ctx.revert();
     };
@@ -289,7 +308,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
   return (
     <div
       ref={containerRef}
-      className="splash-overlay"
+      className={`splash-overlay ${forcePlay ? "force-play" : ""}`}
       style={{
         position: "fixed",
         top: 0,

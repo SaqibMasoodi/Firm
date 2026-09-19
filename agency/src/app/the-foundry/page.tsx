@@ -58,6 +58,7 @@ export default function FoundryPage() {
   // Global keystroke listener: typing anywhere focuses terminal input
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (isPlayingSplash) return;
       // Don't capture modifier combinations (Ctrl, Alt, Meta)
       if (e.ctrlKey || e.altKey || e.metaKey) return;
       if (document.activeElement !== inputRef.current) {
@@ -68,7 +69,7 @@ export default function FoundryPage() {
     };
     window.addEventListener("keydown", handleGlobalKeyDown);
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
-  }, []);
+  }, [isPlayingSplash]);
 
   const handleCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -236,6 +237,7 @@ export default function FoundryPage() {
           forcePlay={true}
           onComplete={() => {
             setIsPlayingSplash(false);
+            inputRef.current?.focus();
             setHistory((prev) => [
               ...prev,
               {

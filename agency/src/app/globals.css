@@ -1,5 +1,5 @@
 /* Splash Screen Session Instant Hide */
-html.splash-viewed .splash-overlay {
+html.splash-viewed .splash-overlay:not(.force-play) {
   display: none !important;
 }
 
