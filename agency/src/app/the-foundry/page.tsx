@@ -149,9 +149,9 @@ export default function FoundryPage() {
       onClick={() => inputRef.current?.focus()}
       style={{
         minHeight: "100vh",
-        backgroundColor: "#0A0A0A",
+        backgroundColor: "#171717",
         color: "#E4E4E7",
-        fontFamily: "'Courier New', Courier, monospace",
+        fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
         padding: "clamp(20px, 4vw, 50px)",
         boxSizing: "border-box",
         display: "flex",
@@ -178,7 +178,7 @@ export default function FoundryPage() {
               height: "10px",
               borderRadius: "50%",
               backgroundColor: "var(--green, #CBFB45)",
-              boxShadow: "0 0 10px var(--green, #CBFB45)",
+              
             }}
           />
           <span style={{ fontWeight: 700, color: "#FFFFFF", fontSize: "14px", letterSpacing: "1px" }}>

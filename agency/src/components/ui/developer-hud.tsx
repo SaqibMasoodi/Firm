@@ -152,9 +152,9 @@ export default function DeveloperHud() {
         WebkitBackdropFilter: "blur(16px)",
         border: "1px solid rgba(255, 255, 255, 0.12)",
         borderRadius: "14px",
-        boxShadow: "0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(203, 251, 69, 0.15)",
+        boxShadow: "0 20px 48px rgba(0, 0, 0, 0.6)",
         zIndex: 999999,
-        fontFamily: "var(--font-inter), monospace",
+        fontFamily: "var(--font-inter), -apple-system, sans-serif",
         color: "#E4E4E7",
         fontSize: "12px",
         overflow: "hidden",
@@ -180,7 +180,7 @@ export default function DeveloperHud() {
               height: "8px",
               borderRadius: "50%",
               backgroundColor: "var(--green, #CBFB45)",
-              boxShadow: "0 0 8px var(--green, #CBFB45)",
+              
             }}
           />
           <span style={{ fontWeight: 600, letterSpacing: "-0.01em", color: "#FFFFFF" }}>

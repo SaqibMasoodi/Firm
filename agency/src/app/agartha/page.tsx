@@ -94,7 +94,7 @@ export default function AgarthaPage() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#0D0D0D",
+        backgroundColor: "#171717",
         color: "#FFFFFF",
         fontFamily: "var(--font-inter), -apple-system, sans-serif",
         padding: "clamp(40px, 8vw, 100px) clamp(20px, 6vw, 80px)",
@@ -102,24 +102,7 @@ export default function AgarthaPage() {
         position: "relative",
       }}
     >
-      {/* Background ambient forge glow */}
-      <div
-        style={{
-          position: "fixed",
-          top: "10%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "600px",
-          height: "400px",
-          backgroundColor: "var(--green, #CBFB45)",
-          opacity: 0.04,
-          filter: "blur(140px)",
-          borderRadius: "50%",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
+      
       <div style={{ maxWidth: "960px", margin: "0 auto", position: "relative", zIndex: 1 }}>
         {/* Top Breadcrumb & Status */}
         <div
@@ -167,7 +150,7 @@ export default function AgarthaPage() {
                 height: "6px",
                 borderRadius: "50%",
                 backgroundColor: "var(--green, #CBFB45)",
-                boxShadow: "0 0 6px var(--green, #CBFB45)",
+                
               }}
             />
             CONFIDENTIAL // LEVEL 4 ARCHIVE
@@ -260,7 +243,7 @@ export default function AgarthaPage() {
                   <span
                     style={{
                       fontSize: "11px",
-                      fontFamily: "monospace",
+                      fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                       backgroundColor: "rgba(255, 255, 255, 0.05)",
                       padding: "3px 8px",
                       borderRadius: "6px",

@@ -133,7 +133,7 @@ export default function BlacksmithCursor() {
         spark.style.height = `${size}px`;
         spark.style.borderRadius = "50%";
         spark.style.backgroundColor = color;
-        spark.style.boxShadow = `0 0 6px ${color}`;
+        
         spark.style.pointerEvents = "none";
         spark.style.willChange = "transform, opacity";
 
@@ -251,7 +251,7 @@ export default function BlacksmithCursor() {
             transform: "translateX(-50%)",
             backgroundColor: "#171717",
             border: "1px solid rgba(255, 255, 255, 0.12)",
-            boxShadow: "0 12px 36px rgba(0, 0, 0, 0.6), 0 0 12px rgba(203, 251, 69, 0.2)",
+            boxShadow: "0 12px 36px rgba(0, 0, 0, 0.6)",
             borderRadius: "100rem",
             padding: "8px 18px",
             display: "inline-flex",

@@ -287,7 +287,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
         padding: "16px",
         boxShadow: "0 20px 48px -8px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.12)",
         color: "#171717",
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         display: "flex",
         flexDirection: "column",
         gap: "14px",

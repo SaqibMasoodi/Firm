@@ -33,7 +33,7 @@ export default function ConsoleForge() {
         spark.style.height = `${size}px`;
         spark.style.borderRadius = "50%";
         spark.style.backgroundColor = color;
-        spark.style.boxShadow = `0 0 8px ${color}`;
+        
         spark.style.pointerEvents = "none";
 
         sparkContainer.appendChild(spark);
