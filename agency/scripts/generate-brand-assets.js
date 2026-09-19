@@ -230,7 +230,9 @@ async function run() {
     .png({ quality: 95, compressionLevel: 8 })
     .toBuffer();
 
-  fs.writeFileSync('agency/public/images/og/og-image.png', ogPngBuffer);
+  if (!fs.existsSync('agency/public/images/og/og-image.png')) {
+    fs.writeFileSync('agency/public/images/og/og-image.png', ogPngBuffer);
+  }
   fs.writeFileSync('agency/src/app/opengraph-image.png', ogPngBuffer);
   fs.writeFileSync('agency/src/app/twitter-image.png', ogPngBuffer);
   console.log('✔ Generated clean 1200x630 og-image.png, opengraph-image.png, twitter-image.png');

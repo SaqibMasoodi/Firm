@@ -15,14 +15,20 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : process.env.NEXT_PUBLIC_SITE_URL || "https://northforgelabs.com";
+
 export const metadata: Metadata = {
   title: {
-    default: "Northforge Labs — Technology & Creative Agency",
+    default: "Northforge Labs - Technology & Creative Agency",
     template: "%s | Northforge Labs",
   },
   description:
     "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
-    metadataBase: new URL("https://northforgelabs.com"),
+  metadataBase: new URL(siteUrl),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
