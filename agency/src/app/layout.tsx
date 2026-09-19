@@ -6,6 +6,8 @@ import "./globals.css";
 import { OrganizationSchema } from "@/components/seo/schemas";
 import SplashScreen from "@/components/ui/splash-screen";
 import BlacksmithCursor from "@/components/ui/blacksmith-cursor";
+import DeveloperHud from "@/components/ui/developer-hud";
+import ConsoleForge from "@/components/ui/console-forge";
 
 
 export const viewport: Viewport = {
@@ -87,6 +89,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
       <head>
         <OrganizationSchema />
+        {/* "The iron never lies." Seek the subterranean halls of /agartha */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{if(sessionStorage.getItem("northforge_splash_viewed")==="true"){document.documentElement.classList.add("splash-viewed");}}catch(e){}})();`,
@@ -96,6 +99,8 @@ export default function RootLayout({
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <SplashScreen />
         <BlacksmithCursor />
+        <DeveloperHud />
+        <ConsoleForge />
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
