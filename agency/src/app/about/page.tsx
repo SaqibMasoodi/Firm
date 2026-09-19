@@ -18,6 +18,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/about",
   },
+  openGraph: {
+    title: "About Us | Northforge Labs",
+    description: "Learn about Northforge Labs, our mission, values, and the team driving digital excellence and business automation.",
+    url: "/about",
+    images: ["/images/og/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Northforge Labs",
+    description: "Learn about Northforge Labs, our mission, values, and the team driving digital excellence and business automation.",
+    images: ["/images/og/og-image.png"],
+  },
 };
 
 export default async function AboutPage() {

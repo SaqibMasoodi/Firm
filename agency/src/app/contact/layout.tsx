@@ -7,6 +7,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contact",
   },
+  openGraph: {
+    title: "Contact Us | Northforge Labs",
+    description: "Ready to build something extraordinary? Get in touch with Northforge Labs for project inquiries and partnerships.",
+    url: "/contact",
+    images: ["/images/og/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Northforge Labs",
+    description: "Ready to build something extraordinary? Get in touch with Northforge Labs for project inquiries and partnerships.",
+    images: ["/images/og/og-image.png"],
+  },
 };
 
 export default function ContactLayout({

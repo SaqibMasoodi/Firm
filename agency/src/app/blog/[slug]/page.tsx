@@ -22,18 +22,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Not Found" };
-  return {
-    title: post.title,
-    description: post.excerpt,
-    alternates: {
-      canonical: `/blog/${slug}`,
-    },
-    openGraph: {
+      const ogImage = post.image || "/images/og/og-image.png";
+    return {
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
-    },
-  };
+      alternates: {
+        canonical: `/blog/${slug}`,
+      },
+      openGraph: {
+        title: `${post.title} | Blog | Northforge Labs`,
+        description: post.excerpt,
+        url: `/blog/${slug}`,
+        images: [
+          {
+            url: ogImage,
+            alt: post.title,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${post.title} | Blog | Northforge Labs`,
+        description: post.excerpt,
+        images: [ogImage],
+      },
+    };
 }
 
 export default async function BlogPostPage({ params }: Props) {

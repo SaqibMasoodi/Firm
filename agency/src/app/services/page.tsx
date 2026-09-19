@@ -16,6 +16,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/services",
   },
+  openGraph: {
+    title: "Services | Northforge Labs",
+    description: "Explore our services across software engineering, product design, AI automation, branding, and digital strategy.",
+    url: "/services",
+    images: ["/images/og/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | Northforge Labs",
+    description: "Explore our services across software engineering, product design, AI automation, branding, and digital strategy.",
+    images: ["/images/og/og-image.png"],
+  },
 };
 
 export default async function ServicesPage() {

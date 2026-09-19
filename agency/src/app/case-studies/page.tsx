@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/case-studies",
   },
+  openGraph: {
+    title: "Case Studies & Client Work | Northforge Labs",
+    description: "Explore our portfolio of digital products, web platforms, and automated solutions built for growing businesses.",
+    url: "/case-studies",
+    images: ["/images/og/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Studies & Client Work | Northforge Labs",
+    description: "Explore our portfolio of digital products, web platforms, and automated solutions built for growing businesses.",
+    images: ["/images/og/og-image.png"],
+  },
 };
 
 function ArrowIcon() {

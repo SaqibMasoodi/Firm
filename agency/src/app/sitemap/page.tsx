@@ -10,6 +10,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/sitemap",
   },
+  openGraph: {
+    title: "Sitemap | Northforge Labs",
+    description: "Complete overview and site index of Northforge Labs pages and resources.",
+    url: "/sitemap",
+    images: ["/images/og/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sitemap | Northforge Labs",
+    description: "Complete overview and site index of Northforge Labs pages and resources.",
+    images: ["/images/og/og-image.png"],
+  },
 };
 
 function ArrowDiagonalIcon() {

@@ -29,9 +29,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const study = await getCaseStudyBySlug(slug);
   if (!study) return { title: "Not Found" };
+  const ogImage = study.image || "/images/og/og-image.png";
   return {
     title: study.title,
     description: study.description,
+    alternates: {
+      canonical: `/case-studies/${slug}`,
+    },
+    openGraph: {
+      title: `${study.title} | Case Study | Northforge Labs`,
+      description: study.description,
+      url: `/case-studies/${slug}`,
+      images: [
+        {
+          url: ogImage,
+          alt: study.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${study.title} | Case Study | Northforge Labs`,
+      description: study.description,
+      images: [ogImage],
+    },
   };
 }
 

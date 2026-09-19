@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/blog",
   },
+  openGraph: {
+    title: "Blog & Insights | Northforge Labs",
+    description: "Insights, guides, and trends on AI automation, software engineering, branding, and digital product strategy.",
+    url: "/blog",
+    images: ["/images/og/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog & Insights | Northforge Labs",
+    description: "Insights, guides, and trends on AI automation, software engineering, branding, and digital product strategy.",
+    images: ["/images/og/og-image.png"],
+  },
 };
 
 function ArrowIcon() {

@@ -22,9 +22,21 @@ export const metadata: Metadata = {
   },
   description:
     "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
-  metadataBase: new URL("https://northforgelabs.com"),
+    metadataBase: new URL("https://northforgelabs.com"),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
-    title: "Northforge Labs — Technology & Creative Agency",
+    title: "Northforge Labs - Technology & Creative Agency",
     description:
       "Build digital products, grow your online presence, and automate operations.",
     url: "https://northforgelabs.com",
@@ -33,18 +45,20 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/hero/hero-banner.webp",
-        width: 1920,
-        height: 1080,
+        url: "/images/og/og-image.png",
+        width: 1200,
+        height: 630,
         alt: "Northforge Labs - Technology & Creative Agency",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Northforge Labs — Technology & Creative Agency",
+    title: "Northforge Labs - Technology & Creative Agency",
     description:
       "Build digital products, grow your online presence, and automate operations.",
+    images: ["/images/og/og-image.png"],
   },
   alternates: {
     canonical: "/",
