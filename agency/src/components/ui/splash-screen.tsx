@@ -34,17 +34,21 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
-  const [isComplete, setIsComplete] = useState(() => {
-    if (forcePlay) return false;
-    if (typeof window !== "undefined") {
-      try {
-        return sessionStorage.getItem("northforge_splash_viewed") === "true";
-      } catch {}
-    }
-    return false;
-  });
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
+    if (!forcePlay) {
+      try {
+        if (sessionStorage.getItem("northforge_splash_viewed") === "true") {
+          const timer = setTimeout(() => {
+            setIsComplete(true);
+            onCompleteRef.current?.();
+          }, 0);
+          return () => clearTimeout(timer);
+        }
+      } catch {}
+    }
+
     if (isComplete) return;
 
     const originalOverflow = document.body.style.overflow;
@@ -278,7 +282,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
       document.body.style.overflow = originalOverflow;
       ctx.revert();
     };
-  }, [isComplete]);
+  }, [isComplete, forcePlay]);
 
   if (isComplete) return null;
 

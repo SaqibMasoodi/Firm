@@ -1,3 +1,4 @@
+import Script from "next/script";
 ﻿import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
@@ -90,9 +91,11 @@ export default function RootLayout({
       <head>
         <OrganizationSchema />
         {/* "The iron never lies." Seek the subterranean halls of /agartha */}
-        <script
+        <Script
+          id="splash-viewed-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(sessionStorage.getItem("northforge_splash_viewed")==="true"){document.documentElement.classList.add("splash-viewed");}}catch(e){}})();`,
+            __html: `try{if(sessionStorage.getItem("northforge_splash_viewed")==="true"){document.documentElement.classList.add("splash-viewed");}}catch(e){}`,
           }}
         />
       </head>
