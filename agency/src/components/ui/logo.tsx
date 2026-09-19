@@ -8,6 +8,9 @@ interface LogoProps {
   className?: string;
 }
 
+const GREEN_LETTERS = "Northforge".split("");
+const WHITE_LETTERS = "Labs.".split("");
+
 export default function Logo({ variant = "default", className = "" }: LogoProps) {
   const hammerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -27,23 +30,23 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
       },
     });
 
-    // 1. Hammer winds up (lifts up and angles back)
+    // 1. Eased Hammer Wind-up (fluid, deliberate arc with natural acceleration)
     tl.to(hammerRef.current, {
-      y: -7,
-      x: -3,
-      rotate: -32,
-      duration: 0.14,
-      ease: "power2.out",
+      y: -6.5,
+      x: -2.8,
+      rotate: -28,
+      duration: 0.18,
+      ease: "sine.inOut",
       force3D: true,
     });
 
-    // 2. Hammer strikes down onto the anvil!
+    // 2. Smoothly accelerated strike onto the anvil (appropriately eased speed)
     tl.to(hammerRef.current, {
       y: 0,
       x: 0,
       rotate: 0,
-      duration: 0.09,
-      ease: "power4.in",
+      duration: 0.13,
+      ease: "power2.in",
       force3D: true,
     });
 
@@ -73,15 +76,15 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
       });
     }
 
-    // 4. Hammer rebound & settle
+    // 4. Hammer soft rebound & settle
     tl.to(
       hammerRef.current,
       {
-        y: -2.5,
-        x: -0.8,
-        rotate: -5,
-        duration: 0.07,
-        ease: "power2.out",
+        y: -1.8,
+        x: -0.5,
+        rotate: -3,
+        duration: 0.08,
+        ease: "power1.out",
         force3D: true,
       },
       "impact"
@@ -91,51 +94,31 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
       y: 0,
       x: 0,
       rotate: 0,
-      duration: 0.09,
-      ease: "power1.inOut",
+      duration: 0.12,
+      ease: "sine.inOut",
       force3D: true,
     });
 
-    // 5. Text wiggles on impact!
-    tl.to(
-      textRef.current,
-      {
-        x: 2.5,
-        rotate: 0.7,
-        duration: 0.04,
-        ease: "power2.out",
-        force3D: true,
-      },
-      "impact"
-    );
-    tl.to(textRef.current, {
-      x: -2,
-      rotate: -0.5,
-      duration: 0.04,
-      ease: "power2.inOut",
-      force3D: true,
-    });
-    tl.to(textRef.current, {
-      x: 1.2,
-      rotate: 0.3,
-      duration: 0.03,
-      ease: "power2.inOut",
-      force3D: true,
-    });
-    tl.to(textRef.current, {
-      x: -0.6,
-      rotate: -0.1,
-      duration: 0.03,
-      ease: "power2.inOut",
-      force3D: true,
-    });
-    tl.to(textRef.current, {
-      x: 0,
-      rotate: 0,
-      duration: 0.04,
-      ease: "power2.out",
-      force3D: true,
-    });
+    // 5. Subtle traversing wave across letters on impact!
+    // Each letter subtly rises (-3px) and falls back to place in a flowing ripple
+    const letters = textRef.current?.querySelectorAll(".logo-letter");
+    if (letters && letters.length > 0) {
+      tl.to(
+        letters,
+        {
+          y: -3,
+          duration: 0.11,
+          ease: "sine.out",
+          stagger: {
+            each: 0.022,
+            yoyo: true,
+            repeat: 1,
+          },
+          force3D: true,
+        },
+        "impact+=0.02"
+      );
+    }
   };
 
   const isNavbar = variant === "navbar";
@@ -218,10 +201,36 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
         </span>
       )}
 
-      {/* Brand Text */}
+      {/* Brand Text with individual letters for traversing wave animation */}
       <span ref={textRef} className="brand-logo-text-wrap">
-        <span className="brand-logo-green">Northforge</span>
-        <span className="brand-logo-white">&nbsp;Labs.</span>
+        <span className="brand-logo-green">
+          {GREEN_LETTERS.map((char, i) => (
+            <span
+              key={i}
+              className="logo-letter"
+              style={{ display: "inline-block", willChange: "transform" }}
+            >
+              {char}
+            </span>
+          ))}
+        </span>
+        <span className="brand-logo-white">
+          <span
+            className="logo-letter"
+            style={{ display: "inline-block", willChange: "transform" }}
+          >
+            &nbsp;
+          </span>
+          {WHITE_LETTERS.map((char, i) => (
+            <span
+              key={i}
+              className="logo-letter"
+              style={{ display: "inline-block", willChange: "transform" }}
+            >
+              {char}
+            </span>
+          ))}
+        </span>
       </span>
     </span>
   );
