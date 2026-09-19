@@ -166,7 +166,19 @@ export default function Footer() {
                   © {new Date().getFullYear()} Northforge Labs. All rights reserved.
                 </div>
                 <div className="footer-credit-text">
-                  Designed &amp; built by the team at Northforge Labs
+                  Designed &amp; built by{" "}
+                  <Link
+                    href="/the-foundry"
+                    style={{
+                      color: "inherit",
+                      textDecoration: "none",
+                      transition: "color 0.2s ease",
+                      cursor: "pointer",
+                    }}
+                    title="The Foundry"
+                  >
+                    the team at Northforge Labs
+                  </Link>
                 </div>
               </div>
             </div>
