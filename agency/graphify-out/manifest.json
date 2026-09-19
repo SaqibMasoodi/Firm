@@ -168,9 +168,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1789792584.3220994,
-    "seen": 1789792661.904932,
-    "ast_hash": "034df035d0f4da73b971e1300c1d6819",
+    "mtime": 1789793459.5702088,
+    "seen": 1789793502.2177565,
+    "ast_hash": "4aa7499e0a4f68af2652d37b9f05ccd7",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -210,9 +210,9 @@
     "semantic_hash": ""
   },
   "src/app/admin/page.tsx": {
-    "mtime": 1789792533.1168587,
-    "seen": 1789792661.904932,
-    "ast_hash": "895b52660497a3518c3442afda2b7d7e",
+    "mtime": 1789792915.997162,
+    "seen": 1789792952.8573916,
+    "ast_hash": "5d1846bfed02da217840a89b6fc7a40a",
     "semantic_hash": ""
   },
   "src/app/api/admin/content/route.ts": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "src/app/blog/page.tsx": {
-    "mtime": 1789792508.2457564,
-    "seen": 1789792661.904932,
-    "ast_hash": "cc925678d8533d962f101790e8674e24",
+    "mtime": 1789793322.48087,
+    "seen": 1789793372.3562677,
+    "ast_hash": "8d534a38dc8085f88316fce3b7e1d0e8",
     "semantic_hash": ""
   },
   "src/app/case-studies/[slug]/page.tsx": {
@@ -258,9 +258,9 @@
     "semantic_hash": ""
   },
   "src/app/case-studies/page.tsx": {
-    "mtime": 1789792486.567346,
-    "seen": 1789792661.904932,
-    "ast_hash": "14ef7834071d610618e5a980e8633f6b",
+    "mtime": 1789793316.407465,
+    "seen": 1789793372.3562677,
+    "ast_hash": "736911224009eaa51ce4c68a4eb9b3dc",
     "semantic_hash": ""
   },
   "src/app/contact/page.tsx": {
@@ -312,15 +312,15 @@
     "semantic_hash": ""
   },
   "src/components/layout/footer.tsx": {
-    "mtime": 1789792575.7066498,
-    "seen": 1789792661.904932,
-    "ast_hash": "8527c0ea92026507c423163d3f9a8113",
+    "mtime": 1789792900.083212,
+    "seen": 1789792952.8573916,
+    "ast_hash": "7a5ff76a27cfd7f6b4a80e2e0bdddc3d",
     "semantic_hash": ""
   },
   "src/components/layout/navbar.tsx": {
-    "mtime": 1789646344.8640485,
-    "seen": 1789746504.9193058,
-    "ast_hash": "26a532b8027ef431a547f12ec552f76d",
+    "mtime": 1789792880.63308,
+    "seen": 1789792952.8573916,
+    "ast_hash": "8c76f8f1440286604fbb43497cf6a995",
     "semantic_hash": ""
   },
   "src/components/sections/case-studies-preview.tsx": {
@@ -510,9 +510,9 @@
     "semantic_hash": ""
   },
   "public/images/brand/logo.svg": {
-    "mtime": 1789646264.4355412,
-    "seen": 1789746504.9193058,
-    "ast_hash": "11d4e8689f1abb16d5ff1e8353fa41a3",
+    "mtime": 1789793129.152665,
+    "seen": 1789793153.6484401,
+    "ast_hash": "df60325953feed9825d3f91fed452cb0",
     "semantic_hash": ""
   },
   "public/images/case-studies/brewzen-coffee-retailer/cover.webp": {
@@ -819,6 +819,24 @@
     "mtime": 1789748753.2770033,
     "seen": 1789792661.904932,
     "ast_hash": "4355bce960873d3d9cedc947d9284ddd",
+    "semantic_hash": ""
+  },
+  "src/components/ui/logo.tsx": {
+    "mtime": 1789792850.882247,
+    "seen": 1789792952.8573916,
+    "ast_hash": "6ff61589cd808d49f42063527081d2f7",
+    "semantic_hash": ""
+  },
+  "src/app/contact/layout.tsx": {
+    "mtime": 1789793298.8896732,
+    "seen": 1789793372.3562677,
+    "ast_hash": "8ffefdf795163897f1e05b163378001c",
+    "semantic_hash": ""
+  },
+  "src/app/manifest.ts": {
+    "mtime": 1789793339.1514702,
+    "seen": 1789793372.3562677,
+    "ast_hash": "d48957d1f5fb7b382e5c3f9dedcfac11",
     "semantic_hash": ""
   }
 }

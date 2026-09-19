@@ -5,7 +5,7 @@ import ScrollReveal from "@/components/ui/scroll-reveal";
 import { getCaseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Case studies — Northforge Labs",
+  title: "Case Studies",
   description:
     "Explore our portfolio of successful projects. See how we bring brands to life with cutting-edge digital strategies.",
 };
