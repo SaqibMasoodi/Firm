@@ -22,18 +22,17 @@ export default function SplashScreen() {
   const textWrapRef = useRef<HTMLDivElement>(null);
   const textInnerRef = useRef<HTMLDivElement>(null);
 
-  const [isComplete, setIsComplete] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        return sessionStorage.getItem("northforge_splash_viewed") === "true";
-      } catch {
-        return false;
-      }
-    }
-    return false;
-  });
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
+    // Check if splash has already been viewed in this session
+    try {
+      if (sessionStorage.getItem("northforge_splash_viewed") === "true") {
+        setIsComplete(true);
+        return;
+      }
+    } catch {}
+
     if (isComplete) return;
 
     const originalOverflow = document.body.style.overflow;
