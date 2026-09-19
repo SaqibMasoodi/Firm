@@ -1,16 +1,16 @@
-{
+﻿{
   "home": {
     "image": "/images/hero/hero-banner.jpg",
     "objectPosition": "53% 43%",
     "alt": "Northforge Labs Creative Office"
   },
   "about": {
-    "image": "/images/headers/chatgpt-image-sep-18,-2026,-10_24_03-pm.png",
+    "image": "/images/headers/about-header.webp",
     "objectPosition": "46% 36%",
     "alt": "Modern office lobby"
   },
   "services": {
-    "image": "/images/headers/gemini_generated_image_ys9r8uys9r8uys9r.png",
+    "image": "/images/headers/services-header.webp",
     "objectPosition": "75% 53%",
     "alt": "Our services"
   }

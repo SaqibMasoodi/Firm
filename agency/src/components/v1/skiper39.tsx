@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { gsap } from "gsap";
 import React, { useEffect, useRef } from "react";
@@ -22,6 +22,7 @@ type Peep = {
   y: number;
   anchorY: number;
   scaleX: number;
+  baseTimeScale: number;
   walk: gsap.core.Timeline | null;
   setRect: (rect: number[]) => void;
   render: (ctx: CanvasRenderingContext2D) => void;
@@ -45,6 +46,11 @@ export const CrowdCanvas = ({
 
     let isMounted = true;
     const config = { src, rows, cols, maxPeeps };
+
+    // Speed multiplier state for smooth deceleration and acceleration
+    const speedMultiplier = { current: 1 };
+    let speedTween: gsap.core.Tween | null = null;
+    let autoPauseTimer: NodeJS.Timeout | null = null;
 
     // UTILS
     const randomRange = (min: number, max: number) =>
@@ -100,7 +106,8 @@ export const CrowdCanvas = ({
       const xDuration = 10;
       const yDuration = 0.25;
       const tl = gsap.timeline();
-      tl.timeScale(randomRange(0.5, 1.5));
+      peep.baseTimeScale = randomRange(0.6, 1.4);
+      tl.timeScale(peep.baseTimeScale * speedMultiplier.current);
       tl.to(
         peep,
         {
@@ -143,6 +150,7 @@ export const CrowdCanvas = ({
         y: 0,
         anchorY: 0,
         scaleX: 1,
+        baseTimeScale: 1,
         walk: null,
         setRect: (rect: number[]) => {
           peep.rect = rect;
@@ -240,6 +248,48 @@ export const CrowdCanvas = ({
       availablePeeps.push(peep);
     };
 
+    // SPEED & DECELERATION CONTROLLERS
+    const syncCrowdSpeed = () => {
+      crowd.forEach((peep) => {
+        if (peep.walk) {
+          peep.walk.timeScale(peep.baseTimeScale * speedMultiplier.current);
+        }
+      });
+    };
+
+    // Smoothly decelerates the crowd to a natural standstill
+    const slowDownAndPause = (duration = 1.4) => {
+      if (speedTween) speedTween.kill();
+      if (autoPauseTimer) clearTimeout(autoPauseTimer);
+
+      speedTween = gsap.to(speedMultiplier, {
+        current: 0,
+        duration,
+        ease: "power2.out",
+        onUpdate: syncCrowdSpeed,
+      });
+    };
+
+    // Accelerates the crowd back to full walking pace for activeDuration, then smoothly slows down
+    const resumeWalk = (activeDuration = 2.8) => {
+      if (speedTween) speedTween.kill();
+      if (autoPauseTimer) clearTimeout(autoPauseTimer);
+
+      speedTween = gsap.to(speedMultiplier, {
+        current: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        onUpdate: syncCrowdSpeed,
+        onComplete: () => {
+          autoPauseTimer = setTimeout(() => {
+            if (isMounted) {
+              slowDownAndPause(1.4);
+            }
+          }, activeDuration * 1000);
+        },
+      });
+    };
+
     const render = () => {
       if (!canvas || !isMounted) return;
       const dpr = window.devicePixelRatio || 1;
@@ -282,6 +332,14 @@ export const CrowdCanvas = ({
       createPeeps();
       resize();
       gsap.ticker.add(render);
+
+      // Initial walk on page arrival: runs for 5.2s (allowing splash screen to finish),
+      // then gently slows down into a natural standstill
+      autoPauseTimer = setTimeout(() => {
+        if (isMounted) {
+          slowDownAndPause(1.4);
+        }
+      }, 5200);
     };
 
     img.onload = init;
@@ -296,6 +354,16 @@ export const CrowdCanvas = ({
 
     window.addEventListener("resize", handleResize);
 
+    // Interactive Hover: on pointerenter or tap, crowd starts walking again for 2.8s, then smoothly slows down
+    const handleInteraction = () => {
+      if (imageLoaded) {
+        resumeWalk(2.8);
+      }
+    };
+
+    canvas.addEventListener("pointerenter", handleInteraction);
+    canvas.addEventListener("pointerdown", handleInteraction);
+
     let ro: ResizeObserver | null = null;
     if (typeof ResizeObserver !== "undefined") {
       ro = new ResizeObserver(() => {
@@ -308,7 +376,11 @@ export const CrowdCanvas = ({
       isMounted = false;
       img.onload = null;
       window.removeEventListener("resize", handleResize);
+      canvas.removeEventListener("pointerenter", handleInteraction);
+      canvas.removeEventListener("pointerdown", handleInteraction);
       if (ro) ro.disconnect();
+      if (speedTween) speedTween.kill();
+      if (autoPauseTimer) clearTimeout(autoPauseTimer);
       gsap.ticker.remove(render);
       crowd.forEach((peep) => {
         if (peep.walk) peep.walk.kill();
@@ -324,6 +396,7 @@ export const CrowdCanvas = ({
         display: "block",
         width: "100%",
         height: "100%",
+        cursor: "pointer",
         ...style,
       }}
     />
@@ -338,7 +411,7 @@ export const Skiper39 = () => {
           Crowd Canvas
         </span>
       </div>
-      <div className="absolute bottom-0 h-full w-screen">
+      <div className="relative h-full w-full">
         <CrowdCanvas src="/images/peeps/all-peeps.png" rows={15} cols={7} />
       </div>
     </div>
