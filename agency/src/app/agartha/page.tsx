@@ -9,7 +9,7 @@ const SECRETS = [
     id: "blacksmith-cursor",
     tag: "Interactive Cursor",
     title: "The Blacksmith Cursor",
-    shortcut: "↑ ↑ ↓ ↓ ← → ← → B A  /  'seeyos'",
+    shortcuts: ["↑ ↑ ↓ ↓ ← → ← → B A", "'seeyos'"],
     description:
       "Transforms the mouse cursor into the brand hammer. Holding down click swings the hammer down from the bottom-right wrist pivot, and each strike disperses sparks that arc and gravitate downward.",
     actionType: "custom",
@@ -29,7 +29,7 @@ const SECRETS = [
     id: "dev-hud",
     tag: "Diagnostics",
     title: "Developer HUD",
-    shortcut: "Ctrl + Shift + D  /  ~ (Tilde)",
+    shortcuts: ["Ctrl + Shift + D", "~ (Tilde)"],
     description:
       "Summons a translucent telemetry HUD in the bottom-right corner tracking live framerate (FPS), scroll velocity, viewport breakpoints, and active GSAP animation tweens.",
     actionType: "custom",
@@ -44,7 +44,7 @@ const SECRETS = [
     id: "console-forge",
     tag: "DevTools CLI",
     title: "DevTools Console Forge",
-    shortcut: "F12  /  Console Tab",
+    shortcuts: ["F12", "Console Tab"],
     description:
       "Inspect browser DevTools to reveal the ASCII Anvil banner. Programmed with the window.forge API: type forge.status() for live diagnostics or forge.strike() to trigger a viewport spark burst.",
     actionType: "custom",
@@ -59,7 +59,7 @@ const SECRETS = [
     id: "the-foundry",
     tag: "Terminal OS",
     title: "The Foundry Retro Terminal",
-    shortcut: "/the-foundry",
+    shortcuts: ["/the-foundry"],
     description:
       "A dedicated, fullscreen terminal providing command-line access to the Northforge engine. Supports 'help', 'status', 'strike', 'craft', and 'agartha' commands.",
     actionType: "link",
@@ -70,7 +70,7 @@ const SECRETS = [
     id: "logo-wave",
     tag: "Kinetic Brand",
     title: "Anvil Strike & Kinetic Letter Wave",
-    shortcut: "Hover Navbar Logo",
+    shortcuts: ["Hover Navbar Logo"],
     description:
       "Hovering or tapping the brand pill in the navigation bar initiates a weighted hammer strike onto the anvil, sending a subtle, traversing kinetic wave across each letter of 'Northforge Labs.'",
     actionType: "info",
@@ -80,7 +80,7 @@ const SECRETS = [
     id: "color-engine",
     tag: "Theme Engine",
     title: "Dynamic Accent Palette Engine",
-    shortcut: "Palette Icon (Navbar)",
+    shortcuts: ["Palette Icon (Navbar)"],
     description:
       "An anchored dropdown widget that dynamically re-tempers the site's accent color in real-time across the entire application — updating the hammer, sparks, splash screen, and UI accents.",
     actionType: "info",
@@ -121,7 +121,7 @@ export default function AgarthaPage() {
         </div>
       </header>
 
-      {/* 2. Grid Container using standard sitemap-component-wrapper & sitemap-card */}
+      {/* 2. Responsive Grid Container */}
       <section className="section-sitemap" style={{ paddingBottom: "6rem" }}>
         <div className="padding-global">
           <div className="container-large">
@@ -130,7 +130,7 @@ export default function AgarthaPage() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(22rem, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 20rem), 1fr))",
                     gap: "1.5rem",
                   }}
                 >
@@ -144,11 +144,25 @@ export default function AgarthaPage() {
                           flexDirection: "column",
                           justifyContent: "space-between",
                           boxSizing: "border-box",
+                          overflow: "hidden",
+                          wordBreak: "break-word",
                         }}
                       >
                         <div>
-                          <div className="sitemap-card-header">
-                            <div>
+                          <div
+                            className="sitemap-card-header"
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "flex-start",
+                              flexWrap: "wrap",
+                              gap: "0.75rem",
+                              marginBottom: "1rem",
+                              borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+                              paddingBottom: "1rem",
+                            }}
+                          >
+                            <div style={{ minWidth: 0, flex: "1 1 12rem" }}>
                               <span
                                 className="tagline-pill"
                                 style={{
@@ -159,19 +173,36 @@ export default function AgarthaPage() {
                               >
                                 {s.tag}
                               </span>
-                              <h2 className="heading-style-h4" style={{ margin: "0.25rem 0" }}>
+                              <h2 className="heading-style-h4" style={{ margin: "0.25rem 0", wordBreak: "break-word" }}>
                                 {s.title}
                               </h2>
                             </div>
-                            <span
-                              className="sitemap-card-badge"
+
+                            <div
                               style={{
-                                fontFamily: "var(--font-inter), ui-monospace, monospace",
-                                fontSize: "0.75rem",
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: "0.35rem",
+                                justifyContent: "flex-end",
+                                maxWidth: "100%",
                               }}
                             >
-                              {s.shortcut}
-                            </span>
+                              {s.shortcuts.map((shortcut, sIdx) => (
+                                <span
+                                  key={sIdx}
+                                  className="sitemap-card-badge"
+                                  style={{
+                                    fontFamily: "var(--font-inter), ui-monospace, monospace",
+                                    fontSize: "0.75rem",
+                                    whiteSpace: "normal",
+                                    lineHeight: 1.3,
+                                    padding: "0.35rem 0.65rem",
+                                  }}
+                                >
+                                  {shortcut}
+                                </span>
+                              ))}
+                            </div>
                           </div>
 
                           <p

@@ -144,9 +144,9 @@ export default function DeveloperHud() {
       aria-label="Developer HUD"
       style={{
         position: "fixed",
-        bottom: "20px",
-        right: "20px",
-        width: "320px",
+        bottom: "clamp(12px, 2vw, 20px)",
+        right: "clamp(12px, 2vw, 20px)",
+        width: "min(320px, calc(100vw - 24px))",
         backgroundColor: "rgba(18, 18, 18, 0.92)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",

@@ -101,7 +101,7 @@ export default function FoundryPage() {
       case "strike":
         output = (
           <div style={{ color: "var(--green, #CBFB45)", lineHeight: 1.6 }}>
-            <pre style={{ margin: 0, fontFamily: "inherit", fontSize: "0.875rem" }}>
+            <pre style={{ margin: 0, fontFamily: "inherit", fontSize: "0.875rem", overflowX: "auto" }}>
 {`
    * . ' *   . ' *  . ' *
        \\   |   //
@@ -205,6 +205,8 @@ export default function FoundryPage() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "0.75rem",
                   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                   paddingBottom: "1rem",
                   marginBottom: "1.5rem",
