@@ -7,7 +7,9 @@ import { OrganizationSchema } from "@/components/seo/schemas";
 import SplashScreen from "@/components/ui/splash-screen";
 
 export const viewport: Viewport = {
-  width: 1280,
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 const inter = Inter({
@@ -85,30 +87,7 @@ export default function RootLayout({
         <OrganizationSchema />
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                function updateViewport() {
-                  var w = window.screen.width;
-                  if (w < 1280) {
-                    var scale = (w / 1280).toFixed(4);
-                    var meta = document.querySelector('meta[name="viewport"]');
-                    var content = 'width=1280, initial-scale=' + scale + ', minimum-scale=' + scale + ', maximum-scale=3.0, user-scalable=yes';
-                    if (meta) {
-                      meta.setAttribute('content', content);
-                    } else {
-                      var m = document.createElement('meta');
-                      m.name = 'viewport';
-                      m.content = content;
-                      document.head.appendChild(m);
-                    }
-                  }
-                }
-                updateViewport();
-                window.addEventListener('orientationchange', function() {
-                  setTimeout(updateViewport, 100);
-                });
-              })();
-            `,
+            __html: `(function(){try{if(sessionStorage.getItem("northforge_splash_viewed")==="true"){document.documentElement.classList.add("splash-viewed");}}catch(e){}})();`,
           }}
         />
       </head>

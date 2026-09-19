@@ -25,18 +25,32 @@ export default function SplashScreen() {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
+    // Check if splash has already been viewed in this session
+    try {
+      if (sessionStorage.getItem("northforge_splash_viewed") === "true") {
+        setIsComplete(true);
+        return;
+      }
+    } catch (e) {
+      // Ignore private mode or storage errors
+    }
+
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     // Pre-calculate intrinsic text width for continuous, pixel-perfect GSAP interpolation
     const textInnerEl = textInnerRef.current;
     const rawTextWidth = textInnerEl ? textInnerEl.getBoundingClientRect().width || textInnerEl.scrollWidth : 270;
-    const targetTextWidth = Math.ceil(rawTextWidth) + 4;
+    const targetTextWidth = Math.ceil(rawTextWidth);
     const targetPillWidth = 82 + targetTextWidth;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => {
+          try {
+            sessionStorage.setItem("northforge_splash_viewed", "true");
+            document.documentElement.classList.add("splash-viewed");
+          } catch (e) {}
           document.body.style.overflow = originalOverflow;
           setIsComplete(true);
         },
@@ -64,12 +78,12 @@ export default function SplashScreen() {
           const isLast = index === wordEls.length - 1;
           tl.fromTo(
             el,
-            { y: 30, opacity: 0, scale: 0.95, force3D: true },
+            { y: 25, opacity: 0, scale: 0.96, force3D: true },
             {
               y: 0,
               opacity: 1,
               scale: 1,
-              duration: isLast ? 0.28 : 0.2,
+              duration: isLast ? 0.16 : 0.12,
               ease: "power2.out",
               force3D: true,
             }
@@ -77,14 +91,14 @@ export default function SplashScreen() {
           tl.to(
             el,
             {
-              y: isLast ? -45 : -30,
+              y: isLast ? -35 : -25,
               opacity: 0,
-              scale: 0.96,
-              duration: isLast ? 0.22 : 0.16,
+              scale: 0.97,
+              duration: isLast ? 0.14 : 0.1,
               ease: "power2.in",
               force3D: true,
             },
-            isLast ? "+=0.22" : "+=0.14"
+            isLast ? "+=0.12" : "+=0.08"
           );
         });
       }
@@ -98,11 +112,11 @@ export default function SplashScreen() {
         {
           opacity: 1,
           scale: 1,
-          duration: 0.38,
-          ease: "back.out(1.2)",
+          duration: 0.28,
+          ease: "back.out(1.4)",
           force3D: true,
         },
-        "-=0.08"
+        "-=0.06"
       );
 
       // 3. Green Hammer comes in smoothly from outside the pill (fully visible, GPU accelerated)
@@ -113,11 +127,11 @@ export default function SplashScreen() {
           y: -35,
           x: -4,
           rotate: -32,
-          duration: 0.35,
+          duration: 0.22,
           ease: "power2.out",
           force3D: true,
         },
-        "+=0.06"
+        "+=0.04"
       );
 
       // 4. Hammer wind-up anticipation (smooth, deliberate arc)
@@ -125,8 +139,8 @@ export default function SplashScreen() {
         y: -52,
         x: -7,
         rotate: -50,
-        duration: 0.28,
-        ease: "power1.inOut",
+        duration: 0.18,
+        ease: "power2.inOut",
         force3D: true,
       });
 
@@ -135,8 +149,8 @@ export default function SplashScreen() {
         y: 0,
         x: 0,
         rotate: 0,
-        duration: 0.18,
-        ease: "power3.in",
+        duration: 0.13,
+        ease: "power4.in",
         force3D: true,
       });
 
@@ -159,7 +173,7 @@ export default function SplashScreen() {
               y: targetY,
               scale: 0,
               opacity: 0,
-              duration: 0.35,
+              duration: 0.28,
               ease: "power3.out",
               force3D: true,
             },
@@ -173,10 +187,10 @@ export default function SplashScreen() {
       tl.to(
         hammerRef.current,
         {
-          y: -7,
+          y: -6,
           x: -1,
-          rotate: -8,
-          duration: 0.12,
+          rotate: -7,
+          duration: 0.08,
           ease: "power2.out",
           force3D: true,
         },
@@ -188,7 +202,7 @@ export default function SplashScreen() {
           y: 0,
           x: 0,
           rotate: 0,
-          duration: 0.14,
+          duration: 0.1,
           ease: "power2.in",
           force3D: true,
         }
@@ -196,10 +210,10 @@ export default function SplashScreen() {
       tl.to(
         hammerRef.current,
         {
-          y: -1.5,
+          y: -1.2,
           x: -0.2,
-          rotate: -1.5,
-          duration: 0.1,
+          rotate: -1,
+          duration: 0.06,
           ease: "power1.out",
           force3D: true,
         }
@@ -210,24 +224,22 @@ export default function SplashScreen() {
           y: 0,
           x: 0,
           rotate: 0,
-          duration: 0.12,
+          duration: 0.08,
           ease: "power1.inOut",
           force3D: true,
         }
       );
 
-      // 7. Pill ENLARGES SLOWLY AND SMOOTHLY with the appearing text!
+      // 7. Pill ENLARGES SMOOTHLY AND SNAPPILY with the appearing text!
       // Continuous numeric tween with force3D ensures silky 60/120fps hardware acceleration
+      // NO width: "auto" reset - preserves exact animated pixel dimensions with zero snap
       tl.to(
         pillRef.current,
         {
           width: targetPillWidth,
-          duration: 1.25,
-          ease: "power2.out",
+          duration: 0.65,
+          ease: "power3.out",
           force3D: true,
-          onComplete: () => {
-            if (pillRef.current) pillRef.current.style.width = "auto";
-          },
         },
         "impact"
       );
@@ -237,12 +249,9 @@ export default function SplashScreen() {
         {
           width: targetTextWidth,
           opacity: 1,
-          duration: 1.25,
-          ease: "power2.out",
+          duration: 0.65,
+          ease: "power3.out",
           force3D: true,
-          onComplete: () => {
-            if (textWrapRef.current) textWrapRef.current.style.width = "auto";
-          },
         },
         "impact"
       );
@@ -252,20 +261,20 @@ export default function SplashScreen() {
         {
           x: 0,
           opacity: 1,
-          duration: 1.15,
-          ease: "power2.out",
+          duration: 0.58,
+          ease: "power3.out",
           force3D: true,
         },
         "impact+=0.04"
       );
 
       // 8. Savor the brand lockup (calm, confident pause)
-      tl.to({}, { duration: 1.0 });
+      tl.to({}, { duration: 0.45 });
 
       // 9. Transition out: Smooth quick fade directly into homepage
       tl.to(containerRef.current, {
         opacity: 0,
-        duration: 0.45,
+        duration: 0.35,
         ease: "power2.inOut",
         force3D: true,
       });
@@ -282,6 +291,7 @@ export default function SplashScreen() {
   return (
     <div
       ref={containerRef}
+      className="splash-overlay"
       style={{
         position: "fixed",
         top: 0,

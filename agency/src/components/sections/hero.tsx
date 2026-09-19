@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import { CrowdCanvas } from "@/components/ui/crowd-canvas";
@@ -14,14 +14,14 @@ export default function Hero({ header }: HeroProps) {
   const imageAlt = header?.alt || "Northforge Labs Creative Office";
 
   return (
-    <header className="section-hero-header">
+    <header className="section-subpage-hero-header">
       <div className="padding-global">
         <div className="container-large">
           <div className="section-padding-large">
-            {/* ── 2-Column Grid: Text Left + Crowd Canvas Right ── */}
-            <div className="hero-split-component">
+            {/* Identical 2-Column Grid to About page */}
+            <div className="subpage-header-component">
               {/* Left: Content */}
-              <div className="hero-split-content">
+              <div className="header-content">
                 <ScrollReveal>
                   <div className="tagline-pill">
                     <div>Welcome to Northforge Labs!</div>
@@ -30,8 +30,7 @@ export default function Hero({ header }: HeroProps) {
                 <div className="margin-bottom margin-small">
                   <ScrollReveal delay={0.1}>
                     <h1 className="heading-style-h1 weight-medium">
-                      Connecting Your Brand to the World, One Click at a
-                      Time.
+                      Connecting Your Brand to the World, One Click at a Time.
                     </h1>
                   </ScrollReveal>
                 </div>
@@ -57,9 +56,9 @@ export default function Hero({ header }: HeroProps) {
                 </div>
               </div>
 
-              {/* Right: Crowd Canvas Container */}
-              <ScrollReveal delay={0.2}>
-                <div className="hero-crowd-container">
+              {/* Right: Crowd Canvas Card (Identical 4:3 card container to About page image) */}
+              <ScrollReveal delay={0.3}>
+                <div className="subpage-header-image-wrapper hero-crowd-card">
                   <CrowdCanvas
                     src="/images/peeps/all-peeps.png"
                     rows={15}
@@ -69,9 +68,9 @@ export default function Hero({ header }: HeroProps) {
               </ScrollReveal>
             </div>
 
-            {/* ── Full-Width Hero Image Below ── */}
+            {/* Full-Width Hero Image Below */}
             <ScrollReveal delay={0.4}>
-              <div className="header-image-wrapper">
+              <div className="header-image-wrapper hero-banner-bottom">
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
