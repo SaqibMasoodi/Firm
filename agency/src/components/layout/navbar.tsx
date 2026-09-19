@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { navLinks } from "@/lib/constants";
 import Logo from "@/components/ui/logo";
 import { Palette } from "lucide-react";
-import AccentColorModal from "@/components/ui/accent-color-modal";
+import AccentColorDropdown from "@/components/ui/accent-color-dropdown";
 
 function AnimatedHamburger({ isOpen }: { isOpen: boolean }) {
   return (
@@ -67,7 +67,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
-  const [isColorModalOpen, setIsColorModalOpen] = useState(false);
+  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   // Close menu on route change
@@ -142,15 +142,24 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-                            <button
-                type="button"
-                className="navbar-accent-button"
-                onClick={() => setIsColorModalOpen(true)}
-                title="Customize Accent Color"
-                aria-label="Customize Accent Color"
-              >
-                <Palette size={16} strokeWidth={2} />
-              </button>
+                            <div className="navbar-accent-wrapper">
+                <button
+                  type="button"
+                  className={`navbar-accent-button ${isColorDropdownOpen ? "is-active" : ""}`}
+                  onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+                  title="Customize Accent Color"
+                  aria-label="Customize Accent Color"
+                  aria-expanded={isColorDropdownOpen}
+                >
+                  <Palette size={16} strokeWidth={2} />
+                </button>
+                {isColorDropdownOpen && (
+                  <AccentColorDropdown
+                    isOpen={isColorDropdownOpen}
+                    onClose={() => setIsColorDropdownOpen(false)}
+                  />
+                )}
+              </div>
               <div className="navbar-button-wrapper">
                 <Link
                   href="/contact"
@@ -175,10 +184,7 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      <AccentColorModal
-        isOpen={isColorModalOpen}
-        onClose={() => setIsColorModalOpen(false)}
-      />
+      
     </>
   );
 }

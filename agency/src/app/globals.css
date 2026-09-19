@@ -3165,3 +3165,23 @@ button,
     border-color: rgba(0, 0, 0, 0.15);
   }
 }
+
+/* Navbar Accent Wrapper for Dropdown */
+.navbar-accent-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-accent-wrapper {
+    margin: 0.75rem auto 0 auto;
+    width: auto;
+    justify-content: center;
+  }
+
+  .navbar-accent-dropdown {
+    right: 50% !important;
+    transform: translateX(50%) !important;
+  }
+}
