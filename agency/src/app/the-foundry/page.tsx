@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 interface HistoryItem {
   id: string;
@@ -17,12 +18,14 @@ export default function FoundryPage() {
     {
       id: "init-1",
       output: (
-        <div style={{ color: "#A1A1AA", lineHeight: 1.6 }}>
-          <div style={{ color: "var(--green, #CBFB45)", fontWeight: 700, marginBottom: "8px" }}>
+        <div style={{ color: "var(--grey-text)", lineHeight: 1.6 }}>
+          <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600, marginBottom: "0.5rem" }}>
             FOUNDRY OS [Version 4.2.0.892] // INDUSTRIAL SYSTEM TERMINAL
           </div>
           <div>All subsystems operational. Anvil calibrated to 120fps.</div>
-          <div>Type <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>help</span> to list available commands, or <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>agartha</span> for subterranean archives.</div>
+          <div>
+            Type <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>help</span> to list available commands, or <span style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>agartha</span> for subterranean archives.
+          </div>
         </div>
       ),
     },
@@ -68,8 +71,8 @@ export default function FoundryPage() {
     switch (trimmed) {
       case "help":
         output = (
-          <div style={{ color: "#D4D4D8", lineHeight: 1.7 }}>
-            <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600, marginBottom: "4px" }}>
+          <div style={{ color: "var(--white)", lineHeight: 1.7 }}>
+            <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600, marginBottom: "0.25rem" }}>
               AVAILABLE SYSTEM COMMANDS:
             </div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>status</span>   - Run live hardware & forge diagnostics</div>
@@ -84,9 +87,9 @@ export default function FoundryPage() {
 
       case "status":
         output = (
-          <div style={{ color: "#D4D4D8", lineHeight: 1.7 }}>
+          <div style={{ color: "var(--white)", lineHeight: 1.7 }}>
             <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>[FORGE DIAGNOSTICS: NOMINAL]</div>
-            <div>Core Temperature:    <span style={{ color: "#FF5555" }}>1,450°C</span> (Molten Steel Crucible)</div>
+            <div>Core Temperature:    1,450°C (Molten Steel Crucible)</div>
             <div>Anvil Pressure:       <span style={{ color: "var(--green, #CBFB45)" }}>450 MPa</span></div>
             <div>Hydraulic Cycle:      <span style={{ color: "var(--green, #CBFB45)" }}>Synchronized at 120Hz</span></div>
             <div>Active Workers:       11 Turbopack static workers</div>
@@ -98,7 +101,7 @@ export default function FoundryPage() {
       case "strike":
         output = (
           <div style={{ color: "var(--green, #CBFB45)", lineHeight: 1.6 }}>
-            <pre style={{ margin: 0, fontFamily: "monospace", fontSize: "13px" }}>
+            <pre style={{ margin: 0, fontFamily: "inherit", fontSize: "0.875rem" }}>
 {`
    * . ' *   . ' *  . ' *
        \\   |   //
@@ -107,7 +110,7 @@ export default function FoundryPage() {
    [ SYSTEM TEMPERED ]
 `}
             </pre>
-            <div style={{ color: "#FFFFFF", marginTop: "4px" }}>
+            <div style={{ color: "var(--white)", marginTop: "0.25rem" }}>
               [OK] Impact recorded at 0.14s velocity. Sparks dispersed.
             </div>
           </div>
@@ -116,7 +119,7 @@ export default function FoundryPage() {
 
       case "craft":
         output = (
-          <div style={{ color: "#D4D4D8", lineHeight: 1.7 }}>
+          <div style={{ color: "var(--white)", lineHeight: 1.7 }}>
             <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>NORTHFORGE LABS // CAPABILITIES:</div>
             <div>01. High-Performance Web & Mobile Architecture</div>
             <div>02. AI-Driven Automation & Intelligent Systems</div>
@@ -128,7 +131,7 @@ export default function FoundryPage() {
 
       default:
         output = (
-          <div style={{ color: "#EF4444" }}>
+          <div style={{ color: "#FF6B6B" }}>
             Command not recognized: "{cmd}". Type <span style={{ color: "var(--green, #CBFB45)" }}>help</span> for available commands.
           </div>
         );
@@ -145,102 +148,141 @@ export default function FoundryPage() {
   };
 
   return (
-    <div
-      onClick={() => inputRef.current?.focus()}
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#171717",
-        color: "#E4E4E7",
-        fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
-        padding: "clamp(20px, 4vw, 50px)",
-        boxSizing: "border-box",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Top Bar */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-          paddingBottom: "16px",
-          marginBottom: "24px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <span
-            style={{
-              width: "10px",
-              height: "10px",
-              borderRadius: "50%",
-              backgroundColor: "var(--green, #CBFB45)",
-              
-            }}
-          />
-          <span style={{ fontWeight: 700, color: "#FFFFFF", fontSize: "14px", letterSpacing: "1px" }}>
-            NORTHFORGE // THE FOUNDRY
-          </span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px", fontSize: "12px" }}>
-          <Link
-            href="/agartha"
-            style={{ color: "var(--green, #CBFB45)", textDecoration: "none", fontWeight: 600 }}
-          >
-            [Access Agartha]
-          </Link>
-          <Link
-            href="/"
-            style={{ color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}
-          >
-            [← Return Home]
-          </Link>
-        </div>
-      </div>
-
-      {/* Terminal History */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "16px", overflowY: "auto" }}>
-        {history.map((item) => (
-          <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {item.command !== undefined && (
-              <div style={{ display: "flex", gap: "8px", color: "var(--green, #CBFB45)" }}>
-                <span>northforge@foundry:~$</span>
-                <span style={{ color: "#FFFFFF" }}>{item.command}</span>
+    <div className="page-wrapper">
+      {/* 1. Subpage Hero Header */}
+      <header className="section-subpage-hero-header">
+        <div className="padding-global">
+          <div className="container-large">
+            <div className="section-padding-large">
+              <div className="subpage-header-component">
+                <div className="header-content">
+                  <ScrollReveal>
+                    <div className="tagline-pill">
+                      <div>Terminal OS</div>
+                    </div>
+                  </ScrollReveal>
+                  <div className="margin-bottom margin-small">
+                    <ScrollReveal delay={0.1}>
+                      <h1 className="heading-style-h1">The Foundry</h1>
+                    </ScrollReveal>
+                  </div>
+                  <ScrollReveal delay={0.15}>
+                    <p className="text-size-medium max-width-small">
+                      Command-line interface to the Northforge engine. Run diagnostics, execute strikes,
+                      and query subterranean archives.
+                    </p>
+                  </ScrollReveal>
+                </div>
               </div>
-            )}
-            {item.output && <div>{item.output}</div>}
+            </div>
           </div>
-        ))}
-
-        {/* Active Command Input Line */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "var(--green, #CBFB45)" }}>
-          <span>northforge@foundry:~$</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={inputVal}
-            onChange={(e) => setInputVal(e.target.value)}
-            onKeyDown={handleKeyDown}
-            autoFocus
-            spellCheck={false}
-            autoComplete="off"
-            style={{
-              flex: 1,
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              color: "#FFFFFF",
-              fontFamily: "inherit",
-              fontSize: "inherit",
-              padding: 0,
-            }}
-          />
         </div>
-        <div ref={terminalEndRef} />
-      </div>
+      </header>
+
+      {/* 2. Terminal Container using standard card corners & brand surface */}
+      <section style={{ paddingBottom: "6rem" }}>
+        <div className="padding-global">
+          <div className="container-large">
+            <div
+              onClick={() => inputRef.current?.focus()}
+              style={{
+                backgroundColor: "var(--black)",
+                borderRadius: "2.5rem",
+                padding: "clamp(1.5rem, 4vw, 3rem)",
+                color: "var(--white)",
+                fontFamily: "var(--font-inter), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+                fontSize: "0.9375rem",
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "520px",
+                cursor: "text",
+                boxSizing: "border-box",
+              }}
+            >
+              {/* Terminal Header Bar */}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                  paddingBottom: "1rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+                  <span
+                    style={{
+                      width: "8px",
+                      height: "8px",
+                      borderRadius: "100rem",
+                      backgroundColor: "var(--green, #CBFB45)",
+                    }}
+                  />
+                  <span style={{ fontWeight: 600, color: "var(--white)", fontSize: "0.875rem" }}>
+                    NORTHFORGE // THE FOUNDRY
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem", fontSize: "0.8125rem" }}>
+                  <Link
+                    href="/agartha"
+                    style={{ color: "var(--green, #CBFB45)", textDecoration: "none", fontWeight: 500 }}
+                  >
+                    [Access Agartha]
+                  </Link>
+                  <Link
+                    href="/"
+                    style={{ color: "var(--grey-text)", textDecoration: "none" }}
+                  >
+                    [← Return Home]
+                  </Link>
+                </div>
+              </div>
+
+              {/* Terminal History */}
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem", overflowY: "auto" }}>
+                {history.map((item) => (
+                  <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                    {item.command !== undefined && (
+                      <div style={{ display: "flex", gap: "0.5rem", color: "var(--green, #CBFB45)" }}>
+                        <span>northforge@foundry:~$</span>
+                        <span style={{ color: "var(--white)" }}>{item.command}</span>
+                      </div>
+                    )}
+                    {item.output && <div>{item.output}</div>}
+                  </div>
+                ))}
+
+                {/* Active Prompt */}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--green, #CBFB45)" }}>
+                  <span>northforge@foundry:~$</span>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={inputVal}
+                    onChange={(e) => setInputVal(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    autoFocus
+                    spellCheck={false}
+                    autoComplete="off"
+                    style={{
+                      flex: 1,
+                      background: "transparent",
+                      border: "none",
+                      outline: "none",
+                      color: "var(--white)",
+                      fontFamily: "inherit",
+                      fontSize: "inherit",
+                      padding: 0,
+                    }}
+                  />
+                </div>
+                <div ref={terminalEndRef} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
