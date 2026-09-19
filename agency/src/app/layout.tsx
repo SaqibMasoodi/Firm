@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Northforge Labs - Technology & Creative Agency",
     description:
       "Build digital products, grow your online presence, and automate operations.",
-    url: "https://northforgelabs.com",
+    url: siteUrl,
     siteName: "Northforge Labs",
     locale: "en_US",
     type: "website",
