@@ -105,7 +105,8 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
 
   // Sync with current document --green variable on open
   useEffect(() => {
-    if (typeof document !== "undefined" && isOpen) {
+    if (!isOpen || typeof document === "undefined") return;
+    const frame = requestAnimationFrame(() => {
       const current = document.documentElement.style.getPropertyValue("--green").trim() || DEFAULT_BRAND_COLOR;
       const rgb = hexToRgb(current);
       if (rgb) {
@@ -115,7 +116,8 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
         setValue(v);
         setHexInput(current.toUpperCase());
       }
-    }
+    });
+    return () => cancelAnimationFrame(frame);
   }, [isOpen]);
 
   // Update current color and apply to root CSS variable

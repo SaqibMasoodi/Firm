@@ -35,8 +35,11 @@ const SECRETS = [
     actionType: "custom",
     actionLabel: "Toggle Dev HUD",
     onClick: () => {
-      if (typeof window !== "undefined" && typeof (window as any).__toggleDevHud === "function") {
-        (window as any).__toggleDevHud();
+      if (typeof window !== "undefined") {
+        const win = window as unknown as { __toggleDevHud?: () => void };
+        if (typeof win.__toggleDevHud === "function") {
+          win.__toggleDevHud();
+        }
       }
     },
   },
@@ -50,8 +53,11 @@ const SECRETS = [
     actionType: "custom",
     actionLabel: "Test forge.strike()",
     onClick: () => {
-      if (typeof window !== "undefined" && (window as any).forge) {
-        (window as any).forge.strike();
+      if (typeof window !== "undefined") {
+        const win = window as unknown as { forge?: { strike: () => void } };
+        if (win.forge && typeof win.forge.strike === "function") {
+          win.forge.strike();
+        }
       }
     },
   },

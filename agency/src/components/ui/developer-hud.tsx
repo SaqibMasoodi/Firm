@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 
@@ -52,7 +52,7 @@ export default function DeveloperHud() {
   // Expose toggle to window for console control
   useEffect(() => {
     if (typeof window !== "undefined") {
-      (window as any).__toggleDevHud = () => setIsOpen((prev) => !prev);
+      (window as unknown as { __toggleDevHud: () => void }).__toggleDevHud = () => setIsOpen((prev) => !prev);
     }
   }, []);
 

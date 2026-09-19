@@ -132,7 +132,7 @@ export default function FoundryPage() {
       default:
         output = (
           <div style={{ color: "#FF6B6B" }}>
-            Command not recognized: "{cmd}". Type <span style={{ color: "var(--green, #CBFB45)" }}>help</span> for available commands.
+            Command not recognized: &quot;{cmd}&quot;. Type <span style={{ color: "var(--green, #CBFB45)" }}>help</span> for available commands.
           </div>
         );
     }

@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import gsap from "gsap";
 
 export default function ConsoleForge() {
+  const router = useRouter();
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -59,7 +61,7 @@ export default function ConsoleForge() {
     };
 
     // Attach forge API to window
-    (window as any).forge = {
+    (window as unknown as { forge: unknown; __toggleDevHud?: () => void }).forge = {
       strike: () => {
         triggerPageSparks();
         console.log(
@@ -80,14 +82,15 @@ export default function ConsoleForge() {
         return "⚒ System operational.";
       },
       hud: () => {
-        if (typeof (window as any).__toggleDevHud === "function") {
-          (window as any).__toggleDevHud();
+        const win = window as unknown as { __toggleDevHud?: () => void };
+        if (typeof win.__toggleDevHud === "function") {
+          win.__toggleDevHud();
           return "HUD toggled.";
         }
         return "HUD ready.";
       },
       agartha: () => {
-        window.location.href = "/agartha";
+        router.push("/agartha");
         return "Entering Agartha...";
       }
     };
@@ -113,7 +116,7 @@ export default function ConsoleForge() {
     console.log('%c"Looking for craftsmen who appreciate the details."', subStyle);
     console.log("%cType `forge.status()` or `forge.strike()` below.", hintStyle);
     console.log("%cSubterranean records: /agartha", secretStyle);
-  }, []);
+  }, [router]);
 
   return null;
 }
