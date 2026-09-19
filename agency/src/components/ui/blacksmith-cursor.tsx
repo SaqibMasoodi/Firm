@@ -110,8 +110,8 @@ export default function BlacksmithCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (hammerEl) {
-        hammerEl.style.transform = `translate3d(${mouseX - 10}px, ${mouseY - 26}px, 0) rotate(${
-          isStrikingRef.current ? "16deg" : "-15deg"
+        hammerEl.style.transform = `translate3d(${mouseX - 8}px, ${mouseY - 24}px, 0) rotate(${
+          isStrikingRef.current ? "-20deg" : "15deg"
         })`;
       }
     };
@@ -159,7 +159,7 @@ export default function BlacksmithCursor() {
     const onMouseDown = (e: MouseEvent) => {
       isStrikingRef.current = true;
       if (hammerEl) {
-        hammerEl.style.transform = `translate3d(${e.clientX - 10}px, ${e.clientY - 26}px, 0) rotate(16deg) scale(0.95)`;
+        hammerEl.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 24}px, 0) rotate(-20deg) scale(0.95)`;
       }
       spawnSparks(e.clientX, e.clientY);
     };
@@ -167,7 +167,7 @@ export default function BlacksmithCursor() {
     const onMouseUp = (e: MouseEvent) => {
       isStrikingRef.current = false;
       if (hammerEl) {
-        hammerEl.style.transform = `translate3d(${e.clientX - 10}px, ${e.clientY - 26}px, 0) rotate(-15deg)`;
+        hammerEl.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 24}px, 0) rotate(15deg)`;
       }
     };
 
@@ -212,12 +212,12 @@ export default function BlacksmithCursor() {
             height: "36px",
             pointerEvents: "none",
             zIndex: 9999999,
-            transformOrigin: "28px 24px",
+            transformOrigin: "8px 24px",
             transition: "transform 0.08s ease-out",
             willChange: "transform",
           }}
         >
-          <svg width="36" height="36" viewBox="0 0 50 40" fill="none">
+          <svg width="36" height="36" viewBox="0 0 50 40" fill="none" style={{ transform: "scaleX(-1)" }}>
             <rect x="2" y="14" width="28" height="4.5" rx="2.25" fill="var(--green, #CBFB45)" />
             <rect x="28" y="4" width="14" height="24" rx="2" fill="var(--green, #CBFB45)" />
             <rect x="27" y="25" width="16" height="3" rx="1" fill="var(--green, #CBFB45)" />
