@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -10,6 +10,9 @@ const WORDS = [
   { text: "Scale", color: "#171717" },
   { text: "Forge", color: "#CBFB45" },
 ];
+
+const GREEN_LETTERS = "Northforge".split("");
+const WHITE_LETTERS = "Labs.".split("");
 
 export default function SplashScreen() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,7 +61,7 @@ export default function SplashScreen() {
 
       const wordEls = wordsContainerRef.current?.querySelectorAll(".splash-word");
 
-      // Initial States: force GPU layer promotion with translateZ(0) to eliminate any reflow/rasterization lag
+      // Initial States: force GPU layer promotion with translateZ(0)
       gsap.set(stageRef.current, { opacity: 0, scale: 0.95, force3D: true });
       gsap.set(pillRef.current, { width: 82, height: 82, borderRadius: "100rem", force3D: true });
       gsap.set(hammerRef.current, {
@@ -70,9 +73,14 @@ export default function SplashScreen() {
         force3D: true,
       });
       gsap.set(textWrapRef.current, { width: 0, opacity: 0, force3D: true });
-      gsap.set(textInnerRef.current, { x: -25, opacity: 0, force3D: true });
+      gsap.set(textInnerRef.current, { x: 0, opacity: 1, force3D: true });
 
-      // 1. Rapid Text Phrases transitioning upwards (GPU accelerated: pure translate + opacity + subtle scale, NO heavy blur filters)
+      const letterEls = textInnerRef.current?.querySelectorAll(".splash-letter");
+      if (letterEls && letterEls.length > 0) {
+        gsap.set(letterEls, { opacity: 0, y: 6, force3D: true });
+      }
+
+      // 1. Rapid Text Phrases transitioning upwards
       if (wordEls && wordEls.length > 0) {
         wordEls.forEach((el, index) => {
           const isLast = index === wordEls.length - 1;
@@ -119,7 +127,7 @@ export default function SplashScreen() {
         "-=0.06"
       );
 
-      // 3. Green Hammer comes in smoothly from outside the pill (fully visible, GPU accelerated)
+      // 3. Green Hammer comes in smoothly from outside the pill
       tl.to(
         hammerRef.current,
         {
@@ -134,23 +142,23 @@ export default function SplashScreen() {
         "+=0.04"
       );
 
-      // 4. Hammer wind-up anticipation (smooth, deliberate arc)
+      // 4. Hammer wind-up anticipation (eased, fluid, deliberate arc)
       tl.to(hammerRef.current, {
         y: -52,
         x: -7,
         rotate: -50,
-        duration: 0.18,
-        ease: "power2.inOut",
+        duration: 0.2,
+        ease: "sine.inOut",
         force3D: true,
       });
 
-      // 5. STRIKE! Lands flat on the top of the anvil
+      // 5. STRIKE! Smoothly accelerated strike onto the anvil (natural easing)
       tl.to(hammerRef.current, {
         y: 0,
         x: 0,
         rotate: 0,
-        duration: 0.13,
-        ease: "power4.in",
+        duration: 0.14,
+        ease: "power2.in",
         force3D: true,
       });
 
@@ -183,61 +191,34 @@ export default function SplashScreen() {
       }
 
       // - The anvil DOES NOT MOVE (solid, immovable rock)
-      // - The hammer REBOUNDS and STEADIES ITSELF smoothly
+      // - The hammer soft rebound and steady settle
       tl.to(
         hammerRef.current,
         {
-          y: -6,
+          y: -5,
           x: -1,
-          rotate: -7,
+          rotate: -6,
           duration: 0.08,
-          ease: "power2.out",
+          ease: "power1.out",
           force3D: true,
         },
         "impact"
       );
-      tl.to(
-        hammerRef.current,
-        {
-          y: 0,
-          x: 0,
-          rotate: 0,
-          duration: 0.1,
-          ease: "power2.in",
-          force3D: true,
-        }
-      );
-      tl.to(
-        hammerRef.current,
-        {
-          y: -1.2,
-          x: -0.2,
-          rotate: -1,
-          duration: 0.06,
-          ease: "power1.out",
-          force3D: true,
-        }
-      );
-      tl.to(
-        hammerRef.current,
-        {
-          y: 0,
-          x: 0,
-          rotate: 0,
-          duration: 0.08,
-          ease: "power1.inOut",
-          force3D: true,
-        }
-      );
+      tl.to(hammerRef.current, {
+        y: 0,
+        x: 0,
+        rotate: 0,
+        duration: 0.12,
+        ease: "sine.inOut",
+        force3D: true,
+      });
 
-      // 7. Pill ENLARGES SMOOTHLY AND SNAPPILY with the appearing text!
-      // Continuous numeric tween with force3D ensures silky 60/120fps hardware acceleration
-      // NO width: "auto" reset - preserves exact animated pixel dimensions with zero snap
+      // 7. Pill expands smoothly on impact as letters appear
       tl.to(
         pillRef.current,
         {
           width: targetPillWidth,
-          duration: 0.65,
+          duration: 0.6,
           ease: "power3.out",
           force3D: true,
         },
@@ -249,29 +230,34 @@ export default function SplashScreen() {
         {
           width: targetTextWidth,
           opacity: 1,
-          duration: 0.65,
+          duration: 0.6,
           ease: "power3.out",
           force3D: true,
         },
         "impact"
       );
 
-      tl.to(
-        textInnerRef.current,
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.58,
-          ease: "power3.out",
-          force3D: true,
-        },
-        "impact+=0.04"
-      );
+      // 8. Traversing wave across letters appearing on strike!
+      // Each letter reveals and undulates upward in a fluid wave, settling smoothly to place
+      if (letterEls && letterEls.length > 0) {
+        tl.to(
+          letterEls,
+          {
+            keyframes: [
+              { opacity: 1, y: -5, duration: 0.13, ease: "sine.out" },
+              { y: 0, duration: 0.13, ease: "sine.inOut" },
+            ],
+            stagger: 0.024,
+            force3D: true,
+          },
+          "impact+=0.03"
+        );
+      }
 
-      // 8. Savor the brand lockup (calm, confident pause)
-      tl.to({}, { duration: 0.45 });
+      // 9. Savor the brand lockup (calm, confident pause)
+      tl.to({}, { duration: 0.48 });
 
-      // 9. Transition out: Smooth quick fade directly into homepage
+      // 10. Transition out: Smooth quick fade directly into homepage
       tl.to(containerRef.current, {
         opacity: 0,
         duration: 0.35,
@@ -310,7 +296,7 @@ export default function SplashScreen() {
         willChange: "opacity",
       }}
     >
-      {/* 1. Rapid Words Ticker - Cycling through brand colors with layout containment */}
+      {/* 1. Rapid Words Ticker - Cycling through brand colors */}
       <div
         ref={wordsContainerRef}
         style={{
@@ -417,7 +403,7 @@ export default function SplashScreen() {
               <path d="M5 20a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1" />
             </svg>
 
-            {/* Green Hammer (#CBFB45): fully visible inside & outside the pill, lands flat on top of the anvil */}
+            {/* Green Hammer (#CBFB45): lands flat on top of the anvil */}
             <div
               ref={hammerRef}
               style={{
@@ -438,11 +424,9 @@ export default function SplashScreen() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* Green handle extending to the left */}
-                <rect x="2" y="12" width="30" height="4.5" rx="2.25" fill="#CBFB45" />
-                {/* Green head: flat striking face at bottom */}
-                <rect x="30" y="2" width="14" height="24" rx="2" fill="#CBFB45" />
-                <rect x="29" y="23" width="16" height="3" rx="1" fill="#CBFB45" />
+                <rect x="2" y="12" width="30" height="4.5" rx="2.25" fill="var(--green, #CBFB45)" />
+                <rect x="30" y="2" width="14" height="24" rx="2" fill="var(--green, #CBFB45)" />
+                <rect x="29" y="23" width="16" height="3" rx="1" fill="var(--green, #CBFB45)" />
               </svg>
             </div>
 
@@ -458,12 +442,12 @@ export default function SplashScreen() {
               }}
             >
               {[
-                { x: -22, y: -16, color: "#CBFB45" },
-                { x: 22, y: -18, color: "#CBFB45" },
+                { x: -22, y: -16, color: "var(--green, #CBFB45)" },
+                { x: 22, y: -18, color: "var(--green, #CBFB45)" },
                 { x: -28, y: -4, color: "#FFFFFF" },
                 { x: 28, y: -6, color: "#FFFFFF" },
-                { x: -14, y: -24, color: "#CBFB45" },
-                { x: 14, y: -24, color: "#CBFB45" },
+                { x: -14, y: -24, color: "var(--green, #CBFB45)" },
+                { x: 14, y: -24, color: "var(--green, #CBFB45)" },
               ].map((s, idx) => (
                 <div
                   key={idx}
@@ -485,7 +469,7 @@ export default function SplashScreen() {
             </div>
           </div>
 
-          {/* Unvealed Brand Logo Text with generous padding and its own overflow: hidden */}
+          {/* Unveiled Brand Logo Text with individual letters for traversing wave appearance */}
           <div
             ref={textWrapRef}
             style={{
@@ -515,8 +499,34 @@ export default function SplashScreen() {
                 transform: "translateZ(0)",
               }}
             >
-              <span style={{ color: "#CBFB45" }}>Northforge</span>
-              <span style={{ color: "#FFFFFF" }}>&nbsp;Labs.</span>
+              <span style={{ color: "var(--green, #CBFB45)" }}>
+                {GREEN_LETTERS.map((char, i) => (
+                  <span
+                    key={`g-${i}`}
+                    className="splash-letter"
+                    style={{ display: "inline-block", willChange: "transform, opacity" }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span style={{ color: "#FFFFFF" }}>
+                <span
+                  className="splash-letter"
+                  style={{ display: "inline-block", willChange: "transform, opacity" }}
+                >
+                  &nbsp;
+                </span>
+                {WHITE_LETTERS.map((char, i) => (
+                  <span
+                    key={`w-${i}`}
+                    className="splash-letter"
+                    style={{ display: "inline-block", willChange: "transform, opacity" }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
             </div>
           </div>
         </div>
