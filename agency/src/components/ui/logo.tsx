@@ -181,9 +181,9 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect x="2" y="12" width="30" height="4.5" rx="2.25" fill="#CBFB45" />
-              <rect x="30" y="2" width="14" height="24" rx="2" fill="#CBFB45" />
-              <rect x="29" y="23" width="16" height="3" rx="1" fill="#CBFB45" />
+              <rect x="2" y="12" width="30" height="4.5" rx="2.25" fill="var(--green, #CBFB45)" />
+              <rect x="30" y="2" width="14" height="24" rx="2" fill="var(--green, #CBFB45)" />
+              <rect x="29" y="23" width="16" height="3" rx="1" fill="var(--green, #CBFB45)" />
             </svg>
           </div>
 
