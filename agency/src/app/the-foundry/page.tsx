@@ -17,6 +17,11 @@ export default function FoundryPage() {
   const [isPlayingSplash, setIsPlayingSplash] = useState(false);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [shouldCrash, setShouldCrash] = useState(false);
+
+  if (shouldCrash) {
+    throw new Error("Simulated system exception from The Foundry terminal.");
+  }
 
   const [history, setHistory] = useState<HistoryItem[]>([
     {
@@ -102,6 +107,11 @@ export default function FoundryPage() {
       return;
     }
 
+    if (trimmed === "crash" || trimmed === "simulate-error") {
+      setShouldCrash(true);
+      return;
+    }
+
     let output: React.ReactNode;
 
     switch (trimmed) {
@@ -117,6 +127,7 @@ export default function FoundryPage() {
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>craft</span>    - Review Northforge engineering pillars</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>agartha</span>  - Access subterranean archives</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>clear</span>    - Clear terminal buffer</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>crash</span>    - Simulate unhandled runtime exception (test error.tsx)</div>
             <div>• <span style={{ color: "var(--green, #CBFB45)" }}>exit</span>     - Return to surface (Home)</div>
           </div>
         );
