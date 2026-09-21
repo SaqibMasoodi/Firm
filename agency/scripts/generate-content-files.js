@@ -46,7 +46,7 @@ const services = [
     id: "software-development",
     title: "Software Development",
     description: "From concept to launch, we build robust digital products that drive business growth. Our team delivers custom websites, SaaS platforms, mobile apps, AI chatbots, and API integrations tailored to your unique needs.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/software-development.webp",
     slug: "software-development",
     features: [
       "Websites",
@@ -61,7 +61,7 @@ const services = [
     id: "ui-ux-design",
     title: "UI/UX Design",
     description: "We craft intuitive, beautiful interfaces that delight users and drive conversions. Our design process combines user research, wireframing, and pixel-perfect execution to create seamless digital experiences.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/ui-ux-design.webp",
     slug: "ui-ux-design",
     features: ["Wireframes", "App design", "Website design", "Design systems"]
   },
@@ -69,7 +69,7 @@ const services = [
     id: "branding-creative-design",
     title: "Branding & Creative Design",
     description: "Your brand is your story. We help you tell it with striking logos, cohesive brand identities, professional business cards, eye-catching posters, and compelling pitch decks that leave lasting impressions.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/branding-creative-design.webp",
     slug: "branding-creative-design",
     features: [
       "Logos",
@@ -83,7 +83,7 @@ const services = [
     id: "social-media-management",
     title: "Social Media Management",
     description: "Stay ahead of the curve with strategic social media management. We handle content calendars, create engaging reels, write compelling captions, track analytics, and build your community — so you can focus on your business.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/social-media-management.webp",
     slug: "social-media-management",
     features: [
       "Content calendars",
@@ -97,7 +97,7 @@ const services = [
     id: "video-editing-production",
     title: "Video Editing & Production",
     description: "Bring your vision to life with professional video production. From Instagram Reels and YouTube Shorts to long-form content and podcasts — we deliver polished, engaging video content with motion graphics, subtitles, and color grading.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/video-editing-production.webp",
     slug: "video-editing-production",
     features: [
       "Instagram Reels",
@@ -115,7 +115,7 @@ const services = [
     id: "digital-marketing",
     title: "Digital Marketing",
     description: "Drive targeted traffic and convert visitors into customers. Our data-driven marketing strategies span SEO, Google Ads, Facebook Ads, email marketing, and lead generation to maximize your ROI.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/digital-marketing.webp",
     slug: "digital-marketing",
     features: [
       "SEO",
@@ -129,7 +129,7 @@ const services = [
     id: "business-automation-ai",
     title: "Business Automation & AI",
     description: "Streamline your operations with intelligent automation. We set up WhatsApp automation, CRM systems, invoice automation, and custom workflow solutions that save time and reduce human error.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/business-automation-ai.webp",
     slug: "business-automation-ai",
     features: [
       "WhatsApp automation",
@@ -142,7 +142,7 @@ const services = [
     id: "it-consulting",
     title: "IT Consulting",
     description: "Navigate the complex technology landscape with expert guidance. From technology strategy and software audits to cloud migration and security consultation, we help you make informed decisions that drive growth.",
-    image: "/images/placeholder.svg",
+    image: "/images/services/it-consulting.webp",
     slug: "it-consulting",
     features: [
       "Technology strategy",

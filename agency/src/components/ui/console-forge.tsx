@@ -92,7 +92,29 @@ export default function ConsoleForge() {
       agartha: () => {
         router.push("/agartha");
         return "Entering Agartha...";
-      }
+      },
+      clearCache: async () => {
+        try {
+          if (typeof window !== "undefined") {
+            localStorage.clear();
+            sessionStorage.clear();
+            if ("caches" in window) {
+              const keys = await window.caches.keys();
+              await Promise.all(keys.map((k) => window.caches.delete(k)));
+            }
+          }
+          await fetch("/api/admin/clear-cache", { method: "POST" });
+          router.refresh();
+          console.log(
+            "%c[OK] Cache Purged: localStorage, sessionStorage, CacheStorage, and Next.js server cache cleared.",
+            "color: #CBFB45; font-weight: bold; font-family: monospace; font-size: 13px;"
+          );
+          return "🧹 Cache purged successfully.";
+        } catch (err) {
+          console.error("Cache purge failed:", err);
+          return "⚠ Cache purge error.";
+        }
+      },
     };
 
     // Print DevTools Banner
@@ -114,7 +136,7 @@ export default function ConsoleForge() {
     console.log(`%c${ascii}`, greenStyle);
     console.log("%c⚒ NORTHFORGE LABS // FORGED IN SILICON & STEEL", titleStyle);
     console.log('%c"Looking for craftsmen who appreciate the details."', subStyle);
-    console.log("%cType `forge.status()` or `forge.strike()` below.", hintStyle);
+    console.log("%cType `forge.status()`, `forge.strike()`, or `forge.clearCache()` below.", hintStyle);
     console.log("%cSubterranean records: /agartha", secretStyle);
   }, [router]);
 

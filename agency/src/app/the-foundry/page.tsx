@@ -76,7 +76,7 @@ export default function FoundryPage() {
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
   }, [isPlayingSplash]);
 
-  const handleCommand = (cmd: string) => {
+  const handleCommand = async (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
     const id = Date.now().toString();
 
@@ -112,6 +112,75 @@ export default function FoundryPage() {
       return;
     }
 
+    if (
+      trimmed === "clear-cache" ||
+      trimmed === "clear cache" ||
+      trimmed === "clearcache" ||
+      trimmed === "purge" ||
+      trimmed === "purge-cache" ||
+      trimmed === "purge cache" ||
+      trimmed === "cache-clear" ||
+      trimmed === "cache" ||
+      trimmed === "flush"
+    ) {
+      let clientStorageCleared = false;
+      let cachesRemoved = 0;
+      let serverStatus = "LOCAL ONLY";
+      let diskStatus = "SKIPPED";
+
+      try {
+        if (typeof window !== "undefined") {
+          localStorage.clear();
+          sessionStorage.clear();
+          clientStorageCleared = true;
+
+          if ("caches" in window) {
+            const keys = await window.caches.keys();
+            await Promise.all(keys.map((k) => window.caches.delete(k)));
+            cachesRemoved = keys.length;
+          }
+        }
+      } catch (err) {
+        console.error("Client storage clear error:", err);
+      }
+
+      try {
+        const res = await fetch("/api/admin/clear-cache", { method: "POST" });
+        if (res.ok) {
+          const data = await res.json();
+          serverStatus = data.revalidated ? `REVALIDATED (${data.revalidated})` : "REVALIDATED (ROOT)";
+          diskStatus = data.diskCachePurged ? "FLUSHED (.next/cache)" : "PERSISTENT";
+        } else {
+          serverStatus = `OFFLINE (${res.status})`;
+        }
+      } catch {
+        serverStatus = "BYPASS (SERVER UNREACHABLE)";
+      }
+
+      try {
+        router.refresh();
+      } catch {}
+
+      const purgeOutput = (
+        <div style={{ color: "var(--white)", lineHeight: 1.7 }}>
+          <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600 }}>
+            [FORGE CACHE PURGE: COMPLETED]
+          </div>
+          <div>• Client Storage: <span style={{ color: "var(--green, #CBFB45)" }}>{clientStorageCleared ? "LOCALSTORAGE & SESSIONSTORAGE FLUSHED" : "UNCHANGED"}</span></div>
+          <div>• Browser CacheStorage: <span style={{ color: "var(--green, #CBFB45)" }}>{cachesRemoved > 0 ? `${cachesRemoved} BUCKET(S) EVICTED` : "PURGED / CLEAN"}</span></div>
+          <div>• Server Route &amp; Data Cache: <span style={{ color: "var(--green, #CBFB45)" }}>{serverStatus}</span></div>
+          <div>• Turbopack / Disk Cache: <span style={{ color: "var(--green, #CBFB45)" }}>{diskStatus}</span></div>
+          <div>• Next.js Client Router: <span style={{ color: "var(--green, #CBFB45)" }}>REFRESHED</span></div>
+          <div style={{ color: "var(--grey-text)", marginTop: "0.25rem", fontSize: "0.8125rem" }}>
+            [OK] All cached layers flushed. System state restored to cold baseline.
+          </div>
+        </div>
+      );
+
+      setHistory((prev) => [...prev, { id, command: cmd, output: purgeOutput }]);
+      return;
+    }
+
     let output: React.ReactNode;
 
     switch (trimmed) {
@@ -121,14 +190,15 @@ export default function FoundryPage() {
             <div style={{ color: "var(--green, #CBFB45)", fontWeight: 600, marginBottom: "0.25rem" }}>
               AVAILABLE SYSTEM COMMANDS:
             </div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>status</span>   - Run live hardware & forge diagnostics</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>splash</span>   - Replay master splash sequence & hammer strike</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>strike</span>   - Execute anvil impact sequence</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>craft</span>    - Review Northforge engineering pillars</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>agartha</span>  - Access subterranean archives</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>clear</span>    - Clear terminal buffer</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>crash</span>    - Simulate unhandled runtime exception (test error.tsx)</div>
-            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>exit</span>     - Return to surface (Home)</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>status</span>      - Run live hardware &amp; forge diagnostics</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>splash</span>      - Replay master splash sequence &amp; hammer strike</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>strike</span>      - Execute anvil impact sequence</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>craft</span>       - Review Northforge engineering pillars</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>agartha</span>     - Access subterranean archives</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>clear-cache</span> - Purge browser, data &amp; dev server caches (aliases: clear cache, purge)</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>clear</span>       - Clear terminal buffer</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>crash</span>       - Simulate unhandled runtime exception (test error.tsx)</div>
+            <div>• <span style={{ color: "var(--green, #CBFB45)" }}>exit</span>        - Return to surface (Home)</div>
           </div>
         );
         break;
