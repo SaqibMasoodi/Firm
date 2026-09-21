@@ -1,16 +1,16 @@
 {
   "home": {
-    "image": "/images/hero/hero-banner.jpg",
+    "image": "/images/hero/hero-main.jpg",
     "objectPosition": "53% 43%",
     "alt": "Northforge Labs Creative Office"
   },
   "about": {
-    "image": "/images/headers/about-header.webp",
+    "image": "/images/headers/about-main.webp",
     "objectPosition": "46% 36%",
     "alt": "Modern office lobby"
   },
   "services": {
-    "image": "/images/headers/services-header.webp",
+    "image": "/images/headers/services-main.webp",
     "objectPosition": "75% 53%",
     "alt": "Our services"
   }

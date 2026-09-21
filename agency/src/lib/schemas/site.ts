@@ -28,11 +28,11 @@ export const TestimonialSchema = z.object({
 
 export const TestimonialsSectionSchema = z.union([
   z.object({
-    image: z.string().default("/images/testimonials/featured.webp"),
+    image: z.string().default("/images/testimonials/client-showcase.webp"),
     testimonials: z.array(TestimonialSchema).default([]),
   }),
   z.array(TestimonialSchema).transform((items) => ({
-    image: "/images/testimonials/featured.webp",
+    image: "/images/testimonials/client-showcase.webp",
     testimonials: items,
   })),
 ]);

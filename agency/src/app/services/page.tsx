@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -83,7 +83,7 @@ export default async function ServicesPage() {
                 <ScrollReveal delay={0.2}>
                   <div className="subpage-header-image-wrapper">
                     <Image
-                      src={header.image || "/images/cta/cta-banner.webp"}
+                      src={header.image || "/images/headers/services-main.webp"}
                       alt={header.alt || "Our services"}
                       width={720}
                       height={540}

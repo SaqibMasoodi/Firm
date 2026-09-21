@@ -66,7 +66,7 @@ export default function CompanySnapshot() {
                     {/* Item 2: Skyline Meeting Image */}
                     <div className="stat-image-wrapper">
                       <Image
-                        src="/images/about/snapshot-1.webp"
+                        src="/images/placeholder.svg"
                         alt="City view office"
                         width={800}
                         height={533}
@@ -114,7 +114,7 @@ export default function CompanySnapshot() {
                     {/* Item 5: Whiteboard Meeting Image */}
                     <div className="stat-image-wrapper">
                       <Image
-                        src="/images/about/snapshot-2.webp"
+                        src="/images/placeholder.svg"
                         alt="Meeting room brainstorming"
                         width={800}
                         height={533}

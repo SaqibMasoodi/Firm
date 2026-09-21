@@ -131,9 +131,9 @@ export default function AdminPage() {
     about: { image: string; objectPosition: string; alt?: string };
     services: { image: string; objectPosition: string; alt?: string };
   }>({
-    home: { image: "/images/hero/hero-banner.jpg", objectPosition: "50% 50%", alt: "Northforge Labs Creative Office" },
-    about: { image: "/images/about/team-culture.webp", objectPosition: "50% 50%", alt: "Modern office lobby" },
-    services: { image: "/images/cta/cta-banner.webp", objectPosition: "50% 50%", alt: "Our services" },
+    home: { image: "/images/hero/hero-main.jpg", objectPosition: "53% 43%", alt: "Northforge Labs Creative Office" },
+    about: { image: "/images/headers/about-main.webp", objectPosition: "46% 36%", alt: "Modern office lobby" },
+    services: { image: "/images/headers/services-main.webp", objectPosition: "75% 53%", alt: "Our services" },
   });
 
   const parsePosition = (posStr: string = "50% 50%") => {
@@ -290,9 +290,9 @@ export default function AdminPage() {
         const res = await fetch("/api/admin/content?type=site&slug=testimonials");
         const data = await res.json();
         const normalized = Array.isArray(data)
-          ? { image: "/images/testimonials/featured.webp", testimonials: data }
+          ? { image: "/images/testimonials/client-showcase.webp", testimonials: data }
           : {
-              image: data?.image || "/images/testimonials/featured.webp",
+              image: data?.image || "/images/testimonials/client-showcase.webp",
               testimonials: Array.isArray(data?.testimonials) ? data.testimonials : [],
             };
         updateEditForm(normalized);
@@ -1454,7 +1454,7 @@ export default function AdminPage() {
                   {/* Active Header Editor in White Card */}
                   {(() => {
                     const currentHeader = headersData[selectedHeaderKey] || {
-                      image: "/images/hero/hero-banner.jpg",
+                      image: "/images/hero/hero-main.jpg",
                       objectPosition: "50% 50%",
                       alt: ""
                     };
@@ -1482,7 +1482,7 @@ export default function AdminPage() {
                                 type="text"
                                 value={currentHeader.image}
                                 onChange={(e) => updateHeaderField(selectedHeaderKey, "image", e.target.value)}
-                                placeholder="/images/hero/hero-banner.jpg"
+                                placeholder="/images/hero/hero-main.jpg"
                                 style={{
                                   flex: 1,
                                   padding: "0.85rem 1.2rem",

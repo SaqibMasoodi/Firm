@@ -30,7 +30,7 @@ export const teamMembers: TeamMember[] = teamMembersData as TeamMember[];
 export const faqs: FAQ[] = faqsData as FAQ[];
 export const testimonialsSection: TestimonialsSectionData = (
   Array.isArray(testimonialsData)
-    ? { image: "/images/testimonials/featured.webp", testimonials: testimonialsData }
+    ? { image: "/images/testimonials/client-showcase.webp", testimonials: testimonialsData }
     : testimonialsData
 ) as unknown as TestimonialsSectionData;
 export const testimonials: Testimonial[] = (

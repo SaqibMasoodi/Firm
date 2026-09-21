@@ -46,7 +46,7 @@ const services = [
     id: "software-development",
     title: "Software Development",
     description: "From concept to launch, we build robust digital products that drive business growth. Our team delivers custom websites, SaaS platforms, mobile apps, AI chatbots, and API integrations tailored to your unique needs.",
-    image: "/images/services/software-development/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "software-development",
     features: [
       "Websites",
@@ -61,7 +61,7 @@ const services = [
     id: "ui-ux-design",
     title: "UI/UX Design",
     description: "We craft intuitive, beautiful interfaces that delight users and drive conversions. Our design process combines user research, wireframing, and pixel-perfect execution to create seamless digital experiences.",
-    image: "/images/services/ui-ux-design/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "ui-ux-design",
     features: ["Wireframes", "App design", "Website design", "Design systems"]
   },
@@ -69,7 +69,7 @@ const services = [
     id: "branding-creative-design",
     title: "Branding & Creative Design",
     description: "Your brand is your story. We help you tell it with striking logos, cohesive brand identities, professional business cards, eye-catching posters, and compelling pitch decks that leave lasting impressions.",
-    image: "/images/services/branding-creative-design/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "branding-creative-design",
     features: [
       "Logos",
@@ -83,7 +83,7 @@ const services = [
     id: "social-media-management",
     title: "Social Media Management",
     description: "Stay ahead of the curve with strategic social media management. We handle content calendars, create engaging reels, write compelling captions, track analytics, and build your community — so you can focus on your business.",
-    image: "/images/services/social-media-management/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "social-media-management",
     features: [
       "Content calendars",
@@ -97,7 +97,7 @@ const services = [
     id: "video-editing-production",
     title: "Video Editing & Production",
     description: "Bring your vision to life with professional video production. From Instagram Reels and YouTube Shorts to long-form content and podcasts — we deliver polished, engaging video content with motion graphics, subtitles, and color grading.",
-    image: "/images/services/video-editing-production/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "video-editing-production",
     features: [
       "Instagram Reels",
@@ -115,7 +115,7 @@ const services = [
     id: "digital-marketing",
     title: "Digital Marketing",
     description: "Drive targeted traffic and convert visitors into customers. Our data-driven marketing strategies span SEO, Google Ads, Facebook Ads, email marketing, and lead generation to maximize your ROI.",
-    image: "/images/services/digital-marketing/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "digital-marketing",
     features: [
       "SEO",
@@ -129,7 +129,7 @@ const services = [
     id: "business-automation-ai",
     title: "Business Automation & AI",
     description: "Streamline your operations with intelligent automation. We set up WhatsApp automation, CRM systems, invoice automation, and custom workflow solutions that save time and reduce human error.",
-    image: "/images/services/business-automation-ai/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "business-automation-ai",
     features: [
       "WhatsApp automation",
@@ -142,7 +142,7 @@ const services = [
     id: "it-consulting",
     title: "IT Consulting",
     description: "Navigate the complex technology landscape with expert guidance. From technology strategy and software audits to cloud migration and security consultation, we help you make informed decisions that drive growth.",
-    image: "/images/services/it-consulting/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "it-consulting",
     features: [
       "Technology strategy",
@@ -163,7 +163,7 @@ const teamMembers = [
     name: "Peter",
     role: "CEO",
     bio: "Peter is the founder of Northforge Labs, and passionate about helping businesses grow through Social Media.",
-    image: "/images/team/peter.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -174,7 +174,7 @@ const teamMembers = [
     name: "Sarah",
     role: "Social Media Strategy Director",
     bio: "Expert in crafting compelling brand stories on social media platforms for heightened engagement.",
-    image: "/images/team/sarah.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -185,7 +185,7 @@ const teamMembers = [
     name: "Claudia",
     role: "Digital Marketing Analyst",
     bio: "Skilled in translating data into actionable insights for strategic online marketing campaigns.",
-    image: "/images/team/claudia.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -196,7 +196,7 @@ const teamMembers = [
     name: "Stanley",
     role: "Admin",
     bio: "Stanley is a master at stress relief and spreading happiness throughout the office.",
-    image: "/images/team/stanley.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -207,7 +207,7 @@ const teamMembers = [
     name: "Eve",
     role: "TikTok Specialist",
     bio: "Eve is the dynamo behind our TikTok campaigns, with an uncanny ability to tap into the latest trends and translate them into viral content.",
-    image: "/images/team/eve.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -218,7 +218,7 @@ const teamMembers = [
     name: "Kirsty",
     role: "Graphic Designer",
     bio: "With a keen eye for aesthetics and a deep understanding of brand identity, Kirsty ensures that every piece of content communicates the essence of our clients' brands.",
-    image: "/images/team/kirsty.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -229,7 +229,7 @@ const teamMembers = [
     name: "Nathan",
     role: "Finance Director",
     bio: "With an expertise in financial strategy and a knack for numbers, Nathan oversees budgeting, forecasting, and financial planning.",
-    image: "/images/team/nathan.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -240,7 +240,7 @@ const teamMembers = [
     name: "Craig",
     role: "Account Manager",
     bio: "Craig is your go-to person for all things project-related. With a talent for organization and a commitment to excellent client service Craig ensures that every project runs smoothly.",
-    image: "/images/team/craig.webp",
+    image: "/images/avatar.svg",
     socials: {
       linkedin: "https://www.linkedin.com/feed/",
       twitter: "https://twitter.com/home"
@@ -311,7 +311,7 @@ const caseStudies = [
     id: "glowessence-skincare",
     title: "GlowEssence Skincare",
     description: "Illuminating the Digital Presence of GlowEssence Skincare",
-    image: "/images/case-studies/glowessence-skincare/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "glowessence-skincare",
     tags: ["Branding", "Web Development"],
     client: "GlowEssence Skincare",
@@ -328,7 +328,7 @@ const caseStudies = [
     id: "brewzen-coffee-retailer",
     title: "BrewZen Coffee Retailer",
     description: "BrewZen is a boutique coffee retailer known for its unique blends and commitment to sustainability.",
-    image: "/images/case-studies/brewzen-coffee-retailer/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "brewzen-coffee-retailer",
     tags: ["Mobile App", "Automation"],
     client: "BrewZen Coffee",
@@ -345,7 +345,7 @@ const caseStudies = [
     id: "burgerhaven-restaurant",
     title: "BurgerHaven Restaurant",
     description: "Sizzling Digital Transformation for BurgerHaven Restaurant",
-    image: "/images/case-studies/burgerhaven-restaurant/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "burgerhaven-restaurant",
     tags: ["SEO", "Digital Marketing"],
     client: "BurgerHaven",
@@ -370,7 +370,7 @@ const blogPosts = [
     title: "The Future of AI in Business Automation",
     excerpt: "Discover how AI is transforming business operations and what it means for your company's future growth.",
     content: `Artificial Intelligence is no longer a futuristic concept — it's here, and it's transforming how businesses operate. From chatbots handling customer inquiries to automated invoice processing and predictive analytics, AI is enabling companies to work smarter, not harder.\n\n## Key Areas Where AI Is Making an Impact\n\n### Customer Service\nAI-powered chatbots can handle up to 80% of routine customer inquiries, freeing your team to focus on complex issues that require a human touch. These systems learn and improve over time, providing increasingly accurate and helpful responses.\n\n### Marketing Automation\nAI algorithms can analyze customer behavior patterns to deliver personalized content at the right time through the right channel. This level of personalization was previously impossible at scale.\n\n### Operations & Workflow\nFrom automated inventory management to predictive maintenance, AI is streamlining operations across industries. Businesses report up to 40% reduction in operational costs after implementing AI solutions.\n\n## Getting Started with AI\n\nThe key is to start small. Identify one area of your business where automation could have the biggest impact, then scale from there. Our team can help you assess your readiness and build a roadmap for AI adoption.`,
-    image: "/images/blog/future-of-ai-business/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "future-of-ai-business",
     author: "Sarah",
     date: "2024-09-10",
@@ -382,7 +382,7 @@ const blogPosts = [
     title: "Building a Brand Identity That Stands Out",
     excerpt: "Learn the essential elements of creating a memorable brand identity that resonates with your target audience.",
     content: `Your brand identity is more than just a logo — it's the complete visual and emotional language that communicates who you are to the world. In a crowded marketplace, a strong brand identity can be the difference between being noticed and being ignored.\n\n## The Core Elements\n\n### Visual Identity\nThis includes your logo, color palette, typography, and imagery style. Every visual element should work together to create a cohesive and recognizable look.\n\n### Brand Voice\nHow you communicate is just as important as what you communicate. Your brand voice should be consistent across all touchpoints — from your website copy to social media posts.\n\n### Brand Values\nWhat does your company stand for? Your values should be authentic and reflected in every aspect of your business, from your product design to your customer service.\n\n## The Process\n\nBuilding a brand identity is a journey, not a destination. It starts with deep research into your market, competitors, and target audience. From there, we develop a brand strategy that guides every creative decision.`,
-    image: "/images/blog/building-brand-identity/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "building-brand-identity",
     author: "Claudia",
     date: "2024-09-05",
@@ -394,7 +394,7 @@ const blogPosts = [
     title: "Social Commerce: The Future of Online Shopping",
     excerpt: "Social commerce is reshaping how consumers discover and purchase products. Here's what you need to know.",
     content: `Social commerce — the integration of e-commerce with social media platforms — is projected to reach $1.2 trillion by 2025. For businesses, this represents an enormous opportunity to meet customers where they already spend their time.\n\n## What Is Social Commerce?\n\nSocial commerce goes beyond simply posting product links on social media. It encompasses the entire shopping experience — from discovery to checkout — within social platforms themselves.\n\n## Key Platforms\n\n### Instagram Shopping\nWith features like shoppable posts, Stories, and the dedicated Shop tab, Instagram has become a powerhouse for social commerce.\n\n### TikTok Shop\nTikTok's explosive growth has made it a critical platform for reaching younger demographics. Its live shopping features are particularly effective.\n\n### Facebook Marketplace & Shops\nWith billions of users, Facebook remains a significant player in social commerce, particularly for local businesses.\n\n## How to Get Started\n\nThe key to social commerce success is authenticity. Create content that adds value first and sells second. Build trust with your audience through consistent, quality content before pushing products.`,
-    image: "/images/blog/social-commerce-trends/cover.webp",
+    image: "/images/placeholder.svg",
     slug: "social-commerce-trends",
     author: "Peter",
     date: "2024-08-28",
@@ -462,12 +462,12 @@ fs.writeFileSync('content/site/workflow.json', JSON.stringify(workflowSteps, nul
 
 // 11. Client Logos
 const clientLogos = [
-  { src: "/images/logos/logoipsum-5.svg", alt: "Client logo" },
-  { src: "/images/logos/logoipsum-3.svg", alt: "Client logo" },
-  { src: "/images/logos/logoipsum-5.svg", alt: "Client logo" },
-  { src: "/images/logos/logoipsum-3.svg", alt: "Client logo" },
-  { src: "/images/logos/logoipsum-5.svg", alt: "Client logo" },
-  { src: "/images/logos/logoipsum-3.svg", alt: "Client logo" }
+  { src: "/images/logos/client-logo-1.svg", alt: "Client logo 1" },
+  { src: "/images/logos/client-logo-2.svg", alt: "Client logo 2" },
+  { src: "/images/logos/client-logo-1.svg", alt: "Client logo 3" },
+  { src: "/images/logos/client-logo-2.svg", alt: "Client logo 4" },
+  { src: "/images/logos/client-logo-1.svg", alt: "Client logo 5" },
+  { src: "/images/logos/client-logo-2.svg", alt: "Client logo 6" }
 ];
 fs.writeFileSync('content/site/client-logos.json', JSON.stringify(clientLogos, null, 2));
 

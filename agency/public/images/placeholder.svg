@@ -1,0 +1,22 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder">
+  <title>Placeholder Image</title>
+  <rect width="800" height="600" fill="#161616"/>
+  <defs>
+    <pattern id="placeholder-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#222222" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#placeholder-grid)"/>
+  <rect x="8" y="8" width="784" height="584" rx="12" fill="none" stroke="#2B2B2B" stroke-width="1.5"/>
+  <g transform="translate(400, 300)">
+    <rect x="-24" y="-56" width="48" height="48" rx="10" fill="#1F1F1F" stroke="#333333" stroke-width="1"/>
+    <path d="M -8 -20 L -2 -28 L 2 -23 L 8 -31 L 12 -20 Z" fill="none" stroke="#CBFB45" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="-3" cy="-32" r="2.5" fill="#CBFB45"/>
+    <text y="16" fill="#EDEDED" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="600" font-size="16" text-anchor="middle" letter-spacing="-0.01em">
+      Placeholder
+    </text>
+    <text y="38" fill="#737373" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="400" font-size="12" text-anchor="middle">
+      Northforge Labs
+    </text>
+  </g>
+</svg>

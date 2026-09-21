@@ -99,7 +99,7 @@ const TestimonialSchema = z.object({
 
 const TestimonialsSectionSchema = z.union([
   z.object({
-    image: z.string().default("/images/testimonials/featured.webp"),
+    image: z.string().default("/images/testimonials/client-showcase.webp"),
     testimonials: z.array(TestimonialSchema),
   }),
   z.array(TestimonialSchema),

@@ -1,0 +1,17 @@
+<svg width="400" height="533" viewBox="0 0 400 533" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="avatar-title avatar-desc">
+  <title id="avatar-title">User Avatar</title>
+  <desc id="avatar-desc">Standard accessible user profile picture</desc>
+  <rect width="400" height="533" fill="#181818"/>
+  <defs>
+    <pattern id="avatar-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#222222" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="533" fill="url(#avatar-grid)"/>
+  <rect x="8" y="8" width="384" height="517" rx="12" fill="none" stroke="#2B2B2B" stroke-width="1.5"/>
+  <g transform="translate(200, 250)">
+    <circle cx="0" cy="0" r="90" fill="#1F1F1F" stroke="#333333" stroke-width="1.5"/>
+    <circle cx="0" cy="-22" r="36" fill="#666666"/>
+    <path d="M -56 58 C -56 20, -34 8, 0 8 C 34 8, 56 20, 56 58 Z" fill="#666666"/>
+  </g>
+</svg>

@@ -60,10 +60,10 @@ export default function Team() {
                         <div className="margin-bottom margin-xsmall">
                           <div className="team-image-wrapper">
                             <Image
-                              src={member.image}
+                              src={member.image || "/images/avatar.svg"}
                               alt={member.name}
                               width={400}
-                              height={533}
+                              height={400}
                               className="team-image"
                               sizes="(max-width: 479px) 83vw, (max-width: 767px) 86vw, (max-width: 991px) 40vw, 19vw"
                             />

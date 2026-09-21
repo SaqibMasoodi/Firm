@@ -49,7 +49,7 @@ export default function Testimonials({
   data,
   testimonials,
 }: TestimonialsProps) {
-  const activeImage = data?.image || defaultSection.image || "/images/testimonials/featured.webp";
+  const activeImage = data?.image || defaultSection.image || "/images/testimonials/client-showcase.webp";
   const allTestimonials = data?.testimonials || testimonials || defaultSection.testimonials || [];
   const displayTestimonials = allTestimonials.slice(0, 3);
 

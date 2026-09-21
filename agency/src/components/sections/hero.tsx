@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import { CrowdCanvas } from "@/components/ui/crowd-canvas";
@@ -9,7 +9,7 @@ interface HeroProps {
 }
 
 export default function Hero({ header }: HeroProps) {
-  const imageSrc = header?.image || "/images/hero/hero-banner.jpg";
+  const imageSrc = header?.image || "/images/hero/hero-main.jpg";
   const objectPosition = header?.objectPosition || "50% 50%";
   const imageAlt = header?.alt || "Northforge Labs Creative Office";
 

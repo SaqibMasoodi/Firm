@@ -4,7 +4,7 @@
     "name": "Ifham",
     "role": "Hardware Specialist",
     "bio": "Ifham specializes in hardware development, electronics, and prototyping. He enjoys transforming ideas into working solutions through hands-on experimentation, careful testing, and a strong commitment to delivering reliable results.",
-    "image": "/images/team/ifham.webp",
+    "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/ifham",
       "twitter": "https://x.com/northforgelabs"
@@ -15,7 +15,7 @@
     "name": "Afan",
     "role": "Operations Manager",
     "bio": "Afan oversees day-to-day operations, ensuring projects stay organized and workflows remain efficient. He excels at coordinating teams, managing logistics, and creating a smooth experience for both clients and collaborators.",
-    "image": "/images/team/afan.webp",
+    "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/afan",
       "twitter": "https://x.com/northforgelabs"
@@ -26,7 +26,7 @@
     "name": "Aleem",
     "role": "Generalist",
     "bio": "Aleem is a versatile team member who adapts quickly to new challenges and responsibilities. With a practical, solution-oriented mindset, he supports projects across multiple areas and contributes wherever he's needed most.",
-    "image": "/images/team/aleem.webp",
+    "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/aleem",
       "twitter": "https://x.com/northforgelabs"
@@ -37,7 +37,7 @@
     "name": "Farhan Azad",
     "role": "Software Developer",
     "bio": "Farhan is a software developer with a strong foundation in full-stack development, specializing in MERN and .NET technologies. He enjoys building efficient, user-friendly applications and turning ideas into practical solutions through clean development, problem-solving, and continuous learning.",
-    "image": "/images/team/farhan.webp",
+    "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/farhan-azad-958595257/"
     }
@@ -58,7 +58,7 @@
     "name": "Mubashir Masoodi",
     "role": "Senior Developer & Team Lead",
     "bio": "Mubashir leads engineering initiatives with a focus on scalable architecture, code quality, and team mentorship. He guides development cycles from concept to deployment, ensuring technical solutions remain robust and aligned with product goals.",
-    "image": "/images/team/mubashir.webp",
+    "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/mubashir-masoodi"
     }

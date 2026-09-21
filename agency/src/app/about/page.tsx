@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Link from "next/link";
 import Image from "next/image";
@@ -85,7 +85,7 @@ export default async function AboutPage() {
                 <ScrollReveal delay={0.2}>
                   <div className="subpage-header-image-wrapper">
                     <Image
-                      src={header.image || "/images/about/team-culture.webp"}
+                      src={header.image || "/images/headers/about-main.webp"}
                       alt={header.alt || "Modern office lobby"}
                       width={1440}
                       height={960}

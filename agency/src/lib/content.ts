@@ -122,7 +122,7 @@ export async function getTestimonials(): Promise<TestimonialsSectionData> {
   );
   return (
     result || {
-      image: "/images/testimonials/featured.webp",
+      image: "/images/testimonials/client-showcase.webp",
       testimonials: [],
     }
   );
@@ -191,17 +191,17 @@ export async function getFeaturedCaseStudies(): Promise<CaseStudy[]> {
 export async function getSiteHeaders(): Promise<SiteHeaders> {
   const defaultHeaders: SiteHeaders = {
     home: {
-      image: "/images/hero/hero-banner.jpg",
+      image: "/images/hero/hero-main.jpg",
       objectPosition: "50% 50%",
       alt: "Northforge Labs Creative Office",
     },
     about: {
-      image: "/images/about/team-culture.webp",
+      image: "/images/headers/about-main.webp",
       objectPosition: "50% 50%",
       alt: "Modern office lobby",
     },
     services: {
-      image: "/images/cta/cta-banner.webp",
+      image: "/images/headers/services-main.webp",
       objectPosition: "50% 50%",
       alt: "Our services",
     },

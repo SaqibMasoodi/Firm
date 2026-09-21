@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -223,7 +223,7 @@ export default async function CaseStudiesPage() {
                     </div>
                     <div className="cta-image-wrapper">
                       <Image
-                        src="/images/cta/cta-banner.webp"
+                        src="/images/placeholder.svg"
                         alt="Collaboration"
                         width={700}
                         height={500}
