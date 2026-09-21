@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Pipette, ChevronsUpDown } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Pipette, ChevronsUpDown, X } from "lucide-react";
 
 export const DEFAULT_BRAND_COLOR = "#CBFB45";
 
@@ -36,6 +37,7 @@ function hsvToRgb(h: number, s: number, v: number): [number, number, number] {
   else if (h < 120) [r, g, b] = [x, c, 0];
   else if (h < 180) [r, g, b] = [0, c, x];
   else if (h < 240) [r, g, b] = [0, x, c];
+  else if (h < 300) [r, g, b] = [x, 0, c];
   else if (h < 300) [r, g, b] = [x, 0, c];
   else [r, g, b] = [c, 0, x];
   return [Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)];
@@ -94,6 +96,9 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const [hexInput, setHexInput] = useState(DEFAULT_BRAND_COLOR);
   const [colorFormat, setColorFormat] = useState<"Hex" | "RGB" | "HSL">("Hex");
 
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   const canvasRef = useRef<HTMLDivElement>(null);
   const hueSliderRef = useRef<HTMLDivElement>(null);
   const alphaSliderRef = useRef<HTMLDivElement>(null);
@@ -102,6 +107,17 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const isDraggingCanvas = useRef(false);
   const isDraggingHue = useRef(false);
   const isDraggingAlpha = useRef(false);
+
+  // Detect mobile viewport and mounting
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 991);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Sync with current document --green variable on open
   useEffect(() => {
@@ -173,14 +189,18 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
     if (!isOpen) return;
 
     const onPointerMove = (e: MouseEvent | TouchEvent) => {
-      const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
-      const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
+      const isTouch = "touches" in e;
+      const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+      const clientY = isTouch ? e.touches[0].clientY : e.clientY;
 
       if (isDraggingCanvas.current) {
+        if (isTouch && e.cancelable) e.preventDefault();
         handleCanvasMove(clientX, clientY);
       } else if (isDraggingHue.current) {
+        if (isTouch && e.cancelable) e.preventDefault();
         handleHueMove(clientX);
       } else if (isDraggingAlpha.current) {
+        if (isTouch && e.cancelable) e.preventDefault();
         handleAlphaMove(clientX);
       }
     };
@@ -193,7 +213,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
 
     window.addEventListener("mousemove", onPointerMove);
     window.addEventListener("mouseup", onPointerUp);
-    window.addEventListener("touchmove", onPointerMove);
+    window.addEventListener("touchmove", onPointerMove, { passive: false });
     window.addEventListener("touchend", onPointerUp);
 
     return () => {
@@ -248,11 +268,14 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    const handleClickOutside = (e: MouseEvent) => {
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        // Don't close if clicking the toggle button itself (handled by button onClick)
         const target = e.target as HTMLElement;
-        if (!target.closest(".navbar-accent-button")) {
+        if (
+          !target.closest(".navbar-accent-button") &&
+          !target.closest(".navbar-menu-accent-btn")
+        ) {
           onClose();
         }
       }
@@ -260,10 +283,12 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
 
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside, { passive: true });
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isOpen, onClose]);
 
@@ -272,32 +297,59 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const [r, g, b] = hsvToRgb(hue, saturation, value);
   const currentColorHex = rgbToHex(r, g, b);
 
-  return (
-    <div
-      ref={dropdownRef}
-      role="region"
-      aria-label="Accent Color Picker Dropdown"
-      className="navbar-accent-dropdown"
-      style={{
-        position: "absolute",
-        top: "calc(100% + 12px)",
-        right: 0,
-        width: "330px",
-        maxWidth: "calc(100vw - 32px)",
-        backgroundColor: "#FFFFFF",
-        borderRadius: "26px",
-        padding: "16px",
-        boxShadow: "0 20px 48px -8px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.12)",
-        color: "#171717",
-        fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        display: "flex",
-        flexDirection: "column",
-        gap: "14px",
-        userSelect: "none",
-        WebkitUserSelect: "none",
-        zIndex: 1000,
-      }}
-    >
+  // Common inner content of the color picker
+  const pickerContent = (
+    <>
+      {/* Mobile Top Header */}
+      {isMobile && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingBottom: "2px",
+            borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span
+              style={{
+                display: "inline-block",
+                width: "12px",
+                height: "12px",
+                borderRadius: "50%",
+                backgroundColor: currentColorHex,
+                boxShadow: "0 0 0 2px #FFFFFF, 0 0 0 3px rgba(0, 0, 0, 0.15)",
+              }}
+            />
+            <span style={{ fontWeight: 700, fontSize: "13px", letterSpacing: "0.03em", color: "#18181B" }}>
+              CUSTOMIZE ACCENT
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close color picker"
+            style={{
+              background: "#F4F4F5",
+              border: "none",
+              color: "#52525B",
+              cursor: "pointer",
+              width: "30px",
+              height: "30px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "background-color 0.15s ease",
+            }}
+          >
+            <X size={15} strokeWidth={2.4} />
+          </button>
+        </div>
+      )}
+
       {/* 1. Large 2D Saturation / Value Gradient Canvas */}
       <div
         ref={canvasRef}
@@ -312,10 +364,11 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
         style={{
           position: "relative",
           width: "100%",
-          height: "155px",
+          height: isMobile ? "140px" : "155px",
           borderRadius: "16px",
           overflow: "hidden",
           cursor: "crosshair",
+          touchAction: "none",
           backgroundColor: `hsl(${hue}, 100%, 50%)`,
           backgroundImage:
             "linear-gradient(to top, #000000, transparent), linear-gradient(to right, #FFFFFF, transparent)",
@@ -346,6 +399,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
           type="button"
           onClick={handleEyeDropper}
           title="Pick color from screen"
+          aria-label="Pick color from screen"
           style={{
             background: "none",
             border: "none",
@@ -378,6 +432,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
               position: "relative",
               height: "10px",
               borderRadius: "100px",
+              touchAction: "none",
               background:
                 "linear-gradient(to right, #FF0000 0%, #FFFF00 17%, #00FF00 33%, #00FFFF 50%, #0000FF 67%, #FF00FF 83%, #FF0000 100%)",
               cursor: "pointer",
@@ -416,6 +471,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
               position: "relative",
               height: "10px",
               borderRadius: "100px",
+              touchAction: "none",
               backgroundImage:
                 `linear-gradient(to right, rgba(${r},${g},${b}, 0), rgba(${r},${g},${b}, 1)), ` +
                 "repeating-conic-gradient(#E4E4E7 0% 25%, #FFFFFF 0% 50%)",
@@ -488,6 +544,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
           <input
             type="text"
             value={hexInput}
+            aria-label="Hex color code"
             onChange={(e) => {
               const val = e.target.value;
               setHexInput(val);
@@ -535,26 +592,26 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
         </div>
       </div>
 
-      {/* 4. Dropdown Pill: Last Colors */}
+      {/* 4. Swatches Heading */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: "36px",
-          backgroundColor: "#FFFFFF",
+          height: "32px",
+          backgroundColor: "#F9F9FB",
           border: "1px solid #E4E4E7",
           borderRadius: "100px",
           padding: "0 14px",
-          fontSize: "12px",
-          fontWeight: 500,
-          color: "#18181B",
-          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04)",
+          fontSize: "11px",
+          fontWeight: 600,
+          letterSpacing: "0.02em",
+          color: "#52525B",
           cursor: "default",
         }}
       >
-        <span>Last Colors</span>
-        <ChevronsUpDown size={13} color="#71717A" />
+        <span>BRAND & PRESET PALETTES</span>
+        <ChevronsUpDown size={12} color="#71717A" />
       </div>
 
       {/* 5. Two Rows of 8 Swatches */}
@@ -573,6 +630,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
               type="button"
               onClick={() => selectPreset(colorHex)}
               title={colorHex}
+              aria-label={`Select color ${colorHex}`}
               style={{
                 width: "100%",
                 aspectRatio: "1/1",
@@ -582,7 +640,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
                 cursor: "pointer",
                 padding: 0,
                 transform: isSelected ? "scale(1.12)" : "scale(1)",
-                boxShadow: isSelected ? "0 2px 5px rgba(0, 0, 0, 0.25)" : "none",
+                boxShadow: isSelected ? "0 2px 6px rgba(0, 0, 0, 0.3)" : "none",
                 transition: "transform 0.12s ease",
               }}
               onMouseEnter={(e) => {
@@ -595,6 +653,81 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
           );
         })}
       </div>
+    </>
+  );
+
+  // Mobile rendering via Portal
+  if (isMobile && mounted) {
+    return createPortal(
+      <div
+        className="navbar-accent-mobile-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Customize Accent Color"
+      >
+        <div
+          className="navbar-accent-mobile-backdrop"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+        <div
+          ref={dropdownRef}
+          role="region"
+          aria-label="Accent Color Picker"
+          className="navbar-accent-dropdown is-mobile-sheet"
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: "350px",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "26px",
+            padding: "16px",
+            boxShadow: "0 24px 60px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.08)",
+            color: "#171717",
+            fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+            display: "flex",
+            flexDirection: "column",
+            gap: "13px",
+            zIndex: 2,
+            userSelect: "none",
+            WebkitUserSelect: "none",
+          }}
+        >
+          {pickerContent}
+        </div>
+      </div>,
+      document.body
+    );
+  }
+
+  // Desktop inline rendering
+  return (
+    <div
+      ref={dropdownRef}
+      role="region"
+      aria-label="Accent Color Picker Dropdown"
+      className="navbar-accent-dropdown"
+      style={{
+        position: "absolute",
+        top: "calc(100% + 12px)",
+        right: 0,
+        width: "330px",
+        maxWidth: "calc(100vw - 32px)",
+        backgroundColor: "#FFFFFF",
+        borderRadius: "26px",
+        padding: "16px",
+        boxShadow: "0 20px 48px -8px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.12)",
+        color: "#171717",
+        fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        display: "flex",
+        flexDirection: "column",
+        gap: "14px",
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        zIndex: 1000,
+      }}
+    >
+      {pickerContent}
     </div>
   );
 }

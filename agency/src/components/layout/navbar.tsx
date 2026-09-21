@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -144,7 +144,8 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-                            <div className="navbar-accent-wrapper">
+              {/* Accent Color Trigger (Desktop) */}
+              <div className="navbar-accent-wrapper is-desktop-only">
                 <button
                   type="button"
                   className={`navbar-accent-button ${isColorDropdownOpen ? "is-active" : ""}`}
@@ -162,6 +163,26 @@ export default function Navbar() {
                   />
                 )}
               </div>
+
+              {/* Accent Color Option (Mobile Menu Item) */}
+              <div className="navbar-menu-accent-row is-mobile-only">
+                <button
+                  type="button"
+                  className={`navbar-menu-accent-btn ${isColorDropdownOpen ? "is-active" : ""}`}
+                  onClick={() => setIsColorDropdownOpen(true)}
+                  aria-label="Customize Accent Color"
+                >
+                  <div className="navbar-menu-accent-left">
+                    <Palette size={17} strokeWidth={2} />
+                    <span>Accent Color</span>
+                  </div>
+                  <span
+                    className="navbar-menu-accent-dot"
+                    style={{ backgroundColor: "var(--green, #CBFB45)" }}
+                  />
+                </button>
+              </div>
+
               <div className="navbar-button-wrapper">
                 <Link
                   href="/contact"
@@ -174,16 +195,30 @@ export default function Navbar() {
             </div>
           </nav>
 
-          <button
-            className="navbar-menu-button"
-            onClick={() => setIsOpen(!isOpen)}
-            type="button"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
-            aria-controls="primary-navigation"
-          >
-            <AnimatedHamburger isOpen={isOpen} />
-          </button>
+          {/* Mobile Right Controls: Header Palette Trigger + Hamburger */}
+          <div className="navbar-mobile-actions">
+            <button
+              type="button"
+              className={`navbar-accent-button is-mobile-header ${isColorDropdownOpen ? "is-active" : ""}`}
+              onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+              title="Customize Accent Color"
+              aria-label="Customize Accent Color"
+              aria-expanded={isColorDropdownOpen}
+            >
+              <Palette size={18} strokeWidth={2} />
+            </button>
+
+            <button
+              className="navbar-menu-button"
+              onClick={() => setIsOpen(!isOpen)}
+              type="button"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="primary-navigation"
+            >
+              <AnimatedHamburger isOpen={isOpen} />
+            </button>
+          </div>
         </div>
       </div>
       
