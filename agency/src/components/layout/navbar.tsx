@@ -164,32 +164,6 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Accent Color Option (Mobile Menu Item) */}
-              <div className="navbar-menu-accent-row is-mobile-only">
-                <button
-                  type="button"
-                  className={`navbar-menu-accent-btn ${isColorDropdownOpen ? "is-active" : ""}`}
-                  onClick={() => setIsColorDropdownOpen(true)}
-                  aria-label="Customize Accent Color"
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-                    <Palette size={19} strokeWidth={2} />
-                    <span>Accent Color</span>
-                    <span
-                      style={{
-                        width: "12px",
-                        height: "12px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--green, #CBFB45)",
-                        display: "inline-block",
-                        boxShadow: "0 0 0 2px #FFFFFF, 0 1px 3px rgba(0, 0, 0, 0.2)",
-                        marginLeft: "2px",
-                      }}
-                    />
-                  </div>
-                </button>
-              </div>
-
               <div className="navbar-button-wrapper">
                 <Link
                   href="/contact"
