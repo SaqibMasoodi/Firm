@@ -664,6 +664,16 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
         role="dialog"
         aria-modal="true"
         aria-label="Customize Accent Color"
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 9999999,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "16px",
+        }}
       >
         <div
           className="navbar-accent-mobile-backdrop"

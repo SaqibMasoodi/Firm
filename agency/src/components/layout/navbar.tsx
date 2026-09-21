@@ -154,7 +154,7 @@ export default function Navbar() {
                   aria-label="Customize Accent Color"
                   aria-expanded={isColorDropdownOpen}
                 >
-                  <Palette size={16} strokeWidth={2} />
+                  <Palette size={20} strokeWidth={2} />
                 </button>
                 {isColorDropdownOpen && (
                   <AccentColorDropdown
@@ -172,14 +172,21 @@ export default function Navbar() {
                   onClick={() => setIsColorDropdownOpen(true)}
                   aria-label="Customize Accent Color"
                 >
-                  <div className="navbar-menu-accent-left">
-                    <Palette size={17} strokeWidth={2} />
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+                    <Palette size={19} strokeWidth={2} />
                     <span>Accent Color</span>
+                    <span
+                      style={{
+                        width: "12px",
+                        height: "12px",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--green, #CBFB45)",
+                        display: "inline-block",
+                        boxShadow: "0 0 0 2px #FFFFFF, 0 1px 3px rgba(0, 0, 0, 0.2)",
+                        marginLeft: "2px",
+                      }}
+                    />
                   </div>
-                  <span
-                    className="navbar-menu-accent-dot"
-                    style={{ backgroundColor: "var(--green, #CBFB45)" }}
-                  />
                 </button>
               </div>
 
@@ -205,7 +212,7 @@ export default function Navbar() {
               aria-label="Customize Accent Color"
               aria-expanded={isColorDropdownOpen}
             >
-              <Palette size={18} strokeWidth={2} />
+              <Palette size={20} strokeWidth={2} />
             </button>
 
             <button
