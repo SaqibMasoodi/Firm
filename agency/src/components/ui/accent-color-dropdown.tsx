@@ -28,24 +28,24 @@ function useIsMobile() {
 }
 
 export const PRESET_SWATCHES = [
-  // Row 1
-  "#3B82F6", // Blue
-  "#F97316", // Orange
-  "#A855F7", // Purple
-  "#8B5CF6", // Violet
-  "#EF4444", // Red
-  "#22C55E", // Green
-  "#EAB308", // Yellow / Gold
-  "#EC4899", // Pink
-  // Row 2
-  "#F59E0B", // Amber Orange
-  "#0EA5E9", // Sky Blue
-  "#14B8A6", // Teal
-  "#CBFB45", // Northforge Lime ("Our Thing")
-  "#06B6D4", // Cyan
+  // Row 1: Warm to Green spectrum
+  "#EF4444", // Crimson Red
+  "#F97316", // Coral Orange
+  "#F59E0B", // Amber Gold
+  "#EAB308", // Golden Yellow
+  "#CBFB45", // Northforge Lime (Brand Hero)
+  "#84CC16", // Bright Chartreuse
+  "#22C55E", // Vivid Green
   "#10B981", // Emerald
-  "#E11D48", // Crimson
-  "#D946EF", // Magenta
+  // Row 2: Cool to Magenta spectrum
+  "#14B8A6", // Mint Teal
+  "#06B6D4", // Electric Cyan
+  "#0EA5E9", // Sky Blue
+  "#3B82F6", // Royal Blue
+  "#6366F1", // Deep Indigo
+  "#8B5CF6", // Violet Purple
+  "#D946EF", // Vibrant Magenta
+  "#EC4899", // Neon Rose Pink
 ];
 
 // Color conversion helpers
