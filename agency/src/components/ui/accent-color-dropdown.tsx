@@ -1,10 +1,31 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { Pipette, ChevronsUpDown, X } from "lucide-react";
 
 export const DEFAULT_BRAND_COLOR = "#CBFB45";
+
+const emptySubscribe = () => () => {};
+
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+function useIsMobile() {
+  return useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback);
+      return () => window.removeEventListener("resize", callback);
+    },
+    () => (typeof window !== "undefined" ? window.innerWidth <= 991 : false),
+    () => false
+  );
+}
 
 export const PRESET_SWATCHES = [
   // Row 1
@@ -96,8 +117,8 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const [hexInput, setHexInput] = useState(DEFAULT_BRAND_COLOR);
   const [colorFormat, setColorFormat] = useState<"Hex" | "RGB" | "HSL">("Hex");
 
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const mounted = useMounted();
+  const isMobile = useIsMobile();
 
   const canvasRef = useRef<HTMLDivElement>(null);
   const hueSliderRef = useRef<HTMLDivElement>(null);
@@ -107,17 +128,6 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const isDraggingCanvas = useRef(false);
   const isDraggingHue = useRef(false);
   const isDraggingAlpha = useRef(false);
-
-  // Detect mobile viewport and mounting
-  useEffect(() => {
-    setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 991);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   // Sync with current document --green variable on open
   useEffect(() => {
