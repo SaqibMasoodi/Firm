@@ -3824,9 +3824,9 @@ button,
     object-fit: cover;
   }
 
+  .hero-crowd-wrapper,
   .hero-crowd-card {
-    border-radius: 1.75rem !important;
-    background-color: #ffffff !important;
+    display: none !important;
   }
 }
 

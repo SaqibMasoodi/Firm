@@ -53,8 +53,8 @@ export default function Hero({ header }: HeroProps) {
                 </div>
               </div>
 
-              {/* Right: Crowd Canvas Card (Identical 4:3 card container to About page image) */}
-              <ScrollReveal priority delay={0.18}>
+              {/* Right: Crowd Canvas Card (Desktop only, hidden on mobile) */}
+              <ScrollReveal priority delay={0.18} className="hero-crowd-wrapper">
                 <div className="subpage-header-image-wrapper hero-crowd-card">
                   <CrowdCanvas
                     src="/images/peeps/all-peeps.png"
