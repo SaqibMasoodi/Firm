@@ -88,6 +88,15 @@ function PhotoIcon() {
   );
 }
 
+function UserIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+  );
+}
+
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>("case-studies");
   const [items, setItems] = useState<ContentItem[]>([]);
@@ -99,6 +108,11 @@ export default function AdminPage() {
   const [uploading, setUploading] = useState(false);
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Inner nav pane state
+  const [isNavPaneCollapsed, setIsNavPaneCollapsed] = useState<boolean>(false);
+  const [selectedTeamIndex, setSelectedTeamIndex] = useState<number>(0);
+  const [selectedTestimonialIndex, setSelectedTestimonialIndex] = useState<number>(0);
 
   // Raw JSON toggle & state
   const [isJsonMode, setIsJsonMode] = useState<boolean>(false);
@@ -206,7 +220,17 @@ export default function AdminPage() {
     setRawJsonText(text);
     try {
       const parsed = JSON.parse(text);
-      setEditForm(parsed);
+      if (activeTab === "featured-work") {
+        if (Array.isArray(parsed)) {
+          setFeaturedSlugs(parsed);
+        }
+      } else if (activeTab === "headers") {
+        if (parsed && typeof parsed === "object") {
+          setHeadersData(parsed);
+        }
+      } else {
+        setEditForm(parsed);
+      }
       setJsonError(null);
     } catch (err) {
       setJsonError((err as Error).message);
@@ -218,7 +242,17 @@ export default function AdminPage() {
       const parsed = JSON.parse(rawJsonText);
       const formatted = JSON.stringify(parsed, null, 2);
       setRawJsonText(formatted);
-      setEditForm(parsed);
+      if (activeTab === "featured-work") {
+        if (Array.isArray(parsed)) {
+          setFeaturedSlugs(parsed);
+        }
+      } else if (activeTab === "headers") {
+        if (parsed && typeof parsed === "object") {
+          setHeadersData(parsed);
+        }
+      } else {
+        setEditForm(parsed);
+      }
       setJsonError(null);
       showToast("JSON formatted cleanly!");
     } catch (err) {
@@ -226,8 +260,240 @@ export default function AdminPage() {
     }
   };
 
+  const toggleViewMode = (toRawJson: boolean) => {
+    if (toRawJson) {
+      if (activeTab === "featured-work") {
+        setRawJsonText(JSON.stringify(featuredSlugs, null, 2));
+      } else if (activeTab === "headers") {
+        setRawJsonText(JSON.stringify(headersData, null, 2));
+      } else if (editForm) {
+        setRawJsonText(JSON.stringify(editForm, null, 2));
+      }
+      setJsonError(null);
+      setIsJsonMode(true);
+    } else {
+      try {
+        if (rawJsonText) {
+          const parsed = JSON.parse(rawJsonText);
+          if (activeTab === "featured-work") {
+            if (Array.isArray(parsed)) {
+              setFeaturedSlugs(parsed);
+            }
+          } else if (activeTab === "headers") {
+            if (parsed && typeof parsed === "object") {
+              setHeadersData(parsed);
+            }
+          } else if (editForm) {
+            if (parsed && typeof parsed === "object") {
+              setEditForm(parsed);
+            }
+          }
+        }
+        setJsonError(null);
+      } catch (err) {
+        setJsonError((err as Error).message);
+      }
+      setIsJsonMode(false);
+    }
+  };
+
+  const triggerSave = () => {
+    if (activeTab === "featured-work") {
+      saveFeaturedWork();
+    } else if (activeTab === "headers") {
+      saveHeaders();
+    } else if (editForm) {
+      handleSave();
+    }
+  };
+
+  const getSectionTitle = () => {
+    switch (activeTab) {
+      case "case-studies":
+        return "Case Studies";
+      case "featured-work":
+        return "Homepage Featured Work";
+      case "headers":
+        return "Page Headers";
+      case "blog":
+        return "Blog Posts";
+      case "services":
+        return "Services";
+      case "team":
+        return "Team Members";
+      case "testimonials":
+        return "Client Testimonials";
+      case "site-config":
+        return "Site Configuration";
+      case "upload":
+        return "Media Upload";
+      default:
+        return activeTab;
+    }
+  };
+
+  const canToggleJson = activeTab !== "upload" && (activeTab === "featured-work" || activeTab === "headers" || editForm !== null);
+  const canSave = activeTab !== "upload" && (activeTab === "featured-work" || activeTab === "headers" || editForm !== null);
+  const isDeletable = (activeTab === "case-studies" || activeTab === "blog" || activeTab === "services") && editForm !== null;
+
+  // Inner nav pane helpers
+  const hasInnerNav =
+    activeTab === "case-studies" ||
+    activeTab === "blog" ||
+    activeTab === "services" ||
+    activeTab === "team" ||
+    activeTab === "testimonials" ||
+    activeTab === "headers";
+
+  const getInnerNavIcon = () => {
+    switch (activeTab) {
+      case "case-studies": return <FolderIcon />;
+      case "blog": return <ChatBubbleIcon />;
+      case "services": return <BoltIcon />;
+      case "team": return <UserIcon />;
+      case "testimonials": return <StarIcon />;
+      case "headers": return <ImageIcon />;
+      default: return null;
+    }
+  };
+
+  const getInnerNavTitle = () => {
+    switch (activeTab) {
+      case "case-studies": return "Case Studies";
+      case "blog": return "Blog Posts";
+      case "services": return "Services";
+      case "team": return "Team";
+      case "testimonials": return "Testimonials";
+      case "headers": return "Headers";
+      default: return "";
+    }
+  };
+
+  const canCreateInInnerNav =
+    activeTab === "case-studies" ||
+    activeTab === "blog" ||
+    activeTab === "services" ||
+    activeTab === "team" ||
+    activeTab === "testimonials";
+
+  const handleInnerCreate = () => {
+    if (activeTab === "team") {
+      addTeamMember();
+      // Select last (newly added)
+      setTimeout(() => {
+        const len = Array.isArray(editForm) ? editForm.length : 0;
+        setSelectedTeamIndex(len);
+      }, 0);
+    } else if (activeTab === "testimonials") {
+      const currentList = Array.isArray(editForm?.testimonials)
+        ? [...editForm.testimonials]
+        : Array.isArray(editForm)
+        ? [...editForm]
+        : [];
+      const newItem = {
+        id: `testimonial-${Date.now().toString().slice(-4)}`,
+        author: "New Client",
+        role: "Founder / Executive",
+        quote: "Working with this team transformed our brand and customer growth.",
+        rating: 5,
+      };
+      updateEditForm({
+        ...editForm,
+        testimonials: [...currentList, newItem],
+      });
+      setTimeout(() => setSelectedTestimonialIndex(currentList.length), 0);
+    } else {
+      createNewItem();
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getInnerNavItems = (): { key: string; title: string; icon: React.ReactNode }[] => {
+    switch (activeTab) {
+      case "case-studies":
+      case "blog":
+      case "services":
+        return items.map((item) => ({
+          key: item.slug,
+          title: item.data.title || item.slug,
+          icon: getInnerNavIcon(),
+        }));
+      case "team":
+        return (Array.isArray(editForm) ? editForm : []).map(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (member: any, idx: number) => ({
+            key: member.id || `member-${idx}`,
+            title: member.name || `Member #${idx + 1}`,
+            icon: <UserIcon />,
+          })
+        );
+      case "testimonials": {
+        const tList = Array.isArray(editForm?.testimonials)
+          ? editForm.testimonials
+          : Array.isArray(editForm)
+          ? editForm
+          : [];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return tList.map((t: any, idx: number) => ({
+          key: t.id || `testimonial-${idx}`,
+          title: t.author || `Testimonial #${idx + 1}`,
+          icon: <StarIcon />,
+        }));
+      }
+      case "headers":
+        return [
+          { key: "home", title: "Homepage Hero", icon: <ImageIcon /> },
+          { key: "about", title: "About Page Hero", icon: <ImageIcon /> },
+          { key: "services", title: "Services Page Hero", icon: <ImageIcon /> },
+        ];
+      default:
+        return [];
+    }
+  };
+
+  const getSelectedInnerKey = (): string | null => {
+    switch (activeTab) {
+      case "case-studies":
+      case "blog":
+      case "services":
+        return selectedSlug;
+      case "team":
+        return (Array.isArray(editForm) && editForm[selectedTeamIndex]?.id) || null;
+      case "testimonials": {
+        const tList = Array.isArray(editForm?.testimonials) ? editForm.testimonials : [];
+        return tList[selectedTestimonialIndex]?.id || null;
+      }
+      case "headers":
+        return selectedHeaderKey;
+      default:
+        return null;
+    }
+  };
+
+  const handleInnerNavSelect = (key: string, index: number) => {
+    switch (activeTab) {
+      case "case-studies":
+      case "blog":
+      case "services": {
+        const item = items.find((i) => i.slug === key);
+        if (item) selectItem(item);
+        break;
+      }
+      case "team":
+        setSelectedTeamIndex(index);
+        break;
+      case "testimonials":
+        setSelectedTestimonialIndex(index);
+        break;
+      case "headers":
+        setSelectedHeaderKey(key as "home" | "about" | "services");
+        break;
+    }
+  };
+
   const selectItem = (item: ContentItem) => {
     setSelectedSlug(item.slug);
+    setIsJsonMode(false);
     updateEditForm(JSON.parse(JSON.stringify(item.data)));
   };
 
@@ -237,6 +503,7 @@ export default function AdminPage() {
     setEditForm(null);
     setRawJsonText("");
     setJsonError(null);
+    setIsJsonMode(false);
 
     try {
       if (tab === "featured-work") {
@@ -349,6 +616,7 @@ export default function AdminPage() {
     }
 
     setSelectedSlug(newSlug);
+    setIsJsonMode(false);
     updateEditForm(template);
   };
 
@@ -687,40 +955,75 @@ export default function AdminPage() {
       <aside style={{
         width: "250px",
         backgroundColor: "#ffffff",
-        borderRight: "1px solid #f0f0f0",
-        padding: "1.5rem 1rem",
+        borderRight: "1px solid #e5e7eb",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         flexShrink: 0,
-        height: "100vh"
+        height: "100vh",
+        position: "relative"
       }}>
-        <div style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
-          {/* Brand header relocated into top of sidebar */}
+        {/* Collapsible toggle arrow on right border */}
+        {hasInnerNav && (
+          <button
+            type="button"
+            onClick={() => setIsNavPaneCollapsed(!isNavPaneCollapsed)}
+            title={isNavPaneCollapsed ? "Expand Submenu" : "Collapse Submenu"}
+            style={{
+              position: "absolute",
+              right: "-12px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: "24px",
+              height: "24px",
+              borderRadius: "50%",
+              backgroundColor: "var(--green, #cbfb45)",
+              border: "2px solid #ffffff",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 50,
+              padding: 0,
+              transition: "transform 0.2s ease"
+            }}
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#171717"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                transform: isNavPaneCollapsed ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.2s ease"
+              }}
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        )}
+
+        <div style={{ display: "flex", flexDirection: "column", minHeight: 0, flex: 1 }}>
+          {/* Flush Logo Header (68px) */}
           <div style={{
+            height: "68px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            padding: "0.25rem 0.5rem 1.25rem 0.5rem",
-            borderBottom: "1px solid #f0f0f0",
-            marginBottom: "1rem"
+            padding: "0 1.25rem",
+            borderBottom: "1px solid #e5e7eb",
+            boxSizing: "border-box",
+            flexShrink: 0
           }}>
             <Logo variant="admin" />
-            <div style={{
-              backgroundColor: "var(--green, #cbfb45)",
-              color: "var(--black, #171717)",
-              fontSize: "0.65rem",
-              fontWeight: 800,
-              letterSpacing: "0.04em",
-              padding: "0.2rem 0.55rem",
-              borderRadius: "100rem",
-            }}>
-              LOCAL DEV
-            </div>
           </div>
 
           {/* Navigation Tab Links */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", overflowY: "auto" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", padding: "1rem", overflowY: "auto", flex: 1 }}>
             {navTabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -758,11 +1061,12 @@ export default function AdminPage() {
 
         {/* Admin footer at bottom of sidebar */}
         <div style={{
-          padding: "0.75rem 0.5rem 0 0.5rem",
-          borderTop: "1px solid #f0f0f0",
+          padding: "1rem 1.25rem",
+          borderTop: "1px solid #e5e7eb",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          flexShrink: 0
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
             <div style={{
@@ -781,110 +1085,96 @@ export default function AdminPage() {
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span style={{ fontSize: "0.825rem", fontWeight: 600, color: "#171717" }}>Admin</span>
-              <span style={{ fontSize: "0.7rem", color: "#9ca3af" }}>File-Based CMS</span>
             </div>
           </div>
         </div>
       </aside>
 
-        {/* Sub-list Panel (for Case Studies, Blog, Services) */}
-        {activeTab !== "featured-work" && activeTab !== "headers" && activeTab !== "site-config" && activeTab !== "team" && activeTab !== "testimonials" && activeTab !== "upload" && (
+        {/* Uniform Inner Nav Pane (collapsible, matching sidebar design) */}
+        {hasInnerNav && (
           <div style={{
-            width: "250px",
-            backgroundColor: "transparent",
-            padding: "2.25rem 1.25rem 2.25rem 2.25rem",
+            width: isNavPaneCollapsed ? "0px" : "250px",
+            backgroundColor: "#ffffff",
+            borderRight: isNavPaneCollapsed ? "none" : "1px solid #e5e7eb",
             display: "flex",
             flexDirection: "column",
-            overflowY: "auto",
-            flexShrink: 0
+            flexShrink: 0,
+            height: "100vh",
+            overflow: "hidden",
+            transition: "width 0.22s cubic-bezier(0.4, 0, 0.2, 1)",
+            boxSizing: "border-box"
           }}>
-            {/* Sub-header */}
-            <div style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.25rem",
-              marginBottom: "1.25rem"
-            }}>
-              <div
-                onClick={() => {
-                  if (items.length > 0) selectItem(items[0]);
-                }}
-                style={{
-                  fontSize: "0.85rem",
-                  color: "#374151",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.4rem"
-                }}
-              >
-                ← Back to {activeTab.replace("-", " ").replace(/\b\w/g, c => c.toUpperCase())}
-              </div>
-
+            <div style={{ width: "250px", display: "flex", flexDirection: "column", height: "100%" }}>
+              {/* Flush Inner Nav Header (68px) */}
               <div style={{
+                height: "68px",
                 display: "flex",
+                alignItems: "center",
                 justifyContent: "space-between",
-                alignItems: "center"
+                padding: "0 1.25rem",
+                borderBottom: "1px solid #e5e7eb",
+                boxSizing: "border-box",
+                flexShrink: 0
               }}>
-                <span style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#9ca3af", fontWeight: 600 }}>
-                  {activeTab.replace("-", " ")} ({items.length})
+                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827" }}>
+                  {getInnerNavTitle()}
                 </span>
-                <button
-                  onClick={createNewItem}
-                  style={{
-                    backgroundColor: "var(--green, #cbfb45)",
-                    color: "var(--black, #171717)",
-                    border: "none",
-                    borderRadius: "100rem",
-                    padding: "0.28rem 0.85rem",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    cursor: "pointer"
-                  }}
-                >
-                  + New
-                </button>
-              </div>
-            </div>
-
-            {/* Items List */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-              {items.map((item) => {
-                const isSelected = selectedSlug === item.slug;
-                return (
-                  <div
-                    key={item.slug}
-                    onClick={() => selectItem(item)}
+                {canCreateInInnerNav && (
+                  <button
+                    type="button"
+                    onClick={handleInnerCreate}
                     style={{
-                      padding: "0.9rem 1.2rem",
-                      borderRadius: "16px",
-                      cursor: "pointer",
-                      backgroundColor: isSelected ? "#efefef" : "transparent",
-                      position: "relative",
-                      transition: "all 0.15s ease"
+                      backgroundColor: "var(--green, #cbfb45)",
+                      color: "var(--black, #171717)",
+                      border: "none",
+                      borderRadius: "100rem",
+                      padding: "0.3rem 0.85rem",
+                      fontSize: "0.75rem",
+                      fontWeight: 700,
+                      cursor: "pointer"
                     }}
                   >
-                    {isSelected && (
-                      <div style={{
-                        position: "absolute",
-                        left: 0,
-                        top: "10px",
-                        bottom: "10px",
-                        width: "3px",
-                        backgroundColor: "var(--green, #cbfb45)",
-                        borderRadius: "0 4px 4px 0"
-                      }} />
-                    )}
-                    <div style={{ fontSize: "0.95rem", fontWeight: isSelected ? 700 : 600, color: isSelected ? "#111827" : "#374151" }}>
-                      {item.data.title || item.slug}
-                    </div>
-                    <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.2rem" }}>
-                      {item.slug}.json
-                    </div>
-                  </div>
-                );
-              })}
+                    + New
+                  </button>
+                )}
+              </div>
+
+              {/* Item List with Identical Button Design */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", padding: "1rem", overflowY: "auto", flex: 1 }}>
+                {getInnerNavItems().map((navItem, idx) => {
+                  const isSelected = navItem.key === getSelectedInnerKey();
+                  return (
+                    <button
+                      key={navItem.key}
+                      type="button"
+                      onClick={() => handleInnerNavSelect(navItem.key, idx)}
+                      style={{
+                        textAlign: "left",
+                        padding: "0.75rem 1.1rem",
+                        borderRadius: "14px",
+                        border: "none",
+                        backgroundColor: isSelected ? "var(--green, #cbfb45)" : "transparent",
+                        color: isSelected ? "var(--black, #171717)" : "#4b5563",
+                        fontWeight: isSelected ? 600 : 500,
+                        fontSize: "0.875rem",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.75rem",
+                        transition: "all 0.15s ease",
+                        width: "100%"
+                      }}
+                    >
+                      <span style={{ display: "flex", alignItems: "center", flexShrink: 0, color: isSelected ? "#171717" : "#4b5563" }}>
+                        {navItem.icon}
+                      </span>
+                      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {navItem.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
@@ -893,189 +1183,260 @@ export default function AdminPage() {
         <main style={{
           flex: 1,
           overflowY: "auto",
-          padding: activeTab === "case-studies" || activeTab === "blog" || activeTab === "services"
-            ? "2.25rem 3rem 2.5rem 1.25rem"
-            : "2.25rem 3rem 2.5rem 3rem",
-          backgroundColor: "var(--light-grey, #f8f8f8)"
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "var(--light-grey, #f8f8f8)",
+          position: "relative"
         }}>
-          {activeTab === "upload" ? (
-            <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-              {/* Header */}
-              <div style={{ marginBottom: "2rem" }}>
-                <h1 style={{ fontSize: "1.75rem", fontWeight: 600, letterSpacing: "-0.02em", color: "#171717" }}>
-                  Media Upload
-                </h1>
-                <p style={{ color: "#818181", fontSize: "0.9rem", marginTop: "0.3rem" }}>
-                  Upload assets directly into the public/images/ directory for use across your website.
-                </p>
-              </div>
-
-              {/* White Card */}
-              <div style={{
-                backgroundColor: "#ffffff",
-                borderRadius: "32px",
-                border: "1px solid #e5e5e5",
-                padding: "3.5rem 2.5rem",
-                textAlign: "center"
+          {/* Uniform Sticky Header Bar across ALL sections (68px flush) */}
+          <header style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 100,
+            height: "68px",
+            backgroundColor: "rgba(248, 248, 248, 0.94)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            borderBottom: "1px solid #e5e7eb",
+            padding: "0 2rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1.25rem",
+            flexShrink: 0,
+            boxSizing: "border-box"
+          }}>
+            {/* Section Name & Badges */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", minWidth: 0 }}>
+              <h1 style={{
+                fontSize: "1.2rem",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                color: "#111827",
+                margin: 0,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
               }}>
-                <div style={{
-                  border: "2px dashed #d1d5db",
-                  borderRadius: "24px",
-                  padding: "3.5rem 2rem",
-                  backgroundColor: "#fafafa"
+                {getSectionTitle()}
+              </h1>
+              {activeTab === "featured-work" && (
+                <span style={{
+                  backgroundColor: featuredSlugs.length === 3 ? "var(--green, #cbfb45)" : "#fee2e2",
+                  color: featuredSlugs.length === 3 ? "var(--black, #171717)" : "#ef4444",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  padding: "0.2rem 0.65rem",
+                  borderRadius: "100rem",
+                  whiteSpace: "nowrap"
                 }}>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    style={{ display: "none" }}
-                    id="admin-file-upload"
-                  />
-                  <label
-                    htmlFor="admin-file-upload"
-                    style={{
-                      backgroundColor: "var(--green, #cbfb45)",
-                      color: "var(--black, #171717)",
-                      padding: "0.75rem 1.75rem",
-                      borderRadius: "100rem",
-                      fontWeight: 600,
-                      fontSize: "0.9rem",
-                      cursor: "pointer",
-                      display: "inline-block",
-                      border: "none"
-                    }}
-                  >
-                    {uploading ? "Uploading image..." : "Select Image from Computer"}
-                  </label>
-                  <div style={{ marginTop: "1.25rem", color: "#6b7280", fontSize: "0.85rem" }}>
-                    Supports WebP, PNG, JPG, and SVG. Self-hosted locally under public/images/
-                  </div>
-                </div>
-              </div>
+                  {featuredSlugs.length} / 3 Selected
+                </span>
+              )}
             </div>
-          ) : activeTab === "featured-work" ? (
-            <div style={{ maxWidth: "960px", margin: "0 auto" }}>
-              {/* Top Bar */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
-                <div>
-                  <h1 style={{ fontSize: "1.75rem", fontWeight: 600, letterSpacing: "-0.02em", color: "#171717", display: "flex", alignItems: "center", gap: "0.85rem" }}>
-                    Homepage Featured Work
-                    <span style={{
-                      backgroundColor: featuredSlugs.length === 3 ? "var(--green, #cbfb45)" : "#fee2e2",
-                      color: featuredSlugs.length === 3 ? "var(--black, #171717)" : "#ef4444",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      padding: "0.25rem 0.75rem",
-                      borderRadius: "100rem",
-                    }}>
-                      {featuredSlugs.length} / 3 Selected
-                    </span>
-                  </h1>
-                  <p style={{ fontSize: "0.9rem", color: "#818181", marginTop: "0.3rem" }}>
-                    Select which 3 case studies appear in the &quot;See our work&quot; section on the homepage.
-                  </p>
-                </div>
 
-                <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                  {/* Mode Toggle */}
+            {/* Controls: [ Form View | Raw JSON ] + [Delete] + [Save Changes] */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
+              {canToggleJson && (
+                <div style={{
+                  display: "inline-flex",
+                  backgroundColor: "#e5e7eb",
+                  padding: "3px",
+                  borderRadius: "100rem",
+                  gap: "2px"
+                }}>
                   <button
-                    onClick={() => setIsJsonMode(false)}
+                    type="button"
+                    onClick={() => toggleViewMode(false)}
                     style={{
-                      padding: "0.5rem 1.25rem",
+                      padding: "0.4rem 1.15rem",
                       borderRadius: "100rem",
                       border: "none",
-                      fontSize: "0.85rem",
+                      fontSize: "0.825rem",
                       fontWeight: !isJsonMode ? 600 : 500,
-                      backgroundColor: "#f0f1f3",
-                      color: !isJsonMode ? "#1f2937" : "#6b7280",
-                      cursor: "pointer"
+                      backgroundColor: !isJsonMode ? "#ffffff" : "transparent",
+                      color: !isJsonMode ? "#111827" : "#4b5563",
+                      boxShadow: !isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease"
                     }}
                   >
-                    Visual Selector
+                    Form View
                   </button>
                   <button
-                    onClick={() => setIsJsonMode(true)}
+                    type="button"
+                    onClick={() => toggleViewMode(true)}
                     style={{
-                      padding: "0.5rem 1.25rem",
+                      padding: "0.4rem 1.15rem",
                       borderRadius: "100rem",
                       border: "none",
-                      fontSize: "0.85rem",
+                      fontSize: "0.825rem",
                       fontWeight: isJsonMode ? 600 : 500,
-                      backgroundColor: "#f0f1f3",
-                      color: isJsonMode ? "#1f2937" : "#6b7280",
-                      cursor: "pointer"
+                      backgroundColor: isJsonMode ? "#ffffff" : "transparent",
+                      color: isJsonMode ? "#111827" : "#4b5563",
+                      boxShadow: isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease"
                     }}
                   >
                     Raw JSON
                   </button>
+                </div>
+              )}
 
+              {/* Delete button (for items in case-studies, blog, services) */}
+              {isDeletable && (
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  disabled={loading}
+                  style={{
+                    backgroundColor: "#ffffff",
+                    color: "#ef4444",
+                    border: "1px solid #fee2e2",
+                    padding: "0.45rem 1.1rem",
+                    borderRadius: "100rem",
+                    fontSize: "0.825rem",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
+                  }}
+                >
+                  Delete
+                </button>
+              )}
+
+              {/* Save Button */}
+              {canSave && (
+                <button
+                  type="button"
+                  onClick={triggerSave}
+                  disabled={loading}
+                  style={{
+                    backgroundColor: "var(--black, #171717)",
+                    color: "var(--white, #ffffff)",
+                    border: "none",
+                    padding: "0.5rem 1.4rem",
+                    borderRadius: "100rem",
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                    cursor: loading ? "not-allowed" : "pointer",
+                    opacity: loading ? 0.7 : 1,
+                    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+                    transition: "opacity 0.15s ease"
+                  }}
+                >
+                  {loading ? "Saving..." : "Save Changes"}
+                </button>
+              )}
+            </div>
+          </header>
+
+          {/* Main Content Workspace Canvas */}
+          <div style={{
+            flex: 1,
+            padding: activeTab === "case-studies" || activeTab === "blog" || activeTab === "services"
+              ? "2rem 2.5rem 3rem 1.25rem"
+              : "2rem 2.5rem 3rem 2.5rem",
+            maxWidth: "1000px",
+            width: "100%",
+            margin: "0 auto",
+            boxSizing: "border-box"
+          }}>
+            {isJsonMode && activeTab !== "upload" ? (
+              <div style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "28px",
+                border: "1px solid #e5e7eb",
+                padding: "2.25rem 2.5rem",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)"
+              }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+                  <span style={{ fontSize: "0.85rem", color: jsonError ? "#ef4444" : "#10b981", fontWeight: 600 }}>
+                    {jsonError ? `✗ ${jsonError}` : "✓ Valid JSON"}
+                  </span>
                   <button
-                    onClick={saveFeaturedWork}
-                    disabled={loading}
+                    type="button"
+                    onClick={formatRawJson}
                     style={{
-                      backgroundColor: "var(--black, #171717)",
-                      color: "var(--white, #ffffff)",
-                      border: "none",
-                      padding: "0.55rem 1.6rem",
+                      background: "#ffffff",
+                      border: "1px solid #e5e7eb",
+                      color: "#374151",
                       borderRadius: "100rem",
-                      fontWeight: 600,
-                      fontSize: "0.875rem",
-                      cursor: "pointer"
+                      padding: "0.35rem 0.85rem",
+                      fontSize: "0.75rem",
+                      cursor: "pointer",
+                      fontWeight: 500
                     }}
                   >
-                    {loading ? "Saving..." : "Save Selection"}
+                    Format JSON
                   </button>
                 </div>
+                <textarea
+                  rows={24}
+                  value={rawJsonText}
+                  onChange={(e) => handleRawJsonChange(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "1.25rem",
+                    backgroundColor: "#fcfcfc",
+                    border: `1px solid ${jsonError ? "#ef4444" : "#e5e7eb"}`,
+                    borderRadius: "16px",
+                    color: "#171717",
+                    fontFamily: "monospace",
+                    fontSize: "0.875rem",
+                    lineHeight: "1.55",
+                    boxSizing: "border-box",
+                    outline: "none"
+                  }}
+                />
               </div>
-
-              {isJsonMode ? (
+            ) : activeTab === "upload" ? (
+              <div style={{ maxWidth: "800px", margin: "0 auto" }}>
                 <div style={{
                   backgroundColor: "#ffffff",
-                  borderRadius: "32px",
+                  borderRadius: "28px",
                   border: "1px solid #e5e5e5",
-                  padding: "2.5rem"
+                  padding: "3.5rem 2.5rem",
+                  textAlign: "center"
                 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-                    <span style={{ fontSize: "0.85rem", color: jsonError ? "#ef4444" : "#10b981", fontWeight: 500 }}>
-                      {jsonError ? `✗ ${jsonError}` : "✓ Valid JSON Array"}
-                    </span>
-                    <button
-                      onClick={formatRawJson}
+                  <div style={{
+                    border: "2px dashed #d1d5db",
+                    borderRadius: "20px",
+                    padding: "3.5rem 2rem",
+                    backgroundColor: "#fafafa"
+                  }}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      style={{ display: "none" }}
+                      id="admin-file-upload"
+                    />
+                    <label
+                      htmlFor="admin-file-upload"
                       style={{
-                        background: "#ffffff",
-                        border: "1px solid #e5e7eb",
-                        color: "#374151",
+                        backgroundColor: "var(--green, #cbfb45)",
+                        color: "var(--black, #171717)",
+                        padding: "0.75rem 1.75rem",
                         borderRadius: "100rem",
-                        padding: "0.35rem 0.85rem",
-                        fontSize: "0.75rem",
+                        fontWeight: 600,
+                        fontSize: "0.9rem",
                         cursor: "pointer",
-                        fontWeight: 500
+                        display: "inline-block",
+                        border: "none"
                       }}
                     >
-                      Format JSON
-                    </button>
+                      {uploading ? "Uploading image..." : "Select Image from Computer"}
+                    </label>
+                    <div style={{ marginTop: "1.25rem", color: "#6b7280", fontSize: "0.85rem" }}>
+                      Supports WebP, PNG, JPG, and SVG
+                    </div>
                   </div>
-                  <textarea
-                    rows={12}
-                    value={rawJsonText}
-                    onChange={(e) => handleRawJsonChange(e.target.value)}
-                    style={{
-                      width: "100%",
-                      fontFamily: "monospace",
-                      fontSize: "0.9rem",
-                      backgroundColor: "#fcfcfc",
-                      color: "#171717",
-                      border: "1px solid #e5e7eb",
-                      borderRadius: "16px",
-                      padding: "1.25rem",
-                      boxSizing: "border-box",
-                      outline: "none",
-                      lineHeight: "1.5"
-                    }}
-                  />
                 </div>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+              </div>
+            ) : activeTab === "featured-work" ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                   {/* Current Featured Card */}
                   <div style={{
                     backgroundColor: "#ffffff",
@@ -1270,167 +1631,8 @@ export default function AdminPage() {
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
-          ) : activeTab === "headers" ? (
-            <div style={{ maxWidth: "960px", margin: "0 auto" }}>
-              {/* Headers Top Bar */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "2rem", flexWrap: "wrap", gap: "1.25rem" }}>
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", flexWrap: "wrap" }}>
-                    <h1 style={{ fontSize: "1.75rem", fontWeight: 600, letterSpacing: "-0.02em", color: "#171717", margin: 0 }}>
-                      Page Headers &amp; Focal Framing
-                    </h1>
-                    <span style={{
-                      backgroundColor: "var(--green, #cbfb45)",
-                      color: "var(--black, #171717)",
-                      fontSize: "0.7rem",
-                      fontWeight: 800,
-                      letterSpacing: "0.04em",
-                      padding: "0.28rem 0.75rem",
-                      borderRadius: "100rem",
-                      display: "inline-flex",
-                      alignItems: "center"
-                    }}>
-                      FIXED DIMENSIONS
-                    </span>
-                  </div>
-                  <p style={{ fontSize: "0.9rem", color: "#818181", marginTop: "0.35rem", marginBottom: 0, lineHeight: 1.5 }}>
-                    Select a page header, upload or paste an image path, and slide or drag the visible window to frame what portion of the image will be shown.
-                  </p>
-                </div>
-
-                <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                  {/* Segmented Control Track */}
-                  <div style={{
-                    display: "inline-flex",
-                    backgroundColor: "#f0f1f3",
-                    padding: "3px",
-                    borderRadius: "100rem",
-                    gap: "2px"
-                  }}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        try {
-                          if (isJsonMode) {
-                            const parsed = JSON.parse(rawJsonText);
-                            if (parsed && parsed.home) {
-                              setHeadersData(parsed);
-                            }
-                          }
-                        } catch {
-                          // ignore json parse error on toggle
-                        }
-                        setIsJsonMode(false);
-                      }}
-                      style={{
-                        padding: "0.45rem 1.25rem",
-                        borderRadius: "100rem",
-                        border: "none",
-                        fontSize: "0.85rem",
-                        fontWeight: !isJsonMode ? 600 : 500,
-                        backgroundColor: !isJsonMode ? "#ffffff" : "transparent",
-                        color: !isJsonMode ? "#111827" : "#6b7280",
-                        boxShadow: !isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
-                        cursor: "pointer",
-                        transition: "all 0.15s ease"
-                      }}
-                    >
-                      Visual Frame
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setRawJsonText(JSON.stringify(headersData, null, 2));
-                        setIsJsonMode(true);
-                      }}
-                      style={{
-                        padding: "0.45rem 1.25rem",
-                        borderRadius: "100rem",
-                        border: "none",
-                        fontSize: "0.85rem",
-                        fontWeight: isJsonMode ? 600 : 500,
-                        backgroundColor: isJsonMode ? "#ffffff" : "transparent",
-                        color: isJsonMode ? "#111827" : "#6b7280",
-                        boxShadow: isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
-                        cursor: "pointer",
-                        transition: "all 0.15s ease"
-                      }}
-                    >
-                      Raw JSON
-                    </button>
-                  </div>
-
-                  <button
-                    onClick={saveHeaders}
-                    disabled={loading}
-                    style={{
-                      backgroundColor: "var(--black, #171717)",
-                      color: "var(--white, #ffffff)",
-                      border: "none",
-                      padding: "0.55rem 1.6rem",
-                      borderRadius: "100rem",
-                      fontWeight: 600,
-                      fontSize: "0.875rem",
-                      cursor: "pointer",
-                      transition: "opacity 0.15s ease",
-                      opacity: loading ? 0.7 : 1
-                    }}
-                  >
-                    {loading ? "Saving..." : "Save Headers"}
-                  </button>
-                </div>
-              </div>
-
-              {isJsonMode ? (
-                <div style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "32px",
-                  border: "1px solid #e5e7eb",
-                  padding: "2.75rem 3rem"
-                }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-                    <span style={{ fontSize: "0.85rem", color: jsonError ? "#ef4444" : "#10b981", fontWeight: 500 }}>
-                      {jsonError ? `✗ ${jsonError}` : "✓ Valid JSON Object"}
-                    </span>
-                    <button
-                      onClick={formatRawJson}
-                      style={{
-                        background: "#ffffff",
-                        border: "1px solid #e5e7eb",
-                        color: "#374151",
-                        borderRadius: "100rem",
-                        padding: "0.35rem 0.85rem",
-                        fontSize: "0.75rem",
-                        cursor: "pointer",
-                        fontWeight: 500
-                      }}
-                    >
-                      Format JSON
-                    </button>
-                  </div>
-                  <textarea
-                    rows={16}
-                    value={rawJsonText}
-                    onChange={(e) => handleRawJsonChange(e.target.value)}
-                    style={{
-                      width: "100%",
-                      fontFamily: "monospace",
-                      fontSize: "0.9rem",
-                      backgroundColor: "#fcfcfc",
-                      color: "#171717",
-                      border: "1px solid #e5e7eb",
-                      borderRadius: "16px",
-                      padding: "1.25rem",
-                      boxSizing: "border-box",
-                      outline: "none",
-                      lineHeight: "1.5"
-                    }}
-                  />
-                </div>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+            ) : activeTab === "headers" ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
                   {/* Hero Selection Cards */}
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
                     {[
@@ -1810,149 +2012,14 @@ export default function AdminPage() {
                     );
                   })()}
                 </div>
-              )}
-            </div>
-          ) : editForm ? (
-            <div style={{ maxWidth: "960px", margin: "0 auto" }}>
-              {/* Top Editor Bar */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.75rem", flexWrap: "wrap", gap: "1rem" }}>
-                <div>
-                  <h1 style={{ fontSize: "1.65rem", fontWeight: 700, letterSpacing: "-0.02em", color: "#111827" }}>
-                    {activeTab === "site-config"
-                      ? "Site Configuration"
-                      : activeTab === "team"
-                      ? "Team Members"
-                      : activeTab === "testimonials"
-                      ? "Client Testimonials"
-                      : `Edit: ${editForm.title || selectedSlug}`}
-                  </h1>
-                  <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.25rem" }}>
-                    Source file: content/{activeTab === "site-config" || activeTab === "team" || activeTab === "testimonials" ? "site" : activeTab}/{selectedSlug}.json
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                  {/* Mode Toggle Button: Form vs Raw JSON */}
-                  <button
-                    onClick={() => setIsJsonMode(false)}
-                    style={{
-                      padding: "0.5rem 1.25rem",
-                      borderRadius: "100rem",
-                      border: "none",
-                      fontSize: "0.85rem",
-                      fontWeight: !isJsonMode ? 600 : 500,
-                      backgroundColor: "#f0f1f3",
-                      color: !isJsonMode ? "#1f2937" : "#6b7280",
-                      cursor: "pointer"
-                    }}
-                  >
-                    Form View
-                  </button>
-                  <button
-                    onClick={() => {
-                      setRawJsonText(JSON.stringify(editForm, null, 2));
-                      setIsJsonMode(true);
-                    }}
-                    style={{
-                      padding: "0.5rem 1.25rem",
-                      borderRadius: "100rem",
-                      border: "none",
-                      fontSize: "0.85rem",
-                      fontWeight: isJsonMode ? 600 : 500,
-                      backgroundColor: "#f0f1f3",
-                      color: isJsonMode ? "#1f2937" : "#6b7280",
-                      cursor: "pointer"
-                    }}
-                  >
-                    Raw JSON
-                  </button>
-
-                  {activeTab !== "site-config" && activeTab !== "team" && activeTab !== "testimonials" && (
-                    <button
-                      onClick={handleDelete}
-                      style={{
-                        backgroundColor: "#ffffff",
-                        color: "#ef4444",
-                        border: "1px solid #fee2e2",
-                        padding: "0.5rem 1.25rem",
-                        borderRadius: "100rem",
-                        fontSize: "0.85rem",
-                        fontWeight: 600,
-                        cursor: "pointer"
-                      }}
-                    >
-                      Delete
-                    </button>
-                  )}
-                  <button
-                    onClick={handleSave}
-                    disabled={loading}
-                    style={{
-                      backgroundColor: "var(--black, #171717)",
-                      color: "var(--white, #ffffff)",
-                      border: "none",
-                      padding: "0.55rem 1.6rem",
-                      borderRadius: "100rem",
-                      fontWeight: 600,
-                      fontSize: "0.875rem",
-                      cursor: "pointer"
-                    }}
-                  >
-                    {loading ? "Saving..." : "Save File"}
-                  </button>
-                </div>
-              </div>
-
-              {/* Body: Either Raw JSON Editor or Structured Form inside large white card */}
+            ) : editForm ? (
               <div style={{
                 backgroundColor: "#ffffff",
-                borderRadius: "32px",
+                borderRadius: "28px",
                 border: "1px solid #e5e7eb",
-                padding: "2.75rem 3rem"
+                padding: "2.5rem 3rem"
               }}>
-                {isJsonMode ? (
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-                      <span style={{ fontSize: "0.85rem", color: jsonError ? "#ef4444" : "#10b981", fontWeight: 500 }}>
-                        {jsonError ? `✗ ${jsonError}` : "✓ Valid JSON"}
-                      </span>
-                      <button
-                        onClick={formatRawJson}
-                        style={{
-                          background: "#ffffff",
-                          border: "1px solid #e5e7eb",
-                          color: "#374151",
-                          borderRadius: "100rem",
-                          padding: "0.35rem 0.85rem",
-                          fontSize: "0.75rem",
-                          cursor: "pointer",
-                          fontWeight: 500
-                        }}
-                      >
-                        Format / Beautify JSON
-                      </button>
-                    </div>
-                    <textarea
-                      rows={22}
-                      value={rawJsonText}
-                      onChange={(e) => handleRawJsonChange(e.target.value)}
-                      style={{
-                        width: "100%",
-                        padding: "1.25rem",
-                        backgroundColor: "#fcfcfc",
-                        border: `1px solid ${jsonError ? "#ef4444" : "#e5e7eb"}`,
-                        borderRadius: "16px",
-                        color: "#171717",
-                        fontFamily: "monospace",
-                        fontSize: "0.875rem",
-                        lineHeight: "1.55",
-                        boxSizing: "border-box",
-                        outline: "none"
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
                     {activeTab === "case-studies" && (
                       <>
                         <div>
@@ -2822,14 +2889,13 @@ export default function AdminPage() {
                       </div>
                     )}
                   </div>
-                )}
-              </div>
+                </div>
+              ) : (
+                <div style={{ textAlign: "center", color: "#9ca3af", marginTop: "5rem", fontSize: "0.95rem" }}>
+                  Select an item from the list to edit, or click + New.
+                </div>
+              )}
             </div>
-          ) : (
-            <div style={{ textAlign: "center", color: "#6b7280", marginTop: "5rem" }}>
-              Select an item to edit or click + New.
-            </div>
-          )}
         </main>
 
       {/* Toast Notification */}

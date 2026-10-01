@@ -42,7 +42,7 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
   }, [variant]);
 
   const handleHover = async () => {
-    if (variant !== "navbar") return;
+    if (variant !== "navbar" && variant !== "admin") return;
     if (isAnimatingRef.current) return;
     if (!hammerRef.current || !textRef.current) return;
 
@@ -147,6 +147,7 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
   };
 
   const isNavbar = variant === "navbar";
+  const hasInteractiveIcon = variant === "navbar" || variant === "admin";
   const collapseClass = isNavbar
     ? isMobileCollapsed
       ? "is-mobile-collapsed"
@@ -168,7 +169,7 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
       onMouseEnter={handleHover}
       onTouchStart={handleHover}
     >
-      {isNavbar && (
+      {hasInteractiveIcon && (
         <span className="navbar-brand-icon-anchor" aria-hidden="true">
           {/* White Anvil */}
           <svg

@@ -422,6 +422,13 @@ body {
   height: 2.4rem;
   padding: 0 1.25rem;
   font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.brand-logo-pill.is-admin:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
 /* Brand Logo Pill - Complete Lockup (Hammer + Anvil + Text) */
