@@ -110,7 +110,7 @@ export default async function AboutPage() {
 
       {/* 4. Our Team */}
       <div id="team">
-        <Team />
+        <Team showAll />
       </div>
 
       {/* 5. Values Behind Our Work */}

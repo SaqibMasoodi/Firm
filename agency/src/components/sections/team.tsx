@@ -1,5 +1,7 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import { teamMembers } from "@/lib/constants";
 
@@ -19,7 +21,20 @@ function TwitterIcon() {
   );
 }
 
-export default function Team() {
+interface TeamProps {
+  initialLimit?: number;
+  showAll?: boolean;
+}
+
+export default function Team({ initialLimit = 4, showAll = false }: TeamProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const displayedMembers = isExpanded || showAll
+    ? teamMembers
+    : teamMembers.slice(0, initialLimit);
+
+  const hasMore = !showAll && teamMembers.length > initialLimit;
+
   return (
     <section className="section-team">
       <div className="padding-global">
@@ -43,20 +58,16 @@ export default function Team() {
                   </p>
                 </ScrollReveal>
               </div>
-              <ScrollReveal delay={0.2}>
-                <div className="button-group">
-                  <Link href="/about#team" className="button">
-                    All team members
-                  </Link>
-                </div>
-              </ScrollReveal>
             </div>
             <div className="team-component">
               <div className="team-list-wrapper">
                 <ScrollReveal delay={0.1}>
                   <div className="team-list">
-                    {teamMembers.map((member) => (
-                      <div key={member.id} className="team-item">
+                    {displayedMembers.map((member, index) => (
+                      <div
+                        key={member.id}
+                        className={`team-item ${index >= initialLimit ? "team-item-animated" : ""}`}
+                      >
                         <div className="margin-bottom margin-xsmall">
                           <div className="team-image-wrapper">
                             <Image
@@ -114,6 +125,20 @@ export default function Team() {
                   </div>
                 </ScrollReveal>
               </div>
+              {hasMore && (
+                <ScrollReveal delay={0.2}>
+                  <div className="team-footer-actions">
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={() => setIsExpanded((prev) => !prev)}
+                      aria-expanded={isExpanded}
+                    >
+                      {isExpanded ? "Show less" : "View all team members"}
+                    </button>
+                  </div>
+                </ScrollReveal>
+              )}
             </div>
           </div>
         </div>

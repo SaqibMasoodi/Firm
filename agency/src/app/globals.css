@@ -1646,6 +1646,40 @@ button,
   justify-content: center;
 }
 
+.team-footer-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+@media screen and (max-width: 767px) {
+  .team-footer-actions {
+    margin-top: 2rem;
+  }
+}
+
+@keyframes teamCardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-item-animated {
+  animation: teamCardFadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-item-animated {
+    animation: none;
+  }
+}
+
 /* ===== FAQ SECTION ===== */
 .section-faq {
   margin-left: 5%;
