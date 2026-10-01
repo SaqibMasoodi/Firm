@@ -17,6 +17,29 @@ html.splash-viewed .splash-overlay:not(.force-play) {
   --grey-text: #818181;
 }
 
+html {
+  scrollbar-color: var(--green) var(--light-grey);
+  scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--light-grey);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border: 3px solid var(--light-grey);
+  border-radius: 100rem;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  border-width: 2px;
+}
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
