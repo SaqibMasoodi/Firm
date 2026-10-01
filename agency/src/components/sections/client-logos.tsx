@@ -26,6 +26,7 @@ export default function ClientLogos() {
                   width={120}
                   height={32}
                   className="client-logo"
+                  unoptimized
                 />
               ))}
             </div>

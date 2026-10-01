@@ -477,6 +477,45 @@ body {
   will-change: transform;
 }
 
+/* Splash Overlay Responsive Custom Properties */
+.splash-overlay {
+  --splash-circle: 82px;
+  --splash-anvil: 44px;
+  --splash-hammer-top: 3.5px;
+  --splash-hammer-left: 14px;
+  --splash-hammer-w: 44px;
+  --splash-hammer-h: 35px;
+  --splash-spark-top: 26px;
+  --splash-spark-left: 46px;
+  --splash-font-size: clamp(1.7rem, 3.4vw, 2.15rem);
+  --splash-padding-right: 32px;
+}
+
+.splash-anvil-svg {
+  width: var(--splash-anvil, 44px);
+  height: var(--splash-anvil, 44px);
+}
+
+.splash-hammer-svg {
+  width: var(--splash-hammer-w, 44px);
+  height: var(--splash-hammer-h, 35px);
+}
+
+@media screen and (max-width: 640px) {
+  .splash-overlay {
+    --splash-circle: 58px;
+    --splash-anvil: 32px;
+    --splash-hammer-top: 2.5px;
+    --splash-hammer-left: 9px;
+    --splash-hammer-w: 32px;
+    --splash-hammer-h: 26px;
+    --splash-spark-top: 18px;
+    --splash-spark-left: 32px;
+    --splash-font-size: clamp(1.15rem, 4.5vw, 1.35rem);
+    --splash-padding-right: 20px;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .brand-logo-pill.is-navbar {
     height: 2.45rem;
@@ -3815,3 +3854,65 @@ button,
     font-size: 1.1rem !important;
   }
 }
+
+/* ===== HARDWARE-ACCELERATED HERO & SCROLL REVEAL ===== */
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-reveal {
+  animation: heroReveal 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-container {
+  will-change: opacity, transform;
+}
+
+/* ===== 60FPS HARDWARE-ACCELERATED CSS ACCORDION ===== */
+.accordion-collapse-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion-collapse-wrapper.is-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-collapse-inner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.24s ease-out;
+}
+
+.accordion-collapse-wrapper.is-open .accordion-collapse-inner {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .scroll-reveal-container {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .accordion-collapse-wrapper {
+    transition: none !important;
+  }
+  .accordion-collapse-inner {
+    transition: none !important;
+  }
+}
+

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
 
 interface LogoProps {
   variant?: "navbar" | "footer" | "admin" | "default";
@@ -42,12 +41,13 @@ export default function Logo({ variant = "default", className = "" }: LogoProps)
     return () => clearTimeout(timer);
   }, [variant]);
 
-  const handleHover = () => {
+  const handleHover = async () => {
     if (variant !== "navbar") return;
     if (isAnimatingRef.current) return;
     if (!hammerRef.current || !textRef.current) return;
 
     isAnimatingRef.current = true;
+    const { default: gsap } = await import("gsap");
 
     const tl = gsap.timeline({
       onComplete: () => {

@@ -3,7 +3,7 @@
     "id": "ifham",
     "name": "Ifham",
     "role": "Hardware Specialist",
-    "bio": "Ifham specializes in hardware development, electronics, and prototyping. He enjoys transforming ideas into working solutions through hands-on experimentation, careful testing, and a strong commitment to delivering reliable results.",
+    "bio": "Ifham works with hardware, electronics, and prototypes. He enjoys building things, testing ideas, and figuring out how to make them work.",
     "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/ifham",
@@ -11,21 +11,10 @@
     }
   },
   {
-    "id": "afan",
-    "name": "Afan",
-    "role": "Operations Manager",
-    "bio": "Afan oversees day-to-day operations, ensuring projects stay organized and workflows remain efficient. He excels at coordinating teams, managing logistics, and creating a smooth experience for both clients and collaborators.",
-    "image": "/images/avatar.svg",
-    "socials": {
-      "linkedin": "https://www.linkedin.com/in/afan",
-      "twitter": "https://x.com/northforgelabs"
-    }
-  },
-  {
     "id": "aleem",
     "name": "Aleem",
     "role": "Generalist",
-    "bio": "Aleem is a versatile team member who adapts quickly to new challenges and responsibilities. With a practical, solution-oriented mindset, he supports projects across multiple areas and contributes wherever he's needed most.",
+    "bio": "Aleem is the kind of person who can jump into just about anything. He enjoys solving problems and helping wherever he's needed.",
     "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/aleem",
@@ -33,20 +22,21 @@
     }
   },
   {
-    "id": "farhan",
-    "name": "Farhan Azad",
-    "role": "Software Developer",
-    "bio": "Farhan is a software developer with a strong foundation in full-stack development, specializing in MERN and .NET technologies. He enjoys building efficient, user-friendly applications and turning ideas into practical solutions through clean development, problem-solving, and continuous learning.",
+    "id": "afan",
+    "name": "Afan",
+    "role": "Operations Manager",
+    "bio": "Afan keeps things moving behind the scenes, from coordinating the team to making sure projects stay on track.",
     "image": "/images/avatar.svg",
     "socials": {
-      "linkedin": "https://www.linkedin.com/in/farhan-azad-958595257/"
+      "linkedin": "https://www.linkedin.com/in/afan",
+      "twitter": "https://x.com/northforgelabs"
     }
   },
   {
     "id": "saqib",
     "name": "Saqib",
     "role": "Design Lead",
-    "bio": "Saqib leads the creative direction of design, crafting thoughtful digital experiences that balance aesthetics with usability. He focuses on creating clean, modern, and functional designs that communicate ideas with clarity.",
+    "bio": "Saqib cares about how things look, feel, and work. He creates clean, practical designs that make ideas easy to understand.",
     "image": "/images/team/saqib.webp",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/saqib",
@@ -54,10 +44,20 @@
     }
   },
   {
+    "id": "farhan",
+    "name": "Farhan Azad",
+    "role": "Software Developer",
+    "bio": "Farhan builds web applications with MERN and .NET. He enjoys turning ideas into simple, useful software.",
+    "image": "/images/avatar.svg",
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/farhan-azad-958595257/"
+    }
+  },
+  {
     "id": "mubashir",
     "name": "Mubashir Masoodi",
     "role": "Senior Developer & Team Lead",
-    "bio": "Mubashir leads engineering initiatives with a focus on scalable architecture, code quality, and team mentorship. He guides development cycles from concept to deployment, ensuring technical solutions remain robust and aligned with product goals.",
+    "bio": "Mubashir works across the stack and leads the development team. He likes building solid systems and helping turn ideas into working products.",
     "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/mubashir-masoodi"
@@ -67,9 +67,8 @@
     "id": "hazar",
     "name": "Hazar Hamad Bhat",
     "role": "AI & Data Science Specialist",
-    "bio": "Hazar specializes in artificial intelligence, machine learning, and data-driven systems. He brings hands-on expertise in neural networks (ANNs), large language models (LLMs), and generative AI, with a focus on building intelligent applications and deploying modern AI solutions.",
+    "bio": "Hazar works with AI, machine learning, and data. He enjoys exploring new models and building useful things with modern AI.",
     "image": "/images/avatar.svg",
     "socials": {}
   }
 ]
-

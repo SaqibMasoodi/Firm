@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import type { Service } from "@/types";
 
@@ -63,6 +62,7 @@ export default function ServicesAccordion({
                           }
                           role="button"
                           tabIndex={0}
+                          aria-expanded={openIndex === index}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" || e.key === " ")
                               setOpenIndex(
@@ -78,7 +78,7 @@ export default function ServicesAccordion({
                             style={{
                               transform:
                                 openIndex === index
-                                  ? "rotate(45deg)"
+                                   ? "rotate(45deg)"
                                   : "rotate(0deg)",
                               transition: "transform 0.26s cubic-bezier(0.22, 1, 0.36, 1)",
                             }}
@@ -88,56 +88,47 @@ export default function ServicesAccordion({
                             </div>
                           </div>
                         </div>
-                        <AnimatePresence initial={false}>
-                          {openIndex === index && (
-                            <motion.div
-                              key="content"
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{
-                                height: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
-                                opacity: { duration: 0.22, ease: "easeOut" },
-                              }}
-                              style={{ overflow: "hidden", transformOrigin: "top" }}
-                            >
-                              <div className="service-description">
-                                <div className="service-component">
-                                  <div className="service-image-wrapper">
-                                    <Image
-                                      src={service.image}
-                                      alt={service.title}
-                                      width={540}
-                                      height={400}
-                                      className="service-image"
-                                      sizes="(max-width: 991px) 80vw, 40vw"
-                                    />
+                        <div
+                          className={`accordion-collapse-wrapper ${openIndex === index ? "is-open" : ""}`}
+                          aria-hidden={openIndex !== index}
+                        >
+                          <div className="accordion-collapse-inner">
+                            <div className="service-description">
+                              <div className="service-component">
+                                <div className="service-image-wrapper">
+                                  <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    width={540}
+                                    height={400}
+                                    className="service-image"
+                                    sizes="(max-width: 991px) 80vw, 40vw"
+                                  />
+                                </div>
+                                <div className="service-content">
+                                  <div className="margin-bottom margin-small">
+                                    <h3 className="heading-style-h3">
+                                      {service.title}
+                                    </h3>
                                   </div>
-                                  <div className="service-content">
-                                    <div className="margin-bottom margin-small">
-                                      <h3 className="heading-style-h3">
-                                        {service.title}
-                                      </h3>
-                                    </div>
-                                    <p className="text-size-medium">
-                                      {service.description}
-                                    </p>
-                                    <div className="margin-top margin-medium">
-                                      <div className="button-group">
-                                        <Link
-                                          href={`/services#${service.slug}`}
-                                          className="button"
-                                        >
-                                          <div className="button-text-item">Learn more</div>
-                                        </Link>
-                                      </div>
+                                  <p className="text-size-medium">
+                                    {service.description}
+                                  </p>
+                                  <div className="margin-top margin-medium">
+                                    <div className="button-group">
+                                      <Link
+                                        href={`/services#${service.slug}`}
+                                        className="button"
+                                      >
+                                        <div className="button-text-item">Learn more</div>
+                                      </Link>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>

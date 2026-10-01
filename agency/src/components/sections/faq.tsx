@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import { faqs } from "@/lib/constants";
 
@@ -56,6 +55,7 @@ export default function FAQ() {
                           }
                           role="button"
                           tabIndex={0}
+                          aria-expanded={openIndex === index}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" || e.key === " ")
                               setOpenIndex(
@@ -81,27 +81,18 @@ export default function FAQ() {
                             </div>
                           </div>
                         </div>
-                        <AnimatePresence initial={false}>
-                          {openIndex === index && (
-                            <motion.div
-                              key="content"
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{
-                                height: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
-                                opacity: { duration: 0.22, ease: "easeOut" },
-                              }}
-                              style={{ overflow: "hidden", transformOrigin: "top" }}
-                            >
-                              <div className="faq-answer">
-                                <div className="margin-bottom margin-small">
-                                  <p className="text-size-medium">{faq.answer}</p>
-                                </div>
+                        <div
+                          className={`accordion-collapse-wrapper ${openIndex === index ? "is-open" : ""}`}
+                          aria-hidden={openIndex !== index}
+                        >
+                          <div className="accordion-collapse-inner">
+                            <div className="faq-answer">
+                              <div className="margin-bottom margin-small">
+                                <p className="text-size-medium">{faq.answer}</p>
                               </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>

@@ -5,10 +5,9 @@ import gsap from "gsap";
 
 const WORDS = [
   { text: "Build", color: "#171717" },
-  { text: "Innovate", color: "#CBFB45" },
-  { text: "Automate", color: "#71717A" },
+  { text: "Innovate", color: "#71717A" },
   { text: "Scale", color: "#171717" },
-  { text: "Forge", color: "#CBFB45" },
+  { text: "Forge", color: "#171717" },
 ];
 
 const GREEN_LETTERS = "Northforge".split("");
@@ -30,6 +29,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
   const textWrapRef = useRef<HTMLDivElement>(null);
   const textInnerRef = useRef<HTMLDivElement>(null);
   const onCompleteRef = useRef(onComplete);
+
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
@@ -37,7 +37,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Check for audit bots, Lighthouse, headless browsers, or reduced motion
+    // Audit bots, Lighthouse, headless browsers, or reduced motion detection
     const isBotOrLighthouse =
       typeof navigator !== "undefined" &&
       /Lighthouse|PageSpeed|Chrome-Lighthouse|PTST|Googlebot|HeadlessChrome/i.test(navigator.userAgent);
@@ -70,14 +70,20 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // Pre-calculate intrinsic text width for continuous, pixel-perfect GSAP interpolation
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 640;
+    const circleSize = isMobile ? 58 : 82;
+
+    // Pre-calculate intrinsic text width for precision interpolation
     const textInnerEl = textInnerRef.current;
-    const rawTextWidth = textInnerEl ? textInnerEl.getBoundingClientRect().width || textInnerEl.scrollWidth : 270;
+    const rawTextWidth = textInnerEl
+      ? textInnerEl.getBoundingClientRect().width || textInnerEl.scrollWidth
+      : (isMobile ? 180 : 272);
     const targetTextWidth = Math.ceil(rawTextWidth);
-    const targetPillWidth = 82 + targetTextWidth;
+    const targetPillWidth = circleSize + targetTextWidth;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
+        defaults: { force3D: true },
         onComplete: () => {
           try {
             sessionStorage.setItem("northforge_splash_viewed", "true");
@@ -90,168 +96,202 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
       });
 
       const wordEls = wordsContainerRef.current?.querySelectorAll(".splash-word");
+      const letterEls = textInnerRef.current?.querySelectorAll(".splash-letter");
+      const sparkEls = sparksRef.current?.querySelectorAll(".splash-spark");
 
-      // Initial States: ensure GSAP is explicitly aligned with initial CSS
-      gsap.set(stageRef.current, { opacity: 0, scale: 0.95, force3D: true });
-      gsap.set(pillRef.current, { width: 82, height: 82, borderRadius: "100rem", force3D: true });
+      // Set explicit initial states (GPU optimized)
+      gsap.set(stageRef.current, { opacity: 0, scale: 0.92, transformOrigin: "center center" });
+      gsap.set(pillRef.current, { width: circleSize, height: circleSize, borderRadius: "100rem" });
+      gsap.set(anvilWrapRef.current, { y: 0, scale: 1 });
       gsap.set(hammerRef.current, {
         opacity: 0,
-        y: -70,
-        x: -8,
-        rotate: -45,
+        y: isMobile ? -50 : -64,
+        x: isMobile ? -9 : -12,
+        rotate: -54,
         transformOrigin: "4px 12px",
-        force3D: true,
       });
-      gsap.set(textWrapRef.current, { width: 0, opacity: 0, force3D: true });
-      gsap.set(textInnerRef.current, { x: 0, opacity: 1, force3D: true });
-
-      const letterEls = textInnerRef.current?.querySelectorAll(".splash-letter");
+      gsap.set(textWrapRef.current, { width: 0, opacity: 0 });
+      gsap.set(textInnerRef.current, { x: 0, opacity: 1 });
       if (letterEls && letterEls.length > 0) {
-        gsap.set(letterEls, { opacity: 0, y: 6, force3D: true });
+        gsap.set(letterEls, { opacity: 0, y: 10, scale: 0.88 });
+      }
+      if (sparkEls && sparkEls.length > 0) {
+        gsap.set(sparkEls, { opacity: 0, scale: 0 });
       }
 
-      // 1. Rapid Text Phrases transitioning upwards
+      // =========================================================================
+      // 1. KINETIC WORDS STREAM (Rapid, overlapping, modern kinetic typography)
+      // =========================================================================
       if (wordEls && wordEls.length > 0) {
         wordEls.forEach((el, index) => {
           const isLast = index === wordEls.length - 1;
+          const enterDuration = isLast ? 0.22 : 0.15;
+          const holdDuration = isLast ? 0.24 : 0.12;
+          const exitDuration = isLast ? 0.18 : 0.12;
+
           tl.fromTo(
             el,
-            { y: 25, opacity: 0, scale: 0.96, force3D: true },
+            { y: 32, opacity: 0, scale: 0.94 },
             {
               y: 0,
               opacity: 1,
               scale: 1,
-              duration: isLast ? 0.16 : 0.12,
-              ease: "power2.out",
-              force3D: true,
+              duration: enterDuration,
+              ease: "power3.out",
             }
           );
+
           tl.to(
             el,
             {
-              y: isLast ? -35 : -25,
+              y: isLast ? -36 : -28,
               opacity: 0,
-              scale: 0.97,
-              duration: isLast ? 0.14 : 0.1,
-              ease: "power2.in",
-              force3D: true,
+              scale: 0.96,
+              duration: exitDuration,
+              ease: isLast ? "power3.in" : "power2.in",
             },
-            isLast ? "+=0.12" : "+=0.08"
+            `+=${holdDuration}`
           );
         });
       }
 
-      // Hide words container once finished to free memory
+      // Hide words container once finished
       tl.set(wordsContainerRef.current, { display: "none" });
 
-      // 2. Dark Circle with White Anvil emerges smoothly in center
+      // =========================================================================
+      // 2. THE ANVIL CIRCLE EMERGES
+      // =========================================================================
       tl.to(
         stageRef.current,
         {
           opacity: 1,
           scale: 1,
-          duration: 0.28,
-          ease: "back.out(1.4)",
-          force3D: true,
+          duration: 0.32,
+          ease: "expo.out",
         },
-        "-=0.06"
+        "-=0.08"
       );
 
-      // 3. Green Hammer comes in smoothly from outside the pill
+      // =========================================================================
+      // 3. FLUID HAMMER ARC & ACCELERATED STRIKE (Natural physics momentum)
+      // =========================================================================
+      // Smooth entrance arc swinging up to ready position
       tl.to(
         hammerRef.current,
         {
           opacity: 1,
-          y: -35,
-          x: -4,
-          rotate: -32,
-          duration: 0.22,
+          y: isMobile ? -32 : -42,
+          x: isMobile ? -4 : -6,
+          rotate: -40,
+          duration: 0.18,
           ease: "power2.out",
-          force3D: true,
         },
-        "+=0.04"
+        "-=0.04"
       );
 
-      // 4. Hammer wind-up anticipation (eased, fluid, deliberate arc)
-      tl.to(hammerRef.current, {
-        y: -52,
-        x: -7,
-        rotate: -50,
-        duration: 0.2,
-        ease: "sine.inOut",
-        force3D: true,
-      });
+      // Fluid apex wind-up
+      tl.to(
+        hammerRef.current,
+        {
+          y: isMobile ? -44 : -58,
+          x: isMobile ? -7 : -10,
+          rotate: -58,
+          duration: 0.16,
+          ease: "sine.inOut",
+        }
+      );
 
-      // 5. STRIKE! Smoothly accelerated strike onto the anvil (natural easing)
+      // Sudden powerful strike down onto the anvil
       tl.to(hammerRef.current, {
         y: 0,
         x: 0,
         rotate: 0,
-        duration: 0.14,
-        ease: "power2.in",
-        force3D: true,
+        duration: 0.12,
+        ease: "power3.in",
       });
 
-      // Exactly at the impact moment:
+      // EXACT IMPACT POINT
       tl.addLabel("impact");
 
-      // 6. Impact moment:
-      // - Tiny crisp lime & white sparks burst
-      const sparkEls = sparksRef.current?.querySelectorAll(".splash-spark");
+      // =========================================================================
+      // 4. VISCERAL ANVIL IMPACT & DAMPED HARMONIC REBOUND
+      // =========================================================================
+      // Anvil micro-recoil (feeling the physical steel mass)
+      tl.to(
+        anvilWrapRef.current,
+        {
+          keyframes: [
+            { y: 2.5, duration: 0.04, ease: "power2.out" },
+            { y: -1.2, duration: 0.05, ease: "sine.inOut" },
+            { y: 0, duration: 0.06, ease: "sine.out" },
+          ],
+        },
+        "impact"
+      );
+
+      // Pill shockwave micro-pulse
+      tl.to(
+        pillRef.current,
+        {
+          keyframes: [
+            { scale: 1.04, duration: 0.06, ease: "power2.out" },
+            { scale: 1.0, duration: 0.22, ease: "elastic.out(1, 0.45)" },
+          ],
+        },
+        "impact"
+      );
+
+      // Hammer physics-accurate elastic bounce
+      tl.to(
+        hammerRef.current,
+        {
+          keyframes: [
+            { y: -8, x: -1.5, rotate: -9, duration: 0.06, ease: "power2.out" },
+            { y: -1.5, x: -0.2, rotate: -1.5, duration: 0.06, ease: "power1.in" },
+            { y: -3, x: -0.5, rotate: -3.5, duration: 0.05, ease: "power1.out" },
+            { y: 0, x: 0, rotate: 0, duration: 0.09, ease: "sine.out" },
+          ],
+        },
+        "impact"
+      );
+
+      // =========================================================================
+      // 5. LUMINOUS ARC SPARKS BURST
+      // =========================================================================
       if (sparkEls && sparkEls.length > 0) {
         tl.set(sparkEls, { opacity: 1, scale: 1 }, "impact");
+        const sparkMultiplier = isMobile ? 0.75 : 1.25;
         sparkEls.forEach((spark) => {
           const el = spark as HTMLElement;
           const targetX = parseFloat(el.dataset.x || "0");
           const targetY = parseFloat(el.dataset.y || "0");
+          const arcUpY = (targetY * 1.5 - 12) * (isMobile ? 0.8 : 1);
+
           tl.to(
             el,
             {
-              x: targetX,
-              y: targetY,
-              scale: 0,
-              opacity: 0,
-              duration: 0.28,
-              ease: "power3.out",
-              force3D: true,
+              x: targetX * sparkMultiplier,
+              keyframes: [
+                { y: arcUpY, duration: 0.11, ease: "sine.out" },
+                { y: (targetY * 1.1 + 8) * (isMobile ? 0.8 : 1), scale: 0.2, opacity: 0, duration: 0.22, ease: "power2.in" },
+              ],
             },
             "impact"
           );
         });
       }
 
-      // - Hammer soft rebound and steady settle
-      tl.to(
-        hammerRef.current,
-        {
-          y: -5,
-          x: -1,
-          rotate: -6,
-          duration: 0.08,
-          ease: "power1.out",
-          force3D: true,
-        },
-        "impact"
-      );
-      tl.to(hammerRef.current, {
-        y: 0,
-        x: 0,
-        rotate: 0,
-        duration: 0.12,
-        ease: "sine.inOut",
-        force3D: true,
-      });
-
-      // 7. Pill expands smoothly on impact as letters appear
+      // =========================================================================
+      // 6. PILL UNROLLS & LETTERS TRAVERSING WAVE (Precision hydraulic reveal)
+      // =========================================================================
       tl.to(
         pillRef.current,
         {
           width: targetPillWidth,
-          duration: 0.6,
-          ease: "power3.out",
-          force3D: true,
+          duration: 0.52,
+          ease: "expo.out",
         },
-        "impact"
+        "impact+=0.02"
       );
 
       tl.to(
@@ -259,45 +299,65 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
         {
           width: targetTextWidth,
           opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          force3D: true,
+          duration: 0.52,
+          ease: "expo.out",
         },
-        "impact"
+        "impact+=0.02"
       );
 
-      // 8. Traversing wave across letters appearing on strike!
       if (letterEls && letterEls.length > 0) {
         tl.to(
           letterEls,
           {
-            keyframes: [
-              { opacity: 1, y: -5, duration: 0.13, ease: "sine.out" },
-              { y: 0, duration: 0.13, ease: "sine.inOut" },
-            ],
-            stagger: 0.024,
-            force3D: true,
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.28,
+            ease: "back.out(2.2)",
+            stagger: 0.018,
           },
-          "impact+=0.03"
+          "impact+=0.04"
         );
       }
 
-      // 9. Savor the brand lockup (calm, confident pause)
-      tl.to({}, { duration: 0.48 });
+      // =========================================================================
+      // 7. SAVOR THE BRAND LOCKUP & SEAMLESS DISSOLVE INTO HOMEPAGE
+      // =========================================================================
+      // Confident, crisp pause
+      tl.to({}, { duration: 0.38 });
 
-      // 10. Transition out: Smooth quick fade directly into homepage
-      tl.to(containerRef.current, {
-        opacity: 0,
-        duration: 0.35,
-        ease: "power2.inOut",
-        force3D: true,
-      });
+      // Dismiss overlay with smooth GPU scale-out fade
+      tl.to(
+        pillRef.current,
+        {
+          scale: 1.03,
+          duration: 0.28,
+          ease: "power2.inOut",
+        },
+        "exit"
+      );
+
+      tl.to(
+        containerRef.current,
+        {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+          onStart: () => {
+            // Immediately pass pointer events to the underlying page
+            if (containerRef.current) {
+              containerRef.current.style.pointerEvents = "none";
+            }
+          },
+        },
+        "exit"
+      );
     }, containerRef);
 
     let canSkip = false;
     const skipTimer = setTimeout(() => {
       canSkip = true;
-    }, 200);
+    }, 150);
 
     const handleSkip = () => {
       if (!canSkip) return;
@@ -329,31 +389,38 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
+        right: 0,
+        bottom: 0,
+        width: "100%",
+        height: "100dvh",
+        minHeight: "-webkit-fill-available",
         backgroundColor: "#FFFFFF",
         zIndex: 999999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
         overflow: "hidden",
         pointerEvents: "all",
         contain: "paint layout",
         willChange: "opacity",
       }}
     >
-      {/* 1. Rapid Words Ticker - Cycling through brand colors */}
+      {/* 1. Kinetic Words Ticker - Guaranteed dead-center on mobile & desktop */}
       <div
         ref={wordsContainerRef}
         style={{
           position: "absolute",
+          top: "50%",
+          left: 0,
+          right: 0,
+          transform: "translateY(-50%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
           maxWidth: "600px",
-          height: "100px",
+          height: "120px",
+          margin: "0 auto",
           overflow: "hidden",
           zIndex: 5,
           pointerEvents: "none",
@@ -366,8 +433,12 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
             className="splash-word"
             style={{
               position: "absolute",
+              left: 0,
+              right: 0,
+              width: "100%",
+              textAlign: "center",
               fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontSize: "clamp(2.4rem, 5.5vw, 4rem)",
+              fontSize: "clamp(2rem, 5.5vw, 3.8rem)",
               fontWeight: 600,
               color: item.color,
               letterSpacing: "-0.025em",
@@ -375,7 +446,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
               opacity: 0,
               willChange: "transform, opacity",
               transform: "translateZ(0)",
-              textShadow: item.color === "#CBFB45" ? "0 1px 2px rgba(23, 23, 23, 0.08)" : "none",
+              textShadow: "none",
             }}
           >
             {item.text}
@@ -383,7 +454,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
         ))}
       </div>
 
-      {/* 2. Brand Circle -> Pill Stage: Starts hidden (opacity: 0) to prevent initial render flash */}
+      {/* 2. Brand Circle -> Pill Stage */}
       <div
         ref={stageRef}
         style={{
@@ -394,11 +465,11 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
           zIndex: 10,
           overflow: "visible",
           opacity: 0,
-          transform: "scale(0.95) translateZ(0)",
+          transform: "scale(0.92) translateZ(0)",
           willChange: "transform, opacity",
         }}
       >
-        {/* The Brand Pill: Starts as an 82px circle, expands smoothly on strike */}
+        {/* The Brand Pill */}
         <div
           ref={pillRef}
           style={{
@@ -407,18 +478,20 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
             alignItems: "center",
             justifyContent: "flex-start",
             backgroundColor: "#171717",
-            width: "82px",
-            height: "82px",
+            width: "var(--splash-circle, 82px)",
+            height: "var(--splash-circle, 82px)",
+            maxWidth: "calc(100vw - 32px)",
             borderRadius: "100rem",
             boxSizing: "border-box",
             whiteSpace: "nowrap",
             overflow: "visible",
             cursor: "default",
-            willChange: "width",
+            willChange: "width, transform",
             transform: "translateZ(0)",
+            boxShadow: "0 12px 32px rgba(0, 0, 0, 0.16)",
           }}
         >
-          {/* Anvil Anchor: 82px x 82px, dead-centers the ANVIL on the circle/pill */}
+          {/* Anvil Anchor */}
           <div
             ref={anvilWrapRef}
             style={{
@@ -427,14 +500,16 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
               alignItems: "center",
               justifyContent: "center",
               flexShrink: 0,
-              width: "82px",
-              height: "82px",
+              width: "var(--splash-circle, 82px)",
+              height: "var(--splash-circle, 82px)",
               overflow: "visible",
               transform: "translateZ(0)",
+              willChange: "transform",
             }}
           >
-            {/* White Anvil Icon centered dead in the middle of the 82px circle */}
+            {/* White Anvil Icon */}
             <svg
+              className="splash-anvil-svg"
               width="44"
               height="44"
               viewBox="0 0 24 24"
@@ -452,22 +527,23 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
               <path d="M5 20a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3 1 1 0 0 1-1 1H6a1 1 0 0 1-1-1" />
             </svg>
 
-            {/* Green Hammer (#CBFB45): starts hidden outside the pill */}
+            {/* Green Hammer (#CBFB45) */}
             <div
               ref={hammerRef}
               style={{
                 position: "absolute",
-                top: "3.5px",
-                left: "14px",
+                top: "var(--splash-hammer-top, 3.5px)",
+                left: "var(--splash-hammer-left, 14px)",
                 zIndex: 25,
                 pointerEvents: "none",
                 transformOrigin: "4px 12px",
                 opacity: 0,
-                transform: "translate(-8px, -70px) rotate(-45deg) translateZ(0)",
+                transform: "translate(-12px, -64px) rotate(-54deg) translateZ(0)",
                 willChange: "transform, opacity",
               }}
             >
               <svg
+                className="splash-hammer-svg"
                 width="44"
                 height="35"
                 viewBox="0 0 50 40"
@@ -480,24 +556,26 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
               </svg>
             </div>
 
-            {/* Impact Sparks */}
+            {/* Impact Sparks with Radial Bloom */}
             <div
               ref={sparksRef}
               style={{
                 position: "absolute",
-                top: "26px",
-                left: "46px",
+                top: "var(--splash-spark-top, 26px)",
+                left: "var(--splash-spark-left, 46px)",
                 zIndex: 30,
                 pointerEvents: "none",
               }}
             >
               {[
-                { x: -22, y: -16, color: "var(--green, #CBFB45)" },
-                { x: 22, y: -18, color: "var(--green, #CBFB45)" },
-                { x: -28, y: -4, color: "#FFFFFF" },
-                { x: 28, y: -6, color: "#FFFFFF" },
-                { x: -14, y: -24, color: "var(--green, #CBFB45)" },
-                { x: 14, y: -24, color: "var(--green, #CBFB45)" },
+                { x: -26, y: -20, color: "var(--green, #CBFB45)", size: 5 },
+                { x: 26, y: -22, color: "var(--green, #CBFB45)", size: 4.5 },
+                { x: -32, y: -6, color: "#FFFFFF", size: 3.5 },
+                { x: 32, y: -8, color: "#FFFFFF", size: 3.5 },
+                { x: -16, y: -28, color: "var(--green, #CBFB45)", size: 4 },
+                { x: 16, y: -28, color: "var(--green, #CBFB45)", size: 4 },
+                { x: -6, y: -34, color: "#FFFFFF", size: 2.5 },
+                { x: 8, y: -32, color: "var(--green, #CBFB45)", size: 3 },
               ].map((s, idx) => (
                 <div
                   key={idx}
@@ -506,12 +584,13 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
                   data-y={s.y}
                   style={{
                     position: "absolute",
-                    width: "4.5px",
-                    height: "4.5px",
+                    width: `${s.size}px`,
+                    height: `${s.size}px`,
                     borderRadius: "50%",
                     backgroundColor: s.color,
+                    boxShadow: s.color === "var(--green, #CBFB45)" ? "0 0 8px #CBFB45" : "0 0 6px rgba(255,255,255,0.8)",
                     opacity: 0,
-                    transform: "translate(-50%, -50%)",
+                    transform: "translate(-50%, -50%) translateZ(0)",
                     willChange: "transform, opacity",
                   }}
                 />
@@ -519,7 +598,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
             </div>
           </div>
 
-          {/* Unveiled Brand Logo Text: starts with width: 0 and opacity: 0 */}
+          {/* Unveiled Brand Logo Text */}
           <div
             ref={textWrapRef}
             style={{
@@ -539,11 +618,11 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
               style={{
                 fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                 fontWeight: 600,
-                fontSize: "clamp(1.7rem, 3.4vw, 2.15rem)",
+                fontSize: "var(--splash-font-size, clamp(1.7rem, 3.4vw, 2.15rem))",
                 lineHeight: 1.4,
                 letterSpacing: "-0.025em",
                 paddingLeft: "4px",
-                paddingRight: "32px",
+                paddingRight: "var(--splash-padding-right, 32px)",
                 boxSizing: "border-box",
                 display: "inline-flex",
                 alignItems: "center",
@@ -559,7 +638,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
                     style={{
                       display: "inline-block",
                       opacity: 0,
-                      transform: "translateY(6px) translateZ(0)",
+                      transform: "translateY(10px) translateZ(0)",
                       willChange: "transform, opacity",
                     }}
                   >
@@ -573,7 +652,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
                   style={{
                     display: "inline-block",
                     opacity: 0,
-                    transform: "translateY(6px) translateZ(0)",
+                    transform: "translateY(10px) translateZ(0)",
                     willChange: "transform, opacity",
                   }}
                 >
@@ -586,7 +665,7 @@ export default function SplashScreen({ forcePlay = false, onComplete }: SplashSc
                     style={{
                       display: "inline-block",
                       opacity: 0,
-                      transform: "translateY(6px) translateZ(0)",
+                      transform: "translateY(10px) translateZ(0)",
                       willChange: "transform, opacity",
                     }}
                   >

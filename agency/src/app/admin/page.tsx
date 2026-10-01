@@ -88,22 +88,6 @@ function PhotoIcon() {
   );
 }
 
-function SunIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/>
-      <line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/>
-      <line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-  );
-}
-
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>("case-studies");
   const [items, setItems] = useState<ContentItem[]>([]);
@@ -113,6 +97,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Raw JSON toggle & state
@@ -424,6 +409,96 @@ export default function AdminPage() {
     }
   };
 
+  const moveTeamMember = (index: number, direction: "up" | "down") => {
+    const currentList = Array.isArray(editForm) ? [...editForm] : [];
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= currentList.length) return;
+    const temp = currentList[index];
+    currentList[index] = currentList[targetIndex];
+    currentList[targetIndex] = temp;
+    updateEditForm(currentList);
+  };
+
+  const addTeamMember = () => {
+    const currentList = Array.isArray(editForm) ? [...editForm] : [];
+    const newMember = {
+      id: `member-${Date.now().toString().slice(-4)}`,
+      name: "New Member",
+      role: "Team Role",
+      bio: "Short bio describing their expertise and contributions.",
+      image: "/images/avatar.svg",
+      socials: {
+        linkedin: "",
+        twitter: "",
+      },
+    };
+    updateEditForm([...currentList, newMember]);
+  };
+
+  const removeTeamMember = (index: number) => {
+    const currentList = Array.isArray(editForm) ? [...editForm] : [];
+    currentList.splice(index, 1);
+    updateEditForm(currentList);
+  };
+
+  const updateTeamMemberField = (index: number, field: string, value: string) => {
+    const currentList = Array.isArray(editForm) ? [...editForm] : [];
+    if (!currentList[index]) return;
+    if (field.startsWith("socials.")) {
+      const socialKey = field.split(".")[1];
+      currentList[index] = {
+        ...currentList[index],
+        socials: {
+          ...(currentList[index].socials || {}),
+          [socialKey]: value,
+        },
+      };
+    } else {
+      currentList[index] = {
+        ...currentList[index],
+        [field]: value,
+      };
+    }
+    updateEditForm(currentList);
+  };
+
+  const handleTeamAvatarUpload = async (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingIndex(index);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("section", "team");
+    const currentMember = Array.isArray(editForm) ? editForm[index] : null;
+    if (currentMember?.id) {
+      formData.append("slug", currentMember.id);
+    }
+
+    try {
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Upload failed");
+      }
+
+      const uploadedUrl = result.url || result.path;
+      if (!uploadedUrl) throw new Error("Upload did not return an image URL");
+
+      showToast(`Uploaded avatar for ${currentMember?.name || `Member #${index + 1}`}`);
+      updateTeamMemberField(index, "image", uploadedUrl);
+    } catch (err) {
+      showToast((err as Error).message, "error");
+    } finally {
+      setUploadingIndex(null);
+      if (e.target) e.target.value = "";
+    }
+  };
+
   const handleSave = async () => {
     if (!editForm || !selectedSlug) return;
 
@@ -601,106 +676,51 @@ export default function AdminPage() {
   return (
     <div style={{
       display: "flex",
-      flexDirection: "column",
       height: "100vh",
+      width: "100vw",
+      overflow: "hidden",
       backgroundColor: "var(--light-grey, #f8f8f8)",
       color: "var(--black, #171717)",
       fontFamily: "var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
     }}>
-      {/* Top Header */}
-      <header style={{
+      {/* Sidebar Tabs */}
+      <aside style={{
+        width: "250px",
         backgroundColor: "#ffffff",
-        borderBottom: "1px solid #f0f0f0",
-        padding: "0 2rem",
-        height: "68px",
+        borderRight: "1px solid #f0f0f0",
+        padding: "1.5rem 1rem",
         display: "flex",
-        alignItems: "center",
+        flexDirection: "column",
         justifyContent: "space-between",
-        flexShrink: 0
+        flexShrink: 0,
+        height: "100vh"
       }}>
-        {/* Left branding */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Logo variant="admin" />
-
-          <div style={{
-            backgroundColor: "var(--green, #cbfb45)",
-            color: "var(--black, #171717)",
-            fontSize: "0.7rem",
-            fontWeight: 800,
-            letterSpacing: "0.04em",
-            padding: "0.3rem 0.75rem",
-            borderRadius: "100rem",
-          }}>
-            LOCAL DEV ONLY
-          </div>
-
-          <span style={{ color: "#9ca3af", fontSize: "0.85rem", fontWeight: 400, marginLeft: "0.35rem" }}>
-            File-Based Content &amp; Media
-          </span>
-        </div>
-
-        {/* Right controls */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
-          {/* Theme icon indicator */}
-          <div style={{
-            width: "36px",
-            height: "36px",
-            borderRadius: "50%",
-            border: "1px solid #e5e7eb",
-            backgroundColor: "#ffffff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#9ca3af"
-          }}>
-            <SunIcon />
-          </div>
-
-          {/* Hairline vertical divider */}
-          <div style={{ width: "1px", height: "24px", backgroundColor: "#e5e7eb" }} />
-
-          {/* Admin User */}
+        <div style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
+          {/* Brand header relocated into top of sidebar */}
           <div style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.6rem",
-            cursor: "pointer"
+            justifyContent: "space-between",
+            padding: "0.25rem 0.5rem 1.25rem 0.5rem",
+            borderBottom: "1px solid #f0f0f0",
+            marginBottom: "1rem"
           }}>
+            <Logo variant="admin" />
             <div style={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "50%",
-              backgroundColor: "#171717",
-              color: "#ffffff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: 700,
-              fontSize: "0.8rem"
+              backgroundColor: "var(--green, #cbfb45)",
+              color: "var(--black, #171717)",
+              fontSize: "0.65rem",
+              fontWeight: 800,
+              letterSpacing: "0.04em",
+              padding: "0.2rem 0.55rem",
+              borderRadius: "100rem",
             }}>
-              S
+              LOCAL DEV
             </div>
-            <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "#171717", display: "flex", alignItems: "center", gap: "0.25rem" }}>
-              Admin ▾
-            </span>
           </div>
-        </div>
-      </header>
 
-      {/* Main Layout Body */}
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-        {/* Sidebar Tabs */}
-        <aside style={{
-          width: "240px",
-          backgroundColor: "#ffffff",
-          borderRight: "1px solid #f0f0f0",
-          padding: "1.75rem 1rem",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          flexShrink: 0
-        }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+          {/* Navigation Tab Links */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", overflowY: "auto" }}>
             {navTabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -734,12 +754,20 @@ export default function AdminPage() {
               );
             })}
           </div>
+        </div>
 
-          {/* Monogram Avatar at bottom */}
-          <div style={{ padding: "0.5rem 0.5rem 0 0.5rem" }}>
+        {/* Admin footer at bottom of sidebar */}
+        <div style={{
+          padding: "0.75rem 0.5rem 0 0.5rem",
+          borderTop: "1px solid #f0f0f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
             <div style={{
-              width: "36px",
-              height: "36px",
+              width: "32px",
+              height: "32px",
               borderRadius: "50%",
               backgroundColor: "#171717",
               color: "#ffffff",
@@ -747,12 +775,17 @@ export default function AdminPage() {
               alignItems: "center",
               justifyContent: "center",
               fontWeight: 700,
-              fontSize: "0.85rem"
+              fontSize: "0.8rem"
             }}>
-              N
+              S
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "0.825rem", fontWeight: 600, color: "#171717" }}>Admin</span>
+              <span style={{ fontSize: "0.7rem", color: "#9ca3af" }}>File-Based CMS</span>
             </div>
           </div>
-        </aside>
+        </div>
+      </aside>
 
         {/* Sub-list Panel (for Case Studies, Blog, Services) */}
         {activeTab !== "featured-work" && activeTab !== "headers" && activeTab !== "site-config" && activeTab !== "team" && activeTab !== "testimonials" && activeTab !== "upload" && (
@@ -860,7 +893,7 @@ export default function AdminPage() {
         <main style={{
           flex: 1,
           overflowY: "auto",
-          padding: activeTab !== "featured-work" && activeTab !== "headers" && activeTab !== "site-config" && activeTab !== "team" && activeTab !== "upload"
+          padding: activeTab === "case-studies" || activeTab === "blog" || activeTab === "services"
             ? "2.25rem 3rem 2.5rem 1.25rem"
             : "2.25rem 3rem 2.5rem 3rem",
           backgroundColor: "var(--light-grey, #f8f8f8)"
@@ -2238,20 +2271,294 @@ export default function AdminPage() {
                     )}
 
                     {activeTab === "team" && (
-                      <div>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 500, color: "#171717", marginBottom: "0.45rem" }}>Team Members JSON</label>
-                        <textarea
-                          rows={16}
-                          value={JSON.stringify(editForm, null, 2)}
-                          onChange={(e) => {
-                            try {
-                              updateEditForm(JSON.parse(e.target.value));
-                            } catch {
-                              // Allow editing
-                            }
-                          }}
-                          style={{ width: "100%", padding: "1.25rem", backgroundColor: "#fcfcfc", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#171717", fontFamily: "monospace", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
-                        />
+                      <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+                        {/* Section Header */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
+                          <div>
+                            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", margin: 0 }}>
+                              Team Members ({Array.isArray(editForm) ? editForm.length : 0})
+                            </h3>
+                            <p style={{ fontSize: "0.85rem", color: "#6b7280", margin: "0.25rem 0 0 0" }}>
+                              Manage profiles, roles, headshots/avatars, bios, and social links displayed across the site.
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={addTeamMember}
+                            style={{
+                              backgroundColor: "var(--green, #cbfb45)",
+                              color: "var(--black, #171717)",
+                              border: "none",
+                              borderRadius: "100rem",
+                              padding: "0.55rem 1.25rem",
+                              fontSize: "0.85rem",
+                              fontWeight: 700,
+                              cursor: "pointer",
+                            }}
+                          >
+                            + Add Team Member
+                          </button>
+                        </div>
+
+                        {/* Team Member Cards */}
+                        {Array.isArray(editForm) && editForm.map((member: { id: string; name: string; role: string; bio: string; image: string; socials?: { linkedin?: string; twitter?: string } }, index: number) => {
+                          const isCurrentUploading = uploadingIndex === index;
+                          return (
+                            <div
+                              key={member.id || index}
+                              style={{
+                                backgroundColor: "#fafafa",
+                                border: "1px solid #e5e7eb",
+                                borderRadius: "20px",
+                                padding: "1.75rem",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "1.25rem",
+                              }}
+                            >
+                              {/* Member Card Header */}
+                              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
+                                  <div style={{
+                                    width: "44px",
+                                    height: "44px",
+                                    borderRadius: "50%",
+                                    overflow: "hidden",
+                                    position: "relative",
+                                    backgroundColor: "#e5e7eb",
+                                    border: "2px solid #ffffff",
+                                    boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
+                                    flexShrink: 0
+                                  }}>
+                                    {member.image ? (
+                                      <Image
+                                        src={member.image}
+                                        alt={member.name || "Member avatar"}
+                                        fill
+                                        sizes="44px"
+                                        style={{ objectFit: "cover" }}
+                                      />
+                                    ) : (
+                                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#6b7280" }}>
+                                        {member.name ? member.name.charAt(0).toUpperCase() : "#"}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div>
+                                    <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#111827" }}>
+                                      {member.name || `Member #${index + 1}`}
+                                      <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "#9ca3af", marginLeft: "0.5rem" }}>
+                                        #{index + 1}
+                                      </span>
+                                    </div>
+                                    <div style={{ fontSize: "0.8rem", color: "#6b7280" }}>
+                                      {member.role || "No role specified"}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+                                  <button
+                                    type="button"
+                                    onClick={() => moveTeamMember(index, "up")}
+                                    disabled={index === 0}
+                                    title="Move up"
+                                    style={{
+                                      backgroundColor: index === 0 ? "#f3f4f6" : "#ffffff",
+                                      color: index === 0 ? "#9ca3af" : "#171717",
+                                      border: "1px solid #e5e7eb",
+                                      padding: "0.35rem 0.65rem",
+                                      borderRadius: "8px",
+                                      cursor: index === 0 ? "default" : "pointer",
+                                      fontSize: "0.85rem",
+                                    }}
+                                  >
+                                    ↑
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => moveTeamMember(index, "down")}
+                                    disabled={index === editForm.length - 1}
+                                    title="Move down"
+                                    style={{
+                                      backgroundColor: index === editForm.length - 1 ? "#f3f4f6" : "#ffffff",
+                                      color: index === editForm.length - 1 ? "#9ca3af" : "#171717",
+                                      border: "1px solid #e5e7eb",
+                                      padding: "0.35rem 0.65rem",
+                                      borderRadius: "8px",
+                                      cursor: index === editForm.length - 1 ? "default" : "pointer",
+                                      fontSize: "0.85rem",
+                                    }}
+                                  >
+                                    ↓
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => removeTeamMember(index)}
+                                    style={{
+                                      backgroundColor: "transparent",
+                                      color: "#ef4444",
+                                      border: "1px solid #fee2e2",
+                                      borderRadius: "100rem",
+                                      padding: "0.35rem 0.85rem",
+                                      fontSize: "0.75rem",
+                                      fontWeight: 600,
+                                      cursor: "pointer",
+                                      marginLeft: "0.25rem",
+                                    }}
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Identity Grid: Name, Role, ID */}
+                              <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.2fr 0.8fr", gap: "1rem" }}>
+                                <div>
+                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                    Full Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={member.name || ""}
+                                    onChange={(e) => updateTeamMemberField(index, "name", e.target.value)}
+                                    placeholder="e.g. Saqib Masoodi"
+                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                                  />
+                                </div>
+                                <div>
+                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                    Role / Title
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={member.role || ""}
+                                    onChange={(e) => updateTeamMemberField(index, "role", e.target.value)}
+                                    placeholder="e.g. Design Lead"
+                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
+                                  />
+                                </div>
+                                <div>
+                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                    Identifier (Slug ID)
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={member.id || ""}
+                                    onChange={(e) => updateTeamMemberField(index, "id", e.target.value)}
+                                    placeholder="e.g. saqib"
+                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Avatar & Image Path */}
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  Avatar / Headshot Image
+                                </label>
+                                <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+                                  <input
+                                    type="text"
+                                    value={member.image || ""}
+                                    onChange={(e) => updateTeamMemberField(index, "image", e.target.value)}
+                                    placeholder="/images/team/name.webp or /images/avatar.svg"
+                                    style={{ flex: 1, padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
+                                  />
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    id={`team-avatar-${index}`}
+                                    onChange={(e) => handleTeamAvatarUpload(index, e)}
+                                    style={{ display: "none" }}
+                                  />
+                                  <label
+                                    htmlFor={`team-avatar-${index}`}
+                                    style={{
+                                      padding: "0.75rem 1.25rem",
+                                      backgroundColor: "var(--black, #171717)",
+                                      color: "var(--white, #ffffff)",
+                                      borderRadius: "100rem",
+                                      cursor: "pointer",
+                                      fontSize: "0.8rem",
+                                      fontWeight: 600,
+                                      whiteSpace: "nowrap",
+                                      display: "inline-flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    {isCurrentUploading ? "Uploading..." : "Upload Avatar"}
+                                  </label>
+                                </div>
+                              </div>
+
+                              {/* Bio */}
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  Biography / Expertise
+                                </label>
+                                <textarea
+                                  rows={3}
+                                  value={member.bio || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "bio", e.target.value)}
+                                  placeholder="Write a concise overview of their focus areas, skills, and background..."
+                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", lineHeight: 1.5, boxSizing: "border-box", outline: "none" }}
+                                />
+                              </div>
+
+                              {/* Social Links */}
+                              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                                <div>
+                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                    LinkedIn Profile URL
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={member.socials?.linkedin || ""}
+                                    onChange={(e) => updateTeamMemberField(index, "socials.linkedin", e.target.value)}
+                                    placeholder="https://www.linkedin.com/in/username"
+                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
+                                  />
+                                </div>
+                                <div>
+                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                    X / Twitter Profile URL
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value={member.socials?.twitter || ""}
+                                    onChange={(e) => updateTeamMemberField(index, "socials.twitter", e.target.value)}
+                                    placeholder="https://x.com/username"
+                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+
+                        {(!Array.isArray(editForm) || editForm.length === 0) && (
+                          <div style={{ padding: "3rem", textAlign: "center", backgroundColor: "#ffffff", borderRadius: "20px", border: "1px dashed #d1d5db", color: "#6b7280" }}>
+                            <p style={{ margin: 0, fontWeight: 500 }}>No team members found.</p>
+                            <button
+                              type="button"
+                              onClick={addTeamMember}
+                              style={{
+                                marginTop: "1rem",
+                                backgroundColor: "var(--green, #cbfb45)",
+                                color: "var(--black, #171717)",
+                                border: "none",
+                                borderRadius: "100rem",
+                                padding: "0.55rem 1.25rem",
+                                fontSize: "0.85rem",
+                                fontWeight: 700,
+                                cursor: "pointer",
+                              }}
+                            >
+                              + Add First Team Member
+                            </button>
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -2524,7 +2831,6 @@ export default function AdminPage() {
             </div>
           )}
         </main>
-      </div>
 
       {/* Toast Notification */}
       {toast && (

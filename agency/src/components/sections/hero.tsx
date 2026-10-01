@@ -22,19 +22,19 @@ export default function Hero({ header }: HeroProps) {
             <div className="subpage-header-component">
               {/* Left: Content */}
               <div className="header-content">
-                <ScrollReveal>
+                <ScrollReveal priority>
                   <div className="tagline-pill">
                     <div>Welcome to Northforge Labs!</div>
                   </div>
                 </ScrollReveal>
                 <div className="margin-bottom margin-small">
-                  <ScrollReveal delay={0.1}>
+                  <ScrollReveal priority delay={0.06}>
                     <h1 className="heading-style-h1 weight-medium">
                       Connecting Your Brand to the World, One Click at a Time.
                     </h1>
                   </ScrollReveal>
                 </div>
-                <ScrollReveal delay={0.2}>
+                <ScrollReveal priority delay={0.12}>
                   <p className="text-size-medium">
                     We&apos;re not just a social media marketing agency—we&apos;re your
                     ticket to digital excellence and engagement growth. With a canvas as vast
@@ -43,7 +43,7 @@ export default function Hero({ header }: HeroProps) {
                   </p>
                 </ScrollReveal>
                 <div className="margin-top margin-medium">
-                  <ScrollReveal delay={0.3}>
+                  <ScrollReveal priority delay={0.18}>
                     <div className="button-group">
                       <Link href="/contact" className="button">
                         <div className="button-text-item">Get in touch</div>
@@ -57,7 +57,7 @@ export default function Hero({ header }: HeroProps) {
               </div>
 
               {/* Right: Crowd Canvas Card (Identical 4:3 card container to About page image) */}
-              <ScrollReveal delay={0.3}>
+              <ScrollReveal priority delay={0.18}>
                 <div className="subpage-header-image-wrapper hero-crowd-card">
                   <CrowdCanvas
                     src="/images/peeps/all-peeps.png"
@@ -69,7 +69,7 @@ export default function Hero({ header }: HeroProps) {
             </div>
 
             {/* Full-Width Hero Image Below */}
-            <ScrollReveal delay={0.4}>
+            <ScrollReveal priority delay={0.24}>
               <div className="header-image-wrapper hero-banner-bottom">
                 <Image
                   src={imageSrc}

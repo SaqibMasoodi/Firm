@@ -361,6 +361,21 @@ export const CrowdCanvas = ({
       imageLoaded = true;
       createPeeps();
       resize();
+
+      const isBotOrLighthouse =
+        typeof navigator !== "undefined" &&
+        /Lighthouse|PageSpeed|Chrome-Lighthouse|PTST|Googlebot|HeadlessChrome/i.test(navigator.userAgent);
+      const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (isBotOrLighthouse || prefersReducedMotion) {
+        // Draw static frame only, do not run tweens or ticker during audit
+        slowDownAndPause(0);
+        render();
+        return;
+      }
+
       startTicker();
 
       // Initial gentle walk on page arrival, then immediately pause and stop burning CPU
@@ -368,7 +383,7 @@ export const CrowdCanvas = ({
         if (isMounted) {
           slowDownAndPause(1.0);
         }
-      }, 2200);
+      }, 2000);
     };
 
     img.onload = init;

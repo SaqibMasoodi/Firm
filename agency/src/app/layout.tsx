@@ -1,13 +1,12 @@
 import Script from "next/script";
-﻿import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import "./globals.css";
 import { OrganizationSchema } from "@/components/seo/schemas";
-import SplashScreen from "@/components/ui/splash-screen";
 import ClientInteractiveTools from "@/components/ui/client-interactive-tools";
-
+import ClientSplashScreen from "@/components/ui/client-splash-screen";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -98,7 +97,7 @@ export default function RootLayout({
         />
       </head>
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <SplashScreen />
+        <ClientSplashScreen />
         <ClientInteractiveTools />
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
