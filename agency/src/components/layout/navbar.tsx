@@ -74,6 +74,7 @@ export default function Navbar() {
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
     setIsOpen(false);
+    setIsColorDropdownOpen(false);
   }
 
   // Close on Escape key & click outside
@@ -88,11 +89,13 @@ export default function Navbar() {
       }
     };
 
-    if (isOpen) {
+    if (isOpen || isColorDropdownOpen) {
       document.addEventListener("keydown", handleKeyDown);
       document.addEventListener("mousedown", handleClickOutside);
       // Lock body scroll on mobile when menu is open
-      document.body.style.overflow = "hidden";
+      if (window.matchMedia("(max-width: 991px)").matches) {
+        document.body.style.overflow = "hidden";
+      }
     } else {
       document.body.style.overflow = "";
     }
@@ -102,16 +105,19 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, isColorDropdownOpen]);
 
   if (pathname === "/the-foundry") return null;
 
   return (
     <>
-      {/* Dimmed backdrop when mobile menu is open */}
+      {/* Shared backdrop for either mobile dropdown. */}
       <div
-        className={`navbar-backdrop ${isOpen ? "is-open" : ""}`}
-        onClick={() => setIsOpen(false)}
+        className={`navbar-backdrop ${isOpen || isColorDropdownOpen ? "is-open" : ""}`}
+        onClick={() => {
+          setIsOpen(false);
+          setIsColorDropdownOpen(false);
+        }}
         aria-hidden="true"
       />
 
@@ -149,19 +155,16 @@ export default function Navbar() {
                 <button
                   type="button"
                   className={`navbar-accent-button ${isColorDropdownOpen ? "is-active" : ""}`}
-                  onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    setIsColorDropdownOpen(!isColorDropdownOpen);
+                  }}
                   title="Customize Accent Color"
                   aria-label="Customize Accent Color"
                   aria-expanded={isColorDropdownOpen}
                 >
                   <Palette size={20} strokeWidth={2} />
                 </button>
-                {isColorDropdownOpen && (
-                  <AccentColorDropdown
-                    isOpen={isColorDropdownOpen}
-                    onClose={() => setIsColorDropdownOpen(false)}
-                  />
-                )}
               </div>
 
               <div className="navbar-button-wrapper">
@@ -181,23 +184,23 @@ export default function Navbar() {
             <button
               type="button"
               className={`navbar-accent-button is-mobile-header ${isColorDropdownOpen ? "is-active" : ""}`}
-              onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+              onClick={() => {
+                setIsOpen(false);
+                setIsColorDropdownOpen(!isColorDropdownOpen);
+              }}
               title="Customize Accent Color"
               aria-label="Customize Accent Color"
               aria-expanded={isColorDropdownOpen}
             >
               <Palette size={20} strokeWidth={2} />
             </button>
-            {isColorDropdownOpen && (
-              <AccentColorDropdown
-                isOpen={isColorDropdownOpen}
-                onClose={() => setIsColorDropdownOpen(false)}
-              />
-            )}
 
             <button
               className="navbar-menu-button"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => {
+                setIsColorDropdownOpen(false);
+                setIsOpen(!isOpen);
+              }}
               type="button"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
@@ -206,6 +209,10 @@ export default function Navbar() {
               <AnimatedHamburger isOpen={isOpen} />
             </button>
           </div>
+          <AccentColorDropdown
+            isOpen={isColorDropdownOpen}
+            onClose={() => setIsColorDropdownOpen(false)}
+          />
         </div>
       </div>
       

@@ -1,20 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback, useSyncExternalStore } from "react";
-import { createPortal } from "react-dom";
 import { Pipette, ChevronsUpDown, X } from "lucide-react";
 
 export const DEFAULT_BRAND_COLOR = "#CBFB45";
-
-const emptySubscribe = () => () => {};
-
-function useMounted() {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
-}
 
 function useIsMobile() {
   return useSyncExternalStore(
@@ -117,7 +106,6 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const [hexInput, setHexInput] = useState(DEFAULT_BRAND_COLOR);
   const [colorFormat, setColorFormat] = useState<"Hex" | "RGB" | "HSL">("Hex");
 
-  const mounted = useMounted();
   const isMobile = useIsMobile();
 
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -301,8 +289,6 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
       document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
 
   const [r, g, b] = hsvToRgb(hue, saturation, value);
   const currentColorHex = rgbToHex(r, g, b);
@@ -666,73 +652,16 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
     </>
   );
 
-  // Mobile rendering via Portal
-  if (isMobile && mounted) {
-    return createPortal(
-      <div
-        className="navbar-accent-mobile-overlay"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Customize Accent Color"
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 9999999,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "16px",
-        }}
-      >
-        <div
-          className="navbar-accent-mobile-backdrop"
-          onClick={onClose}
-          aria-hidden="true"
-        />
-        <div
-          ref={dropdownRef}
-          role="region"
-          aria-label="Accent Color Picker"
-          className="navbar-accent-dropdown is-mobile-sheet"
-          style={{
-            position: "relative",
-            width: "100%",
-            maxWidth: "350px",
-            backgroundColor: "#FFFFFF",
-            borderRadius: "26px",
-            padding: "16px",
-            boxShadow: "0 24px 60px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.08)",
-            color: "#171717",
-            fontFamily: "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-            display: "flex",
-            flexDirection: "column",
-            gap: "13px",
-            zIndex: 2,
-            userSelect: "none",
-            WebkitUserSelect: "none",
-          }}
-        >
-          {pickerContent}
-        </div>
-      </div>,
-      document.body
-    );
-  }
-
-  // Desktop inline rendering
+  // Both layouts anchor to the navbar container.
   return (
     <div
       ref={dropdownRef}
       role="region"
       aria-label="Accent Color Picker Dropdown"
-      className="navbar-accent-dropdown"
+      className={`navbar-accent-dropdown ${isOpen ? "is-open" : ""}`}
+      aria-hidden={!isOpen}
+      inert={!isOpen}
       style={{
-        position: "absolute",
-        top: "calc(100% + 12px)",
-        right: 0,
-        width: "330px",
-        maxWidth: "calc(100vw - 32px)",
         backgroundColor: "#FFFFFF",
         borderRadius: "26px",
         padding: "16px",

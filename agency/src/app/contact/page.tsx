@@ -47,6 +47,7 @@ function LocationIcon() {
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const {
     register,
@@ -59,18 +60,20 @@ export default function ContactPage() {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
+    setSubmitError("");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (!res.ok) throw new Error("Submission failed");
       if (res.ok) {
         setIsSuccess(true);
         reset();
       }
     } catch {
-      // Handle error
+      setSubmitError("Your message could not be sent. Please try again or contact us by email.");
     } finally {
       setIsSubmitting(false);
     }
@@ -148,7 +151,7 @@ export default function ContactPage() {
                 <ScrollReveal delay={0.2}>
                   <div className="contact-form-block">
                     {isSuccess ? (
-                      <div style={{ textAlign: "center", padding: "3rem 1rem", color: "var(--black)" }}>
+                      <div className="contact-success" role="status">
                         <div className="tagline-pill" style={{ backgroundColor: "var(--black)", color: "var(--white)", marginBottom: "1rem" }}>
                           <div>Message Received!</div>
                         </div>
@@ -163,19 +166,29 @@ export default function ContactPage() {
                       <form
                         onSubmit={handleSubmit(onSubmit)}
                         className="contact-form"
+                        noValidate
+                        aria-busy={isSubmitting}
                       >
+                        <div className="contact-form-heading">
+                          <h2 className="heading-style-h5">Tell us about your project</h2>
+                          <p>Fields marked optional can be left blank.</p>
+                        </div>
                         <div className="form-field-2col">
                           <div className="form-field-wrapper">
                             <label htmlFor="name" className="form-field-label">Name</label>
                             <input
                               id="name"
+                              aria-required="true"
+                              aria-invalid={!!errors.name}
+                              aria-describedby={errors.name ? "name-error" : undefined}
                               type="text"
+                              autoComplete="name"
                               className="input-form"
                               placeholder="Enter your name"
                               {...register("name")}
                             />
                             {errors.name && (
-                              <span style={{ color: "#d32f2f", fontSize: "0.75rem" }}>
+                              <span id="name-error" className="contact-form-error" role="alert">
                                 {errors.name.message}
                               </span>
                             )}
@@ -184,13 +197,20 @@ export default function ContactPage() {
                             <label htmlFor="email" className="form-field-label">Email</label>
                             <input
                               id="email"
+                              aria-required="true"
+                              aria-invalid={!!errors.email}
+                              aria-describedby={errors.email ? "email-error" : undefined}
                               type="email"
+                              autoComplete="email"
+                              inputMode="email"
+                              autoCapitalize="none"
+                              spellCheck={false}
                               className="input-form"
                               placeholder="Enter your email"
                               {...register("email")}
                             />
                             {errors.email && (
-                              <span style={{ color: "#d32f2f", fontSize: "0.75rem" }}>
+                              <span id="email-error" className="contact-form-error" role="alert">
                                 {errors.email.message}
                               </span>
                             )}
@@ -199,17 +219,19 @@ export default function ContactPage() {
 
                         <div className="form-field-2col">
                           <div className="form-field-wrapper">
-                            <label htmlFor="phone" className="form-field-label">Phone</label>
+                            <label htmlFor="phone" className="form-field-label">Phone <span>(optional)</span></label>
                             <input
                               id="phone"
                               type="tel"
+                              autoComplete="tel"
+                              inputMode="tel"
                               className="input-form"
                               placeholder="Enter your phone number"
                               {...register("phone")}
                             />
                           </div>
                           <div className="form-field-wrapper">
-                            <label htmlFor="subject" className="form-field-label">Subject</label>
+                            <label htmlFor="subject" className="form-field-label">Subject <span>(optional)</span></label>
                             <input
                               id="subject"
                               type="text"
@@ -224,17 +246,23 @@ export default function ContactPage() {
                           <label htmlFor="message" className="form-field-label">Message</label>
                           <textarea
                             id="message"
+                            aria-required="true"
+                            aria-invalid={!!errors.message}
+                            aria-describedby={errors.message ? "message-error" : undefined}
                             className="input-form is-text-area"
                             placeholder="Type your message..."
                             {...register("message")}
                           />
                           {errors.message && (
-                            <span style={{ color: "#d32f2f", fontSize: "0.75rem" }}>
+                            <span id="message-error" className="contact-form-error" role="alert">
                               {errors.message.message}
                             </span>
                           )}
                         </div>
 
+                        {submitError && (
+                          <p className="contact-form-error" role="alert">{submitError}</p>
+                        )}
                         <div className="form-button-wrapper">
                           <button
                             type="submit"
@@ -242,7 +270,7 @@ export default function ContactPage() {
                             disabled={isSubmitting}
                             style={{ opacity: isSubmitting ? 0.7 : 1 }}
                           >
-                            {isSubmitting ? "Submitting..." : "Submit"}
+                            {isSubmitting ? "Sending..." : "Send message"}
                           </button>
                         </div>
                       </form>
