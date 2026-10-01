@@ -17,8 +17,8 @@ export default function NotFound() {
           <div
             style={{
               textAlign: "center",
-              paddingTop: "clamp(11rem, 22vh, 17rem)",
-              paddingBottom: "clamp(6rem, 14vh, 10rem)",
+              paddingTop: "clamp(6.5rem, 14vh, 14rem)",
+              paddingBottom: "clamp(3.5rem, 8vh, 7rem)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

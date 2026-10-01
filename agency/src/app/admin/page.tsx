@@ -17,7 +17,7 @@ interface ContentItem {
 function FolderIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
     </svg>
   );
 }
@@ -25,7 +25,7 @@ function FolderIcon() {
 function StarIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   );
 }
@@ -33,9 +33,9 @@ function StarIcon() {
 function ImageIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-      <circle cx="8.5" cy="8.5" r="1.5"/>
-      <polyline points="21 15 16 10 5 21"/>
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <polyline points="21 15 16 10 5 21" />
     </svg>
   );
 }
@@ -43,9 +43,9 @@ function ImageIcon() {
 function ChatBubbleIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      <line x1="8" y1="9" x2="16" y2="9"/>
-      <line x1="8" y1="13" x2="14" y2="13"/>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      <line x1="8" y1="9" x2="16" y2="9" />
+      <line x1="8" y1="13" x2="14" y2="13" />
     </svg>
   );
 }
@@ -53,7 +53,7 @@ function ChatBubbleIcon() {
 function BoltIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
     </svg>
   );
 }
@@ -61,10 +61,10 @@ function BoltIcon() {
 function UsersIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-      <circle cx="9" cy="7" r="4"/>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   );
 }
@@ -72,8 +72,8 @@ function UsersIcon() {
 function SettingsIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="3"/>
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
     </svg>
   );
 }
@@ -81,9 +81,9 @@ function SettingsIcon() {
 function PhotoIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-      <circle cx="8.5" cy="8.5" r="1.5"/>
-      <polyline points="21 15 16 10 5 21"/>
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <polyline points="21 15 16 10 5 21" />
     </svg>
   );
 }
@@ -91,14 +91,13 @@ function PhotoIcon() {
 function UserIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-      <circle cx="12" cy="7" r="4"/>
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
     </svg>
   );
 }
 
 function generateUniqueId(prefix: string): string {
-  // eslint-disable-next-line react-hooks/purity
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
@@ -328,9 +327,9 @@ export default function AdminPage() {
       case "team":
         return "Team Members";
       case "testimonials":
-        return "Client Testimonials";
+        return "Testimonials";
       case "site-config":
-        return "Site Configuration";
+        return "Site Settings";
       case "upload":
         return "Media Upload";
       default:
@@ -385,19 +384,15 @@ export default function AdminPage() {
   const handleInnerCreate = () => {
     if (activeTab === "team") {
       addTeamMember();
-      // Select last (newly added)
-      setTimeout(() => {
-        const len = Array.isArray(editForm) ? editForm.length : 0;
-        setSelectedTeamIndex(len);
-      }, 0);
     } else if (activeTab === "testimonials") {
       const currentList = Array.isArray(editForm?.testimonials)
         ? [...editForm.testimonials]
         : Array.isArray(editForm)
-        ? [...editForm]
-        : [];
+          ? [...editForm]
+          : [];
+      const newId = generateUniqueId("testimonial");
       const newItem = {
-        id: `testimonial-${Date.now().toString().slice(-4)}`,
+        id: newId,
         author: "New Client",
         role: "Founder / Executive",
         quote: "Working with this team transformed our brand and customer growth.",
@@ -407,13 +402,13 @@ export default function AdminPage() {
         ...editForm,
         testimonials: [...currentList, newItem],
       });
-      setTimeout(() => setSelectedTestimonialIndex(currentList.length), 0);
+      setSelectedTestimonialKey(newId);
+      setSelectedTestimonialIndex(currentList.length);
     } else {
       createNewItem();
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getInnerNavItems = (): { key: string; title: string; icon: React.ReactNode }[] => {
     switch (activeTab) {
       case "case-studies":
@@ -426,8 +421,7 @@ export default function AdminPage() {
         }));
       case "team":
         return (Array.isArray(editForm) ? editForm : []).map(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (member: any, idx: number) => ({
+          (member: { id?: string; name?: string }, idx: number) => ({
             key: member.id || `member-${idx}`,
             title: member.name || `Member #${idx + 1}`,
             icon: <UserIcon />,
@@ -437,14 +431,16 @@ export default function AdminPage() {
         const tList = Array.isArray(editForm?.testimonials)
           ? editForm.testimonials
           : Array.isArray(editForm)
-          ? editForm
-          : [];
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return tList.map((t: any, idx: number) => ({
-          key: t.id || `testimonial-${idx}`,
-          title: t.author || `Testimonial #${idx + 1}`,
-          icon: <StarIcon />,
-        }));
+            ? editForm
+            : [];
+        return [
+          { key: "hero-image", title: "Showcase Hero Image", icon: <ImageIcon /> },
+          ...tList.map((t: { id?: string; author?: string }, idx: number) => ({
+            key: t.id || `testimonial-${idx}`,
+            title: t.author || `Testimonial #${idx + 1}`,
+            icon: <StarIcon />,
+          })),
+        ];
       }
       case "headers":
         return [
@@ -465,10 +461,8 @@ export default function AdminPage() {
         return selectedSlug;
       case "team":
         return (Array.isArray(editForm) && editForm[selectedTeamIndex]?.id) || null;
-      case "testimonials": {
-        const tList = Array.isArray(editForm?.testimonials) ? editForm.testimonials : [];
-        return tList[selectedTestimonialIndex]?.id || null;
-      }
+      case "testimonials":
+        return selectedTestimonialKey;
       case "headers":
         return selectedHeaderKey;
       default:
@@ -488,9 +482,17 @@ export default function AdminPage() {
       case "team":
         setSelectedTeamIndex(index);
         break;
-      case "testimonials":
-        setSelectedTestimonialIndex(index);
+      case "testimonials": {
+        setSelectedTestimonialKey(key);
+        if (key === "hero-image") {
+          setSelectedTestimonialIndex(-1);
+        } else {
+          const tList = Array.isArray(editForm?.testimonials) ? editForm.testimonials : [];
+          const foundIdx = tList.findIndex((t: { id?: string }, i: number) => (t.id || `testimonial-${i}`) === key);
+          setSelectedTestimonialIndex(foundIdx !== -1 ? foundIdx : Math.max(0, index - 1));
+        }
         break;
+      }
       case "headers":
         setSelectedHeaderKey(key as "home" | "about" | "services");
         break;
@@ -544,17 +546,20 @@ export default function AdminPage() {
         const data = await res.json();
         updateEditForm(data);
         setSelectedSlug("team");
+        setSelectedTeamIndex(0);
       } else if (tab === "testimonials") {
         const res = await fetch("/api/admin/content?type=site&slug=testimonials");
         const data = await res.json();
         const normalized = Array.isArray(data)
           ? { image: "/images/testimonials/client-showcase.webp", testimonials: data }
           : {
-              image: data?.image || "/images/testimonials/client-showcase.webp",
-              testimonials: Array.isArray(data?.testimonials) ? data.testimonials : [],
-            };
+            image: data?.image || "/images/testimonials/client-showcase.webp",
+            testimonials: Array.isArray(data?.testimonials) ? data.testimonials : [],
+          };
         updateEditForm(normalized);
         setSelectedSlug("testimonials");
+        setSelectedTestimonialKey("hero-image");
+        setSelectedTestimonialIndex(-1);
       } else {
         const res = await fetch(`/api/admin/content?type=${tab}`);
         const data = await res.json();
@@ -581,7 +586,7 @@ export default function AdminPage() {
   }, [activeTab]);
 
   const createNewItem = () => {
-    const newSlug = `new-${activeTab.slice(0, -1)}-${Date.now().toString().slice(-4)}`;
+    const newSlug = generateUniqueId(`new-${activeTab.slice(0, -1)}`);
     let template = {};
     if (activeTab === "case-studies") {
       template = {
@@ -636,14 +641,14 @@ export default function AdminPage() {
         activeTab === "blog"
           ? "blog"
           : activeTab === "services"
-          ? "services"
-          : activeTab === "case-studies"
-          ? "case-studies"
-          : activeTab === "testimonials"
-          ? "testimonials"
-          : activeTab === "headers"
-          ? "headers"
-          : "general";
+            ? "services"
+            : activeTab === "case-studies"
+              ? "case-studies"
+              : activeTab === "testimonials"
+                ? "testimonials"
+                : activeTab === "headers"
+                  ? "headers"
+                  : "general";
 
       const formData = new FormData();
       formData.append("file", file);
@@ -696,7 +701,7 @@ export default function AdminPage() {
   const addTeamMember = () => {
     const currentList = Array.isArray(editForm) ? [...editForm] : [];
     const newMember = {
-      id: `member-${Date.now().toString().slice(-4)}`,
+      id: generateUniqueId("member"),
       name: "New Member",
       role: "Team Role",
       bio: "Short bio describing their expertise and contributions.",
@@ -707,12 +712,35 @@ export default function AdminPage() {
       },
     };
     updateEditForm([...currentList, newMember]);
+    setSelectedTeamIndex(currentList.length);
   };
 
   const removeTeamMember = (index: number) => {
     const currentList = Array.isArray(editForm) ? [...editForm] : [];
     currentList.splice(index, 1);
     updateEditForm(currentList);
+    setSelectedTeamIndex((prev) => Math.max(0, Math.min(prev, currentList.length - 1)));
+  };
+
+  const removeTestimonial = (index: number) => {
+    const currentList = Array.isArray(editForm?.testimonials)
+      ? [...editForm.testimonials]
+      : Array.isArray(editForm)
+        ? [...editForm]
+        : [];
+    currentList.splice(index, 1);
+    updateEditForm({
+      ...editForm,
+      testimonials: currentList,
+    });
+    if (currentList.length === 0) {
+      setSelectedTestimonialKey("hero-image");
+      setSelectedTestimonialIndex(-1);
+    } else {
+      const nextIndex = Math.max(0, Math.min(index, currentList.length - 1));
+      setSelectedTestimonialIndex(nextIndex);
+      setSelectedTestimonialKey(currentList[nextIndex].id || `testimonial-${nextIndex}`);
+    }
   };
 
   const updateTeamMemberField = (index: number, field: string, value: string) => {
@@ -1096,1696 +1124,1641 @@ export default function AdminPage() {
         </div>
       </aside>
 
-        {/* Uniform Inner Nav Pane (collapsible, matching sidebar design) */}
-        {hasInnerNav && (
-          <div style={{
-            width: isNavPaneCollapsed ? "0px" : "250px",
-            backgroundColor: "#ffffff",
-            borderRight: isNavPaneCollapsed ? "none" : "1px solid #e5e7eb",
-            display: "flex",
-            flexDirection: "column",
-            flexShrink: 0,
-            height: "100vh",
-            overflow: "hidden",
-            transition: "width 0.22s cubic-bezier(0.4, 0, 0.2, 1)",
-            boxSizing: "border-box"
-          }}>
-            <div style={{ width: "250px", display: "flex", flexDirection: "column", height: "100%" }}>
-              {/* Flush Inner Nav Header (68px) */}
-              <div style={{
-                height: "68px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "0 1.25rem",
-                borderBottom: "1px solid #e5e7eb",
-                boxSizing: "border-box",
-                flexShrink: 0
-              }}>
-                <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827" }}>
-                  {getInnerNavTitle()}
-                </span>
-                {canCreateInInnerNav && (
-                  <button
-                    type="button"
-                    onClick={handleInnerCreate}
-                    style={{
-                      backgroundColor: "var(--green, #cbfb45)",
-                      color: "var(--black, #171717)",
-                      border: "none",
-                      borderRadius: "100rem",
-                      padding: "0.3rem 0.85rem",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      cursor: "pointer"
-                    }}
-                  >
-                    + New
-                  </button>
-                )}
-              </div>
-
-              {/* Item List with Identical Button Design */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", padding: "1rem", overflowY: "auto", flex: 1 }}>
-                {getInnerNavItems().map((navItem, idx) => {
-                  const isSelected = navItem.key === getSelectedInnerKey();
-                  return (
-                    <button
-                      key={navItem.key}
-                      type="button"
-                      onClick={() => handleInnerNavSelect(navItem.key, idx)}
-                      style={{
-                        textAlign: "left",
-                        padding: "0.75rem 1.1rem",
-                        borderRadius: "14px",
-                        border: "none",
-                        backgroundColor: isSelected ? "var(--green, #cbfb45)" : "transparent",
-                        color: isSelected ? "var(--black, #171717)" : "#4b5563",
-                        fontWeight: isSelected ? 600 : 500,
-                        fontSize: "0.875rem",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.75rem",
-                        transition: "all 0.15s ease",
-                        width: "100%"
-                      }}
-                    >
-                      <span style={{ display: "flex", alignItems: "center", flexShrink: 0, color: isSelected ? "#171717" : "#4b5563" }}>
-                        {navItem.icon}
-                      </span>
-                      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                        {navItem.title}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Main Editor Canvas Workspace */}
-        <main style={{
-          flex: 1,
-          overflowY: "auto",
+      {/* Uniform Inner Nav Pane (collapsible, matching sidebar design) */}
+      {hasInnerNav && (
+        <div style={{
+          width: isNavPaneCollapsed ? "0px" : "250px",
+          backgroundColor: "#ffffff",
+          borderRight: isNavPaneCollapsed ? "none" : "1px solid #e5e7eb",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "var(--light-grey, #f8f8f8)",
-          position: "relative"
+          flexShrink: 0,
+          height: "100vh",
+          overflow: "hidden",
+          transition: "width 0.22s cubic-bezier(0.4, 0, 0.2, 1)",
+          boxSizing: "border-box"
         }}>
-          {/* Uniform Sticky Header Bar across ALL sections (68px flush) */}
-          <header style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 100,
-            height: "68px",
-            backgroundColor: "rgba(248, 248, 248, 0.94)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            borderBottom: "1px solid #e5e7eb",
-            padding: "0 2rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1.25rem",
-            flexShrink: 0,
-            boxSizing: "border-box"
-          }}>
-            {/* Section Name & Badges */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", minWidth: 0 }}>
-              <h1 style={{
-                fontSize: "1.2rem",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                color: "#111827",
-                margin: 0,
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis"
-              }}>
-                {getSectionTitle()}
-              </h1>
-              {activeTab === "featured-work" && (
-                <span style={{
-                  backgroundColor: featuredSlugs.length === 3 ? "var(--green, #cbfb45)" : "#fee2e2",
-                  color: featuredSlugs.length === 3 ? "var(--black, #171717)" : "#ef4444",
-                  fontSize: "0.72rem",
-                  fontWeight: 700,
-                  padding: "0.2rem 0.65rem",
-                  borderRadius: "100rem",
-                  whiteSpace: "nowrap"
-                }}>
-                  {featuredSlugs.length} / 3 Selected
-                </span>
+          <div style={{ width: "250px", display: "flex", flexDirection: "column", height: "100%" }}>
+            {/* Flush Inner Nav Header (68px) */}
+            <div style={{
+              height: "68px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 1.25rem",
+              borderBottom: "1px solid #e5e7eb",
+              boxSizing: "border-box",
+              flexShrink: 0
+            }}>
+              <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#111827" }}>
+                {getInnerNavTitle()}
+              </span>
+              {canCreateInInnerNav && (
+                <button
+                  type="button"
+                  onClick={handleInnerCreate}
+                  style={{
+                    backgroundColor: "var(--green, #cbfb45)",
+                    color: "var(--black, #171717)",
+                    border: "none",
+                    borderRadius: "100rem",
+                    padding: "0.3rem 0.85rem",
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    cursor: "pointer"
+                  }}
+                >
+                  + New
+                </button>
               )}
             </div>
 
-            {/* Controls: [ Form View | Raw JSON ] + [Delete] + [Save Changes] */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
-              {canToggleJson && (
-                <div style={{
-                  display: "inline-flex",
-                  backgroundColor: "#e5e7eb",
-                  padding: "3px",
-                  borderRadius: "100rem",
-                  gap: "2px"
-                }}>
+            {/* Item List with Identical Button Design */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", padding: "1rem", overflowY: "auto", flex: 1 }}>
+              {getInnerNavItems().map((navItem, idx) => {
+                const isSelected = navItem.key === getSelectedInnerKey();
+                return (
                   <button
+                    key={navItem.key}
                     type="button"
-                    onClick={() => toggleViewMode(false)}
+                    onClick={() => handleInnerNavSelect(navItem.key, idx)}
                     style={{
-                      padding: "0.4rem 1.15rem",
-                      borderRadius: "100rem",
+                      textAlign: "left",
+                      padding: "0.75rem 1.1rem",
+                      borderRadius: "14px",
                       border: "none",
-                      fontSize: "0.825rem",
-                      fontWeight: !isJsonMode ? 600 : 500,
-                      backgroundColor: !isJsonMode ? "#ffffff" : "transparent",
-                      color: !isJsonMode ? "#111827" : "#4b5563",
-                      boxShadow: !isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
+                      backgroundColor: isSelected ? "var(--green, #cbfb45)" : "transparent",
+                      color: isSelected ? "var(--black, #171717)" : "#4b5563",
+                      fontWeight: isSelected ? 600 : 500,
+                      fontSize: "0.875rem",
                       cursor: "pointer",
-                      transition: "all 0.15s ease"
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      transition: "all 0.15s ease",
+                      width: "100%"
                     }}
                   >
-                    Form View
+                    <span style={{ display: "flex", alignItems: "center", flexShrink: 0, color: isSelected ? "#171717" : "#4b5563" }}>
+                      {navItem.icon}
+                    </span>
+                    <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {navItem.title}
+                    </span>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => toggleViewMode(true)}
-                    style={{
-                      padding: "0.4rem 1.15rem",
-                      borderRadius: "100rem",
-                      border: "none",
-                      fontSize: "0.825rem",
-                      fontWeight: isJsonMode ? 600 : 500,
-                      backgroundColor: isJsonMode ? "#ffffff" : "transparent",
-                      color: isJsonMode ? "#111827" : "#4b5563",
-                      boxShadow: isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
-                      cursor: "pointer",
-                      transition: "all 0.15s ease"
-                    }}
-                  >
-                    Raw JSON
-                  </button>
-                </div>
-              )}
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
-              {/* Delete button (for items in case-studies, blog, services) */}
-              {isDeletable && (
+      {/* Main Editor Canvas Workspace */}
+      <main style={{
+        flex: 1,
+        overflowY: "auto",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "var(--light-grey, #f8f8f8)",
+        position: "relative"
+      }}>
+        {/* Uniform Sticky Header Bar across ALL sections (68px flush) */}
+        <header style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          height: "68px",
+          backgroundColor: "rgba(248, 248, 248, 0.94)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid #e5e7eb",
+          padding: "0 2rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "1.25rem",
+          flexShrink: 0,
+          boxSizing: "border-box"
+        }}>
+          {/* Section Name & Badges */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", minWidth: 0 }}>
+            <h1 style={{
+              fontSize: "1.2rem",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              color: "#111827",
+              margin: 0,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis"
+            }}>
+              {getSectionTitle()}
+            </h1>
+            {activeTab === "featured-work" && (
+              <span style={{
+                backgroundColor: featuredSlugs.length === 3 ? "var(--green, #cbfb45)" : "#fee2e2",
+                color: featuredSlugs.length === 3 ? "var(--black, #171717)" : "#ef4444",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                padding: "0.2rem 0.65rem",
+                borderRadius: "100rem",
+                whiteSpace: "nowrap"
+              }}>
+                {featuredSlugs.length} / 3 Selected
+              </span>
+            )}
+          </div>
+
+          {/* Controls: [ Form View | Raw JSON ] + [Delete] + [Save Changes] */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
+            {canToggleJson && (
+              <div style={{
+                display: "inline-flex",
+                backgroundColor: "#e5e7eb",
+                padding: "3px",
+                borderRadius: "100rem",
+                gap: "2px"
+              }}>
                 <button
                   type="button"
-                  onClick={handleDelete}
-                  disabled={loading}
+                  onClick={() => toggleViewMode(false)}
                   style={{
-                    backgroundColor: "#ffffff",
-                    color: "#ef4444",
-                    border: "1px solid #fee2e2",
-                    padding: "0.45rem 1.1rem",
+                    padding: "0.4rem 1.15rem",
                     borderRadius: "100rem",
+                    border: "none",
                     fontSize: "0.825rem",
-                    fontWeight: 600,
+                    fontWeight: !isJsonMode ? 600 : 500,
+                    backgroundColor: !isJsonMode ? "#ffffff" : "transparent",
+                    color: !isJsonMode ? "#111827" : "#4b5563",
+                    boxShadow: !isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
                     cursor: "pointer",
                     transition: "all 0.15s ease"
                   }}
                 >
-                  Delete
+                  Form View
                 </button>
-              )}
-
-              {/* Save Button */}
-              {canSave && (
                 <button
                   type="button"
-                  onClick={triggerSave}
-                  disabled={loading}
+                  onClick={() => toggleViewMode(true)}
                   style={{
-                    backgroundColor: "var(--black, #171717)",
-                    color: "var(--white, #ffffff)",
-                    border: "none",
-                    padding: "0.5rem 1.4rem",
+                    padding: "0.4rem 1.15rem",
                     borderRadius: "100rem",
-                    fontWeight: 600,
-                    fontSize: "0.85rem",
-                    cursor: loading ? "not-allowed" : "pointer",
-                    opacity: loading ? 0.7 : 1,
-                    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
-                    transition: "opacity 0.15s ease"
+                    border: "none",
+                    fontSize: "0.825rem",
+                    fontWeight: isJsonMode ? 600 : 500,
+                    backgroundColor: isJsonMode ? "#ffffff" : "transparent",
+                    color: isJsonMode ? "#111827" : "#4b5563",
+                    boxShadow: isJsonMode ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease"
                   }}
                 >
-                  {loading ? "Saving..." : "Save Changes"}
+                  Raw JSON
                 </button>
-              )}
-            </div>
-          </header>
+              </div>
+            )}
 
-          {/* Main Content Workspace Canvas */}
-          <div style={{
-            flex: 1,
-            padding: activeTab === "case-studies" || activeTab === "blog" || activeTab === "services"
-              ? "2rem 2.5rem 3rem 1.25rem"
-              : "2rem 2.5rem 3rem 2.5rem",
-            maxWidth: "1000px",
-            width: "100%",
-            margin: "0 auto",
-            boxSizing: "border-box"
-          }}>
-            {isJsonMode && activeTab !== "upload" ? (
+            {/* Delete button (for items in case-studies, blog, services) */}
+            {isDeletable && (
+              <button
+                type="button"
+                onClick={handleDelete}
+                disabled={loading}
+                style={{
+                  backgroundColor: "#ffffff",
+                  color: "#ef4444",
+                  border: "1px solid #fee2e2",
+                  padding: "0.45rem 1.1rem",
+                  borderRadius: "100rem",
+                  fontSize: "0.825rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease"
+                }}
+              >
+                Delete
+              </button>
+            )}
+
+            {/* Save Button */}
+            {canSave && (
+              <button
+                type="button"
+                onClick={triggerSave}
+                disabled={loading}
+                style={{
+                  backgroundColor: "var(--black, #171717)",
+                  color: "var(--white, #ffffff)",
+                  border: "none",
+                  padding: "0.5rem 1.4rem",
+                  borderRadius: "100rem",
+                  fontWeight: 600,
+                  fontSize: "0.85rem",
+                  cursor: loading ? "not-allowed" : "pointer",
+                  opacity: loading ? 0.7 : 1,
+                  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+                  transition: "opacity 0.15s ease"
+                }}
+              >
+                {loading ? "Saving..." : "Save Changes"}
+              </button>
+            )}
+          </div>
+        </header>
+
+        {/* Main Content Workspace Canvas */}
+        <div style={{
+          flex: 1,
+          padding: activeTab === "case-studies" || activeTab === "blog" || activeTab === "services"
+            ? "2rem 2.5rem 3rem 1.25rem"
+            : "2rem 2.5rem 3rem 2.5rem",
+          maxWidth: "1000px",
+          width: "100%",
+          margin: "0 auto",
+          boxSizing: "border-box"
+        }}>
+          {isJsonMode && activeTab !== "upload" ? (
+            <div style={{
+              backgroundColor: "#ffffff",
+              borderRadius: "28px",
+              border: "1px solid #e5e7eb",
+              padding: "2.25rem 2.5rem",
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)"
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+                <span style={{ fontSize: "0.85rem", color: jsonError ? "#ef4444" : "#10b981", fontWeight: 600 }}>
+                  {jsonError ? `✗ ${jsonError}` : "✓ Valid JSON"}
+                </span>
+                <button
+                  type="button"
+                  onClick={formatRawJson}
+                  style={{
+                    background: "#ffffff",
+                    border: "1px solid #e5e7eb",
+                    color: "#374151",
+                    borderRadius: "100rem",
+                    padding: "0.35rem 0.85rem",
+                    fontSize: "0.75rem",
+                    cursor: "pointer",
+                    fontWeight: 500
+                  }}
+                >
+                  Format JSON
+                </button>
+              </div>
+              <textarea
+                rows={24}
+                value={rawJsonText}
+                onChange={(e) => handleRawJsonChange(e.target.value)}
+                style={{
+                  width: "100%",
+                  padding: "1.25rem",
+                  backgroundColor: "#fcfcfc",
+                  border: `1px solid ${jsonError ? "#ef4444" : "#e5e7eb"}`,
+                  borderRadius: "16px",
+                  color: "#171717",
+                  fontFamily: "monospace",
+                  fontSize: "0.875rem",
+                  lineHeight: "1.55",
+                  boxSizing: "border-box",
+                  outline: "none"
+                }}
+              />
+            </div>
+          ) : activeTab === "upload" ? (
+            <div style={{ maxWidth: "800px", margin: "0 auto" }}>
               <div style={{
                 backgroundColor: "#ffffff",
                 borderRadius: "28px",
-                border: "1px solid #e5e7eb",
-                padding: "2.25rem 2.5rem",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)"
+                border: "1px solid #e5e5e5",
+                padding: "3.5rem 2.5rem",
+                textAlign: "center"
               }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                  <span style={{ fontSize: "0.85rem", color: jsonError ? "#ef4444" : "#10b981", fontWeight: 600 }}>
-                    {jsonError ? `✗ ${jsonError}` : "✓ Valid JSON"}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={formatRawJson}
+                <div style={{
+                  border: "2px dashed #d1d5db",
+                  borderRadius: "20px",
+                  padding: "3.5rem 2rem",
+                  backgroundColor: "#fafafa"
+                }}>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    style={{ display: "none" }}
+                    id="admin-file-upload"
+                  />
+                  <label
+                    htmlFor="admin-file-upload"
                     style={{
-                      background: "#ffffff",
-                      border: "1px solid #e5e7eb",
-                      color: "#374151",
+                      backgroundColor: "var(--green, #cbfb45)",
+                      color: "var(--black, #171717)",
+                      padding: "0.75rem 1.75rem",
                       borderRadius: "100rem",
-                      padding: "0.35rem 0.85rem",
-                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      fontSize: "0.9rem",
                       cursor: "pointer",
-                      fontWeight: 500
+                      display: "inline-block",
+                      border: "none"
                     }}
                   >
-                    Format JSON
-                  </button>
-                </div>
-                <textarea
-                  rows={24}
-                  value={rawJsonText}
-                  onChange={(e) => handleRawJsonChange(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "1.25rem",
-                    backgroundColor: "#fcfcfc",
-                    border: `1px solid ${jsonError ? "#ef4444" : "#e5e7eb"}`,
-                    borderRadius: "16px",
-                    color: "#171717",
-                    fontFamily: "monospace",
-                    fontSize: "0.875rem",
-                    lineHeight: "1.55",
-                    boxSizing: "border-box",
-                    outline: "none"
-                  }}
-                />
-              </div>
-            ) : activeTab === "upload" ? (
-              <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-                <div style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "28px",
-                  border: "1px solid #e5e5e5",
-                  padding: "3.5rem 2.5rem",
-                  textAlign: "center"
-                }}>
-                  <div style={{
-                    border: "2px dashed #d1d5db",
-                    borderRadius: "20px",
-                    padding: "3.5rem 2rem",
-                    backgroundColor: "#fafafa"
-                  }}>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      style={{ display: "none" }}
-                      id="admin-file-upload"
-                    />
-                    <label
-                      htmlFor="admin-file-upload"
-                      style={{
-                        backgroundColor: "var(--green, #cbfb45)",
-                        color: "var(--black, #171717)",
-                        padding: "0.75rem 1.75rem",
-                        borderRadius: "100rem",
-                        fontWeight: 600,
-                        fontSize: "0.9rem",
-                        cursor: "pointer",
-                        display: "inline-block",
-                        border: "none"
-                      }}
-                    >
-                      {uploading ? "Uploading image..." : "Select Image from Computer"}
-                    </label>
-                    <div style={{ marginTop: "1.25rem", color: "#6b7280", fontSize: "0.85rem" }}>
-                      Supports WebP, PNG, JPG, and SVG
-                    </div>
+                    {uploading ? "Uploading image..." : "Select Image from Computer"}
+                  </label>
+                  <div style={{ marginTop: "1.25rem", color: "#6b7280", fontSize: "0.85rem" }}>
+                    Supports WebP, PNG, JPG, and SVG
                   </div>
                 </div>
               </div>
-            ) : activeTab === "featured-work" ? (
-              <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-                  {/* Current Featured Card */}
+            </div>
+          ) : activeTab === "featured-work" ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+              {/* Current Featured Card */}
+              <div style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "32px",
+                border: "1px solid #e5e5e5",
+                padding: "2rem"
+              }}>
+                <h2 style={{ fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280", marginBottom: "1rem", fontWeight: 600 }}>
+                  Current Homepage Order ({featuredSlugs.length}/3)
+                </h2>
+
+                {featuredSlugs.length === 0 ? (
+                  <div style={{ padding: "2rem", textAlign: "center", color: "#9ca3af", fontSize: "0.9rem" }}>
+                    No case studies selected. Pick up to 3 below.
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {featuredSlugs.map((slug, idx) => {
+                      const study = allCaseStudies.find((s) => s.slug === slug);
+                      return (
+                        <div
+                          key={slug}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            padding: "1rem 1.25rem",
+                            backgroundColor: "#f9fafb",
+                            border: "1px solid #ebebeb",
+                            borderRadius: "18px"
+                          }}
+                        >
+                          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                            <div style={{
+                              width: "28px",
+                              height: "28px",
+                              borderRadius: "50%",
+                              backgroundColor: "#171717",
+                              color: "#ffffff",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              fontWeight: 700,
+                              fontSize: "0.8rem"
+                            }}>
+                              {idx + 1}
+                            </div>
+                            {study?.data?.image && (
+                              <div style={{ width: "54px", height: "36px", borderRadius: "8px", overflow: "hidden", position: "relative", backgroundColor: "#e5e5e5" }}>
+                                <Image src={study.data.image} alt="" fill sizes="54px" style={{ objectFit: "cover" }} />
+                              </div>
+                            )}
+                            <div>
+                              <div style={{ fontWeight: 600, color: "#171717", fontSize: "0.95rem" }}>
+                                {study?.data?.title || slug}
+                              </div>
+                              <div style={{ fontSize: "0.75rem", color: "#818181" }}>
+                                {slug}.json
+                              </div>
+                            </div>
+                          </div>
+
+                          <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+                            <button
+                              onClick={() => moveFeaturedSlug(idx, "up")}
+                              disabled={idx === 0}
+                              style={{
+                                backgroundColor: idx === 0 ? "#f3f4f6" : "#ffffff",
+                                color: idx === 0 ? "#9ca3af" : "#171717",
+                                border: "1px solid #e5e5e5",
+                                padding: "0.35rem 0.65rem",
+                                borderRadius: "8px",
+                                cursor: idx === 0 ? "default" : "pointer"
+                              }}
+                            >
+                              ↑
+                            </button>
+                            <button
+                              onClick={() => moveFeaturedSlug(idx, "down")}
+                              disabled={idx === featuredSlugs.length - 1}
+                              style={{
+                                backgroundColor: idx === featuredSlugs.length - 1 ? "#f3f4f6" : "#ffffff",
+                                color: idx === featuredSlugs.length - 1 ? "#9ca3af" : "#171717",
+                                border: "1px solid #e5e5e5",
+                                padding: "0.35rem 0.65rem",
+                                borderRadius: "8px",
+                                cursor: idx === featuredSlugs.length - 1 ? "default" : "pointer"
+                              }}
+                            >
+                              ↓
+                            </button>
+                            <button
+                              onClick={() => toggleFeaturedSlug(slug)}
+                              style={{
+                                backgroundColor: "#fee2e2",
+                                color: "#ef4444",
+                                border: "none",
+                                padding: "0.4rem 0.85rem",
+                                borderRadius: "100rem",
+                                cursor: "pointer",
+                                fontSize: "0.8rem",
+                                fontWeight: 500
+                              }}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* All Case Studies Picker */}
+              <div style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "32px",
+                border: "1px solid #e5e5e5",
+                padding: "2rem"
+              }}>
+                <h2 style={{ fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280", marginBottom: "1.25rem", fontWeight: 600 }}>
+                  All Case Studies ({allCaseStudies.length})
+                </h2>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "1.25rem" }}>
+                  {allCaseStudies.map((item) => {
+                    const isFeatured = featuredSlugs.includes(item.slug);
+
+                    return (
+                      <div
+                        key={item.slug}
+                        style={{
+                          backgroundColor: isFeatured ? "#fbfcf7" : "#ffffff",
+                          border: isFeatured ? "2px solid var(--green, #cbfb45)" : "1px solid #e5e5e5",
+                          borderRadius: "20px",
+                          overflow: "hidden",
+                          display: "flex",
+                          flexDirection: "column"
+                        }}
+                      >
+                        <div style={{ height: "140px", position: "relative", backgroundColor: "#f3f4f6" }}>
+                          {item.data.image && (
+                            <Image src={item.data.image} alt={item.data.title || item.slug} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: "cover" }} />
+                          )}
+                          {isFeatured && (
+                            <span style={{
+                              position: "absolute",
+                              top: "0.6rem",
+                              right: "0.6rem",
+                              backgroundColor: "var(--green, #cbfb45)",
+                              color: "var(--black, #171717)",
+                              fontWeight: 700,
+                              fontSize: "0.7rem",
+                              padding: "0.25rem 0.6rem",
+                              borderRadius: "100rem"
+                            }}>
+                              ✓ Featured
+                            </span>
+                          )}
+                        </div>
+
+                        <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", flex: 1, justifyContent: "space-between" }}>
+                          <div>
+                            <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#171717", marginBottom: "0.35rem" }}>
+                              {item.data.title}
+                            </h3>
+                            <p style={{ fontSize: "0.8rem", color: "#666", lineHeight: 1.4, marginBottom: "1rem", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                              {item.data.description}
+                            </p>
+                          </div>
+
+                          <button
+                            onClick={() => toggleFeaturedSlug(item.slug)}
+                            style={{
+                              width: "100%",
+                              padding: "0.55rem",
+                              borderRadius: "100rem",
+                              border: "none",
+                              fontWeight: 600,
+                              fontSize: "0.8rem",
+                              cursor: "pointer",
+                              backgroundColor: isFeatured ? "#fee2e2" : "var(--black, #171717)",
+                              color: isFeatured ? "#ef4444" : "#ffffff"
+                            }}
+                          >
+                            {isFeatured ? "✕ Remove from Homepage" : "+ Add to Homepage"}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : activeTab === "headers" ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+              {/* Hero Selection Cards */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
+                {[
+                  { key: "home", label: "Homepage Hero Banner", aspect: "16:9 Widescreen" },
+                  { key: "about", label: "About Page Hero", aspect: "4:3 Hero Card" },
+                  { key: "services", label: "Services Page Hero", aspect: "4:3 Hero Card" },
+                ].map((card) => {
+                  const isSelected = selectedHeaderKey === card.key;
+                  return (
+                    <button
+                      key={card.key}
+                      onClick={() => setSelectedHeaderKey(card.key as "home" | "about" | "services")}
+                      style={{
+                        padding: "1.35rem 1.5rem",
+                        borderRadius: "20px",
+                        border: isSelected ? "2px solid var(--black, #171717)" : "1px solid #e5e7eb",
+                        backgroundColor: "#ffffff",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        transition: "all 0.15s ease",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        minHeight: "96px"
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
+                        <div style={{ fontWeight: 700, fontSize: "0.95rem", color: isSelected ? "#111827" : "#374151", letterSpacing: "-0.01em" }}>
+                          {card.label}
+                        </div>
+                        {isSelected && (
+                          <span style={{
+                            backgroundColor: "var(--green, #cbfb45)",
+                            color: "var(--black, #171717)",
+                            fontSize: "0.68rem",
+                            fontWeight: 800,
+                            letterSpacing: "0.04em",
+                            padding: "0.2rem 0.55rem",
+                            borderRadius: "100rem",
+                            textTransform: "uppercase"
+                          }}>
+                            Active
+                          </span>
+                        )}
+                      </div>
+                      <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.4rem" }}>
+                        Aspect Ratio: {card.aspect}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active Header Editor in White Card */}
+              {(() => {
+                const currentHeader = headersData[selectedHeaderKey] || {
+                  image: "/images/hero/hero-main.jpg",
+                  objectPosition: "50% 50%",
+                  alt: ""
+                };
+                const currentPos = parsePosition(currentHeader.objectPosition);
+                const is16by9 = selectedHeaderKey === "home";
+
+                return (
                   <div style={{
                     backgroundColor: "#ffffff",
                     borderRadius: "32px",
-                    border: "1px solid #e5e5e5",
-                    padding: "2rem"
+                    border: "1px solid #e5e7eb",
+                    padding: "2.75rem 3rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "2rem"
                   }}>
-                    <h2 style={{ fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280", marginBottom: "1rem", fontWeight: 600 }}>
-                      Current Homepage Order ({featuredSlugs.length}/3)
-                    </h2>
-
-                    {featuredSlugs.length === 0 ? (
-                      <div style={{ padding: "2rem", textAlign: "center", color: "#9ca3af", fontSize: "0.9rem" }}>
-                        No case studies selected. Pick up to 3 below.
+                    {/* Image Path and Alt Text */}
+                    <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "1.5rem" }}>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
+                          Header Image Path or URL
+                        </label>
+                        <div style={{ display: "flex", gap: "0.75rem" }}>
+                          <input
+                            type="text"
+                            value={currentHeader.image}
+                            onChange={(e) => updateHeaderField(selectedHeaderKey, "image", e.target.value)}
+                            placeholder="/images/hero/hero-main.jpg"
+                            style={{
+                              flex: 1,
+                              padding: "0.85rem 1.2rem",
+                              borderRadius: "16px",
+                              border: "1px solid #e5e7eb",
+                              backgroundColor: "#ffffff",
+                              color: "#111827",
+                              fontSize: "0.95rem",
+                              fontWeight: 600,
+                              outline: "none",
+                              boxSizing: "border-box"
+                            }}
+                          />
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            style={{ display: "none" }}
+                            id="header-image-upload"
+                          />
+                          <label
+                            htmlFor="header-image-upload"
+                            style={{
+                              padding: "0.85rem 1.5rem",
+                              backgroundColor: "var(--black, #171717)",
+                              color: "var(--white, #ffffff)",
+                              borderRadius: "100rem",
+                              cursor: "pointer",
+                              fontSize: "0.85rem",
+                              fontWeight: 600,
+                              whiteSpace: "nowrap",
+                              display: "inline-flex",
+                              alignItems: "center"
+                            }}
+                          >
+                            {uploading ? "Uploading..." : "Upload New"}
+                          </label>
+                        </div>
+                        <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.35rem" }}>
+                          Upload a new image file or paste a path/URL directly.
+                        </div>
                       </div>
-                    ) : (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                        {featuredSlugs.map((slug, idx) => {
-                          const study = allCaseStudies.find((s) => s.slug === slug);
-                          return (
-                            <div
-                              key={slug}
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                padding: "1rem 1.25rem",
-                                backgroundColor: "#f9fafb",
-                                border: "1px solid #ebebeb",
-                                borderRadius: "18px"
-                              }}
-                            >
+
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
+                          Alt / Accessibility Text
+                        </label>
+                        <input
+                          type="text"
+                          value={currentHeader.alt || ""}
+                          onChange={(e) => updateHeaderField(selectedHeaderKey, "alt", e.target.value)}
+                          placeholder="Image description"
+                          style={{
+                            width: "100%",
+                            padding: "0.85rem 1.2rem",
+                            borderRadius: "16px",
+                            border: "1px solid #e5e7eb",
+                            backgroundColor: "#ffffff",
+                            color: "#111827",
+                            fontSize: "0.95rem",
+                            fontWeight: 600,
+                            outline: "none",
+                            boxSizing: "border-box"
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Visible Window Preview Container */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <div>
+                          <div style={{ fontSize: "1rem", fontWeight: 700, color: "#111827" }}>
+                            Interactive Visible Window Preview
+                          </div>
+                          <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.2rem" }}>
+                            Frame is locked to {is16by9 ? "16:9 widescreen" : "4:3 hero card"}. Click or drag on the preview to position focal center.
+                          </div>
+                        </div>
+
+                        <div style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "0.45rem",
+                          backgroundColor: "#f4f5f7",
+                          padding: "0.35rem 0.9rem",
+                          borderRadius: "100rem",
+                          fontSize: "0.8rem",
+                          color: "#374151",
+                          fontWeight: 600
+                        }}>
+                          <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "var(--green, #cbfb45)" }} />
+                          <span>Focal Point: {currentPos.x}%, {currentPos.y}%</span>
+                        </div>
+                      </div>
+
+                      {/* The Window Frame */}
+                      <div
+                        onPointerDown={(e) => {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const x = ((e.clientX - rect.left) / rect.width) * 100;
+                          const y = ((e.clientY - rect.top) / rect.height) * 100;
+                          updateHeaderPosition(selectedHeaderKey, x, y);
+                        }}
+                        onPointerMove={(e) => {
+                          if (e.buttons === 1) {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const x = ((e.clientX - rect.left) / rect.width) * 100;
+                            const y = ((e.clientY - rect.top) / rect.height) * 100;
+                            updateHeaderPosition(selectedHeaderKey, x, y);
+                          }
+                        }}
+                        style={{
+                          position: "relative",
+                          width: "100%",
+                          aspectRatio: is16by9 ? "16 / 9" : "4 / 3",
+                          maxHeight: "440px",
+                          borderRadius: "24px",
+                          overflow: "hidden",
+                          backgroundColor: "#171717",
+                          border: "1px solid #e5e7eb",
+                          cursor: "crosshair",
+                          userSelect: "none"
+                        }}
+                      >
+                        {currentHeader.image && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={currentHeader.image}
+                            alt={currentHeader.alt || "Header preview"}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              objectPosition: `${currentPos.x}% ${currentPos.y}%`,
+                              display: "block",
+                              pointerEvents: "none"
+                            }}
+                          />
+                        )}
+
+                        {/* Clean Reticle */}
+                        <div
+                          style={{
+                            position: "absolute",
+                            left: `${currentPos.x}%`,
+                            top: `${currentPos.y}%`,
+                            transform: "translate(-50%, -50%)",
+                            pointerEvents: "none",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                          }}
+                        >
+                          <div style={{
+                            width: "34px",
+                            height: "34px",
+                            borderRadius: "50%",
+                            border: "2px solid #cbfb45",
+                            backgroundColor: "rgba(203, 251, 69, 0.25)",
+                            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                          }}>
+                            <div style={{
+                              width: "6px",
+                              height: "6px",
+                              borderRadius: "50%",
+                              backgroundColor: "#cbfb45"
+                            }} />
+                          </div>
+                        </div>
+
+                        {/* Badges */}
+                        <div style={{
+                          position: "absolute",
+                          top: "14px",
+                          left: "14px",
+                          backgroundColor: "rgba(23, 23, 23, 0.8)",
+                          color: "#ffffff",
+                          fontSize: "0.72rem",
+                          fontWeight: 700,
+                          letterSpacing: "0.04em",
+                          padding: "0.35rem 0.8rem",
+                          borderRadius: "100rem",
+                          pointerEvents: "none"
+                        }}>
+                          VISIBLE WINDOW ({is16by9 ? "16:9 BANNER" : "4:3 HERO"})
+                        </div>
+
+                        <div style={{
+                          position: "absolute",
+                          bottom: "14px",
+                          right: "14px",
+                          backgroundColor: "rgba(23, 23, 23, 0.8)",
+                          color: "#ffffff",
+                          fontSize: "0.75rem",
+                          padding: "0.35rem 0.8rem",
+                          borderRadius: "100rem",
+                          pointerEvents: "none"
+                        }}>
+                          Click or drag to reframe
+                        </div>
+                      </div>
+
+                      {/* Sliders */}
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", marginTop: "0.5rem" }}>
+                        <div style={{ backgroundColor: "#f9fafb", padding: "1.35rem 1.5rem", borderRadius: "20px", border: "1px solid #e5e7eb" }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "#171717" }}>
+                              Vertical Position (Y Axis)
+                            </label>
+                            <span style={{ fontSize: "0.85rem", color: "#171717", fontWeight: 700 }}>
+                              {currentPos.y}% {currentPos.y < 35 ? "(Top)" : currentPos.y > 65 ? "(Bottom)" : "(Center)"}
+                            </span>
+                          </div>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={currentPos.y}
+                            onChange={(e) => updateHeaderPosition(selectedHeaderKey, currentPos.x, parseFloat(e.target.value))}
+                            style={{ width: "100%", accentColor: "#171717", cursor: "pointer" }}
+                          />
+                          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#9ca3af", marginTop: "0.35rem" }}>
+                            <span>0% (Top)</span>
+                            <span>50% (Center)</span>
+                            <span>100% (Bottom)</span>
+                          </div>
+                        </div>
+
+                        <div style={{ backgroundColor: "#f9fafb", padding: "1.35rem 1.5rem", borderRadius: "20px", border: "1px solid #e5e7eb" }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                            <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "#171717" }}>
+                              Horizontal Position (X Axis)
+                            </label>
+                            <span style={{ fontSize: "0.85rem", color: "#171717", fontWeight: 700 }}>
+                              {currentPos.x}% {currentPos.x < 35 ? "(Left)" : currentPos.x > 65 ? "(Right)" : "(Center)"}
+                            </span>
+                          </div>
+                          <input
+                            type="range"
+                            min={0}
+                            max={100}
+                            value={currentPos.x}
+                            onChange={(e) => updateHeaderPosition(selectedHeaderKey, parseFloat(e.target.value), currentPos.y)}
+                            style={{ width: "100%", accentColor: "#171717", cursor: "pointer" }}
+                          />
+                          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#9ca3af", marginTop: "0.35rem" }}>
+                            <span>0% (Left)</span>
+                            <span>50% (Center)</span>
+                            <span>100% (Right)</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Quick Alignment Presets */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap", paddingTop: "0.5rem" }}>
+                        <span style={{ fontSize: "0.85rem", color: "#6b7280", fontWeight: 500, marginRight: "0.25rem" }}>
+                          Quick Presets:
+                        </span>
+                        {[
+                          { label: "Top", x: 50, y: 0 },
+                          { label: "Center", x: 50, y: 50 },
+                          { label: "Bottom", x: 50, y: 100 },
+                          { label: "Left", x: 0, y: 50 },
+                          { label: "Right", x: 100, y: 50 },
+                        ].map((preset) => (
+                          <button
+                            key={preset.label}
+                            onClick={() => updateHeaderPosition(selectedHeaderKey, preset.x, preset.y)}
+                            style={{
+                              backgroundColor: "#ffffff",
+                              border: "1px solid #e5e7eb",
+                              color: "#374151",
+                              padding: "0.4rem 1.1rem",
+                              borderRadius: "100rem",
+                              fontSize: "0.8rem",
+                              cursor: "pointer",
+                              fontWeight: 600,
+                              transition: "all 0.15s ease"
+                            }}
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          ) : editForm ? (
+            <div style={{
+              backgroundColor: "#ffffff",
+              borderRadius: "28px",
+              border: "1px solid #e5e7eb",
+              padding: "2.5rem 3rem"
+            }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+                {activeTab === "case-studies" && (
+                  <>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
+                      <input
+                        type="text"
+                        value={editForm.title || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
+                        <input
+                          type="text"
+                          value={editForm.slug || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Client</label>
+                        <input
+                          type="text"
+                          value={editForm.client || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, client: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
+                      <textarea
+                        rows={3}
+                        value={editForm.description || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
+                      <div style={{ display: "flex", gap: "0.75rem" }}>
+                        <input
+                          type="text"
+                          value={editForm.image || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
+                          style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          style={{ display: "none" }}
+                          id="image-field-upload"
+                        />
+                        <label
+                          htmlFor="image-field-upload"
+                          style={{
+                            padding: "0.85rem 1.5rem",
+                            backgroundColor: "var(--black, #171717)",
+                            color: "var(--white, #ffffff)",
+                            borderRadius: "100rem",
+                            cursor: "pointer",
+                            fontSize: "0.85rem",
+                            fontWeight: 600,
+                            whiteSpace: "nowrap",
+                            display: "inline-flex",
+                            alignItems: "center"
+                          }}
+                        >
+                          {uploading ? "Uploading..." : "Upload New"}
+                        </label>
+                      </div>
+                      {editForm.image && (
+                        <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
+                          <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Live Site URL</label>
+                      <input
+                        type="url"
+                        placeholder="https://example.com"
+                        value={editForm.siteUrl || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, siteUrl: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 500, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Tags (Comma separated)</label>
+                      <input
+                        type="text"
+                        value={(editForm.tags || []).join(", ")}
+                        onChange={(e) => updateEditForm({ ...editForm, tags: e.target.value.split(",").map((s: string) => s.trim()).filter(Boolean) })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Challenge</label>
+                      <textarea
+                        rows={3}
+                        value={editForm.challenge || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, challenge: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Solution</label>
+                      <textarea
+                        rows={3}
+                        value={editForm.solution || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, solution: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Results (One per line)</label>
+                      <textarea
+                        rows={4}
+                        value={(editForm.results || []).join("\n")}
+                        onChange={(e) => updateEditForm({ ...editForm, results: e.target.value.split("\n").filter(Boolean) })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {activeTab === "blog" && (
+                  <>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
+                      <input
+                        type="text"
+                        value={editForm.title || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.25rem" }}>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
+                        <input
+                          type="text"
+                          value={editForm.slug || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Author</label>
+                        <input
+                          type="text"
+                          value={editForm.author || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, author: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Category</label>
+                        <input
+                          type="text"
+                          value={editForm.category || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, category: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Excerpt</label>
+                      <textarea
+                        rows={2}
+                        value={editForm.excerpt || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, excerpt: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
+                      <div style={{ display: "flex", gap: "0.75rem" }}>
+                        <input
+                          type="text"
+                          value={editForm.image || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
+                          style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          style={{ display: "none" }}
+                          id="blog-image-upload"
+                        />
+                        <label
+                          htmlFor="blog-image-upload"
+                          style={{
+                            padding: "0.85rem 1.5rem",
+                            backgroundColor: "var(--black, #171717)",
+                            color: "var(--white, #ffffff)",
+                            borderRadius: "100rem",
+                            cursor: "pointer",
+                            fontSize: "0.85rem",
+                            fontWeight: 600,
+                            whiteSpace: "nowrap",
+                            display: "inline-flex",
+                            alignItems: "center"
+                          }}
+                        >
+                          {uploading ? "Uploading..." : "Upload New"}
+                        </label>
+                      </div>
+                      {editForm.image && (
+                        <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
+                          <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Article Body (Markdown)</label>
+                      <textarea
+                        rows={12}
+                        value={editForm.content || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, content: e.target.value })}
+                        style={{ width: "100%", padding: "1rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontFamily: "monospace", fontSize: "0.875rem", lineHeight: "1.55", boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {activeTab === "services" && (
+                  <>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
+                      <input
+                        type="text"
+                        value={editForm.title || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
+                      <input
+                        type="text"
+                        value={editForm.slug || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
+                      <textarea
+                        rows={3}
+                        value={editForm.description || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Features (One per line)</label>
+                      <textarea
+                        rows={4}
+                        value={(editForm.features || []).join("\n")}
+                        onChange={(e) => updateEditForm({ ...editForm, features: e.target.value.split("\n").filter(Boolean) })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {activeTab === "site-config" && (
+                  <>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Agency Name</label>
+                        <input
+                          type="text"
+                          value={editForm.name || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, name: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Email</label>
+                        <input
+                          type="text"
+                          value={editForm.email || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, email: e.target.value })}
+                          style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
+                      <textarea
+                        rows={3}
+                        value={editForm.description || ""}
+                        onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
+                        style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {activeTab === "team" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+                    {Array.isArray(editForm) && editForm.length > 0 ? (
+                      (() => {
+                        const index = Math.max(0, Math.min(selectedTeamIndex, editForm.length - 1));
+                        const member = editForm[index];
+                        if (!member) return null;
+                        const isCurrentUploading = uploadingIndex === index;
+
+                        return (
+                          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                            {/* Member Card Header */}
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem", borderBottom: "1px solid #f3f4f6", paddingBottom: "1.25rem" }}>
                               <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                                 <div style={{
-                                  width: "28px",
-                                  height: "28px",
+                                  width: "48px",
+                                  height: "48px",
                                   borderRadius: "50%",
-                                  backgroundColor: "#171717",
-                                  color: "#ffffff",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  fontWeight: 700,
-                                  fontSize: "0.8rem"
+                                  overflow: "hidden",
+                                  position: "relative",
+                                  backgroundColor: "#e5e7eb",
+                                  border: "2px solid #ffffff",
+                                  boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
+                                  flexShrink: 0
                                 }}>
-                                  {idx + 1}
+                                  {member.image ? (
+                                    <Image
+                                      src={member.image}
+                                      alt={member.name || "Member avatar"}
+                                      fill
+                                      sizes="48px"
+                                      style={{ objectFit: "cover" }}
+                                    />
+                                  ) : (
+                                    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#6b7280" }}>
+                                      {member.name ? member.name.charAt(0).toUpperCase() : "#"}
+                                    </div>
+                                  )}
                                 </div>
-                                {study?.data?.image && (
-                                  <div style={{ width: "54px", height: "36px", borderRadius: "8px", overflow: "hidden", position: "relative", backgroundColor: "#e5e5e5" }}>
-                                    <Image src={study.data.image} alt="" fill sizes="54px" style={{ objectFit: "cover" }} />
-                                  </div>
-                                )}
                                 <div>
-                                  <div style={{ fontWeight: 600, color: "#171717", fontSize: "0.95rem" }}>
-                                    {study?.data?.title || slug}
+                                  <div style={{ fontSize: "1.05rem", fontWeight: 700, color: "#111827" }}>
+                                    {member.name || `Member #${index + 1}`}
+                                    <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#9ca3af", marginLeft: "0.5rem" }}>
+                                      #${index + 1} of ${editForm.length}
+                                    </span>
                                   </div>
-                                  <div style={{ fontSize: "0.75rem", color: "#818181" }}>
-                                    {slug}.json
+                                  <div style={{ fontSize: "0.825rem", color: "#6b7280" }}>
+                                    {member.role || "No role specified"}
                                   </div>
                                 </div>
                               </div>
 
                               <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
                                 <button
-                                  onClick={() => moveFeaturedSlug(idx, "up")}
-                                  disabled={idx === 0}
+                                  type="button"
+                                  onClick={() => {
+                                    moveTeamMember(index, "up");
+                                    setSelectedTeamIndex(Math.max(0, index - 1));
+                                  }}
+                                  disabled={index === 0}
+                                  title="Move up"
                                   style={{
-                                    backgroundColor: idx === 0 ? "#f3f4f6" : "#ffffff",
-                                    color: idx === 0 ? "#9ca3af" : "#171717",
-                                    border: "1px solid #e5e5e5",
-                                    padding: "0.35rem 0.65rem",
-                                    borderRadius: "8px",
-                                    cursor: idx === 0 ? "default" : "pointer"
+                                    backgroundColor: index === 0 ? "#f9fafb" : "#ffffff",
+                                    color: index === 0 ? "#9ca3af" : "#171717",
+                                    border: "1px solid #e5e7eb",
+                                    padding: "0.35rem 0.75rem",
+                                    borderRadius: "10px",
+                                    cursor: index === 0 ? "default" : "pointer",
+                                    fontSize: "0.85rem",
+                                    fontWeight: 600
                                   }}
                                 >
                                   ↑
                                 </button>
                                 <button
-                                  onClick={() => moveFeaturedSlug(idx, "down")}
-                                  disabled={idx === featuredSlugs.length - 1}
+                                  type="button"
+                                  onClick={() => {
+                                    moveTeamMember(index, "down");
+                                    setSelectedTeamIndex(Math.min(editForm.length - 1, index + 1));
+                                  }}
+                                  disabled={index === editForm.length - 1}
+                                  title="Move down"
                                   style={{
-                                    backgroundColor: idx === featuredSlugs.length - 1 ? "#f3f4f6" : "#ffffff",
-                                    color: idx === featuredSlugs.length - 1 ? "#9ca3af" : "#171717",
-                                    border: "1px solid #e5e5e5",
-                                    padding: "0.35rem 0.65rem",
-                                    borderRadius: "8px",
-                                    cursor: idx === featuredSlugs.length - 1 ? "default" : "pointer"
+                                    backgroundColor: index === editForm.length - 1 ? "#f9fafb" : "#ffffff",
+                                    color: index === editForm.length - 1 ? "#9ca3af" : "#171717",
+                                    border: "1px solid #e5e7eb",
+                                    padding: "0.35rem 0.75rem",
+                                    borderRadius: "10px",
+                                    cursor: index === editForm.length - 1 ? "default" : "pointer",
+                                    fontSize: "0.85rem",
+                                    fontWeight: 600
                                   }}
                                 >
                                   ↓
                                 </button>
                                 <button
-                                  onClick={() => toggleFeaturedSlug(slug)}
+                                  type="button"
+                                  onClick={() => removeTeamMember(index)}
                                   style={{
-                                    backgroundColor: "#fee2e2",
+                                    backgroundColor: "transparent",
                                     color: "#ef4444",
-                                    border: "none",
-                                    padding: "0.4rem 0.85rem",
-                                    borderRadius: "100rem",
-                                    cursor: "pointer",
+                                    border: "1px solid #fee2e2",
+                                    padding: "0.35rem 0.85rem",
+                                    borderRadius: "10px",
                                     fontSize: "0.8rem",
-                                    fontWeight: 500
+                                    fontWeight: 600,
+                                    cursor: "pointer"
                                   }}
                                 >
                                   Remove
                                 </button>
                               </div>
                             </div>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
 
-                  {/* All Case Studies Picker */}
-                  <div style={{
-                    backgroundColor: "#ffffff",
-                    borderRadius: "32px",
-                    border: "1px solid #e5e5e5",
-                    padding: "2rem"
-                  }}>
-                    <h2 style={{ fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280", marginBottom: "1.25rem", fontWeight: 600 }}>
-                      All Case Studies ({allCaseStudies.length})
-                    </h2>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "1.25rem" }}>
-                      {allCaseStudies.map((item) => {
-                        const isFeatured = featuredSlugs.includes(item.slug);
-
-                        return (
-                          <div
-                            key={item.slug}
-                            style={{
-                              backgroundColor: isFeatured ? "#fbfcf7" : "#ffffff",
-                              border: isFeatured ? "2px solid var(--green, #cbfb45)" : "1px solid #e5e5e5",
-                              borderRadius: "20px",
-                              overflow: "hidden",
-                              display: "flex",
-                              flexDirection: "column"
-                            }}
-                          >
-                            <div style={{ height: "140px", position: "relative", backgroundColor: "#f3f4f6" }}>
-                              {item.data.image && (
-                                <Image src={item.data.image} alt={item.data.title || item.slug} fill sizes="(max-width: 768px) 100vw, 400px" style={{ objectFit: "cover" }} />
-                              )}
-                              {isFeatured && (
-                                <span style={{
-                                  position: "absolute",
-                                  top: "0.6rem",
-                                  right: "0.6rem",
-                                  backgroundColor: "var(--green, #cbfb45)",
-                                  color: "var(--black, #171717)",
-                                  fontWeight: 700,
-                                  fontSize: "0.7rem",
-                                  padding: "0.25rem 0.6rem",
-                                  borderRadius: "100rem"
-                                }}>
-                                  ✓ Featured
-                                </span>
-                              )}
+                            {/* Identity Grid: Name, Role, ID */}
+                            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.2fr 0.8fr", gap: "1rem" }}>
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  Full Name
+                                </label>
+                                <input
+                                  type="text"
+                                  value={member.name || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "name", e.target.value)}
+                                  placeholder="e.g. Saqib Masoodi"
+                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                                />
+                              </div>
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  Role / Title
+                                </label>
+                                <input
+                                  type="text"
+                                  value={member.role || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "role", e.target.value)}
+                                  placeholder="e.g. Design Lead"
+                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
+                                />
+                              </div>
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  Identifier (Slug ID)
+                                </label>
+                                <input
+                                  type="text"
+                                  value={member.id || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "id", e.target.value)}
+                                  placeholder="e.g. saqib"
+                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
+                                />
+                              </div>
                             </div>
 
-                            <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", flex: 1, justifyContent: "space-between" }}>
-                              <div>
-                                <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#171717", marginBottom: "0.35rem" }}>
-                                  {item.data.title}
-                                </h3>
-                                <p style={{ fontSize: "0.8rem", color: "#666", lineHeight: 1.4, marginBottom: "1rem", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-                                  {item.data.description}
-                                </p>
+                            {/* Avatar & Image Path */}
+                            <div>
+                              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                Avatar / Headshot Image
+                              </label>
+                              <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+                                <input
+                                  type="text"
+                                  value={member.image || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "image", e.target.value)}
+                                  placeholder="/images/team/name.webp or /images/avatar.svg"
+                                  style={{ flex: 1, padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
+                                />
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  id={`team-avatar-${index}`}
+                                  onChange={(e) => handleTeamAvatarUpload(index, e)}
+                                  style={{ display: "none" }}
+                                />
+                                <label
+                                  htmlFor={`team-avatar-${index}`}
+                                  style={{
+                                    padding: "0.75rem 1.25rem",
+                                    backgroundColor: "var(--black, #171717)",
+                                    color: "var(--white, #ffffff)",
+                                    borderRadius: "100rem",
+                                    cursor: "pointer",
+                                    fontSize: "0.8rem",
+                                    fontWeight: 600,
+                                    whiteSpace: "nowrap",
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  {isCurrentUploading ? "Uploading..." : "Upload Avatar"}
+                                </label>
                               </div>
+                            </div>
 
-                              <button
-                                onClick={() => toggleFeaturedSlug(item.slug)}
-                                style={{
-                                  width: "100%",
-                                  padding: "0.55rem",
-                                  borderRadius: "100rem",
-                                  border: "none",
-                                  fontWeight: 600,
-                                  fontSize: "0.8rem",
-                                  cursor: "pointer",
-                                  backgroundColor: isFeatured ? "#fee2e2" : "var(--black, #171717)",
-                                  color: isFeatured ? "#ef4444" : "#ffffff"
-                                }}
-                              >
-                                {isFeatured ? "✕ Remove from Homepage" : "+ Add to Homepage"}
-                              </button>
+                            {/* Bio */}
+                            <div>
+                              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                Biography / Expertise
+                              </label>
+                              <textarea
+                                rows={3}
+                                value={member.bio || ""}
+                                onChange={(e) => updateTeamMemberField(index, "bio", e.target.value)}
+                                placeholder="Write a concise overview of their focus areas, skills, and background..."
+                                style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", lineHeight: 1.5, boxSizing: "border-box", outline: "none" }}
+                              />
+                            </div>
+
+                            {/* Social Links */}
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  LinkedIn Profile URL
+                                </label>
+                                <input
+                                  type="text"
+                                  value={member.socials?.linkedin || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "socials.linkedin", e.target.value)}
+                                  placeholder="https://www.linkedin.com/in/username"
+                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
+                                />
+                              </div>
+                              <div>
+                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
+                                  X / Twitter Profile URL
+                                </label>
+                                <input
+                                  type="text"
+                                  value={member.socials?.twitter || ""}
+                                  onChange={(e) => updateTeamMemberField(index, "socials.twitter", e.target.value)}
+                                  placeholder="https://x.com/username"
+                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
+                                />
+                              </div>
                             </div>
                           </div>
                         );
-                      })}
-                    </div>
-                  </div>
-                </div>
-            ) : activeTab === "headers" ? (
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-                  {/* Hero Selection Cards */}
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
-                    {[
-                      { key: "home", label: "Homepage Hero Banner", aspect: "16:9 Widescreen" },
-                      { key: "about", label: "About Page Hero", aspect: "4:3 Hero Card" },
-                      { key: "services", label: "Services Page Hero", aspect: "4:3 Hero Card" },
-                    ].map((card) => {
-                      const isSelected = selectedHeaderKey === card.key;
-                      return (
+                      })()
+                    ) : (
+                      <div style={{ padding: "3rem", textAlign: "center", color: "#6b7280" }}>
+                        <p style={{ margin: 0, fontWeight: 500 }}>No team members found.</p>
                         <button
-                          key={card.key}
-                          onClick={() => setSelectedHeaderKey(card.key as "home" | "about" | "services")}
+                          type="button"
+                          onClick={addTeamMember}
                           style={{
-                            padding: "1.35rem 1.5rem",
-                            borderRadius: "20px",
-                            border: isSelected ? "2px solid var(--black, #171717)" : "1px solid #e5e7eb",
-                            backgroundColor: "#ffffff",
+                            marginTop: "1rem",
+                            backgroundColor: "var(--green, #cbfb45)",
+                            color: "var(--black, #171717)",
+                            border: "none",
+                            borderRadius: "100rem",
+                            padding: "0.55rem 1.25rem",
+                            fontSize: "0.85rem",
+                            fontWeight: 700,
                             cursor: "pointer",
-                            textAlign: "left",
-                            transition: "all 0.15s ease",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            minHeight: "96px"
                           }}
                         >
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
-                            <div style={{ fontWeight: 700, fontSize: "0.95rem", color: isSelected ? "#111827" : "#374151", letterSpacing: "-0.01em" }}>
-                              {card.label}
-                            </div>
-                            {isSelected && (
-                              <span style={{
-                                backgroundColor: "var(--green, #cbfb45)",
-                                color: "var(--black, #171717)",
-                                fontSize: "0.68rem",
-                                fontWeight: 800,
-                                letterSpacing: "0.04em",
-                                padding: "0.2rem 0.55rem",
-                                borderRadius: "100rem",
-                                textTransform: "uppercase"
-                              }}>
-                                Active
-                              </span>
-                            )}
-                          </div>
-                          <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.4rem" }}>
-                            Aspect Ratio: {card.aspect}
-                          </div>
+                          + Add First Team Member
                         </button>
-                      );
-                    })}
+                      </div>
+                    )}
                   </div>
+                )}
 
-                  {/* Active Header Editor in White Card */}
-                  {(() => {
-                    const currentHeader = headersData[selectedHeaderKey] || {
-                      image: "/images/hero/hero-main.jpg",
-                      objectPosition: "50% 50%",
-                      alt: ""
-                    };
-                    const currentPos = parsePosition(currentHeader.objectPosition);
-                    const is16by9 = selectedHeaderKey === "home";
-
-                    return (
-                      <div style={{
-                        backgroundColor: "#ffffff",
-                        borderRadius: "32px",
-                        border: "1px solid #e5e7eb",
-                        padding: "2.75rem 3rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "2rem"
-                      }}>
-                        {/* Image Path and Alt Text */}
-                        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "1.5rem" }}>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
-                              Header Image Path or URL
-                            </label>
-                            <div style={{ display: "flex", gap: "0.75rem" }}>
-                              <input
-                                type="text"
-                                value={currentHeader.image}
-                                onChange={(e) => updateHeaderField(selectedHeaderKey, "image", e.target.value)}
-                                placeholder="/images/hero/hero-main.jpg"
-                                style={{
-                                  flex: 1,
-                                  padding: "0.85rem 1.2rem",
-                                  borderRadius: "16px",
-                                  border: "1px solid #e5e7eb",
-                                  backgroundColor: "#ffffff",
-                                  color: "#111827",
-                                  fontSize: "0.95rem",
-                                  fontWeight: 600,
-                                  outline: "none",
-                                  boxSizing: "border-box"
-                                }}
-                              />
-                              <input
-                                ref={fileInputRef}
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                style={{ display: "none" }}
-                                id="header-image-upload"
-                              />
-                              <label
-                                htmlFor="header-image-upload"
-                                style={{
-                                  padding: "0.85rem 1.5rem",
-                                  backgroundColor: "var(--black, #171717)",
-                                  color: "var(--white, #ffffff)",
-                                  borderRadius: "100rem",
-                                  cursor: "pointer",
-                                  fontSize: "0.85rem",
-                                  fontWeight: 600,
-                                  whiteSpace: "nowrap",
-                                  display: "inline-flex",
-                                  alignItems: "center"
-                                }}
-                              >
-                                {uploading ? "Uploading..." : "Upload New"}
-                              </label>
-                            </div>
-                            <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.35rem" }}>
-                              Upload a new image file or paste a path/URL directly.
-                            </div>
-                          </div>
-
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
-                              Alt / Accessibility Text
-                            </label>
-                            <input
-                              type="text"
-                              value={currentHeader.alt || ""}
-                              onChange={(e) => updateHeaderField(selectedHeaderKey, "alt", e.target.value)}
-                              placeholder="Image description"
-                              style={{
-                                width: "100%",
-                                padding: "0.85rem 1.2rem",
-                                borderRadius: "16px",
-                                border: "1px solid #e5e7eb",
-                                backgroundColor: "#ffffff",
-                                color: "#111827",
-                                fontSize: "0.95rem",
-                                fontWeight: 600,
-                                outline: "none",
-                                boxSizing: "border-box"
-                              }}
-                            />
-                          </div>
+                {activeTab === "testimonials" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+                    {selectedTestimonialKey === "hero-image" ? (
+                      <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                        <div>
+                          <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", margin: 0 }}>
+                            Left Card Featured Hero Image
+                          </h3>
+                          <p style={{ fontSize: "0.85rem", color: "#6b7280", margin: "0.25rem 0 0 0" }}>
+                            The hero-style image displayed on the large left card of the testimonials section.
+                          </p>
                         </div>
 
-                        {/* Visible Window Preview Container */}
-                        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <div>
-                              <div style={{ fontSize: "1rem", fontWeight: 700, color: "#111827" }}>
-                                Interactive Visible Window Preview
-                              </div>
-                              <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.2rem" }}>
-                                Frame is locked to {is16by9 ? "16:9 widescreen" : "4:3 hero card"}. Click or drag on the preview to position focal center.
-                              </div>
-                            </div>
-
-                            <div style={{
-                              display: "inline-flex",
-                              alignItems: "center",
-                              gap: "0.45rem",
-                              backgroundColor: "#f4f5f7",
-                              padding: "0.35rem 0.9rem",
-                              borderRadius: "100rem",
-                              fontSize: "0.8rem",
-                              color: "#374151",
-                              fontWeight: 600
-                            }}>
-                              <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "var(--green, #cbfb45)" }} />
-                              <span>Focal Point: {currentPos.x}%, {currentPos.y}%</span>
-                            </div>
-                          </div>
-
-                          {/* The Window Frame */}
-                          <div
-                            onPointerDown={(e) => {
-                              const rect = e.currentTarget.getBoundingClientRect();
-                              const x = ((e.clientX - rect.left) / rect.width) * 100;
-                              const y = ((e.clientY - rect.top) / rect.height) * 100;
-                              updateHeaderPosition(selectedHeaderKey, x, y);
-                            }}
-                            onPointerMove={(e) => {
-                              if (e.buttons === 1) {
-                                const rect = e.currentTarget.getBoundingClientRect();
-                                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                                updateHeaderPosition(selectedHeaderKey, x, y);
-                              }
-                            }}
-                            style={{
-                              position: "relative",
-                              width: "100%",
-                              aspectRatio: is16by9 ? "16 / 9" : "4 / 3",
-                              maxHeight: "440px",
-                              borderRadius: "24px",
-                              overflow: "hidden",
-                              backgroundColor: "#171717",
-                              border: "1px solid #e5e7eb",
-                              cursor: "crosshair",
-                              userSelect: "none"
-                            }}
-                          >
-                            {currentHeader.image && (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
-                                src={currentHeader.image}
-                                alt={currentHeader.alt || "Header preview"}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "cover",
-                                  objectPosition: `${currentPos.x}% ${currentPos.y}%`,
-                                  display: "block",
-                                  pointerEvents: "none"
-                                }}
-                              />
-                            )}
-
-                            {/* Clean Reticle */}
-                            <div
+                        <div>
+                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
+                            Hero Image Path
+                          </label>
+                          <div style={{ display: "flex", gap: "0.75rem" }}>
+                            <input
+                              type="text"
+                              value={editForm?.image || ""}
+                              onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
+                              placeholder="/images/testimonials/client-showcase.webp"
+                              style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                            />
+                            <input
+                              ref={fileInputRef}
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                              style={{ display: "none" }}
+                              id="testimonials-image-upload"
+                            />
+                            <label
+                              htmlFor="testimonials-image-upload"
                               style={{
-                                position: "absolute",
-                                left: `${currentPos.x}%`,
-                                top: `${currentPos.y}%`,
-                                transform: "translate(-50%, -50%)",
-                                pointerEvents: "none",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center"
+                                padding: "0.85rem 1.5rem",
+                                backgroundColor: "var(--black, #171717)",
+                                color: "var(--white, #ffffff)",
+                                borderRadius: "100rem",
+                                cursor: "pointer",
+                                fontSize: "0.85rem",
+                                fontWeight: 600,
+                                whiteSpace: "nowrap",
+                                display: "inline-flex",
+                                alignItems: "center"
                               }}
                             >
-                              <div style={{
-                                width: "34px",
-                                height: "34px",
-                                borderRadius: "50%",
-                                border: "2px solid #cbfb45",
-                                backgroundColor: "rgba(203, 251, 69, 0.25)",
-                                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center"
-                              }}>
-                                <div style={{
-                                  width: "6px",
-                                  height: "6px",
-                                  borderRadius: "50%",
-                                  backgroundColor: "#cbfb45"
-                                }} />
-                              </div>
-                            </div>
-
-                            {/* Badges */}
-                            <div style={{
-                              position: "absolute",
-                              top: "14px",
-                              left: "14px",
-                              backgroundColor: "rgba(23, 23, 23, 0.8)",
-                              color: "#ffffff",
-                              fontSize: "0.72rem",
-                              fontWeight: 700,
-                              letterSpacing: "0.04em",
-                              padding: "0.35rem 0.8rem",
-                              borderRadius: "100rem",
-                              pointerEvents: "none"
-                            }}>
-                              VISIBLE WINDOW ({is16by9 ? "16:9 BANNER" : "4:3 HERO"})
-                            </div>
-
-                            <div style={{
-                              position: "absolute",
-                              bottom: "14px",
-                              right: "14px",
-                              backgroundColor: "rgba(23, 23, 23, 0.8)",
-                              color: "#ffffff",
-                              fontSize: "0.75rem",
-                              padding: "0.35rem 0.8rem",
-                              borderRadius: "100rem",
-                              pointerEvents: "none"
-                            }}>
-                              Click or drag to reframe
-                            </div>
+                              {uploading ? "Uploading..." : "Upload New"}
+                            </label>
                           </div>
-
-                          {/* Sliders */}
-                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem", marginTop: "0.5rem" }}>
-                            <div style={{ backgroundColor: "#f9fafb", padding: "1.35rem 1.5rem", borderRadius: "20px", border: "1px solid #e5e7eb" }}>
-                              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                                <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "#171717" }}>
-                                  Vertical Position (Y Axis)
-                                </label>
-                                <span style={{ fontSize: "0.85rem", color: "#171717", fontWeight: 700 }}>
-                                  {currentPos.y}% {currentPos.y < 35 ? "(Top)" : currentPos.y > 65 ? "(Bottom)" : "(Center)"}
-                                </span>
-                              </div>
-                              <input
-                                type="range"
-                                min={0}
-                                max={100}
-                                value={currentPos.y}
-                                onChange={(e) => updateHeaderPosition(selectedHeaderKey, currentPos.x, parseFloat(e.target.value))}
-                                style={{ width: "100%", accentColor: "#171717", cursor: "pointer" }}
-                              />
-                              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#9ca3af", marginTop: "0.35rem" }}>
-                                <span>0% (Top)</span>
-                                <span>50% (Center)</span>
-                                <span>100% (Bottom)</span>
-                              </div>
+                          {editForm?.image && (
+                            <div style={{ marginTop: "1rem", borderRadius: "18px", overflow: "hidden", width: "240px", height: "140px", position: "relative", border: "1px solid #e5e7eb" }}>
+                              <Image src={editForm.image} alt="Testimonial Hero Preview" fill sizes="240px" style={{ objectFit: "cover" }} />
                             </div>
-
-                            <div style={{ backgroundColor: "#f9fafb", padding: "1.35rem 1.5rem", borderRadius: "20px", border: "1px solid #e5e7eb" }}>
-                              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                                <label style={{ fontSize: "0.85rem", fontWeight: 600, color: "#171717" }}>
-                                  Horizontal Position (X Axis)
-                                </label>
-                                <span style={{ fontSize: "0.85rem", color: "#171717", fontWeight: 700 }}>
-                                  {currentPos.x}% {currentPos.x < 35 ? "(Left)" : currentPos.x > 65 ? "(Right)" : "(Center)"}
-                                </span>
-                              </div>
-                              <input
-                                type="range"
-                                min={0}
-                                max={100}
-                                value={currentPos.x}
-                                onChange={(e) => updateHeaderPosition(selectedHeaderKey, parseFloat(e.target.value), currentPos.y)}
-                                style={{ width: "100%", accentColor: "#171717", cursor: "pointer" }}
-                              />
-                              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "#9ca3af", marginTop: "0.35rem" }}>
-                                <span>0% (Left)</span>
-                                <span>50% (Center)</span>
-                                <span>100% (Right)</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Quick Alignment Presets */}
-                          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap", paddingTop: "0.5rem" }}>
-                            <span style={{ fontSize: "0.85rem", color: "#6b7280", fontWeight: 500, marginRight: "0.25rem" }}>
-                              Quick Presets:
-                            </span>
-                            {[
-                              { label: "Top", x: 50, y: 0 },
-                              { label: "Center", x: 50, y: 50 },
-                              { label: "Bottom", x: 50, y: 100 },
-                              { label: "Left", x: 0, y: 50 },
-                              { label: "Right", x: 100, y: 50 },
-                            ].map((preset) => (
-                              <button
-                                key={preset.label}
-                                onClick={() => updateHeaderPosition(selectedHeaderKey, preset.x, preset.y)}
-                                style={{
-                                  backgroundColor: "#ffffff",
-                                  border: "1px solid #e5e7eb",
-                                  color: "#374151",
-                                  padding: "0.4rem 1.1rem",
-                                  borderRadius: "100rem",
-                                  fontSize: "0.8rem",
-                                  cursor: "pointer",
-                                  fontWeight: 600,
-                                  transition: "all 0.15s ease"
-                                }}
-                              >
-                                {preset.label}
-                              </button>
-                            ))}
-                          </div>
+                          )}
                         </div>
                       </div>
-                    );
-                  })()}
-                </div>
-            ) : editForm ? (
-              <div style={{
-                backgroundColor: "#ffffff",
-                borderRadius: "28px",
-                border: "1px solid #e5e7eb",
-                padding: "2.5rem 3rem"
-              }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-                    {activeTab === "case-studies" && (
-                      <>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
-                          <input
-                            type="text"
-                            value={editForm.title || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
-                            <input
-                              type="text"
-                              value={editForm.slug || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Client</label>
-                            <input
-                              type="text"
-                              value={editForm.client || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, client: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
-                          <textarea
-                            rows={3}
-                            value={editForm.description || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
-                          <div style={{ display: "flex", gap: "0.75rem" }}>
-                            <input
-                              type="text"
-                              value={editForm.image || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
-                              style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                            <input
-                              ref={fileInputRef}
-                              type="file"
-                              accept="image/*"
-                              onChange={handleImageUpload}
-                              style={{ display: "none" }}
-                              id="image-field-upload"
-                            />
-                            <label
-                              htmlFor="image-field-upload"
-                              style={{
-                                padding: "0.85rem 1.5rem",
-                                backgroundColor: "var(--black, #171717)",
-                                color: "var(--white, #ffffff)",
-                                borderRadius: "100rem",
-                                cursor: "pointer",
-                                fontSize: "0.85rem",
-                                fontWeight: 600,
-                                whiteSpace: "nowrap",
-                                display: "inline-flex",
-                                alignItems: "center"
-                              }}
-                            >
-                              {uploading ? "Uploading..." : "Upload New"}
-                            </label>
-                          </div>
-                          {editForm.image && (
-                            <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
-                              <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
-                            </div>
-                          )}
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Live Site URL</label>
-                          <input
-                            type="url"
-                            placeholder="https://example.com"
-                            value={editForm.siteUrl || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, siteUrl: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 500, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Tags (Comma separated)</label>
-                          <input
-                            type="text"
-                            value={(editForm.tags || []).join(", ")}
-                            onChange={(e) => updateEditForm({ ...editForm, tags: e.target.value.split(",").map((s: string) => s.trim()).filter(Boolean) })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Challenge</label>
-                          <textarea
-                            rows={3}
-                            value={editForm.challenge || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, challenge: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Solution</label>
-                          <textarea
-                            rows={3}
-                            value={editForm.solution || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, solution: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Results (One per line)</label>
-                          <textarea
-                            rows={4}
-                            value={(editForm.results || []).join("\n")}
-                            onChange={(e) => updateEditForm({ ...editForm, results: e.target.value.split("\n").filter(Boolean) })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    {activeTab === "blog" && (
-                      <>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
-                          <input
-                            type="text"
-                            value={editForm.title || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.25rem" }}>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
-                            <input
-                              type="text"
-                              value={editForm.slug || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Author</label>
-                            <input
-                              type="text"
-                              value={editForm.author || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, author: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Category</label>
-                            <input
-                              type="text"
-                              value={editForm.category || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, category: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Excerpt</label>
-                          <textarea
-                            rows={2}
-                            value={editForm.excerpt || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, excerpt: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
-                          <div style={{ display: "flex", gap: "0.75rem" }}>
-                            <input
-                              type="text"
-                              value={editForm.image || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
-                              style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                            <input
-                              ref={fileInputRef}
-                              type="file"
-                              accept="image/*"
-                              onChange={handleImageUpload}
-                              style={{ display: "none" }}
-                              id="blog-image-upload"
-                            />
-                            <label
-                              htmlFor="blog-image-upload"
-                              style={{
-                                padding: "0.85rem 1.5rem",
-                                backgroundColor: "var(--black, #171717)",
-                                color: "var(--white, #ffffff)",
-                                borderRadius: "100rem",
-                                cursor: "pointer",
-                                fontSize: "0.85rem",
-                                fontWeight: 600,
-                                whiteSpace: "nowrap",
-                                display: "inline-flex",
-                                alignItems: "center"
-                              }}
-                            >
-                              {uploading ? "Uploading..." : "Upload New"}
-                            </label>
-                          </div>
-                          {editForm.image && (
-                            <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
-                              <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
-                            </div>
-                          )}
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Article Body (Markdown)</label>
-                          <textarea
-                            rows={12}
-                            value={editForm.content || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, content: e.target.value })}
-                            style={{ width: "100%", padding: "1rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontFamily: "monospace", fontSize: "0.875rem", lineHeight: "1.55", boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    {activeTab === "services" && (
-                      <>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
-                          <input
-                            type="text"
-                            value={editForm.title || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
-                          <input
-                            type="text"
-                            value={editForm.slug || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
-                          <textarea
-                            rows={3}
-                            value={editForm.description || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Features (One per line)</label>
-                          <textarea
-                            rows={4}
-                            value={(editForm.features || []).join("\n")}
-                            onChange={(e) => updateEditForm({ ...editForm, features: e.target.value.split("\n").filter(Boolean) })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    {activeTab === "site-config" && (
-                      <>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Agency Name</label>
-                            <input
-                              type="text"
-                              value={editForm.name || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, name: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Email</label>
-                            <input
-                              type="text"
-                              value={editForm.email || ""}
-                              onChange={(e) => updateEditForm({ ...editForm, email: e.target.value })}
-                              style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
-                          <textarea
-                            rows={3}
-                            value={editForm.description || ""}
-                            onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
-                            style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    {activeTab === "team" && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-                        {/* Section Header */}
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
-                          <div>
-                            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", margin: 0 }}>
-                              Team Members ({Array.isArray(editForm) ? editForm.length : 0})
-                            </h3>
-                            <p style={{ fontSize: "0.85rem", color: "#6b7280", margin: "0.25rem 0 0 0" }}>
-                              Manage profiles, roles, headshots/avatars, bios, and social links displayed across the site.
-                            </p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={addTeamMember}
-                            style={{
-                              backgroundColor: "var(--green, #cbfb45)",
-                              color: "var(--black, #171717)",
-                              border: "none",
-                              borderRadius: "100rem",
-                              padding: "0.55rem 1.25rem",
-                              fontSize: "0.85rem",
-                              fontWeight: 700,
-                              cursor: "pointer",
-                            }}
-                          >
-                            + Add Team Member
-                          </button>
-                        </div>
-
-                        {/* Team Member Cards */}
-                        {Array.isArray(editForm) && editForm.map((member: { id: string; name: string; role: string; bio: string; image: string; socials?: { linkedin?: string; twitter?: string } }, index: number) => {
-                          const isCurrentUploading = uploadingIndex === index;
+                    ) : (
+                      (() => {
+                        const currentList = (Array.isArray(editForm?.testimonials)
+                          ? editForm.testimonials
+                          : Array.isArray(editForm)
+                          ? editForm
+                          : []) as Array<{ id: string; author: string; role: string; quote: string; rating: number }>;
+                        const index = Math.max(0, Math.min(selectedTestimonialIndex, currentList.length - 1));
+                        const item = currentList[index];
+                        if (!item) {
                           return (
-                            <div
-                              key={member.id || index}
-                              style={{
-                                backgroundColor: "#fafafa",
-                                border: "1px solid #e5e7eb",
-                                borderRadius: "20px",
-                                padding: "1.75rem",
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "1.25rem",
-                              }}
-                            >
-                              {/* Member Card Header */}
-                              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
-                                <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
-                                  <div style={{
-                                    width: "44px",
-                                    height: "44px",
-                                    borderRadius: "50%",
-                                    overflow: "hidden",
-                                    position: "relative",
-                                    backgroundColor: "#e5e7eb",
-                                    border: "2px solid #ffffff",
-                                    boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-                                    flexShrink: 0
-                                  }}>
-                                    {member.image ? (
-                                      <Image
-                                        src={member.image}
-                                        alt={member.name || "Member avatar"}
-                                        fill
-                                        sizes="44px"
-                                        style={{ objectFit: "cover" }}
-                                      />
-                                    ) : (
-                                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#6b7280" }}>
-                                        {member.name ? member.name.charAt(0).toUpperCase() : "#"}
-                                      </div>
-                                    )}
-                                  </div>
-                                  <div>
-                                    <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "#111827" }}>
-                                      {member.name || `Member #${index + 1}`}
-                                      <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "#9ca3af", marginLeft: "0.5rem" }}>
-                                        #{index + 1}
-                                      </span>
-                                    </div>
-                                    <div style={{ fontSize: "0.8rem", color: "#6b7280" }}>
-                                      {member.role || "No role specified"}
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-                                  <button
-                                    type="button"
-                                    onClick={() => moveTeamMember(index, "up")}
-                                    disabled={index === 0}
-                                    title="Move up"
-                                    style={{
-                                      backgroundColor: index === 0 ? "#f3f4f6" : "#ffffff",
-                                      color: index === 0 ? "#9ca3af" : "#171717",
-                                      border: "1px solid #e5e7eb",
-                                      padding: "0.35rem 0.65rem",
-                                      borderRadius: "8px",
-                                      cursor: index === 0 ? "default" : "pointer",
-                                      fontSize: "0.85rem",
-                                    }}
-                                  >
-                                    ↑
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => moveTeamMember(index, "down")}
-                                    disabled={index === editForm.length - 1}
-                                    title="Move down"
-                                    style={{
-                                      backgroundColor: index === editForm.length - 1 ? "#f3f4f6" : "#ffffff",
-                                      color: index === editForm.length - 1 ? "#9ca3af" : "#171717",
-                                      border: "1px solid #e5e7eb",
-                                      padding: "0.35rem 0.65rem",
-                                      borderRadius: "8px",
-                                      cursor: index === editForm.length - 1 ? "default" : "pointer",
-                                      fontSize: "0.85rem",
-                                    }}
-                                  >
-                                    ↓
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => removeTeamMember(index)}
-                                    style={{
-                                      backgroundColor: "transparent",
-                                      color: "#ef4444",
-                                      border: "1px solid #fee2e2",
-                                      borderRadius: "100rem",
-                                      padding: "0.35rem 0.85rem",
-                                      fontSize: "0.75rem",
-                                      fontWeight: 600,
-                                      cursor: "pointer",
-                                      marginLeft: "0.25rem",
-                                    }}
-                                  >
-                                    Remove
-                                  </button>
-                                </div>
-                              </div>
-
-                              {/* Identity Grid: Name, Role, ID */}
-                              <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.2fr 0.8fr", gap: "1rem" }}>
-                                <div>
-                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                    Full Name
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={member.name || ""}
-                                    onChange={(e) => updateTeamMemberField(index, "name", e.target.value)}
-                                    placeholder="e.g. Saqib Masoodi"
-                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                                  />
-                                </div>
-                                <div>
-                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                    Role / Title
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={member.role || ""}
-                                    onChange={(e) => updateTeamMemberField(index, "role", e.target.value)}
-                                    placeholder="e.g. Design Lead"
-                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
-                                  />
-                                </div>
-                                <div>
-                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                    Identifier (Slug ID)
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={member.id || ""}
-                                    onChange={(e) => updateTeamMemberField(index, "id", e.target.value)}
-                                    placeholder="e.g. saqib"
-                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
-                                  />
-                                </div>
-                              </div>
-
-                              {/* Avatar & Image Path */}
-                              <div>
-                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                  Avatar / Headshot Image
-                                </label>
-                                <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                                  <input
-                                    type="text"
-                                    value={member.image || ""}
-                                    onChange={(e) => updateTeamMemberField(index, "image", e.target.value)}
-                                    placeholder="/images/team/name.webp or /images/avatar.svg"
-                                    style={{ flex: 1, padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
-                                  />
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    id={`team-avatar-${index}`}
-                                    onChange={(e) => handleTeamAvatarUpload(index, e)}
-                                    style={{ display: "none" }}
-                                  />
-                                  <label
-                                    htmlFor={`team-avatar-${index}`}
-                                    style={{
-                                      padding: "0.75rem 1.25rem",
-                                      backgroundColor: "var(--black, #171717)",
-                                      color: "var(--white, #ffffff)",
-                                      borderRadius: "100rem",
-                                      cursor: "pointer",
-                                      fontSize: "0.8rem",
-                                      fontWeight: 600,
-                                      whiteSpace: "nowrap",
-                                      display: "inline-flex",
-                                      alignItems: "center",
-                                    }}
-                                  >
-                                    {isCurrentUploading ? "Uploading..." : "Upload Avatar"}
-                                  </label>
-                                </div>
-                              </div>
-
-                              {/* Bio */}
-                              <div>
-                                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                  Biography / Expertise
-                                </label>
-                                <textarea
-                                  rows={3}
-                                  value={member.bio || ""}
-                                  onChange={(e) => updateTeamMemberField(index, "bio", e.target.value)}
-                                  placeholder="Write a concise overview of their focus areas, skills, and background..."
-                                  style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", lineHeight: 1.5, boxSizing: "border-box", outline: "none" }}
-                                />
-                              </div>
-
-                              {/* Social Links */}
-                              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                                <div>
-                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                    LinkedIn Profile URL
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={member.socials?.linkedin || ""}
-                                    onChange={(e) => updateTeamMemberField(index, "socials.linkedin", e.target.value)}
-                                    placeholder="https://www.linkedin.com/in/username"
-                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
-                                  />
-                                </div>
-                                <div>
-                                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "#4b5563", marginBottom: "0.35rem" }}>
-                                    X / Twitter Profile URL
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={member.socials?.twitter || ""}
-                                    onChange={(e) => updateTeamMemberField(index, "socials.twitter", e.target.value)}
-                                    placeholder="https://x.com/username"
-                                    style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.85rem", boxSizing: "border-box", outline: "none" }}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-
-                        {(!Array.isArray(editForm) || editForm.length === 0) && (
-                          <div style={{ padding: "3rem", textAlign: "center", backgroundColor: "#ffffff", borderRadius: "20px", border: "1px dashed #d1d5db", color: "#6b7280" }}>
-                            <p style={{ margin: 0, fontWeight: 500 }}>No team members found.</p>
-                            <button
-                              type="button"
-                              onClick={addTeamMember}
-                              style={{
-                                marginTop: "1rem",
-                                backgroundColor: "var(--green, #cbfb45)",
-                                color: "var(--black, #171717)",
-                                border: "none",
-                                borderRadius: "100rem",
-                                padding: "0.55rem 1.25rem",
-                                fontSize: "0.85rem",
-                                fontWeight: 700,
-                                cursor: "pointer",
-                              }}
-                            >
-                              + Add First Team Member
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {activeTab === "testimonials" && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-                        {/* Featured Hero Image for Left Card */}
-                        <div
-                          style={{
-                            backgroundColor: "#fafafa",
-                            border: "1px solid #e5e7eb",
-                            borderRadius: "20px",
-                            padding: "1.5rem",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "1rem",
-                          }}
-                        >
-                          <div>
-                            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", margin: 0 }}>
-                              Left Card Featured Hero Image
-                            </h3>
-                            <p style={{ fontSize: "0.85rem", color: "#6b7280", margin: "0.25rem 0 0 0" }}>
-                              The hero-style image displayed on the large left card of the redesigned testimonials section.
-                            </p>
-                          </div>
-
-                          <div>
-                            <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
-                              Hero Image Path
-                            </label>
-                            <div style={{ display: "flex", gap: "0.75rem" }}>
-                              <input
-                                type="text"
-                                value={editForm?.image || ""}
-                                onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
-                                style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
-                              />
-                              <input
-                                ref={fileInputRef}
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                style={{ display: "none" }}
-                                id="testimonials-image-upload"
-                              />
-                              <label
-                                htmlFor="testimonials-image-upload"
-                                style={{
-                                  padding: "0.85rem 1.5rem",
-                                  backgroundColor: "var(--black, #171717)",
-                                  color: "var(--white, #ffffff)",
-                                  borderRadius: "100rem",
-                                  cursor: "pointer",
-                                  fontSize: "0.85rem",
-                                  fontWeight: 600,
-                                  whiteSpace: "nowrap",
-                                  display: "inline-flex",
-                                  alignItems: "center"
-                                }}
-                              >
-                                {uploading ? "Uploading..." : "Upload New"}
-                              </label>
-                            </div>
-                            {editForm?.image && (
-                              <div style={{ marginTop: "0.85rem", borderRadius: "18px", overflow: "hidden", width: "200px", height: "120px", position: "relative", border: "1px solid #e5e7eb" }}>
-                                <Image src={editForm.image} alt="Testimonial Hero Preview" fill sizes="200px" style={{ objectFit: "cover" }} />
-                              </div>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Testimonials List */}
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
-                          <div>
-                            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#111827", margin: 0 }}>
-                              Client Reviews & Testimonials
-                            </h3>
-                            <p style={{ fontSize: "0.85rem", color: "#6b7280", margin: "0.25rem 0 0 0" }}>
-                              Add, edit, or remove testimonials. The top 3 appear on the right side of the section.
-                            </p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const currentList = Array.isArray(editForm?.testimonials)
-                                ? [...editForm.testimonials]
-                                : Array.isArray(editForm)
-                                ? [...editForm]
-                                : [];
-                              const newItem = {
-                                id: `testimonial-${Date.now().toString().slice(-4)}`,
-                                author: "New Client",
-                                role: "Founder / Executive",
-                                quote: "Working with this team transformed our brand and customer growth.",
-                                rating: 5,
-                              };
-                              updateEditForm({
-                                ...editForm,
-                                testimonials: [...currentList, newItem],
-                              });
-                            }}
-                            style={{
-                              backgroundColor: "var(--green, #cbfb45)",
-                              color: "var(--black, #171717)",
-                              border: "none",
-                              borderRadius: "100rem",
-                              padding: "0.55rem 1.25rem",
-                              fontSize: "0.85rem",
-                              fontWeight: 700,
-                              cursor: "pointer",
-                            }}
-                          >
-                            + Add Testimonial
-                          </button>
-                        </div>
-
-                        {((Array.isArray(editForm?.testimonials) ? editForm.testimonials : Array.isArray(editForm) ? editForm : []) as Array<{ id: string; author: string; role: string; quote: string; rating: number }>).map((item, index: number) => (
-                          <div
-                            key={item.id || index}
-                            style={{
-                              backgroundColor: "#fafafa",
-                              border: "1px solid #e5e7eb",
-                              borderRadius: "20px",
-                              padding: "1.5rem",
-                              display: "flex",
-                              flexDirection: "column",
-                              gap: "1.25rem",
-                            }}
-                          >
-                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                              <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "#374151" }}>
-                                Testimonial #{index + 1} {index < 3 && <span style={{ color: "#059669", fontWeight: 600, fontSize: "0.75rem" }}>(Live on Homepage)</span>}
-                              </span>
+                            <div style={{ padding: "3rem", textAlign: "center", color: "#6b7280" }}>
+                              <p style={{ margin: 0, fontWeight: 500 }}>No testimonials found.</p>
                               <button
                                 type="button"
-                                onClick={() => {
-                                  const currentList = Array.isArray(editForm?.testimonials)
-                                    ? [...editForm.testimonials]
-                                    : Array.isArray(editForm)
-                                    ? [...editForm]
-                                    : [];
-                                  currentList.splice(index, 1);
-                                  updateEditForm({
-                                    ...editForm,
-                                    testimonials: currentList,
-                                  });
+                                onClick={handleInnerCreate}
+                                style={{
+                                  marginTop: "1rem",
+                                  backgroundColor: "var(--green, #cbfb45)",
+                                  color: "var(--black, #171717)",
+                                  border: "none",
+                                  borderRadius: "100rem",
+                                  padding: "0.55rem 1.25rem",
+                                  fontSize: "0.85rem",
+                                  fontWeight: 700,
+                                  cursor: "pointer",
                                 }}
+                              >
+                                + Add Testimonial
+                              </button>
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #f3f4f6", paddingBottom: "1.25rem" }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                                <span style={{ fontSize: "1.05rem", fontWeight: 700, color: "#111827" }}>
+                                  {item.author || `Testimonial #${index + 1}`}
+                                </span>
+                                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#9ca3af" }}>
+                                  #${index + 1} of ${currentList.length}
+                                </span>
+                                {index < 3 && (
+                                  <span style={{
+                                    backgroundColor: "var(--green, #cbfb45)",
+                                    color: "var(--black, #171717)",
+                                    fontSize: "0.7rem",
+                                    fontWeight: 700,
+                                    padding: "0.2rem 0.6rem",
+                                    borderRadius: "100rem"
+                                  }}>
+                                    Live on Homepage
+                                  </span>
+                                )}
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => removeTestimonial(index)}
                                 style={{
                                   backgroundColor: "transparent",
                                   color: "#ef4444",
                                   border: "1px solid #fee2e2",
                                   borderRadius: "100rem",
-                                  padding: "0.3rem 0.85rem",
-                                  fontSize: "0.75rem",
+                                  padding: "0.35rem 0.85rem",
+                                  fontSize: "0.8rem",
                                   fontWeight: 600,
                                   cursor: "pointer",
                                 }}
@@ -2803,17 +2776,11 @@ export default function AdminPage() {
                                   type="text"
                                   value={item.author || ""}
                                   onChange={(e) => {
-                                    const currentList = Array.isArray(editForm?.testimonials)
-                                      ? [...editForm.testimonials]
-                                      : Array.isArray(editForm)
-                                      ? [...editForm]
-                                      : [];
-                                    currentList[index] = { ...currentList[index], author: e.target.value };
-                                    updateEditForm({
-                                      ...editForm,
-                                      testimonials: currentList,
-                                    });
+                                    const nextList = [...currentList];
+                                    nextList[index] = { ...nextList[index], author: e.target.value };
+                                    updateEditForm({ ...editForm, testimonials: nextList });
                                   }}
+                                  placeholder="Client Name"
                                   style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
                                 />
                               </div>
@@ -2825,17 +2792,11 @@ export default function AdminPage() {
                                   type="text"
                                   value={item.role || ""}
                                   onChange={(e) => {
-                                    const currentList = Array.isArray(editForm?.testimonials)
-                                      ? [...editForm.testimonials]
-                                      : Array.isArray(editForm)
-                                      ? [...editForm]
-                                      : [];
-                                    currentList[index] = { ...currentList[index], role: e.target.value };
-                                    updateEditForm({
-                                      ...editForm,
-                                      testimonials: currentList,
-                                    });
+                                    const nextList = [...currentList];
+                                    nextList[index] = { ...nextList[index], role: e.target.value };
+                                    updateEditForm({ ...editForm, testimonials: nextList });
                                   }}
+                                  placeholder="e.g. CEO at Acme Corp"
                                   style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", boxSizing: "border-box", outline: "none" }}
                                 />
                               </div>
@@ -2846,16 +2807,9 @@ export default function AdminPage() {
                                 <select
                                   value={item.rating ?? 5}
                                   onChange={(e) => {
-                                    const currentList = Array.isArray(editForm?.testimonials)
-                                      ? [...editForm.testimonials]
-                                      : Array.isArray(editForm)
-                                      ? [...editForm]
-                                      : [];
-                                    currentList[index] = { ...currentList[index], rating: Number(e.target.value) };
-                                    updateEditForm({
-                                      ...editForm,
-                                      testimonials: currentList,
-                                    });
+                                    const nextList = [...currentList];
+                                    nextList[index] = { ...nextList[index], rating: Number(e.target.value) };
+                                    updateEditForm({ ...editForm, testimonials: nextList });
                                   }}
                                   style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
                                 >
@@ -2873,36 +2827,32 @@ export default function AdminPage() {
                                 Testimonial Quote
                               </label>
                               <textarea
-                                rows={3}
+                                rows={4}
                                 value={item.quote || ""}
                                 onChange={(e) => {
-                                  const currentList = Array.isArray(editForm?.testimonials)
-                                    ? [...editForm.testimonials]
-                                    : Array.isArray(editForm)
-                                    ? [...editForm]
-                                    : [];
-                                  currentList[index] = { ...currentList[index], quote: e.target.value };
-                                  updateEditForm({
-                                    ...editForm,
-                                    testimonials: currentList,
-                                  });
+                                  const nextList = [...currentList];
+                                  nextList[index] = { ...nextList[index], quote: e.target.value };
+                                  updateEditForm({ ...editForm, testimonials: nextList });
                                 }}
-                                style={{ width: "100%", padding: "0.75rem 1rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "14px", color: "#111827", fontSize: "0.9rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
+                                placeholder="Write the client's testimonial feedback..."
+                                style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", lineHeight: 1.55, boxSizing: "border-box", outline: "none" }}
                               />
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        );
+                      })()
                     )}
                   </div>
-                </div>
-              ) : (
-                <div style={{ textAlign: "center", color: "#9ca3af", marginTop: "5rem", fontSize: "0.95rem" }}>
-                  Select an item from the list to edit, or click + New.
-                </div>
-              )}
+                )}
+              </div>
             </div>
-        </main>
+          ) : (
+            <div style={{ textAlign: "center", color: "#9ca3af", marginTop: "5rem", fontSize: "0.95rem" }}>
+              Select an item from the list to edit, or click + New.
+            </div>
+          )}
+        </div>
+      </main>
 
       {/* Toast Notification */}
       {toast && (

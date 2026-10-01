@@ -188,6 +188,12 @@ export default function Navbar() {
             >
               <Palette size={20} strokeWidth={2} />
             </button>
+            {isColorDropdownOpen && (
+              <AccentColorDropdown
+                isOpen={isColorDropdownOpen}
+                onClose={() => setIsColorDropdownOpen(false)}
+              />
+            )}
 
             <button
               className="navbar-menu-button"

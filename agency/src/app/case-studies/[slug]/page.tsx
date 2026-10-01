@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
@@ -164,7 +164,7 @@ export default async function CaseStudyPage({ params }: Props) {
                   <h2 className="heading-style-h2 weight-medium" style={{ marginBottom: "1.5rem" }}>
                     Results
                   </h2>
-                  <div className="stats-list" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+                  <div className="stats-list case-study-results-grid">
                     {study.results.map((result, index) => (
                       <div
                         key={index}
