@@ -79,7 +79,7 @@ export default function CaseStudiesPreview({
                                     width={600}
                                     height={338}
                                     className="project-image"
-                                    sizes="(max-width: 767px) 94vw, (max-width: 991px) 600px, 33vw"
+                                    sizes="(max-width: 527px) calc(100vw - 80px), (max-width: 639px) 448px, (max-width: 991px) 42vw, 33vw"
                                   />
                                 </div>
                               </Link>

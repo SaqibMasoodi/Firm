@@ -114,7 +114,7 @@ export default async function CaseStudiesPage() {
                                     width={720}
                                     height={450}
                                     className="case-study-image"
-                                    sizes="(max-width: 479px) 76vw, (max-width: 767px) 77vw, (max-width: 991px) 37vw, 39vw"
+                                    sizes="(max-width: 527px) calc(100vw - 64px), (max-width: 639px) 448px, (max-width: 991px) 42vw, 39vw"
                                   />
                                 </div>
                               </Link>

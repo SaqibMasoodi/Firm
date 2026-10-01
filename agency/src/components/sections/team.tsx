@@ -66,7 +66,7 @@ export default function Team() {
                               height={400}
                               className="team-image"
                               unoptimized={!(member.image && member.image.endsWith(".webp"))}
-                              sizes="(max-width: 479px) 83vw, (max-width: 767px) 86vw, (max-width: 991px) 40vw, 19vw"
+                              sizes="(max-width: 399px) calc(100vw - 64px), (max-width: 600px) 336px, (max-width: 991px) 42vw, 19vw"
                             />
                           </div>
                         </div>
