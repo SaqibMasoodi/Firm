@@ -62,5 +62,14 @@
     "socials": {
       "linkedin": "https://www.linkedin.com/in/mubashir-masoodi"
     }
+  },
+  {
+    "id": "hazar",
+    "name": "Hazar Hamad Bhat",
+    "role": "AI & Data Science Specialist",
+    "bio": "Hazar specializes in artificial intelligence, machine learning, and data-driven systems. He brings hands-on expertise in neural networks (ANNs), large language models (LLMs), and generative AI, with a focus on building intelligent applications and deploying modern AI solutions.",
+    "image": "/images/avatar.svg",
+    "socials": {}
   }
 ]
+

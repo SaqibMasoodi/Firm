@@ -79,7 +79,7 @@ export default function CaseStudiesPreview({
                                     width={600}
                                     height={338}
                                     className="project-image"
-                                    sizes="(max-width: 479px) 83vw, (max-width: 767px) 86vw, (max-width: 991px) 40vw, 26vw"
+                                    sizes="(max-width: 767px) 94vw, (max-width: 991px) 600px, 33vw"
                                   />
                                 </div>
                               </Link>
@@ -111,7 +111,7 @@ export default function CaseStudiesPreview({
                                     )}
                                   </div>
                                 </div>
-                                <div className="project-button-wrapper" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: "0.75rem", flexWrap: "wrap" }}>
+                                <div className="project-button-wrapper">
                                   <Link href={`/case-studies/${study.slug}`} className="button-link">
                                     <div className="button-text-item">
                                       View case study

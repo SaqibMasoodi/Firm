@@ -146,7 +146,7 @@ export default async function CaseStudiesPage() {
                                     )}
                                   </div>
                                 </div>
-                                <div className="project-button-wrapper" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", gap: "1rem" }}>
+                                <div className="project-button-wrapper">
                                   <Link href={`/case-studies/${study.slug}`} className="button-link">
                                     <div className="button-text-item">
                                       View case study
