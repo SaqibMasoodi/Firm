@@ -35,11 +35,8 @@ export default function Hero({ header }: HeroProps) {
                   </ScrollReveal>
                 </div>
                 <ScrollReveal priority delay={0.12}>
-                  <p className="text-size-medium">
-                    We&apos;re not just a social media marketing agency—we&apos;re your
-                    ticket to digital excellence and engagement growth. With a canvas as vast
-                    as the internet, your business has limitless potential to connect with its
-                    audience. And we&apos;re here to paint that picture of success.
+                  <p className="text-size-medium" style={{ maxWidth: "32rem" }}>
+                    We craft high-impact digital experiences, software, and growth strategies that help your brand connect and scale.
                   </p>
                 </ScrollReveal>
                 <div className="margin-top margin-medium">
