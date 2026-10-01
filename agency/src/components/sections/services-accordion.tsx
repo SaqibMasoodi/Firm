@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
@@ -22,6 +22,51 @@ export default function ServicesAccordion({
   services = [],
 }: ServicesAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const toggleAnchor = useRef<{ element: HTMLDivElement; top: number } | null>(null);
+
+  function toggleService(index: number, element: HTMLDivElement) {
+    toggleAnchor.current = { element, top: element.getBoundingClientRect().top };
+    setOpenIndex((current) => (current === index ? null : index));
+  }
+
+  useLayoutEffect(() => {
+    const anchor = toggleAnchor.current;
+    if (!anchor) return;
+
+    // Keep the selected heading stationary while the old panel above it closes.
+    // Disable document anchoring too: the browser may anchor to content below us.
+    const root = document.documentElement;
+    const previousAnchor = root.style.overflowAnchor;
+    root.style.overflowAnchor = "none";
+    const started = performance.now();
+    let frame = 0;
+
+    function stop() {
+      cancelAnimationFrame(frame);
+      root.style.overflowAnchor = previousAnchor;
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop, true);
+    }
+
+    function keepHeadingInPlace() {
+      const offset = anchor!.element.getBoundingClientRect().top - anchor!.top;
+      if (Math.abs(offset) > 0.5) {
+        window.scrollBy({ top: offset, behavior: "instant" });
+      }
+      if (performance.now() - started < 400) {
+        frame = requestAnimationFrame(keepHeadingInPlace);
+      } else {
+        stop();
+      }
+    }
+
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("keydown", stop, true);
+    keepHeadingInPlace();
+    return stop;
+  }, [openIndex]);
 
   return (
     <div className="section-services">
@@ -57,17 +102,17 @@ export default function ServicesAccordion({
                       <div key={service.id} className="service-accordion">
                         <div
                           className="service-name"
-                          onClick={() =>
-                            setOpenIndex(openIndex === index ? null : index)
+                          onClick={(e) =>
+                            toggleService(index, e.currentTarget)
                           }
                           role="button"
                           tabIndex={0}
                           aria-expanded={openIndex === index}
                           onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ")
-                              setOpenIndex(
-                                openIndex === index ? null : index
-                              );
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              toggleService(index, e.currentTarget);
+                            }
                           }}
                         >
                           <div className="text-size-large weight-medium">

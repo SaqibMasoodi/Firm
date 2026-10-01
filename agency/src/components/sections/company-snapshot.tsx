@@ -71,7 +71,7 @@ export default function CompanySnapshot() {
                         width={800}
                         height={533}
                         className="stat-image"
-                        sizes="(max-width: 479px) 83vw, (max-width: 767px) 82vw, (max-width: 991px) 41vw, 27vw"
+                        sizes="(max-width: 991px) 41vw, 27vw"
                       />
                     </div>
 
@@ -119,7 +119,7 @@ export default function CompanySnapshot() {
                         width={800}
                         height={533}
                         className="stat-image"
-                        sizes="(max-width: 479px) 83vw, (max-width: 767px) 82vw, (max-width: 991px) 41vw, 27vw"
+                        sizes="(max-width: 991px) 41vw, 27vw"
                       />
                     </div>
                   </div>
