@@ -2531,13 +2531,17 @@ button,
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
-  color: var(--grey-text);
+  color: #171717;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
+.footer-credit-text {
+  color: #171717 !important;
+}
+
 .footer-credit-text a {
-  color: inherit;
+  color: #171717 !important;
   text-decoration: underline;
 }
 

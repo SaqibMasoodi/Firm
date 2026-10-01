@@ -86,6 +86,7 @@ export default function Team() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="team-social-link"
+                                aria-label={`${member.name} on LinkedIn`}
                               >
                                 <div className="team-social-icon">
                                   <LinkedInIcon />
@@ -98,6 +99,7 @@ export default function Team() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="team-social-link"
+                                aria-label={`${member.name} on X`}
                               >
                                 <div className="team-social-icon">
                                   <TwitterIcon />

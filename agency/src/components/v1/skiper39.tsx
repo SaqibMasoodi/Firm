@@ -214,7 +214,9 @@ export const CrowdCanvas = ({
     };
 
     const initCrowd = () => {
-      const maxCount = config.maxPeeps ?? availablePeeps.length;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const defaultMax = isMobile ? 12 : 24;
+      const maxCount = config.maxPeeps ?? Math.min(defaultMax, availablePeeps.length);
       while (availablePeeps.length && crowd.length < maxCount) {
         const peep = addPeepToCrowd();
         if (peep && peep.walk) {
@@ -257,8 +259,23 @@ export const CrowdCanvas = ({
       });
     };
 
+    let isTickerActive = false;
+    const startTicker = () => {
+      if (!isTickerActive && isMounted) {
+        gsap.ticker.add(render);
+        isTickerActive = true;
+      }
+    };
+
+    const stopTicker = () => {
+      if (isTickerActive) {
+        gsap.ticker.remove(render);
+        isTickerActive = false;
+      }
+    };
+
     // Smoothly decelerates the crowd to a natural standstill
-    const slowDownAndPause = (duration = 1.4) => {
+    const slowDownAndPause = (duration = 1.2) => {
       if (speedTween) speedTween.kill();
       if (autoPauseTimer) clearTimeout(autoPauseTimer);
 
@@ -267,23 +284,35 @@ export const CrowdCanvas = ({
         duration,
         ease: "power2.out",
         onUpdate: syncCrowdSpeed,
+        onComplete: () => {
+          crowd.forEach((peep) => {
+            if (peep.walk) peep.walk.pause();
+          });
+          render();
+          stopTicker();
+        },
       });
     };
 
     // Accelerates the crowd back to full walking pace for activeDuration, then smoothly slows down
-    const resumeWalk = (activeDuration = 2.8) => {
+    const resumeWalk = (activeDuration = 2.5) => {
       if (speedTween) speedTween.kill();
       if (autoPauseTimer) clearTimeout(autoPauseTimer);
 
+      startTicker();
+      crowd.forEach((peep) => {
+        if (peep.walk) peep.walk.resume();
+      });
+
       speedTween = gsap.to(speedMultiplier, {
         current: 1,
-        duration: 0.8,
+        duration: 0.6,
         ease: "power2.out",
         onUpdate: syncCrowdSpeed,
         onComplete: () => {
           autoPauseTimer = setTimeout(() => {
             if (isMounted) {
-              slowDownAndPause(1.4);
+              slowDownAndPause(1.2);
             }
           }, activeDuration * 1000);
         },
@@ -292,7 +321,7 @@ export const CrowdCanvas = ({
 
     const render = () => {
       if (!canvas || !isMounted) return;
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.save();
       ctx.scale(dpr, dpr);
@@ -304,7 +333,7 @@ export const CrowdCanvas = ({
 
     const resize = () => {
       if (!canvas || !isMounted) return;
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
       if (width === 0 || height === 0) return;
@@ -323,6 +352,7 @@ export const CrowdCanvas = ({
       availablePeeps.push(...allPeeps);
 
       initCrowd();
+      render();
     };
 
     let imageLoaded = false;
@@ -331,15 +361,14 @@ export const CrowdCanvas = ({
       imageLoaded = true;
       createPeeps();
       resize();
-      gsap.ticker.add(render);
+      startTicker();
 
-      // Initial walk on page arrival: runs for 5.2s (allowing splash screen to finish),
-      // then gently slows down into a natural standstill
+      // Initial gentle walk on page arrival, then immediately pause and stop burning CPU
       autoPauseTimer = setTimeout(() => {
         if (isMounted) {
-          slowDownAndPause(1.4);
+          slowDownAndPause(1.0);
         }
-      }, 5200);
+      }, 2200);
     };
 
     img.onload = init;
@@ -354,15 +383,31 @@ export const CrowdCanvas = ({
 
     window.addEventListener("resize", handleResize);
 
-    // Interactive Hover: on pointerenter or tap, crowd starts walking again for 2.8s, then smoothly slows down
+    // Interactive Hover/Tap: crowd starts walking again, then smoothly stops
     const handleInteraction = () => {
       if (imageLoaded) {
-        resumeWalk(2.8);
+        resumeWalk(2.5);
       }
     };
 
     canvas.addEventListener("pointerenter", handleInteraction);
     canvas.addEventListener("pointerdown", handleInteraction);
+
+    // Viewport Visibility: pause completely when canvas is scrolled out of view
+    let io: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              slowDownAndPause(0.1);
+            }
+          });
+        },
+        { threshold: 0.05 }
+      );
+      io.observe(canvas);
+    }
 
     let ro: ResizeObserver | null = null;
     if (typeof ResizeObserver !== "undefined") {
@@ -378,10 +423,11 @@ export const CrowdCanvas = ({
       window.removeEventListener("resize", handleResize);
       canvas.removeEventListener("pointerenter", handleInteraction);
       canvas.removeEventListener("pointerdown", handleInteraction);
+      if (io) io.disconnect();
       if (ro) ro.disconnect();
       if (speedTween) speedTween.kill();
       if (autoPauseTimer) clearTimeout(autoPauseTimer);
-      gsap.ticker.remove(render);
+      stopTicker();
       crowd.forEach((peep) => {
         if (peep.walk) peep.walk.kill();
       });

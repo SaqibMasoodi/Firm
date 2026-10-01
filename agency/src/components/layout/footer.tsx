@@ -98,7 +98,7 @@ export default function Footer() {
                         Thank you! Your submission has been received!
                       </div>
                     )}
-                    <div className="text-size-tiny" style={{ color: "var(--black)", opacity: 0.8, marginTop: "0.5rem" }}>
+                    <div className="text-size-tiny" style={{ color: "#262626", marginTop: "0.5rem" }}>
                       By subscribing you agree to with our Privacy Policy and provide
                       consent to receive updates from our company.
                     </div>

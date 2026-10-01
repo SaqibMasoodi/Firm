@@ -78,7 +78,8 @@ export default function Hero({ header }: HeroProps) {
                   height={1080}
                   className="header-image"
                   priority
-                  sizes="90vw"
+                  quality={80}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 92vw, 1200px"
                   style={{ objectPosition }}
                 />
               </div>
