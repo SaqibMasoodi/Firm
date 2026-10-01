@@ -97,6 +97,11 @@ function UserIcon() {
   );
 }
 
+function generateUniqueId(prefix: string): string {
+  // eslint-disable-next-line react-hooks/purity
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+}
+
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>("case-studies");
   const [items, setItems] = useState<ContentItem[]>([]);
@@ -112,7 +117,8 @@ export default function AdminPage() {
   // Inner nav pane state
   const [isNavPaneCollapsed, setIsNavPaneCollapsed] = useState<boolean>(false);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState<number>(0);
-  const [selectedTestimonialIndex, setSelectedTestimonialIndex] = useState<number>(0);
+  const [selectedTestimonialKey, setSelectedTestimonialKey] = useState<string>("hero-image");
+  const [selectedTestimonialIndex, setSelectedTestimonialIndex] = useState<number>(-1);
 
   // Raw JSON toggle & state
   const [isJsonMode, setIsJsonMode] = useState<boolean>(false);
