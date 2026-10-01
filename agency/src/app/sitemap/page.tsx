@@ -58,6 +58,7 @@ export default async function SitemapPage() {
     { title: "Case Studies", href: "/case-studies", desc: "Client work & transformations" },
     { title: "Blog", href: "/blog", desc: "Insights, industry trends & news" },
     { title: "Contact", href: "/contact", desc: "Inquiries & project kick-offs" },
+    { title: "Policies", href: "/policies", desc: "Privacy, cookies, and website use" },
     { title: "Admin CMS", href: "/admin", desc: "Site management dashboard" },
   ];
 

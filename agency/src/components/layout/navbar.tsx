@@ -146,6 +146,7 @@ export default function Navbar() {
                     pathname === link.href ? "active" : ""
                   }`}
                   onClick={() => setIsOpen(false)}
+                  aria-current={pathname === link.href ? "page" : undefined}
                 >
                   {link.label}
                 </Link>

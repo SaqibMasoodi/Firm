@@ -99,8 +99,8 @@ export default function Footer() {
                       </div>
                     )}
                     <div className="text-size-tiny" style={{ color: "#262626", marginTop: "0.5rem" }}>
-                      By subscribing you agree to with our Privacy Policy and provide
-                      consent to receive updates from our company.
+                      By subscribing, you agree to receive updates from our company.
+                      Read our <Link href="/policies#privacy">privacy policy</Link>.
                     </div>
                   </div>
                 </div>
@@ -113,11 +113,9 @@ export default function Footer() {
                     <Link href="/about" className="footer-link">About us</Link>
                     <Link href="/services" className="footer-link">Services</Link>
                     <Link href="/case-studies" className="footer-link">Case studies</Link>
-                    <Link href="/case-studies/wolf-adventures-kashmir" className="footer-link">Case study sample</Link>
                     <Link href="/blog" className="footer-link">Blog</Link>
-                    <Link href="/blog/social-commerce-trends" className="footer-link">Blog post sample</Link>
                     <Link href="/contact" className="footer-link">Contact</Link>
-                    <Link href="/sitemap" className="footer-link">Sitemap</Link>
+                    <Link href="/policies" className="footer-link">Policies</Link>
                   </div>
 
                   <div className="footer-link-list">

@@ -14,5 +14,9 @@
   {
     "label": "Blog",
     "href": "/blog"
+  },
+  {
+    "label": "Policies",
+    "href": "/policies"
   }
 ]

@@ -7,6 +7,7 @@ import "./globals.css";
 import { OrganizationSchema } from "@/components/seo/schemas";
 import ClientInteractiveTools from "@/components/ui/client-interactive-tools";
 import ClientSplashScreen from "@/components/ui/client-splash-screen";
+import CookieBanner from "@/components/ui/cookie-banner";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -102,6 +103,7 @@ export default function RootLayout({
         <Navbar />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

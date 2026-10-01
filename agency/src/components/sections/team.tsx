@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import { teamMembers } from "@/lib/constants";
@@ -28,6 +29,95 @@ interface TeamProps {
 
 export default function Team({ initialLimit = 4, showAll = false }: TeamProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const transitionRef = useRef<(() => void) | null>(null);
+  const listId = useId();
+
+  useEffect(() => () => transitionRef.current?.(), []);
+
+  function toggleTeam() {
+    const wrapper = listRef.current;
+    const button = buttonRef.current;
+    if (!wrapper || !button || transitionRef.current) return;
+
+    const collapsing = isExpanded;
+    const startHeight = wrapper.getBoundingClientRect().height;
+    const startScroll = window.scrollY;
+    const buttonCenter = button.getBoundingClientRect().top + button.offsetHeight / 2;
+    // Keep the button where it was clicked, unless it is close to a screen edge.
+    const targetCenter = Math.min(Math.max(buttonCenter, window.innerHeight * 0.35), window.innerHeight * 0.75);
+    const root = document.documentElement;
+    const previousAnchor = root.style.overflowAnchor;
+    root.style.overflowAnchor = "none";
+    wrapper.style.height = `${startHeight}px`;
+    wrapper.style.overflow = "clip";
+
+    if (!collapsing) flushSync(() => setIsExpanded(true));
+
+    const grid = wrapper.querySelector<HTMLDivElement>(".team-list")!;
+    const extraCards = Array.from(grid.children).slice(initialLimit) as HTMLElement[];
+    // Measure the real collapsed grid at the current responsive breakpoint.
+    if (collapsing) extraCards.forEach((card) => { card.style.display = "none"; });
+    const endHeight = grid.getBoundingClientRect().height;
+    if (collapsing) extraCards.forEach((card) => {
+      card.style.removeProperty("display");
+      card.style.animation = "none";
+      card.inert = true;
+    });
+
+    const endScroll = Math.max(0, startScroll + endHeight - startHeight + buttonCenter - targetCenter);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = reducedMotion ? 0 : 650;
+    let frame = 0;
+    let startedAt: number | undefined;
+    let followButton = collapsing;
+    const stopFollowing = () => { followButton = false; };
+    window.addEventListener("wheel", stopFollowing, { passive: true });
+    window.addEventListener("touchstart", stopFollowing, { passive: true });
+    window.addEventListener("keydown", stopFollowing);
+
+    const cleanup = () => {
+      cancelAnimationFrame(frame);
+      wrapper.style.removeProperty("height");
+      wrapper.style.removeProperty("overflow");
+      extraCards.forEach((card) => {
+        card.style.removeProperty("opacity");
+        card.style.removeProperty("animation");
+        card.inert = false;
+      });
+      root.style.overflowAnchor = previousAnchor;
+      window.removeEventListener("wheel", stopFollowing);
+      window.removeEventListener("touchstart", stopFollowing);
+      window.removeEventListener("keydown", stopFollowing);
+      transitionRef.current = null;
+    };
+    transitionRef.current = cleanup;
+
+    const tick = (now: number) => {
+      startedAt ??= now;
+      const progress = duration === 0 ? 1 : Math.min((now - startedAt) / duration, 1);
+      const eased = progress < 0.5
+        ? 4 * progress ** 3
+        : 1 - (-2 * progress + 2) ** 3 / 2;
+      wrapper.style.height = `${startHeight + (endHeight - startHeight) * eased}px`;
+      if (collapsing) extraCards.forEach((card) => {
+        card.style.opacity = `${Math.max(0, 1 - progress * 3)}`;
+      });
+      // One animation drives both layout and scrolling; native smooth scrolling
+      // would compete with the changing page height and browser scroll anchoring.
+      if (followButton) window.scrollTo({ top: startScroll + (endScroll - startScroll) * eased, behavior: "instant" });
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      } else {
+        if (collapsing) flushSync(() => setIsExpanded(false));
+        cleanup();
+      }
+    };
+    if (reducedMotion) tick(performance.now());
+    else frame = requestAnimationFrame(tick);
+  }
 
   const displayedMembers = isExpanded || showAll
     ? teamMembers
@@ -60,7 +150,7 @@ export default function Team({ initialLimit = 4, showAll = false }: TeamProps) {
               </div>
             </div>
             <div className="team-component">
-              <div className="team-list-wrapper">
+              <div className="team-list-wrapper" ref={listRef} id={listId}>
                 <ScrollReveal delay={0.1}>
                   <div className="team-list">
                     {displayedMembers.map((member, index) => (
@@ -130,9 +220,11 @@ export default function Team({ initialLimit = 4, showAll = false }: TeamProps) {
                   <div className="team-footer-actions">
                     <button
                       type="button"
+                      ref={buttonRef}
                       className="button"
-                      onClick={() => setIsExpanded((prev) => !prev)}
+                      onClick={toggleTeam}
                       aria-expanded={isExpanded}
+                      aria-controls={listId}
                     >
                       {isExpanded ? "Show less" : "View all team members"}
                     </button>
