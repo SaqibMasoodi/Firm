@@ -1,5 +1,5 @@
 "use client";
-import { Play, Music2, MessageCircle } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
 
 
 import Link from "next/link";
@@ -123,19 +123,18 @@ export default function Footer() {
                     <div className="footer-links-list-title">
                       <div className="weight-semibold">Contact</div>
                     </div>
-                    <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="footer-link">
-                      {siteConfig.phone}
+                    <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="footer-contact-row">
+                      <Phone size={18} aria-hidden="true" /><span>{siteConfig.phone}</span>
                     </a>
-                    <a href={`mailto:${siteConfig.email}`} className="footer-link">
-                      {siteConfig.email}
+                    <a href={`mailto:${siteConfig.email}`} className="footer-contact-row" target="_blank" rel="noopener noreferrer">
+                      <Mail size={18} aria-hidden="true" /><span>{siteConfig.email}</span>
                     </a>
-                    {siteConfig.whatsappNumber && <a href={`https://wa.me/${siteConfig.whatsappNumber.replace(/\D/g, "")}`} className="footer-social-link" target="_blank" rel="noopener noreferrer"><MessageCircle size={18} aria-hidden="true" />WhatsApp</a>}
-                    <div className="footer-address">
-                      {siteConfig.address.line1}
-                      <br />
-                      {siteConfig.address.line2}
-                      <br />
-                      {siteConfig.address.city}
+                    {siteConfig.whatsappNumber && <a href={`https://wa.me/${siteConfig.whatsappNumber.replace(/\D/g, "")}`} className="footer-contact-row" target="_blank" rel="noopener noreferrer">
+                      <MessageCircle size={18} aria-hidden="true" /><span>WhatsApp: {siteConfig.whatsappNumber}</span>
+                    </a>}
+                    <div className="footer-contact-row footer-contact-address">
+                      <MapPin size={18} aria-hidden="true" />
+                      <span>{[siteConfig.address.line1, siteConfig.address.line2, siteConfig.address.city].filter(Boolean).map((line,index)=><span key={index} className="footer-address-line">{line}</span>)}</span>
                     </div>
                   </div>
 
@@ -159,8 +158,6 @@ export default function Footer() {
                       <div className="social-icon w-embed"><LinkedInIcon /></div>
                       <div className="text-size-small text-colour-black">LinkedIn</div>
                     </a>
-                    {siteConfig.socials.youtube && <Link href={siteConfig.socials.youtube} className="footer-social-link"><div className="social-icon"><Play size={20} aria-hidden="true" /></div><div className="text-size-small text-colour-black">YouTube</div></Link>}
-                    {siteConfig.socials.tiktok && <Link href={siteConfig.socials.tiktok} className="footer-social-link"><div className="social-icon"><Music2 size={20} aria-hidden="true" /></div><div className="text-size-small text-colour-black">TikTok</div></Link>}
                   </div>
                 </div>
               </div>

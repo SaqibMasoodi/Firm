@@ -24,8 +24,6 @@ export function OrganizationSchema() {
       siteConfig.socials.instagram,
       siteConfig.socials.twitter,
       siteConfig.socials.linkedin,
-      siteConfig.socials.youtube,
-      siteConfig.socials.tiktok,
     ].filter(url => url && /^https?:\/\//.test(url)),
   };
 

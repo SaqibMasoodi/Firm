@@ -1,24 +1,17 @@
 "use client";
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { ContactMessageSchema, type ContactMessage } from "@/lib/contact-message";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import FAQ from "@/components/sections/faq";
 import { siteConfig } from "@/lib/constants";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().optional(),
-  subject: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+const contactSchema = ContactMessageSchema;
+type ContactFormData = ContactMessage;
 
 function EmailIcon() {
   return (
@@ -49,6 +42,19 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [whatsappUrl, setWhatsappUrl] = useState<string | null>(null);
+  const [showWhatsApp, setShowWhatsApp] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const requestRef = useRef<{ fingerprint: string; id: string } | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (showWhatsApp && !dialog.open) dialog.showModal();
+    else if (!showWhatsApp && dialog.open) dialog.close();
+    return () => { if (dialog.open) dialog.close(); };
+  }, [showWhatsApp]);
+
 
   const {
     register,
@@ -62,19 +68,26 @@ export default function ContactPage() {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitError("");
+    const fingerprint = JSON.stringify(data);
+    if (requestRef.current?.fingerprint !== fingerprint) requestRef.current = { fingerprint, id: crypto.randomUUID() };
     try {
       const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, requestId: requestRef.current!.id }),
       });
-      if (!res.ok) throw new Error("Submission failed");
-      if (res.ok) {
-        setIsSuccess(true);
-        reset();
+      const result = await res.json();
+      if (!res.ok || result.emailAccepted !== true) {
+        setSubmitError(result.message || "Your email could not be sent. Please try again or contact us directly.");
+        return;
       }
+      setIsSuccess(true);
+      const url = typeof result.whatsappUrl === "string" && /^https:\/\/wa\.me\/\d+\?text=/.test(result.whatsappUrl) ? result.whatsappUrl : null;
+      setWhatsappUrl(url);
+      setShowWhatsApp(Boolean(url));
+      reset();
+      requestRef.current = null;
     } catch {
-      setSubmitError("Your message could not be sent. Please try again or contact us by email.");
+      setSubmitError("Your email could not be sent. Please try again or contact us by email or WhatsApp.");
     } finally {
       setIsSubmitting(false);
     }
@@ -161,8 +174,9 @@ export default function ContactPage() {
                           Thank you for reaching out!
                         </h3>
                         <p className="text-size-medium" style={{ color: "var(--black)", opacity: 0.85, marginTop: "0.5rem" }}>
-                          We have received your message and one of our experts will get back to you shortly.
+                          Your enquiry has been submitted by email. We will get back to you shortly.
                         </p>
+                      {whatsappUrl && <button type="button" className="button-secondary" style={{marginTop:"1rem"}} onClick={()=>setShowWhatsApp(true)}>Continue on WhatsApp</button>}
                       </div>
                     ) : (
                       <form
@@ -283,6 +297,16 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <dialog ref={dialogRef} className="contact-whatsapp-dialog" aria-labelledby="whatsapp-prompt-title" aria-describedby="whatsapp-prompt-description" onCancel={()=>setShowWhatsApp(false)} onClose={()=>setShowWhatsApp(false)}>
+        <div className="tagline-pill">Enquiry submitted</div>
+        <h2 id="whatsapp-prompt-title" className="heading-style-h4 weight-medium">Would you like to continue on WhatsApp?</h2>
+        <p id="whatsapp-prompt-description" className="text-size-regular">Your enquiry has been submitted by email. We can also chat on WhatsApp. Your form details will be filled in—just tap Send.</p>
+        <div className="button-group">
+          {whatsappUrl && <a href={whatsappUrl} className="button" target="_blank" rel="noopener noreferrer" onClick={()=>setShowWhatsApp(false)}>Open WhatsApp</a>}
+          <button type="button" className="button-secondary" onClick={()=>setShowWhatsApp(false)}>No, thanks</button>
+        </div>
+      </dialog>
 
       {/* FAQ Component on Contact Page */}
       <FAQ />

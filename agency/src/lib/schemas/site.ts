@@ -75,8 +75,6 @@ export const SiteConfigSchema = z.object({
     instagram: z.string().optional(),
     twitter: z.string().optional(),
     linkedin: z.string().optional(),
-    youtube: z.string().optional(),
-    tiktok: z.string().optional(),
   }),
 });
 

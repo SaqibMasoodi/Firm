@@ -1,4 +1,3 @@
-import ScrollJump from "@/components/ui/scroll-jump";
 import PageScrollbar from "@/components/ui/page-scrollbar";
 import { getSiteConfig } from "@/lib/content";
 import { siteConfig } from "@/lib/constants";
@@ -102,7 +101,6 @@ export default async function RootLayout({
         <ClientSplashScreen />
         <ClientInteractiveTools />
         <PageScrollbar enabled={config.draggableScrollbar} />
-        <ScrollJump />
         <Navbar />
         <main id="main-content" style={{ flex: 1 }}>{children}</main>
         <Footer />
