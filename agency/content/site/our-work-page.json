@@ -1,0 +1,26 @@
+{
+  "title": "Our Work",
+  "description": "Websites, apps, and social media. Explore what we build and the pages we manage.",
+  "ctaTitle": "Let's work together",
+  "ctaDescription": "Have a website, app, or social media project in mind? Let's talk about what you need.",
+  "sections": {
+    "websites": {
+      "title": "Websites",
+      "description": "Websites and web platforms we've designed and built.",
+      "emptyText": "Projects will be added here soon.",
+      "visible": true
+    },
+    "apps": {
+      "title": "Apps",
+      "description": "Mobile apps built for everyday use.",
+      "emptyText": "Projects will be added here soon.",
+      "visible": true
+    },
+    "social-media": {
+      "title": "Social Media Management",
+      "description": "The social media pages we manage.",
+      "emptyText": "Projects will be added here soon.",
+      "visible": true
+    }
+  }
+}

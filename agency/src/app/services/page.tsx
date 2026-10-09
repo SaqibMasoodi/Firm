@@ -5,9 +5,9 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
 import ClientLogos from "@/components/sections/client-logos";
 import ServicesAccordion from "@/components/sections/services-accordion";
-import CaseStudiesPreview from "@/components/sections/case-studies-preview";
+import OurWorkPreview from "@/components/sections/our-work-preview";
 import { stats } from "@/lib/constants";
-import { getServices, getFeaturedCaseStudies, getSiteHeader } from "@/lib/content";
+import { getServices, getFeaturedWorkProjects, getSiteHeader } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default async function ServicesPage() {
   const [services, featuredStudies, header] = await Promise.all([
     getServices(),
-    getFeaturedCaseStudies(),
+    getFeaturedWorkProjects(),
     getSiteHeader("services"),
   ]);
   return (
@@ -103,8 +103,8 @@ export default async function ServicesPage() {
       <ClientLogos />
       <ServicesAccordion services={services} />
 
-      {/* Case Studies */}
-      <CaseStudiesPreview caseStudies={featuredStudies} />
+      {/* Our Work */}
+      <OurWorkPreview workProjects={featuredStudies} />
 
       {/* Stats Section */}
       <div className="section-stats">

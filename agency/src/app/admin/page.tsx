@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Logo from "@/components/ui/logo";
+import OurWorkPageEditor from "@/components/admin/our-work-page-editor";
 
-type Tab = "case-studies" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
+type Tab = "our-work" | "our-work-page" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
 
 interface ContentItem {
   filename: string;
@@ -102,7 +103,7 @@ function generateUniqueId(prefix: string): string {
 }
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("case-studies");
+  const [activeTab, setActiveTab] = useState<Tab>("our-work");
   const [items, setItems] = useState<ContentItem[]>([]);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -126,7 +127,7 @@ export default function AdminPage() {
 
   // Featured Work state
   const [featuredSlugs, setFeaturedSlugs] = useState<string[]>([]);
-  const [allCaseStudies, setAllCaseStudies] = useState<ContentItem[]>([]);
+  const [allWorkProjects, setAllWorkProjects] = useState<ContentItem[]>([]);
 
   // Page Headers state & focal position
   const [selectedHeaderKey, setSelectedHeaderKey] = useState<"home" | "about" | "services">("home");
@@ -314,8 +315,10 @@ export default function AdminPage() {
 
   const getSectionTitle = () => {
     switch (activeTab) {
-      case "case-studies":
-        return "Case Studies";
+      case "our-work":
+        return "Our Work";
+      case "our-work-page":
+        return "Our Work Page";
       case "featured-work":
         return "Homepage Featured Work";
       case "headers":
@@ -339,11 +342,11 @@ export default function AdminPage() {
 
   const canToggleJson = activeTab !== "upload" && (activeTab === "featured-work" || activeTab === "headers" || editForm !== null);
   const canSave = activeTab !== "upload" && (activeTab === "featured-work" || activeTab === "headers" || editForm !== null);
-  const isDeletable = (activeTab === "case-studies" || activeTab === "blog" || activeTab === "services") && editForm !== null;
+  const isDeletable = (activeTab === "our-work" || activeTab === "blog" || activeTab === "services") && editForm !== null;
 
   // Inner nav pane helpers
   const hasInnerNav =
-    activeTab === "case-studies" ||
+    activeTab === "our-work" ||
     activeTab === "blog" ||
     activeTab === "services" ||
     activeTab === "team" ||
@@ -352,7 +355,7 @@ export default function AdminPage() {
 
   const getInnerNavIcon = () => {
     switch (activeTab) {
-      case "case-studies": return <FolderIcon />;
+      case "our-work": return <FolderIcon />;
       case "blog": return <ChatBubbleIcon />;
       case "services": return <BoltIcon />;
       case "team": return <UserIcon />;
@@ -364,7 +367,7 @@ export default function AdminPage() {
 
   const getInnerNavTitle = () => {
     switch (activeTab) {
-      case "case-studies": return "Case Studies";
+      case "our-work": return "Our Work";
       case "blog": return "Blog Posts";
       case "services": return "Services";
       case "team": return "Team";
@@ -375,7 +378,7 @@ export default function AdminPage() {
   };
 
   const canCreateInInnerNav =
-    activeTab === "case-studies" ||
+    activeTab === "our-work" ||
     activeTab === "blog" ||
     activeTab === "services" ||
     activeTab === "team" ||
@@ -411,7 +414,7 @@ export default function AdminPage() {
 
   const getInnerNavItems = (): { key: string; title: string; icon: React.ReactNode }[] => {
     switch (activeTab) {
-      case "case-studies":
+      case "our-work":
       case "blog":
       case "services":
         return items.map((item) => ({
@@ -455,7 +458,7 @@ export default function AdminPage() {
 
   const getSelectedInnerKey = (): string | null => {
     switch (activeTab) {
-      case "case-studies":
+      case "our-work":
       case "blog":
       case "services":
         return selectedSlug;
@@ -472,7 +475,7 @@ export default function AdminPage() {
 
   const handleInnerNavSelect = (key: string, index: number) => {
     switch (activeTab) {
-      case "case-studies":
+      case "our-work":
       case "blog":
       case "services": {
         const item = items.find((i) => i.slug === key);
@@ -505,7 +508,9 @@ export default function AdminPage() {
     updateEditForm(JSON.parse(JSON.stringify(item.data)));
   };
 
-  const loadTabContent = async (tab: Tab) => {
+  const tabLoadVersion = useRef(0);
+  const loadTabContent = async (tab: Tab, preferredSlug?: string) => {
+    const requestVersion = ++tabLoadVersion.current;
     setLoading(true);
     setSelectedSlug(null);
     setEditForm(null);
@@ -515,22 +520,25 @@ export default function AdminPage() {
 
     try {
       if (tab === "featured-work") {
-        const [caseStudiesRes, featuredRes] = await Promise.all([
-          fetch("/api/admin/content?type=case-studies"),
+        const [workProjectsRes, featuredRes] = await Promise.all([
+          fetch("/api/admin/content?type=our-work"),
           fetch("/api/admin/content?type=site&slug=featured-work"),
         ]);
-        const caseStudiesData = await caseStudiesRes.json();
+        const workProjectsData = await workProjectsRes.json();
+        if (requestVersion !== tabLoadVersion.current) return;
         const featuredData = await featuredRes.json();
+        if (requestVersion !== tabLoadVersion.current) return;
 
-        const studies = Array.isArray(caseStudiesData) ? caseStudiesData : [];
+        const studies = Array.isArray(workProjectsData) ? workProjectsData : [];
         const slugs = Array.isArray(featuredData) ? featuredData : [];
 
-        setAllCaseStudies(studies);
+        setAllWorkProjects(studies);
         setFeaturedSlugs(slugs);
         setRawJsonText(JSON.stringify(slugs, null, 2));
       } else if (tab === "headers") {
         const res = await fetch("/api/admin/content?type=site&slug=headers");
         const data = await res.json();
+        if (requestVersion !== tabLoadVersion.current) return;
         if (data && data.home) {
           setHeadersData(data);
           updateEditForm(data);
@@ -539,17 +547,27 @@ export default function AdminPage() {
       } else if (tab === "site-config") {
         const res = await fetch("/api/admin/content?type=site&slug=config");
         const data = await res.json();
+        if (requestVersion !== tabLoadVersion.current) return;
         updateEditForm(data);
         setSelectedSlug("config");
+      } else if (tab === "our-work-page") {
+        const res = await fetch("/api/admin/content?type=site&slug=our-work-page");
+        if (!res.ok) throw new Error("Could not load Our Work page settings");
+        const settings = await res.json();
+        if (requestVersion !== tabLoadVersion.current) return;
+        updateEditForm(settings);
+        setSelectedSlug("our-work-page");
       } else if (tab === "team") {
         const res = await fetch("/api/admin/content?type=site&slug=team");
         const data = await res.json();
+        if (requestVersion !== tabLoadVersion.current) return;
         updateEditForm(data);
         setSelectedSlug("team");
         setSelectedTeamIndex(0);
       } else if (tab === "testimonials") {
         const res = await fetch("/api/admin/content?type=site&slug=testimonials");
         const data = await res.json();
+        if (requestVersion !== tabLoadVersion.current) return;
         const normalized = Array.isArray(data)
           ? { image: "/images/testimonials/client-showcase.webp", testimonials: data }
           : {
@@ -563,17 +581,18 @@ export default function AdminPage() {
       } else {
         const res = await fetch(`/api/admin/content?type=${tab}`);
         const data = await res.json();
+        if (requestVersion !== tabLoadVersion.current) return;
         if (Array.isArray(data)) {
           setItems(data);
           if (data.length > 0) {
-            selectItem(data[0]);
+            selectItem(data.find((item: ContentItem) => item.slug === preferredSlug) || data[0]);
           }
         }
       }
     } catch (err) {
       showToast((err as Error).message, "error");
     } finally {
-      setLoading(false);
+      if (requestVersion === tabLoadVersion.current) setLoading(false);
     }
   };
 
@@ -586,21 +605,25 @@ export default function AdminPage() {
   }, [activeTab]);
 
   const createNewItem = () => {
+    ++tabLoadVersion.current;
+    setLoading(false);
     const newSlug = generateUniqueId(`new-${activeTab.slice(0, -1)}`);
     let template = {};
-    if (activeTab === "case-studies") {
+    if (activeTab === "our-work") {
       template = {
         id: newSlug,
         slug: newSlug,
-        title: "New Case Study",
+        title: "New Project",
+        category: "websites",
+        playStoreUrl: "",
         description: "A short summary of the client and project.",
-        image: `/images/case-studies/${newSlug}/cover.webp`,
-        siteUrl: "https://",
-        tags: ["Web App", "Branding"],
-        client: "Client Name",
-        challenge: "Explain the client problem.",
-        solution: "Explain the solution provided.",
-        results: ["100% Growth", "40% More Leads"],
+        image: "",
+        siteUrl: "",
+        tags: [],
+        client: "",
+        challenge: "",
+        solution: "",
+        results: [],
       };
     } else if (activeTab === "blog") {
       template = {
@@ -642,8 +665,8 @@ export default function AdminPage() {
           ? "blog"
           : activeTab === "services"
             ? "services"
-            : activeTab === "case-studies"
-              ? "case-studies"
+            : activeTab === "our-work"
+              ? "our-work"
               : activeTab === "testimonials"
                 ? "testimonials"
                 : activeTab === "headers"
@@ -816,11 +839,11 @@ export default function AdminPage() {
 
     setLoading(true);
     try {
-      const isSiteType = activeTab === "site-config" || activeTab === "team" || activeTab === "testimonials";
+      const isSiteType = activeTab === "site-config" || activeTab === "team" || activeTab === "testimonials" || activeTab === "our-work-page";
       const type = isSiteType ? "site" : activeTab;
       const slug = isSiteType
-        ? (activeTab === "site-config" ? "config" : activeTab === "testimonials" ? "testimonials" : "team")
-        : selectedSlug;
+        ? (activeTab === "our-work-page" ? "our-work-page" : activeTab === "site-config" ? "config" : activeTab === "testimonials" ? "testimonials" : "team")
+        : activeTab === "our-work" ? dataToSave.slug : selectedSlug;
 
       const res = await fetch("/api/admin/content", {
         method: "POST",
@@ -829,6 +852,7 @@ export default function AdminPage() {
           type,
           slug,
           data: dataToSave,
+          ...(activeTab === "our-work" ? { oldSlug: selectedSlug } : {}),
         }),
       });
 
@@ -836,7 +860,7 @@ export default function AdminPage() {
       if (!res.ok) throw new Error(result.error || "Save failed");
 
       showToast(`Saved ${slug}.json successfully!`);
-      loadTabContent(activeTab);
+      await loadTabContent(activeTab, slug);
     } catch (err) {
       showToast((err as Error).message, "error");
     } finally {
@@ -857,7 +881,7 @@ export default function AdminPage() {
     }
 
     if (slugsToSave.length > 3) {
-      showToast("Maximum 3 case studies can be featured on the homepage.", "error");
+      showToast("Maximum 3 projects can be featured on the homepage.", "error");
       return;
     }
 
@@ -944,7 +968,7 @@ export default function AdminPage() {
       next = featuredSlugs.filter((s) => s !== slug);
     } else {
       if (featuredSlugs.length >= 3) {
-        showToast("Maximum 3 case studies can be featured. Remove one first.", "error");
+        showToast("Maximum 3 projects can be featured. Remove one first.", "error");
         return;
       }
       next = [...featuredSlugs, slug];
@@ -964,7 +988,8 @@ export default function AdminPage() {
   };
 
   const navTabs = [
-    { id: "case-studies", label: "Case Studies", icon: <FolderIcon /> },
+    { id: "our-work", label: "Our Work", icon: <FolderIcon /> },
+    { id: "our-work-page", label: "Our Work Page", icon: <SettingsIcon /> },
     { id: "featured-work", label: "Featured Work (Home)", icon: <StarIcon /> },
     { id: "headers", label: "Page Headers", icon: <ImageIcon /> },
     { id: "blog", label: "Blog Posts", icon: <ChatBubbleIcon /> },
@@ -1318,7 +1343,7 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* Delete button (for items in case-studies, blog, services) */}
+            {/* Delete button (for items in our-work, blog, services) */}
             {isDeletable && (
               <button
                 type="button"
@@ -1369,7 +1394,7 @@ export default function AdminPage() {
         {/* Main Content Workspace Canvas */}
         <div style={{
           flex: 1,
-          padding: activeTab === "case-studies" || activeTab === "blog" || activeTab === "services"
+          padding: activeTab === "our-work" || activeTab === "blog" || activeTab === "services"
             ? "2rem 2.5rem 3rem 1.25rem"
             : "2rem 2.5rem 3rem 2.5rem",
           maxWidth: "1000px",
@@ -1484,12 +1509,12 @@ export default function AdminPage() {
 
                 {featuredSlugs.length === 0 ? (
                   <div style={{ padding: "2rem", textAlign: "center", color: "#9ca3af", fontSize: "0.9rem" }}>
-                    No case studies selected. Pick up to 3 below.
+                    No projects selected. Pick up to 3 below.
                   </div>
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                     {featuredSlugs.map((slug, idx) => {
-                      const study = allCaseStudies.find((s) => s.slug === slug);
+                      const study = allWorkProjects.find((s) => s.slug === slug);
                       return (
                         <div
                           key={slug}
@@ -1585,7 +1610,7 @@ export default function AdminPage() {
                 )}
               </div>
 
-              {/* All Case Studies Picker */}
+              {/* All Our Work Picker */}
               <div style={{
                 backgroundColor: "#ffffff",
                 borderRadius: "32px",
@@ -1593,10 +1618,10 @@ export default function AdminPage() {
                 padding: "2rem"
               }}>
                 <h2 style={{ fontSize: "1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280", marginBottom: "1.25rem", fontWeight: 600 }}>
-                  All Case Studies ({allCaseStudies.length})
+                  All Our Work ({allWorkProjects.length})
                 </h2>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "1.25rem" }}>
-                  {allCaseStudies.map((item) => {
+                  {allWorkProjects.map((item) => {
                     const isFeatured = featuredSlugs.includes(item.slug);
 
                     return (
@@ -2054,11 +2079,26 @@ export default function AdminPage() {
               padding: "2.5rem 3rem"
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-                {activeTab === "case-studies" && (
+                {activeTab === "our-work-page" && <OurWorkPageEditor value={editForm} onChange={updateEditForm} />}
+                {activeTab === "our-work" && (
                   <>
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
+                      <label htmlFor="work-category">Category</label>
+                      <select id="work-category" value={editForm.category || "websites"} onChange={(e) => updateEditForm({ ...editForm, category: e.target.value })} style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem" }}>
+                        <option value="websites">Websites</option>
+                        <option value="apps">Apps</option>
+                        <option value="social-media">Social Media Management</option>
+                      </select>
+                    </div>
+                    {editForm.category === "apps" && <div>
+                      <label htmlFor="work-play-store">Play Store URL</label>
+                      <input id="work-play-store" type="url" placeholder="https://play.google.com/store/apps/details?id=…" value={editForm.playStoreUrl || ""} onChange={(e) => updateEditForm({ ...editForm, playStoreUrl: e.target.value })} style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem" }} />
+                    </div>}
+
+                    <div>
+                      <label htmlFor="work-title" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Title</label>
                       <input
+                        id="work-title"
                         type="text"
                         value={editForm.title || ""}
                         onChange={(e) => updateEditForm({ ...editForm, title: e.target.value })}
@@ -2067,8 +2107,9 @@ export default function AdminPage() {
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
                       <div>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
+                        <label htmlFor="work-slug" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Slug</label>
                         <input
+                        id="work-slug"
                           type="text"
                           value={editForm.slug || ""}
                           onChange={(e) => updateEditForm({ ...editForm, slug: e.target.value })}
@@ -2076,8 +2117,9 @@ export default function AdminPage() {
                         />
                       </div>
                       <div>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Client</label>
+                        <label htmlFor="work-client" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Client</label>
                         <input
+                        id="work-client"
                           type="text"
                           value={editForm.client || ""}
                           onChange={(e) => updateEditForm({ ...editForm, client: e.target.value })}
@@ -2087,8 +2129,9 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
+                      <label htmlFor="work-description" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Description</label>
                       <textarea
+                        id="work-description"
                         rows={3}
                         value={editForm.description || ""}
                         onChange={(e) => updateEditForm({ ...editForm, description: e.target.value })}
@@ -2097,9 +2140,10 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
+                      <label htmlFor="work-image" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
                       <div style={{ display: "flex", gap: "0.75rem" }}>
                         <input
+                        id="work-image"
                           type="text"
                           value={editForm.image || ""}
                           onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
@@ -2139,10 +2183,11 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Live Site URL</label>
+                      <label htmlFor="work-site-url" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>{editForm.category === "social-media" ? "Social Media Page URL" : "Website URL"}</label>
                       <input
                         type="url"
                         placeholder="https://example.com"
+                        id="work-site-url"
                         value={editForm.siteUrl || ""}
                         onChange={(e) => updateEditForm({ ...editForm, siteUrl: e.target.value })}
                         style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 500, boxSizing: "border-box", outline: "none" }}
@@ -2150,8 +2195,9 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Tags (Comma separated)</label>
+                      <label htmlFor="work-tags" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Tags (Comma separated)</label>
                       <input
+                        id="work-tags"
                         type="text"
                         value={(editForm.tags || []).join(", ")}
                         onChange={(e) => updateEditForm({ ...editForm, tags: e.target.value.split(",").map((s: string) => s.trim()).filter(Boolean) })}
@@ -2160,8 +2206,9 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Challenge</label>
+                      <label htmlFor="work-challenge" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Challenge</label>
                       <textarea
+                        id="work-challenge"
                         rows={3}
                         value={editForm.challenge || ""}
                         onChange={(e) => updateEditForm({ ...editForm, challenge: e.target.value })}
@@ -2170,8 +2217,9 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Solution</label>
+                      <label htmlFor="work-solution" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Solution</label>
                       <textarea
+                        id="work-solution"
                         rows={3}
                         value={editForm.solution || ""}
                         onChange={(e) => updateEditForm({ ...editForm, solution: e.target.value })}
@@ -2180,8 +2228,9 @@ export default function AdminPage() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Results (One per line)</label>
+                      <label htmlFor="work-results" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Results (One per line)</label>
                       <textarea
+                        id="work-results"
                         rows={4}
                         value={(editForm.results || []).join("\n")}
                         onChange={(e) => updateEditForm({ ...editForm, results: e.target.value.split("\n").filter(Boolean) })}
@@ -2339,6 +2388,7 @@ export default function AdminPage() {
 
                 {activeTab === "site-config" && (
                   <>
+                    <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}><input type="checkbox" checked={editForm.draggableScrollbar !== false} onChange={(e) => updateEditForm({ ...editForm, draggableScrollbar: e.target.checked })} />Enable draggable page scrollbar</label>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
                       <div>
                         <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Agency Name</label>

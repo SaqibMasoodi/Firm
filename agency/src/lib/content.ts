@@ -1,7 +1,8 @@
+import { OurWorkPageSettingsSchema, type OurWorkPageSettings } from "@/lib/schemas/our-work-page-settings";
 import fs from "fs/promises";
 import path from "path";
 import { ServiceSchema, type Service } from "@/lib/schemas/service";
-import { CaseStudySchema, type CaseStudy } from "@/lib/schemas/case-study";
+import { WorkProjectSchema, type WorkProject } from "@/lib/schemas/work-project";
 import { BlogPostSchema, type BlogPost } from "@/lib/schemas/blog";
 import {
   TeamMemberSchema,
@@ -80,15 +81,15 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
   return readFileJson(`services/${slug}.json`, ServiceSchema);
 }
 
-// Case Studies
-export async function getCaseStudies(): Promise<CaseStudy[]> {
-  return readDirectoryJson("case-studies", CaseStudySchema);
+// Our Work
+export async function getWorkProjects(): Promise<WorkProject[]> {
+  return readDirectoryJson("our-work", WorkProjectSchema);
 }
 
-export async function getCaseStudyBySlug(
+export async function getWorkProjectBySlug(
   slug: string
-): Promise<CaseStudy | null> {
-  return readFileJson(`case-studies/${slug}.json`, CaseStudySchema);
+): Promise<WorkProject | null> {
+  return readFileJson(`our-work/${slug}.json`, WorkProjectSchema);
 }
 
 // Blog Posts
@@ -170,9 +171,9 @@ export async function getFeaturedWorkSlugs(): Promise<string[]> {
   return result || [];
 }
 
-export async function getFeaturedCaseStudies(): Promise<CaseStudy[]> {
+export async function getFeaturedWorkProjects(): Promise<WorkProject[]> {
   const [allStudies, featuredSlugs] = await Promise.all([
-    getCaseStudies(),
+    getWorkProjects(),
     getFeaturedWorkSlugs(),
   ]);
 
@@ -183,7 +184,7 @@ export async function getFeaturedCaseStudies(): Promise<CaseStudy[]> {
   const map = new Map(allStudies.map((study) => [study.slug, study]));
   const featured = featuredSlugs
     .map((slug) => map.get(slug))
-    .filter(Boolean) as CaseStudy[];
+    .filter(Boolean) as WorkProject[];
 
   return featured.length > 0 ? featured : allStudies.slice(0, 3);
 }
@@ -219,3 +220,9 @@ export async function getSiteHeader(
 }
 
 
+
+export async function getOurWorkPageSettings(): Promise<OurWorkPageSettings> {
+  const settings = await readFileJson("site/our-work-page.json", OurWorkPageSettingsSchema);
+  if (!settings) throw new Error("Missing or invalid Our Work page settings");
+  return settings;
+}

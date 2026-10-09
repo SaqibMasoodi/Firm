@@ -1,7 +1,7 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { getCaseStudies, getBlogPosts, getServices } from "@/lib/content";
+import { getWorkProjects, getBlogPosts, getServices } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Sitemap",
@@ -45,8 +45,8 @@ function ArrowDiagonalIcon() {
 }
 
 export default async function SitemapPage() {
-  const [caseStudies, blogPosts, services] = await Promise.all([
-    getCaseStudies(),
+  const [workProjects, blogPosts, services] = await Promise.all([
+    getWorkProjects(),
     getBlogPosts(),
     getServices(),
   ]);
@@ -55,7 +55,7 @@ export default async function SitemapPage() {
     { title: "Home", href: "/", desc: "Homepage & hero introduction" },
     { title: "About Us", href: "/about", desc: "Our team, vision, and agency story" },
     { title: "Services", href: "/services", desc: "Full-service digital capabilities" },
-    { title: "Case Studies", href: "/case-studies", desc: "Client work & transformations" },
+    { title: "Our Work", href: "/our-work", desc: "Client work & transformations" },
     { title: "Blog", href: "/blog", desc: "Insights, industry trends & news" },
     { title: "Contact", href: "/contact", desc: "Inquiries & project kick-offs" },
     { title: "Policies", href: "/policies", desc: "Privacy, cookies, and website use" },
@@ -85,7 +85,7 @@ export default async function SitemapPage() {
                   </div>
                   <ScrollReveal delay={0.2}>
                     <p className="text-size-medium" style={{ maxWidth: "42rem" }}>
-                      A complete, accessible overview of all pages, case studies,
+                      A complete, accessible overview of all pages, projects,
                       services, and resources across Northforge Labs.
                     </p>
                   </ScrollReveal>
@@ -141,25 +141,25 @@ export default async function SitemapPage() {
                     </div>
                   </ScrollReveal>
 
-                  {/* Card 2: Case Studies */}
+                  {/* Card 2: Our Work */}
                   <ScrollReveal delay={0.15}>
                     <div className="sitemap-card">
                       <div className="sitemap-card-header">
                         <div>
-                          <h2 className="sitemap-card-title">Case Studies</h2>
+                          <h2 className="sitemap-card-title">Our Work</h2>
                           <div className="sitemap-card-subtitle">
                             Client projects &amp; results
                           </div>
                         </div>
                         <span className="sitemap-card-badge">
-                          {caseStudies.length} projects
+                          {workProjects.length} projects
                         </span>
                       </div>
                       <div className="sitemap-list">
-                        {caseStudies.map((study) => (
+                        {workProjects.map((study) => (
                           <Link
                             key={study.slug}
-                            href={`/case-studies/${study.slug}`}
+                            href={`/our-work/${study.slug}`}
                             className="sitemap-link-item"
                           >
                             <div className="sitemap-link-info">
@@ -167,7 +167,7 @@ export default async function SitemapPage() {
                                 {study.title}
                               </span>
                               <span className="sitemap-link-url">
-                                /case-studies/{study.slug}
+                                /our-work/{study.slug}
                               </span>
                             </div>
                             <div className="sitemap-link-arrow">

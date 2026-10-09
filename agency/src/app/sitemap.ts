@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getCaseStudies, getBlogPosts } from "@/lib/content";
+import { getWorkProjects, getBlogPosts } from "@/lib/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [caseStudies, blogPosts] = await Promise.all([
-    getCaseStudies(),
+  const [workProjects, blogPosts] = await Promise.all([
+    getWorkProjects(),
     getBlogPosts(),
   ]);
   const baseUrl = "https://northforgelabs.com";
@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "",
     "/about",
     "/services",
-    "/case-studies",
+    "/our-work",
     "/blog",
     "/contact",
     "/policies",
@@ -24,8 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === "" ? 1 : 0.8,
   }));
 
-  const caseStudyPages = caseStudies.map((study) => ({
-    url: `${baseUrl}/case-studies/${study.slug}`,
+  const workProjectPages = workProjects.map((study) => ({
+    url: `${baseUrl}/our-work/${study.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.6,
@@ -38,5 +38,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...caseStudyPages, ...blogPages];
+  return [...staticPages, ...workProjectPages, ...blogPages];
 }

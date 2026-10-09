@@ -12,17 +12,21 @@ const ServiceSchema = z.object({
   features: z.array(z.string()).optional().default([]),
 });
 
-const CaseStudySchema = z.object({
+const ExternalUrl = z.string().url().refine(value => /^https?:\/\//i.test(value), "Use an http or https URL").or(z.literal("")).default("");
+
+const WorkProjectSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
   image: z.string().default(""),
   slug: z.string(),
-  siteUrl: z.string().optional().default(""),
+  category: z.enum(["websites", "apps", "social-media"]).default("websites"),
+  siteUrl: ExternalUrl,
+  playStoreUrl: ExternalUrl,
   tags: z.array(z.string()).default([]),
-  client: z.string(),
-  challenge: z.string(),
-  solution: z.string(),
+  client: z.string().default(""),
+  challenge: z.string().default(""),
+  solution: z.string().default(""),
   results: z.array(z.string()).default([]),
 });
 
@@ -67,7 +71,7 @@ function validateDirectory(dir, schema, name) {
 }
 
 validateDirectory('content/services', ServiceSchema, 'services');
-validateDirectory('content/case-studies', CaseStudySchema, 'case studies');
+validateDirectory('content/our-work', WorkProjectSchema, 'projects');
 validateDirectory('content/blog', BlogPostSchema, 'blog posts');
 
 // Validate site files
@@ -110,3 +114,26 @@ TestimonialsSectionSchema.parse(testimonials);
 console.log(' [PASS] content/site/testimonials.json');
 
 console.log('ALL CONTENT FILES PASSED ZOD VALIDATION!');
+
+const SectionSchema = z.object({
+  title: z.string().trim().min(1),
+  description: z.string(),
+  emptyText: z.string(),
+  visible: z.boolean(),
+});
+
+const OurWorkPageSettingsSchema = z.object({
+  title: z.string().trim().min(1),
+  description: z.string(),
+  ctaTitle: z.string().trim().min(1),
+  ctaDescription: z.string(),
+  sections: z.object({
+    websites: SectionSchema,
+    apps: SectionSchema,
+    "social-media": SectionSchema,
+  }),
+});
+
+
+OurWorkPageSettingsSchema.parse(JSON.parse(fs.readFileSync("content/site/our-work-page.json", "utf8")));
+console.log(" [PASS] content/site/our-work-page.json");

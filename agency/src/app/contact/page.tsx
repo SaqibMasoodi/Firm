@@ -170,8 +170,7 @@ export default function ContactPage() {
                         aria-busy={isSubmitting}
                       >
                         <div className="contact-form-heading">
-                          <h2 className="heading-style-h5">Tell us about your project</h2>
-                          <p>Fields marked optional can be left blank.</p>
+                          <h2 className="heading-style-h5">Send a message</h2>
                         </div>
                         <div className="form-field-2col">
                           <div className="form-field-wrapper">

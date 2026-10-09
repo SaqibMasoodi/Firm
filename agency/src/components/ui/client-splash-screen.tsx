@@ -1,10 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const SplashScreen = dynamic(() => import("@/components/ui/splash-screen"), {
-  ssr: false,
-});
+// Render the overlay in the initial HTML so it covers the page before hydration.
+import SplashScreen from "@/components/ui/splash-screen";
 
 export default function ClientSplashScreen() {
   return <SplashScreen />;

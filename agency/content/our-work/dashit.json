@@ -2,9 +2,11 @@
   "id": "dashit",
   "title": "DASHit",
   "description": "A hyperlocal quick-commerce platform delivering groceries and daily essentials across Anantnag, Kashmir through a fast, mobile-first ordering experience.",
-  "image": "/images/case-studies/dashit/cover-optimized.webp",
+  "image": "/images/our-work/dashit/cover-optimized.webp",
   "slug": "dashit",
+  "category": "websites",
   "siteUrl": "https://dashit.co.in",
+  "playStoreUrl": "",
   "tags": [
     "Website",
     "Web App",

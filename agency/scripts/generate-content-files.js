@@ -3,7 +3,7 @@ const path = require('path');
 
 // Ensure directories exist
 const dirs = [
-  'content/case-studies',
+  'content/our-work',
   'content/blog',
   'content/services',
   'content/site'
@@ -35,7 +35,7 @@ fs.writeFileSync('content/site/config.json', JSON.stringify(siteConfig, null, 2)
 const navigation = [
   { label: "About us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Case studies", href: "/case-studies" },
+  { label: "Our Work", href: "/our-work" },
   { label: "Blog", href: "/blog" }
 ];
 fs.writeFileSync('content/site/navigation.json', JSON.stringify(navigation, null, 2));
@@ -305,8 +305,8 @@ const testimonials = [
 ];
 fs.writeFileSync('content/site/testimonials.json', JSON.stringify(testimonials, null, 2));
 
-// 7. Case Studies
-const caseStudies = [
+// 7. Our Work
+const workProjects = [
   {
     id: "glowessence-skincare",
     title: "GlowEssence Skincare",
@@ -359,8 +359,8 @@ const caseStudies = [
     ]
   }
 ];
-caseStudies.forEach(cs => {
-  fs.writeFileSync(`content/case-studies/${cs.slug}.json`, JSON.stringify(cs, null, 2));
+workProjects.forEach(cs => {
+  fs.writeFileSync(`content/our-work/${cs.slug}.json`, JSON.stringify(cs, null, 2));
 });
 
 // 8. Blog Posts

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { getCaseStudies, getCaseStudyBySlug } from "@/lib/content";
+import { getWorkProjects, getWorkProjectBySlug } from "@/lib/content";
 
 function ArrowIcon() {
   return (
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const studies = await getCaseStudies();
+  const studies = await getWorkProjects();
   return studies.map((study) => ({
     slug: study.slug,
   }));
@@ -27,19 +27,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const study = await getCaseStudyBySlug(slug);
+  const study = await getWorkProjectBySlug(slug);
   if (!study) return { title: "Not Found" };
   const ogImage = study.image || "/images/og/og-image.png";
   return {
     title: study.title,
     description: study.description,
     alternates: {
-      canonical: `/case-studies/${slug}`,
+      canonical: `/our-work/${slug}`,
     },
     openGraph: {
       title: `${study.title} — Northforge Labs`,
       description: study.description,
-      url: `/case-studies/${slug}`,
+      url: `/our-work/${slug}`,
       images: [
         {
           url: ogImage,
@@ -56,9 +56,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CaseStudyPage({ params }: Props) {
+export default async function WorkProjectPage({ params }: Props) {
   const { slug } = await params;
-  const study = await getCaseStudyBySlug(slug);
+  const study = await getWorkProjectBySlug(slug);
 
   if (!study) {
     notFound();
@@ -66,7 +66,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <div className="page-wrapper">
-      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Case Studies", href: "/case-studies" }, { name: study.title, href: `/case-studies/${slug}` }]} />
+      <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Our Work", href: "/our-work" }, { name: study.title, href: `/our-work/${slug}` }]} />
       <header className="section-subpage-hero-header">
         <div className="padding-global">
           <div className="container-large">
@@ -75,7 +75,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 <div className="header-content">
                   <ScrollReveal>
                     <div className="tagline-pill">
-                      <div>Case Study</div>
+                      <div>{study.category === "apps" ? "Apps" : study.category === "social-media" ? "Social Media Management" : "Websites"}</div>
                     </div>
                   </ScrollReveal>
                   <div className="margin-bottom margin-small">
@@ -97,6 +97,7 @@ export default async function CaseStudyPage({ params }: Props) {
                       ))}
                     </div>
                   </ScrollReveal>
+                  {study.playStoreUrl && <ScrollReveal delay={0.4}><div style={{ marginTop: "2rem" }}><a href={study.playStoreUrl} target="_blank" rel="noopener noreferrer" className="button">View on Play Store</a></div></ScrollReveal>}
                   {study.siteUrl && (
                     <ScrollReveal delay={0.4}>
                       <div className="project-button-wrapper" style={{ marginTop: "2rem" }}>
@@ -106,7 +107,7 @@ export default async function CaseStudyPage({ params }: Props) {
                           rel="noopener noreferrer"
                           className="button-link"
                         >
-                          <div className="button-text-item">Visit site</div>
+                          <div className="button-text-item">{study.category === "social-media" ? "Visit page" : "Visit website"}</div>
                           <div className="button-arrow">
                             <ArrowIcon />
                           </div>
@@ -139,6 +140,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <div className="container-medium">
             <div style={{ paddingBottom: "5rem" }}>
               {/* Challenge */}
+              {study.challenge && (
               <ScrollReveal>
                 <div style={{ marginBottom: "3rem" }}>
                   <h2 className="heading-style-h2 weight-medium" style={{ marginBottom: "1rem" }}>
@@ -147,8 +149,10 @@ export default async function CaseStudyPage({ params }: Props) {
                   <p className="text-size-medium">{study.challenge}</p>
                 </div>
               </ScrollReveal>
+              )}
 
               {/* Solution */}
+              {study.solution && (
               <ScrollReveal delay={0.1}>
                 <div style={{ marginBottom: "3rem" }}>
                   <h2 className="heading-style-h2 weight-medium" style={{ marginBottom: "1rem" }}>
@@ -157,14 +161,16 @@ export default async function CaseStudyPage({ params }: Props) {
                   <p className="text-size-medium">{study.solution}</p>
                 </div>
               </ScrollReveal>
+              )}
 
               {/* Results */}
+              {study.results.length > 0 && (
               <ScrollReveal delay={0.2}>
                 <div style={{ marginBottom: "3rem" }}>
                   <h2 className="heading-style-h2 weight-medium" style={{ marginBottom: "1.5rem" }}>
                     Results
                   </h2>
-                  <div className="stats-list case-study-results-grid">
+                  <div className="stats-list work-project-results-grid">
                     {study.results.map((result, index) => (
                       <div
                         key={index}
@@ -179,11 +185,12 @@ export default async function CaseStudyPage({ params }: Props) {
                   </div>
                 </div>
               </ScrollReveal>
+              )}
 
               <ScrollReveal delay={0.3}>
                 <div className="button-group">
-                  <Link href="/case-studies" className="button-secondary">
-                    ← Back to Case Studies
+                  <Link href="/our-work" className="button-secondary">
+                    ← Back to Our Work
                   </Link>
                   <Link href="/contact" className="button">
                     Start your project

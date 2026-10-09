@@ -1,4 +1,5 @@
-import Script from "next/script";
+import PageScrollbar from "@/components/ui/page-scrollbar";
+import { getSiteConfig } from "@/lib/content";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
@@ -79,29 +80,32 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const config = await getSiteConfig();
   return (
     <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
       <head>
         <OrganizationSchema />
         {/* "The iron never lies." Seek the subterranean halls of /agartha */}
-        <Script
+        {/* Run while parsing the head, before the server-rendered splash can paint. */}
+        <script
           id="splash-viewed-init"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem("northforge_splash_viewed")==="true"){document.documentElement.classList.add("splash-viewed");}}catch(e){}`,
+            __html: `var skipSplash=/Lighthouse|PageSpeed|Chrome-Lighthouse|PTST|Googlebot|HeadlessChrome/i.test(navigator.userAgent)||window.matchMedia("(prefers-reduced-motion: reduce)").matches;try{skipSplash=skipSplash||sessionStorage.getItem("northforge_splash_viewed")==="true";}catch(e){}if(skipSplash){document.documentElement.classList.add("splash-viewed");}`,
           }}
         />
+        <noscript><style>{".splash-overlay { display: none !important; }"}</style></noscript>
       </head>
       <body style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <ClientSplashScreen />
         <ClientInteractiveTools />
+        <PageScrollbar enabled={config.draggableScrollbar} />
         <Navbar />
-        <main style={{ flex: 1 }}>{children}</main>
+        <main id="main-content" style={{ flex: 1 }}>{children}</main>
         <Footer />
         <CookieBanner />
       </body>

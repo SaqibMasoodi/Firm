@@ -56,6 +56,7 @@ export const ClientLogoSchema = z.object({
 });
 
 export const SiteConfigSchema = z.object({
+  draggableScrollbar: z.boolean().default(true),
   name: z.string(),
   description: z.string(),
   url: z.string(),

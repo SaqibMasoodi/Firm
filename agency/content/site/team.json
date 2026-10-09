@@ -44,8 +44,16 @@
     }
   },
   {
+    "id": "humayun",
+    "name": "Humayun",
+    "role": "3D Visualization & Digital Art Specialist",
+    "bio": "Humayun brings ideas to life through 3D modeling, digital art, and immersive visual experiences. He enjoys crafting detailed environments, experimenting with form and lighting, and turning concepts into striking visuals.",
+    "image": "/images/avatar.svg",
+    "socials": {}
+  },
+  {
     "id": "farhan",
-    "name": "Farhan Azad",
+    "name": "Farhan",
     "role": "Software Developer",
     "bio": "Farhan builds web applications with MERN and .NET. He enjoys turning ideas into simple, useful software.",
     "image": "/images/avatar.svg",
@@ -55,7 +63,7 @@
   },
   {
     "id": "mubashir",
-    "name": "Mubashir Masoodi",
+    "name": "Mubashir",
     "role": "Senior Developer & Team Lead",
     "bio": "Mubashir works across the stack and leads the development team. He likes building solid systems and helping turn ideas into working products.",
     "image": "/images/avatar.svg",
@@ -65,7 +73,7 @@
   },
   {
     "id": "hazar",
-    "name": "Hazar Hamad Bhat",
+    "name": "Hammad",
     "role": "AI & Data Science Specialist",
     "bio": "Hazar works with AI, machine learning, and data. He enjoys exploring new models and building useful things with modern AI.",
     "image": "/images/avatar.svg",

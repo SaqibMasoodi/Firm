@@ -1,5 +1,5 @@
 export type { Service } from "@/lib/schemas/service";
-export type { CaseStudy } from "@/lib/schemas/case-study";
+export type { WorkProject } from "@/lib/schemas/work-project";
 export type { BlogPost } from "@/lib/schemas/blog";
 export type {
   TeamMember,

@@ -2,7 +2,7 @@
   "id": "dreamcabs",
   "title": "DreamCabs",
   "description": "A production-grade, multi-tenant ride-hailing and fleet management platform with real-time dispatch, integrated payments, and a unified admin dashboard.",
-  "image": "/images/case-studies/dreamcabs/cover-optimized.webp",
+  "image": "/images/our-work/dreamcabs/cover-optimized.webp",
   "slug": "dreamcabs",
   "siteUrl": "https://dreamcabs.in",
   "tags": [
@@ -21,5 +21,7 @@
     "Added real-time driver tracking and dispatch via WebSockets",
     "Integrated Razorpay payments, driver wallets, and a complete financial ledger",
     "Designed a multi-city architecture with role-based access control"
-  ]
+  ],
+  "category": "websites",
+  "playStoreUrl": ""
 }

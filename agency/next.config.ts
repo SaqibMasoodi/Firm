@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Preserve existing bookmarks and indexed project URLs.
+      { source: "/case-studies/:path*", destination: "/our-work/:path*", permanent: true },
       {
         source: "/about-us",
         destination: "/about",

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import type { CaseStudy } from "@/types";
+import type { WorkProject } from "@/types";
 
 function ArrowIcon() {
   return (
@@ -11,14 +11,14 @@ function ArrowIcon() {
   );
 }
 
-interface CaseStudiesPreviewProps {
-  caseStudies?: CaseStudy[];
+interface OurWorkPreviewProps {
+  workProjects?: WorkProject[];
 }
 
-export default function CaseStudiesPreview({
-  caseStudies = [],
-}: CaseStudiesPreviewProps) {
-  const homeCaseStudies = caseStudies.slice(0, 3);
+export default function OurWorkPreview({
+  workProjects = [],
+}: OurWorkPreviewProps) {
+  const homeWorkProjects = workProjects.slice(0, 3);
 
   return (
     <section className="section-projects">
@@ -29,7 +29,7 @@ export default function CaseStudiesPreview({
               <div className="max-width-large">
                 <ScrollReveal>
                   <div className="tagline-pill">
-                    <div>Case studies</div>
+                    <div>Our Work</div>
                   </div>
                 </ScrollReveal>
                 <div className="margin-bottom margin-small">
@@ -48,7 +48,7 @@ export default function CaseStudiesPreview({
               </div>
               <ScrollReveal delay={0.2}>
                 <div className="button-group">
-                  <Link href="/case-studies" className="button">
+                  <Link href="/our-work" className="button">
                     <div className="button-text-item">View all</div>
                   </Link>
                 </div>
@@ -57,7 +57,7 @@ export default function CaseStudiesPreview({
             <div className="projects-component">
               <div className="project-list-wrapper">
                   <div className="project-list">
-                    {homeCaseStudies.map((study, index) => {
+                    {homeWorkProjects.map((study, index) => {
                       const displayTags = study.tags.slice(0, 3);
                       const extraTags = study.tags.length - 3;
                       return (
@@ -69,7 +69,7 @@ export default function CaseStudiesPreview({
                           <div className="project-item">
                             <div className="project-item-link">
                               <Link
-                                href={`/case-studies/${study.slug}`}
+                                href={`/our-work/${study.slug}`}
                                 style={{ display: "block", textDecoration: "none", color: "inherit" }}
                               >
                                 <div className="project-image-wrapper">
@@ -88,7 +88,7 @@ export default function CaseStudiesPreview({
                                   <div className="margin-bottom margin-xxsmall">
                                     <h3 className="heading-style-h5">
                                       <Link
-                                        href={`/case-studies/${study.slug}`}
+                                        href={`/our-work/${study.slug}`}
                                         style={{ textDecoration: "none", color: "inherit" }}
                                       >
                                         {study.title}
@@ -112,9 +112,9 @@ export default function CaseStudiesPreview({
                                   </div>
                                 </div>
                                 <div className="project-button-wrapper">
-                                  <Link href={`/case-studies/${study.slug}`} className="button-link">
+                                  <Link href={`/our-work/${study.slug}`} className="button-link">
                                     <div className="button-text-item">
-                                      View case study
+                                      View project
                                     </div>
                                     <div className="button-arrow">
                                       <ArrowIcon />

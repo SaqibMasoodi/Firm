@@ -106,18 +106,18 @@ const downloads = [
     url: 'https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f52/66386a9c5a29d081bf4e6f8c_joel-filipe-PFIeJh17SZo-unsplash-1.webp',
     dest: 'public/images/team/craig.webp'
   },
-  // Case Studies
+  // Our Work
   {
     url: 'https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f63/663b43702704f962650dca7f_663a28dc7e93c88d44d5b464_reuben-mansell-nwOip8AOZz0-unsplash%20(1)%20(1).webp',
-    dest: 'public/images/case-studies/glowessence-skincare/cover.webp'
+    dest: 'public/images/our-work/glowessence-skincare/cover.webp'
   },
   {
     url: 'https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f63/663a473e10986c639c898829_1.webp',
-    dest: 'public/images/case-studies/brewzen-coffee-retailer/cover.webp'
+    dest: 'public/images/our-work/brewzen-coffee-retailer/cover.webp'
   },
   {
     url: 'https://cdn.prod.website-files.com/66386a9c5a29d081bf4e6f63/663a47dee92fa62a03e898be_Untitled%20design%20(28).webp',
-    dest: 'public/images/case-studies/burgerhaven-restaurant/cover.webp'
+    dest: 'public/images/our-work/burgerhaven-restaurant/cover.webp'
   },
   // Blog
   {

@@ -71,8 +71,8 @@ export default async function BlogPage() {
                           <Link href="/contact" className="button">
                             <div className="button-text-item">Get in touch</div>
                           </Link>
-                          <Link href="/case-studies" className="button-secondary">
-                            <div className="button-text-item">Case studies</div>
+                          <Link href="/our-work" className="button-secondary">
+                            <div className="button-text-item">Our Work</div>
                           </Link>
                         </div>
                       </ScrollReveal>
