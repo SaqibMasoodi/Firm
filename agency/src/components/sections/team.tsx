@@ -68,7 +68,8 @@ export default function Team({ initialLimit = 4, showAll = false }: TeamProps) {
 
     const endScroll = Math.max(0, startScroll + endHeight - startHeight + buttonCenter - targetCenter);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const duration = reducedMotion ? 0 : 650;
+    // Match the Services accordion on close; retain the original expansion.
+    const duration = reducedMotion ? 0 : collapsing ? 320 : 650;
     let frame = 0;
     let startedAt: number | undefined;
     let followButton = collapsing;

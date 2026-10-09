@@ -98,6 +98,7 @@ export default async function WorkProjectPage({ params }: Props) {
                     </div>
                   </ScrollReveal>
                   {study.playStoreUrl && <ScrollReveal delay={0.4}><div style={{ marginTop: "2rem" }}><a href={study.playStoreUrl} target="_blank" rel="noopener noreferrer" className="button">View on Play Store</a></div></ScrollReveal>}
+                  {study.appDownloadUrl && <ScrollReveal delay={0.4}><div style={{ marginTop: "1rem" }}><a href={study.appDownloadUrl} target="_blank" rel="noopener noreferrer" className="button">Download Android APK</a></div></ScrollReveal>}
                   {study.siteUrl && (
                     <ScrollReveal delay={0.4}>
                       <div className="project-button-wrapper" style={{ marginTop: "2rem" }}>

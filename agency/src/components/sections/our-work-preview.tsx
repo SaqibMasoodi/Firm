@@ -46,13 +46,7 @@ export default function OurWorkPreview({
                   </p>
                 </ScrollReveal>
               </div>
-              <ScrollReveal delay={0.2}>
-                <div className="button-group">
-                  <Link href="/our-work" className="button">
-                    <div className="button-text-item">View all</div>
-                  </Link>
-                </div>
-              </ScrollReveal>
+
             </div>
             <div className="projects-component">
               <div className="project-list-wrapper">
@@ -145,6 +139,11 @@ export default function OurWorkPreview({
                   </div>
               </div>
             </div>
+            <ScrollReveal delay={0.2}>
+              <div className="project-footer-actions">
+                <Link href="/our-work" className="button">View all work</Link>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

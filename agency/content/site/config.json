@@ -2,18 +2,21 @@
   "draggableScrollbar": true,
   "name": "Northforge Labs",
   "description": "A technology and creative agency that helps businesses build digital products, grow their online presence, and automate their operations.",
-  "url": "https://northforgelabs.com",
-  "email": "contact@northforgelabs.com",
-  "phone": "01234 567 890",
+  "url": "https://firm-khaki.vercel.app",
+  "email": "masudisaqib1@gmail.com",
+  "phone": "+91 9622720283",
   "address": {
     "line1": "Northforge Labs HQ",
-    "line2": "13 Imaginary Street",
-    "city": "Manchester"
+    "line2": "Srinagar",
+    "city": "Jammu and Kashmir"
   },
   "socials": {
-    "facebook": "https://www.facebook.com/northforgelabs",
-    "instagram": "https://www.instagram.com/northforgelabs",
-    "twitter": "https://x.com/northforgelabs",
-    "linkedin": "https://www.linkedin.com/company/northforgelabs"
-  }
+    "facebook": "/404",
+    "instagram": "/404",
+    "twitter": "/404",
+    "linkedin": "/404",
+    "youtube": "/404",
+    "tiktok": "/404"
+  },
+  "whatsappNumber": "+91 9622720283"
 }

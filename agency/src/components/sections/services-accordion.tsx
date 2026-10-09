@@ -69,7 +69,7 @@ export default function ServicesAccordion({
   }, [openIndex]);
 
   return (
-    <div className="section-services">
+    <div className="section-services" id="services">
       <section className="services-component-wrapper">
         <div className="padding-global is-2rem">
           <div className="container-large">
@@ -99,7 +99,7 @@ export default function ServicesAccordion({
                 <ScrollReveal delay={0.1}>
                   <div className="services-list">
                     {services.map((service, index) => (
-                      <div key={service.id} className="service-accordion">
+                      <div key={service.id} id={service.slug} className="service-accordion">
                         <div
                           className="service-name"
                           onClick={(e) =>
@@ -162,10 +162,10 @@ export default function ServicesAccordion({
                                   <div className="margin-top margin-medium">
                                     <div className="button-group">
                                       <Link
-                                        href={`/services#${service.slug}`}
+                                        href="/contact"
                                         className="button"
                                       >
-                                        <div className="button-text-item">Learn more</div>
+                                        <div className="button-text-item">Discuss your project</div>
                                       </Link>
                                     </div>
                                   </div>

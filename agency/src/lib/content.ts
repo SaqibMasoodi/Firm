@@ -1,3 +1,4 @@
+import { HomePageSettingsSchema, type HomePageSettings } from "@/lib/schemas/home-page-settings";
 import { OurWorkPageSettingsSchema, type OurWorkPageSettings } from "@/lib/schemas/our-work-page-settings";
 import fs from "fs/promises";
 import path from "path";
@@ -201,10 +202,10 @@ export async function getSiteHeaders(): Promise<SiteHeaders> {
       objectPosition: "50% 50%",
       alt: "Modern office lobby",
     },
-    services: {
-      image: "/images/headers/services-main.webp",
+    "our-work": {
+      image: "/images/headers/our-work-main.webp",
       objectPosition: "50% 50%",
-      alt: "Our services",
+      alt: "Our Work",
     },
   };
 
@@ -213,7 +214,7 @@ export async function getSiteHeaders(): Promise<SiteHeaders> {
 }
 
 export async function getSiteHeader(
-  key: "home" | "about" | "services"
+  key: "home" | "about" | "our-work"
 ): Promise<HeaderConfig> {
   const headers = await getSiteHeaders();
   return headers[key];
@@ -225,4 +226,10 @@ export async function getOurWorkPageSettings(): Promise<OurWorkPageSettings> {
   const settings = await readFileJson("site/our-work-page.json", OurWorkPageSettingsSchema);
   if (!settings) throw new Error("Missing or invalid Our Work page settings");
   return settings;
+}
+
+export async function getHomePageSettings(): Promise<HomePageSettings> {
+ const settings = await readFileJson("site/home-page.json", HomePageSettingsSchema);
+ if (!settings) throw new Error("Missing or invalid Home page settings");
+ return settings;
 }

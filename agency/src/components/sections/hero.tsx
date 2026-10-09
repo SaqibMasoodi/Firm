@@ -14,7 +14,7 @@ export default function Hero({ header }: HeroProps) {
   const imageAlt = header?.alt || "Northforge Labs Creative Office";
 
   return (
-    <header className="section-subpage-hero-header">
+    <header className="section-subpage-hero-header balanced-hero">
       <div className="padding-global">
         <div className="container-large">
           <div className="section-padding-large">

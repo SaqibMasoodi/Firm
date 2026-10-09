@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Logo from "@/components/ui/logo";
-import OurWorkPageEditor from "@/components/admin/our-work-page-editor";
+import type { OurWorkPageSettings } from "@/lib/schemas/our-work-page-settings";
+import WorkCategoriesEditor from "@/components/admin/work-categories-editor";
 
-type Tab = "our-work" | "our-work-page" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
+type Tab = "our-work" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
 
 interface ContentItem {
   filename: string;
@@ -130,15 +131,15 @@ export default function AdminPage() {
   const [allWorkProjects, setAllWorkProjects] = useState<ContentItem[]>([]);
 
   // Page Headers state & focal position
-  const [selectedHeaderKey, setSelectedHeaderKey] = useState<"home" | "about" | "services">("home");
+  const [selectedHeaderKey, setSelectedHeaderKey] = useState<"home" | "about" | "our-work">("home");
   const [headersData, setHeadersData] = useState<{
     home: { image: string; objectPosition: string; alt?: string };
     about: { image: string; objectPosition: string; alt?: string };
-    services: { image: string; objectPosition: string; alt?: string };
+    "our-work": { image: string; objectPosition: string; alt?: string };
   }>({
     home: { image: "/images/hero/hero-main.jpg", objectPosition: "53% 43%", alt: "Northforge Labs Creative Office" },
     about: { image: "/images/headers/about-main.webp", objectPosition: "46% 36%", alt: "Modern office lobby" },
-    services: { image: "/images/headers/services-main.webp", objectPosition: "75% 53%", alt: "Our services" },
+    "our-work": { image: "/images/headers/our-work-main.webp", objectPosition: "75% 53%", alt: "Our Work" },
   });
 
   const parsePosition = (posStr: string = "50% 50%") => {
@@ -166,7 +167,7 @@ export default function AdminPage() {
     return { x: Math.round(x), y: Math.round(y) };
   };
 
-  const updateHeaderPosition = (key: "home" | "about" | "services", x: number, y: number) => {
+  const updateHeaderPosition = (key: "home" | "about" | "our-work", x: number, y: number) => {
     const clampedX = Math.max(0, Math.min(100, Math.round(x)));
     const clampedY = Math.max(0, Math.min(100, Math.round(y)));
     const newPos = `${clampedX}% ${clampedY}%`;
@@ -181,7 +182,7 @@ export default function AdminPage() {
     updateEditForm(nextHeaders);
   };
 
-  const updateHeaderField = (key: "home" | "about" | "services", field: "image" | "alt", val: string) => {
+  const updateHeaderField = (key: "home" | "about" | "our-work", field: "image" | "alt", val: string) => {
     const nextHeaders = {
       ...headersData,
       [key]: {
@@ -317,8 +318,6 @@ export default function AdminPage() {
     switch (activeTab) {
       case "our-work":
         return "Our Work";
-      case "our-work-page":
-        return "Our Work Page";
       case "featured-work":
         return "Homepage Featured Work";
       case "headers":
@@ -449,7 +448,7 @@ export default function AdminPage() {
         return [
           { key: "home", title: "Homepage Hero", icon: <ImageIcon /> },
           { key: "about", title: "About Page Hero", icon: <ImageIcon /> },
-          { key: "services", title: "Services Page Hero", icon: <ImageIcon /> },
+          { key: "our-work", title: "Our Work Page Hero", icon: <ImageIcon /> },
         ];
       default:
         return [];
@@ -497,7 +496,7 @@ export default function AdminPage() {
         break;
       }
       case "headers":
-        setSelectedHeaderKey(key as "home" | "about" | "services");
+        setSelectedHeaderKey(key as "home" | "about" | "our-work");
         break;
     }
   };
@@ -508,6 +507,9 @@ export default function AdminPage() {
     updateEditForm(JSON.parse(JSON.stringify(item.data)));
   };
 
+  const [workPageSettings, setWorkPageSettings] = useState<OurWorkPageSettings | null>(null);
+  const [savingCategories, setSavingCategories] = useState(false);
+  const [workCategories, setWorkCategories] = useState<OurWorkPageSettings["sections"]>({});
   const tabLoadVersion = useRef(0);
   const loadTabContent = async (tab: Tab, preferredSlug?: string) => {
     const requestVersion = ++tabLoadVersion.current;
@@ -550,13 +552,6 @@ export default function AdminPage() {
         if (requestVersion !== tabLoadVersion.current) return;
         updateEditForm(data);
         setSelectedSlug("config");
-      } else if (tab === "our-work-page") {
-        const res = await fetch("/api/admin/content?type=site&slug=our-work-page");
-        if (!res.ok) throw new Error("Could not load Our Work page settings");
-        const settings = await res.json();
-        if (requestVersion !== tabLoadVersion.current) return;
-        updateEditForm(settings);
-        setSelectedSlug("our-work-page");
       } else if (tab === "team") {
         const res = await fetch("/api/admin/content?type=site&slug=team");
         const data = await res.json();
@@ -579,6 +574,14 @@ export default function AdminPage() {
         setSelectedTestimonialKey("hero-image");
         setSelectedTestimonialIndex(-1);
       } else {
+        if (tab === "our-work") {
+          const response = await fetch("/api/admin/content?type=site&slug=our-work-page");
+          if (!response.ok) throw new Error("Could not load work categories");
+          const settings = await response.json();
+          if (requestVersion !== tabLoadVersion.current) return;
+          setWorkCategories(settings.sections);
+          setWorkPageSettings(settings);
+        }
         const res = await fetch(`/api/admin/content?type=${tab}`);
         const data = await res.json();
         if (requestVersion !== tabLoadVersion.current) return;
@@ -614,8 +617,10 @@ export default function AdminPage() {
         id: newSlug,
         slug: newSlug,
         title: "New Project",
-        category: "websites",
+        category: Object.keys(workCategories)[0] || "websites",
         playStoreUrl: "",
+        appDownloadUrl: "",
+        additionalCategories: [],
         description: "A short summary of the client and project.",
         image: "",
         siteUrl: "",
@@ -839,10 +844,10 @@ export default function AdminPage() {
 
     setLoading(true);
     try {
-      const isSiteType = activeTab === "site-config" || activeTab === "team" || activeTab === "testimonials" || activeTab === "our-work-page";
+      const isSiteType = activeTab === "site-config" || activeTab === "team" || activeTab === "testimonials";
       const type = isSiteType ? "site" : activeTab;
       const slug = isSiteType
-        ? (activeTab === "our-work-page" ? "our-work-page" : activeTab === "site-config" ? "config" : activeTab === "testimonials" ? "testimonials" : "team")
+        ? (activeTab === "site-config" ? "config" : activeTab === "testimonials" ? "testimonials" : "team")
         : activeTab === "our-work" ? dataToSave.slug : selectedSlug;
 
       const res = await fetch("/api/admin/content", {
@@ -866,6 +871,33 @@ export default function AdminPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const saveCategories = async () => {
+    if (!workPageSettings || savingCategories) return;
+    const requestVersion = tabLoadVersion.current;
+    const settings = workPageSettings;
+    setSavingCategories(true);
+    try {
+      const response = await fetch("/api/admin/content", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "site", slug: "our-work-page", data: settings }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not save categories");
+      const projectsResponse = await fetch("/api/admin/content?type=our-work");
+      if (!projectsResponse.ok) throw new Error("Categories saved, but projects could not be refreshed. Reload the editor.");
+      const projects = await projectsResponse.json();
+      if (requestVersion !== tabLoadVersion.current) return;
+      setWorkCategories(settings.sections);
+      setItems(projects);
+      // Keep unsaved project fields, but repair its category if that category was removed.
+      if (editForm) {
+        updateEditForm({ ...editForm, category: Object.hasOwn(settings.sections, editForm.category || "websites") ? editForm.category || "websites" : Object.keys(settings.sections)[0], additionalCategories: (editForm.additionalCategories || []).filter((category: string) => Object.hasOwn(settings.sections, category)) });
+      }
+      showToast("Work categories saved successfully!");
+    } catch (error) { showToast((error as Error).message, "error"); }
+    finally { setSavingCategories(false); }
   };
 
   const saveFeaturedWork = async () => {
@@ -989,7 +1021,6 @@ export default function AdminPage() {
 
   const navTabs = [
     { id: "our-work", label: "Our Work", icon: <FolderIcon /> },
-    { id: "our-work-page", label: "Our Work Page", icon: <SettingsIcon /> },
     { id: "featured-work", label: "Featured Work (Home)", icon: <StarIcon /> },
     { id: "headers", label: "Page Headers", icon: <ImageIcon /> },
     { id: "blog", label: "Blog Posts", icon: <ChatBubbleIcon /> },
@@ -1402,6 +1433,17 @@ export default function AdminPage() {
           margin: "0 auto",
           boxSizing: "border-box"
         }}>
+          {activeTab === "our-work" && workPageSettings && (
+            <details style={{ padding: "1.5rem", marginBottom: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "24px", background: "#fff" }}>
+              <summary style={{ fontWeight: 600, cursor: "pointer" }}>Categories</summary>
+              <div style={{ marginTop: "1.5rem" }}>
+                <fieldset disabled={savingCategories} style={{ border: "none", padding: 0, margin: 0 }}>
+                  <WorkCategoriesEditor value={workPageSettings} onChange={setWorkPageSettings} />
+                </fieldset>
+                <button type="button" className="button" disabled={savingCategories} onClick={saveCategories} style={{ marginTop: "1.5rem" }}>{savingCategories ? "Saving categories…" : "Save categories"}</button>
+              </div>
+            </details>
+          )}
           {isJsonMode && activeTab !== "upload" ? (
             <div style={{
               backgroundColor: "#ffffff",
@@ -1697,13 +1739,13 @@ export default function AdminPage() {
                 {[
                   { key: "home", label: "Homepage Hero Banner", aspect: "16:9 Widescreen" },
                   { key: "about", label: "About Page Hero", aspect: "4:3 Hero Card" },
-                  { key: "services", label: "Services Page Hero", aspect: "4:3 Hero Card" },
+                  { key: "our-work", label: "Our Work Page Hero", aspect: "4:3 Hero Card" },
                 ].map((card) => {
                   const isSelected = selectedHeaderKey === card.key;
                   return (
                     <button
                       key={card.key}
-                      onClick={() => setSelectedHeaderKey(card.key as "home" | "about" | "services")}
+                      onClick={() => setSelectedHeaderKey(card.key as "home" | "about" | "our-work")}
                       style={{
                         padding: "1.35rem 1.5rem",
                         borderRadius: "20px",
@@ -2079,18 +2121,23 @@ export default function AdminPage() {
               padding: "2.5rem 3rem"
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
-                {activeTab === "our-work-page" && <OurWorkPageEditor value={editForm} onChange={updateEditForm} />}
                 {activeTab === "our-work" && (
                   <>
                     <div>
                       <label htmlFor="work-category">Category</label>
-                      <select id="work-category" value={editForm.category || "websites"} onChange={(e) => updateEditForm({ ...editForm, category: e.target.value })} style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem" }}>
-                        <option value="websites">Websites</option>
-                        <option value="apps">Apps</option>
-                        <option value="social-media">Social Media Management</option>
+                      <select id="work-category" value={editForm.category || "websites"} onChange={(e) => updateEditForm({ ...editForm, category: e.target.value, additionalCategories: (editForm.additionalCategories || []).filter((id: string) => id !== e.target.value) })} style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem" }}>
+                        {Object.entries(workCategories).map(([id, category]) => <option key={id} value={id}>{category.title}{category.visible ? "" : " (hidden)"}</option>)}
                       </select>
                     </div>
-                    {editForm.category === "apps" && <div>
+                    <fieldset style={{ border: "1px solid #e5e7eb", borderRadius: "16px", padding: "1rem", display: "grid", gap: ".75rem" }}>
+                      <legend>Also show in</legend>
+                      {Object.entries(workCategories).filter(([id]) => id !== (editForm.category || "websites")).map(([id, category]) => <label key={id}><input type="checkbox" checked={(editForm.additionalCategories || []).includes(id)} onChange={event => updateEditForm({ ...editForm, additionalCategories: event.target.checked ? [...(editForm.additionalCategories || []), id] : (editForm.additionalCategories || []).filter((value: string) => value !== id) })} /> Also show in {category.title}</label>)}
+                    </fieldset>
+                    <div>
+                      <label htmlFor="work-download-url">App download URL (APK)</label>
+                      <input id="work-download-url" type="url" placeholder="https://example.com/app.apk" value={editForm.appDownloadUrl || ""} onChange={event => updateEditForm({ ...editForm, appDownloadUrl: event.target.value })} style={{ width: "100%", padding: ".85rem 1.2rem", border: "1px solid #e5e7eb", borderRadius: "16px" }} />
+                    </div>
+                    {<div>
                       <label htmlFor="work-play-store">Play Store URL</label>
                       <input id="work-play-store" type="url" placeholder="https://play.google.com/store/apps/details?id=…" value={editForm.playStoreUrl || ""} onChange={(e) => updateEditForm({ ...editForm, playStoreUrl: e.target.value })} style={{ width: "100%", padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem" }} />
                     </div>}
@@ -2388,7 +2435,14 @@ export default function AdminPage() {
 
                 {activeTab === "site-config" && (
                   <>
+                    {[
+                      {key:"url",label:"Website URL"}, {key:"phone",label:"Phone number"}, {key:"whatsappNumber",label:"WhatsApp number"},
+                      {key:"address.line1",label:"Office / business name"}, {key:"address.line2",label:"Street / locality"}, {key:"address.city",label:"City / region"},
+                      ...["facebook","instagram","twitter","linkedin","youtube","tiktok"].map(key=>({key:"socials."+key,label:key === "twitter" ? "X / Twitter URL" : key[0].toUpperCase()+key.slice(1)+" URL"}))
+                    ].map(field=>{const [group,nested]=field.key.split(".");return <div key={field.key}><label htmlFor={"site-"+field.key}>{field.label}</label><input id={"site-"+field.key} type="text" value={nested ? editForm[group]?.[nested] || "" : editForm[group] || ""} onChange={e=>updateEditForm(nested ? {...editForm,[group]:{...editForm[group],[nested]:e.target.value}} : {...editForm,[group]:e.target.value})} style={{width:"100%",padding:".85rem 1.2rem",border:"1px solid #e5e7eb",borderRadius:"16px"}} /></div>;})}
                     <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}><input type="checkbox" checked={editForm.draggableScrollbar !== false} onChange={(e) => updateEditForm({ ...editForm, draggableScrollbar: e.target.checked })} />Enable draggable page scrollbar</label>
+                    <div><label htmlFor="cookie-delay">Cookie notice delay after the splash (seconds)</label><input id="cookie-delay" type="number" min={0} max={60} step={0.5} value={editForm.cookieNoticeDelay ?? 3} onChange={(e) => updateEditForm({ ...editForm, cookieNoticeDelay: Number(e.target.value) })} style={{ width: "100%", padding: "0.85rem 1.2rem", border: "1px solid #e5e7eb", borderRadius: "16px" }} /></div>
+                    <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}><input type="checkbox" checked={editForm.cookieNoticeAnimation !== false} onChange={(e) => updateEditForm({ ...editForm, cookieNoticeAnimation: e.target.checked })} />Animate cookie notice expansion and text</label>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
                       <div>
                         <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Agency Name</label>

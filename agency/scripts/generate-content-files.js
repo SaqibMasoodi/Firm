@@ -34,7 +34,6 @@ fs.writeFileSync('content/site/config.json', JSON.stringify(siteConfig, null, 2)
 // 2. Navigation
 const navigation = [
   { label: "About us", href: "/about" },
-  { label: "Services", href: "/services" },
   { label: "Our Work", href: "/our-work" },
   { label: "Blog", href: "/blog" }
 ];

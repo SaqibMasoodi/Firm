@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/constants";
 import { getWorkProjects, getBlogPosts } from "@/lib/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -6,12 +7,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getWorkProjects(),
     getBlogPosts(),
   ]);
-  const baseUrl = "https://northforgelabs.com";
+  const baseUrl = siteConfig.url.replace(/\/$/, "");
 
   const staticPages = [
     "",
     "/about",
-    "/services",
     "/our-work",
     "/blog",
     "/contact",

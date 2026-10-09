@@ -10,13 +10,13 @@ export function OrganizationSchema() {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/images/brand/logo.svg`,
+    logo: `${siteConfig.url.replace(/\/$/, "")}/images/brand/logo.svg`,
     description: siteConfig.description,
     email: siteConfig.email,
     telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
-      streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}`,
+      streetAddress: [siteConfig.address.line1, siteConfig.address.line2].filter(Boolean).join(", "),
       addressLocality: siteConfig.address.city,
     },
     sameAs: [
@@ -24,7 +24,9 @@ export function OrganizationSchema() {
       siteConfig.socials.instagram,
       siteConfig.socials.twitter,
       siteConfig.socials.linkedin,
-    ],
+      siteConfig.socials.youtube,
+      siteConfig.socials.tiktok,
+    ].filter(url => url && /^https?:\/\//.test(url)),
   };
 
   return (
@@ -50,7 +52,7 @@ export function BreadcrumbSchema({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${siteConfig.url}${item.href}`,
+      item: `${siteConfig.url.replace(/\/$/, "")}${item.href}`,
     })),
   };
 
@@ -122,7 +124,7 @@ export function ArticleSchema({
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/images/brand/logo.svg`,
+        url: `${siteConfig.url.replace(/\/$/, "")}/images/brand/logo.svg`,
       },
     },
   };

@@ -57,11 +57,14 @@ export const ClientLogoSchema = z.object({
 
 export const SiteConfigSchema = z.object({
   draggableScrollbar: z.boolean().default(true),
+  cookieNoticeDelay: z.number().min(0).max(60).default(3),
+  cookieNoticeAnimation: z.boolean().default(true),
   name: z.string(),
   description: z.string(),
   url: z.string(),
   email: z.string(),
   phone: z.string(),
+  whatsappNumber: z.string().default(""),
   address: z.object({
     line1: z.string(),
     line2: z.string(),
@@ -72,6 +75,8 @@ export const SiteConfigSchema = z.object({
     instagram: z.string().optional(),
     twitter: z.string().optional(),
     linkedin: z.string().optional(),
+    youtube: z.string().optional(),
+    tiktok: z.string().optional(),
   }),
 });
 
@@ -91,7 +96,7 @@ export const HeaderConfigSchema = z.object({
 export const SiteHeadersSchema = z.object({
   home: HeaderConfigSchema,
   about: HeaderConfigSchema,
-  services: HeaderConfigSchema,
+  "our-work": HeaderConfigSchema,
 });
 
 export type TeamMember = z.infer<typeof TeamMemberSchema>;

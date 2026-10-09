@@ -1,5 +1,7 @@
+import ScrollJump from "@/components/ui/scroll-jump";
 import PageScrollbar from "@/components/ui/page-scrollbar";
 import { getSiteConfig } from "@/lib/content";
+import { siteConfig } from "@/lib/constants";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
@@ -22,11 +24,7 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : process.env.NEXT_PUBLIC_SITE_URL || "https://northforgelabs.com";
+const siteUrl = siteConfig.url.replace(/\/$/, "");
 
 export const metadata: Metadata = {
   title: {
@@ -104,10 +102,11 @@ export default async function RootLayout({
         <ClientSplashScreen />
         <ClientInteractiveTools />
         <PageScrollbar enabled={config.draggableScrollbar} />
+        <ScrollJump />
         <Navbar />
         <main id="main-content" style={{ flex: 1 }}>{children}</main>
         <Footer />
-        <CookieBanner />
+        <CookieBanner delaySeconds={config.cookieNoticeDelay} animate={config.cookieNoticeAnimation} />
       </body>
     </html>
   );

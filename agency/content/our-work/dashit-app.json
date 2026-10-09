@@ -1,0 +1,29 @@
+{
+  "id": "dashit-app",
+  "title": "DASHit — App",
+  "description": "The DASHit Android app brings hyperlocal grocery and daily essentials ordering to mobile, with a direct APK download.",
+  "image": "/images/our-work/dashit/cover-optimized.webp",
+  "slug": "dashit-app",
+  "category": "apps",
+  "siteUrl": "",
+  "playStoreUrl": "",
+  "tags": [
+    "Android App",
+    "Dashboard",
+    "UI/UX",
+    "Branding"
+  ],
+  "client": "DASHit Quick Commerce",
+  "challenge": "Build a cost-effective hyperlocal delivery platform that could support fast grocery ordering, regional delivery operations, and cross-platform access while minimizing recurring infrastructure costs for maps and related services.",
+  "solution": "Built a Next.js and Capacitor platform for web, Android, and iOS, powered by Firebase Firestore for real-time order management, OpenStreetMap-based driver tracking, an Open Food Facts product importer, and a comprehensive dark-store admin dashboard for operations.",
+  "results": [
+    "Cross-platform web, Android, and iOS experience delivered",
+    "Real-time order management and driver tracking implemented",
+    "Admin dashboard for store operations and order processing built",
+    "OpenStreetMap integration reduced dependency on paid mapping services",
+    "Automated product catalog import workflow integrated",
+    "PWA support and SEO foundations implemented with sitemap generation"
+  ],
+  "appDownloadUrl": "https://dashit.co.in/DASHit.apk",
+  "additionalCategories": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "pockethost-website",
+  "title": "PocketHost — Website",
+  "description": "The PocketHost website introduces its Android Minecraft server-hosting platform and helps users discover the mobile hosting experience.",
+  "image": "/images/our-work/pockethost/cover-optimized.webp",
+  "slug": "pockethost-website",
+  "siteUrl": "https://pockethost.online",
+  "tags": [
+    "Website",
+    "Minecraft",
+    "Server Hosting"
+  ],
+  "client": "PocketHost",
+  "challenge": "Introduce mobile Minecraft server hosting clearly and give visitors a route to explore PocketHost.",
+  "solution": "A dedicated website presenting PocketHost and its Android hosting experience.",
+  "results": [
+    "A public website for the PocketHost platform",
+    "A dedicated online presence alongside the Android app"
+  ],
+  "category": "websites",
+  "playStoreUrl": "",
+  "appDownloadUrl": "",
+  "additionalCategories": []
+}

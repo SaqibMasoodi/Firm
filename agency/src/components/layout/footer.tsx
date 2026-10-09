@@ -1,4 +1,6 @@
 "use client";
+import { Play, Music2, MessageCircle } from "lucide-react";
+
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -111,7 +113,6 @@ export default function Footer() {
                       <div className="weight-semibold">Quick Links</div>
                     </div>
                     <Link href="/about" className="footer-link">About us</Link>
-                    <Link href="/services" className="footer-link">Services</Link>
                     <Link href="/our-work" className="footer-link">Our Work</Link>
                     <Link href="/blog" className="footer-link">Blog</Link>
                     <Link href="/contact" className="footer-link">Contact</Link>
@@ -128,6 +129,7 @@ export default function Footer() {
                     <a href={`mailto:${siteConfig.email}`} className="footer-link">
                       {siteConfig.email}
                     </a>
+                    {siteConfig.whatsappNumber && <a href={`https://wa.me/${siteConfig.whatsappNumber.replace(/\D/g, "")}`} className="footer-social-link" target="_blank" rel="noopener noreferrer"><MessageCircle size={18} aria-hidden="true" />WhatsApp</a>}
                     <div className="footer-address">
                       {siteConfig.address.line1}
                       <br />
@@ -141,22 +143,24 @@ export default function Footer() {
                     <div className="margin-bottom margin-xsmall">
                       <div className="weight-semibold">Follow us</div>
                     </div>
-                    <a href={siteConfig.socials.facebook} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                    <a href={siteConfig.socials.facebook} className="footer-social-link w-inline-block">
                       <div className="social-icon w-embed"><FacebookIcon /></div>
                       <div className="text-size-small text-colour-black">Facebook</div>
                     </a>
-                    <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                    <a href={siteConfig.socials.instagram} className="footer-social-link w-inline-block">
                       <div className="social-icon w-embed"><InstagramIcon /></div>
                       <div className="text-size-small text-colour-black">Instagram</div>
                     </a>
-                    <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                    <a href={siteConfig.socials.twitter} className="footer-social-link w-inline-block">
                       <div className="social-icon w-embed"><XIcon /></div>
                       <div className="text-size-small text-colour-black">X</div>
                     </a>
-                    <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" className="footer-social-link w-inline-block">
+                    <a href={siteConfig.socials.linkedin} className="footer-social-link w-inline-block">
                       <div className="social-icon w-embed"><LinkedInIcon /></div>
                       <div className="text-size-small text-colour-black">LinkedIn</div>
                     </a>
+                    {siteConfig.socials.youtube && <Link href={siteConfig.socials.youtube} className="footer-social-link"><div className="social-icon"><Play size={20} aria-hidden="true" /></div><div className="text-size-small text-colour-black">YouTube</div></Link>}
+                    {siteConfig.socials.tiktok && <Link href={siteConfig.socials.tiktok} className="footer-social-link"><div className="social-icon"><Music2 size={20} aria-hidden="true" /></div><div className="text-size-small text-colour-black">TikTok</div></Link>}
                   </div>
                 </div>
               </div>
@@ -190,3 +194,4 @@ export default function Footer() {
     </footer>
   );
 }
+

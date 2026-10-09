@@ -1,13 +1,12 @@
 {
   "id": "dreamcabs",
-  "title": "DreamCabs",
-  "description": "A production-grade, multi-tenant ride-hailing and fleet management platform with real-time dispatch, integrated payments, and a unified admin dashboard.",
+  "title": "DreamCabs — Website",
+  "description": "The website and administration side of DreamCabs, a ride-hailing and fleet management platform with real-time dispatch and integrated payments.",
   "image": "/images/our-work/dreamcabs/cover-optimized.webp",
   "slug": "dreamcabs",
   "siteUrl": "https://dreamcabs.in",
   "tags": [
     "Web App",
-    "Mobile App",
     "Dashboard",
     "Automation"
   ],
@@ -23,5 +22,7 @@
     "Designed a multi-city architecture with role-based access control"
   ],
   "category": "websites",
-  "playStoreUrl": ""
+  "playStoreUrl": "",
+  "appDownloadUrl": "",
+  "additionalCategories": []
 }

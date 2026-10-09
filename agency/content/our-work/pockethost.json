@@ -1,12 +1,12 @@
 {
   "id": "pockethost",
-  "title": "PocketHost",
+  "title": "PocketHost — App",
   "description": "A mobile platform that lets users host dedicated Minecraft servers directly from Android devices without port forwarding or desktop hardware.",
   "image": "/images/our-work/pockethost/cover-optimized.webp",
   "slug": "pockethost",
-  "siteUrl": "https://pockethost.online",
+  "siteUrl": "",
   "tags": [
-    "Mobile App",
+    "Android App",
     "Automation",
     "UI/UX"
   ],
@@ -20,5 +20,7 @@
     "Delivered a mobile-first hosting experience with a native Android interface"
   ],
   "category": "apps",
-  "playStoreUrl": ""
+  "playStoreUrl": "https://play.google.com/store/apps/details?id=com.pockethost.app&pcampaignid=web_share",
+  "appDownloadUrl": "",
+  "additionalCategories": []
 }

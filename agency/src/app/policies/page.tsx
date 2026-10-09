@@ -18,18 +18,50 @@ export const metadata: Metadata = {
 
 export default function PoliciesPage() {
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper policies-page">
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Policies", href: "/policies" }]} />
-      <header className="section-subpage-hero-header">
+      <header className="section-hero-header">
         <div className="padding-global">
           <div className="container-large">
-            <div className="section-padding-large policies-header">
-              <ScrollReveal>
-                <div className="tagline-pill"><div>Clear by design</div></div>
-                <h1 className="heading-style-h1 weight-medium">Policies</h1>
-                <p className="text-size-medium">A clear overview of your privacy, the storage this website uses, and how we work.</p>
-                <p className="text-size-small">Last updated: <time dateTime="2026-10-01">1 October 2026</time></p>
-              </ScrollReveal>
+            <div className="section-padding-large">
+              <div className="header-component">
+                <div className="text-align-center">
+                  <div className="max-width-large align-center">
+                    <ScrollReveal>
+                      <div className="tagline-pill">
+                        <div>Clear by design</div>
+                      </div>
+                    </ScrollReveal>
+                    <div className="margin-bottom margin-small">
+                      <ScrollReveal delay={0.1}>
+                        <h1 className="heading-style-h1 weight-medium">
+                          Policies
+                        </h1>
+                      </ScrollReveal>
+                    </div>
+                    <ScrollReveal delay={0.2}>
+                      <p className="text-size-medium">
+                        A clear overview of your privacy, the storage this website uses, and how we work.
+                      </p>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.25}>
+                      <p className="text-size-small margin-top margin-small">Last updated: <time dateTime="2026-10-01">1 October 2026</time></p>
+                    </ScrollReveal>
+                    <div className="margin-top margin-medium">
+                      <ScrollReveal delay={0.3}>
+                        <div className="button-group is-center">
+                          <Link href="/contact" className="button">
+                            <div className="button-text-item">Get in touch</div>
+                          </Link>
+                          <Link href="/our-work" className="button-secondary">
+                            <div className="button-text-item">Our Work</div>
+                          </Link>
+                        </div>
+                      </ScrollReveal>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

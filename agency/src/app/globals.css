@@ -5321,29 +5321,6 @@ button,
 
 
 /* Our Work category layout, scoped to the portfolio page. */
-.our-work-shortcuts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 3.5rem;
-}
-.our-work-shortcut {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  padding: 0.875rem 1.25rem;
-  border: 1px solid var(--black, #171717);
-  border-radius: 100rem;
-  color: var(--black, #171717);
-  background: var(--white, #fff);
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.4;
-  transition: background-color 0.2s;
-}
-.our-work-shortcut:hover { background: var(--green, #cbfb45); }
 .our-work-portfolio a:focus-visible { outline: 3px solid var(--black, #171717); outline-offset: 4px; }
 .our-work-category { scroll-margin-top: 9rem; }
 .our-work-category + .our-work-category { margin-top: 4.5rem; padding-top: 3.5rem; border-top: 1px solid rgba(0, 0, 0, 0.12); }
@@ -5357,9 +5334,7 @@ button,
 .our-work-portfolio .work-project-title-wrapper h3 { margin-top: 0; }
 .our-work-portfolio .project-button-wrapper { flex-wrap: wrap; }
 @media screen and (max-width: 639px) {
-  .our-work-portfolio .our-work-list { grid-template-columns: minmax(0, 1fr) !important; gap: 1.5rem !important; }
-  .our-work-shortcuts { justify-content: flex-start; margin-bottom: 2.5rem; }
-  .our-work-shortcut { padding: 0.75rem 1rem; font-size: 0.9375rem; }
+  .our-work-portfolio .our-work-list { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 1rem !important; }
   .our-work-category + .our-work-category { margin-top: 3rem; padding-top: 2.5rem; }
   .our-work-portfolio .work-project-item .text-size-regular { font-size: 1rem !important; line-height: 1.5 !important; }
   .our-work-portfolio .work-project-title-wrapper h3 { font-size: 1.5rem; line-height: 1.3; }
@@ -5370,12 +5345,135 @@ button,
 /* Keep native scrolling until the draggable page scrollbar is ready. */
 html.has-drag-scrollbar { scrollbar-width: none; }
 html.has-drag-scrollbar::-webkit-scrollbar { width: 0; }
-.page-scrollbar { position: fixed; top: 4px; bottom: 4px; right: 0; width: 22px; z-index: 10000; touch-action: none; user-select: none; cursor: grab; opacity: 0; pointer-events: none; }
+.page-scrollbar { position: fixed; top: 4px; bottom: 4px; right: 0; width: 22px; z-index: 10000; touch-action: none; user-select: none; cursor: grab; opacity: 0; pointer-events: none; outline: none; -webkit-tap-highlight-color: transparent; }
 .page-scrollbar[data-visible="true"] { opacity: 1; pointer-events: auto; }
 .page-scrollbar-thumb { position: absolute; top: 0; right: 3px; width: 5px; border-radius: 100rem; background: var(--green, #cbfb45); transition: width 160ms ease, box-shadow 160ms ease; }
-.page-scrollbar:hover .page-scrollbar-thumb, .page-scrollbar:focus-visible .page-scrollbar-thumb { width: 8px; box-shadow: 0 0 0 3px color-mix(in srgb, var(--green, #cbfb45) 18%, transparent); }
+@media (hover: hover) and (pointer: fine) { .page-scrollbar:hover .page-scrollbar-thumb { width: 8px; box-shadow: 0 0 0 3px color-mix(in srgb, var(--green, #cbfb45) 18%, transparent); } }
 .page-scrollbar.is-dragging { cursor: grabbing; }
 .page-scrollbar.is-dragging .page-scrollbar-thumb { width: 9px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--green, #cbfb45) 24%, transparent); }
-.page-scrollbar:focus-visible { outline: 1px solid var(--black, #171717); outline-offset: -1px; border-radius: 100rem; }
+.page-scrollbar:focus-visible .page-scrollbar-thumb { outline: 2px solid var(--black, #171717); outline-offset: 2px; }
 @media (pointer: coarse) { .page-scrollbar { width: 32px; } .page-scrollbar-thumb { width: 6px; } }
 @media (prefers-reduced-motion: reduce) { .page-scrollbar-thumb { transition: none; } }
+
+/* Expand the panel before writing its text; reserve final text height to avoid jumps. */
+.cookie-banner.cookie-banner-expanding { animation: none; opacity: 0; transform-origin: center bottom; will-change: transform, opacity; }
+.cookie-banner-expanding.is-leaving { animation: none; pointer-events: none; }
+.cookie-type-line { display: grid; }
+.cookie-type-line > span { grid-area: 1 / 1; min-width: 0; }
+.cookie-type-reserve { opacity: 0; pointer-events: none; }
+.cookie-type-visual { overflow-wrap: anywhere; }
+.cookie-policy-link { display: inline-block; margin-top: 0.25rem; opacity: 0; }
+.cookie-banner-expanding > .button { opacity: 0; }
+.cookie-banner-expanding > .button:disabled { pointer-events: none; }
+
+/* Our Work filter toolbar follows the same section spacing as other pages. */
+.our-work-filter-bar { display: flex; align-items: center; gap: 1rem; padding: .5rem 1.25rem; margin-bottom: 2rem; border-radius: 100rem; }
+.our-work-filter-label { display: flex; align-items: center; gap: .65rem; flex-shrink: 0; font-size: .875rem; font-weight: 600; }
+.our-work-filter-options { display: flex; align-items: center; gap: .6rem; min-width: 0; flex: 1; overflow-x: auto; padding: 4px; scrollbar-width: thin; }
+.our-work-filter-pill { flex-shrink: 0; min-height: 40px; padding: .6rem 1.15rem; border: 1px solid transparent; border-radius: 100rem; background: transparent; color: var(--black, #171717); font-size: .875rem; line-height: 1.4; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease; }
+.our-work-filter-pill[aria-pressed="true"] { background: var(--black, #171717); color: var(--white, #fff); box-shadow: 0 3px 8px rgba(0,0,0,.12); }
+@media (hover: hover) { .our-work-filter-pill:not([aria-pressed="true"]):hover { background: var(--grey); } }
+.our-work-filter-pill:focus-visible { outline: 2px solid var(--black, #171717); outline-offset: 2px; }
+.our-work-search { display: flex; align-items: center; gap: .6rem; flex: 0 1 270px; min-width: 180px; border-left: 1px solid rgba(0,0,0,.1); padding-left: 1rem; }
+.our-work-search input { width: 100%; min-width: 0; min-height: 40px; border: 1px solid transparent; border-radius: 100rem; padding: .6rem 1rem; background: #f1f1f1; color: var(--black, #171717); font: inherit; font-size: .875rem; }
+.our-work-search input:focus-visible { outline: 2px solid var(--black, #171717); outline-offset: 2px; }
+.our-work-search svg { flex-shrink: 0; }
+.our-work-filter-description { margin: 0 0 1.5rem; }
+.our-work-filter-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media screen and (max-width: 1100px) { .our-work-filter-bar { flex-wrap: wrap; } .our-work-search { flex-basis: 100%; border-left: 0; border-top: 1px solid rgba(0,0,0,.08); padding: .85rem 0 0; } }
+@media screen and (max-width: 639px) { .our-work-filter-bar { padding: 1.1rem; gap: .75rem; border-radius: 1.5rem; margin-bottom: 1.5rem; } .our-work-filter-label { width: 100%; } .our-work-filter-options { flex-basis: 100%; } .our-work-filter-pill { padding: .6rem 1rem; } }
+@media (prefers-reduced-motion: reduce) { .our-work-filter-pill { transition: none; } }
+
+/* Featured Work navigation remains a simple footer link. */
+.project-footer-actions { display: flex; justify-content: center; margin-top: 3rem; }
+@media screen and (max-width: 767px) { .project-footer-actions { margin-top: 2rem; } }
+
+/* Transfer space from above these heroes to below them without moving the next section. */
+.balanced-hero .section-padding-large { padding-top: 4rem; padding-bottom: 8rem; }
+@media screen and (max-width: 991px) { .balanced-hero .section-padding-large { padding-top: 3rem; padding-bottom: 6rem; } }
+@media screen and (max-width: 767px) { .balanced-hero .section-padding-large { padding-top: 2rem; padding-bottom: 4rem; } }
+@media screen and (max-width: 479px) { .balanced-hero .section-padding-large { padding-top: 1.5rem; padding-bottom: 3rem; } }
+
+/* Shared frosted surface for navigation and portfolio filters. */
+.navbar-container, .our-work-filter-bar {
+  background-color: rgba(248, 248, 248, 0.75);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* A wrapped filter needs rounded corners rather than an elongated oval. */
+@media screen and (max-width: 1100px) { .our-work-filter-bar { border-radius: 2rem; } }
+@media (prefers-reduced-motion: reduce) { .our-work-filter-bar { transition: none; } }
+
+/* Clip horizontal overflow without making the body a non-scrolling sticky ancestor. */
+body:has(.policies-page) { overflow-x: clip; }
+@media screen and (max-width: 991px) {
+  .policies-page .policies-index { position: static; top: auto; }
+  .policies-page .policies-layout { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+}
+
+/* Fit the Contact introduction and form into the first desktop screen. */
+@media screen and (min-width: 992px) {
+  .section-contact { display: flex; align-items: center; min-height: 100svh; margin-top: 0; padding-top: 7rem !important; padding-bottom: 2rem; }
+  .section-contact > .padding-global { width: 100%; }
+  .section-contact .section-padding-large { padding-block: 0; }
+  .section-contact .contact-component { column-gap: clamp(2rem, 4vw, 5rem); align-items: center; }
+  .section-contact .contact-form-block { padding: clamp(1.25rem, 3vh, 2rem); }
+  .section-contact .contact-form { row-gap: clamp(.625rem, 1.5vh, 1rem); }
+  .section-contact .input-form { min-height: 2.75rem; padding: .65rem 1rem; }
+  .section-contact .input-form.is-text-area { min-height: clamp(5rem, 13vh, 7.5rem); }
+  .section-contact .button.is-form { min-height: 2.75rem; padding: .7rem 1.25rem; }
+}
+@media screen and (min-width: 992px) and (max-height: 720px) {
+  .section-contact .contact-heading-wrapper h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); }
+  .section-contact .contact-heading-wrapper .text-size-medium { font-size: 1.125rem; line-height: 1.5; }
+  .section-contact .contact-content > .margin-bottom { margin-bottom: 1rem; }
+  .section-contact .contact-list { margin-top: 1rem; row-gap: .75rem; }
+}
+
+/* Keep the homepage snapshot compact on phones without changing desktop cards. */
+@media screen and (max-width: 767px) {
+  .home-company-snapshot .stats-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  .home-company-snapshot .stats-item { aspect-ratio: 1; padding: clamp(.875rem, 3vw, 1.5rem); justify-content: space-between; }
+  .home-company-snapshot .snapshot-card-description { display: none; }
+  .home-company-snapshot .stats-item > .margin-bottom { margin-bottom: .5rem; }
+  .home-company-snapshot .stat-item-content .heading-style-h6 { margin-bottom: 0; }
+}
+
+/* A brief direction-aware shortcut, using the site's frosted pills and accent. */
+.scroll-jump {
+  position: fixed;
+  z-index: 980;
+  right: max(2rem, env(safe-area-inset-right));
+  bottom: max(1.5rem, env(safe-area-inset-bottom), var(--scroll-jump-clearance, 0px));
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  min-height: 48px;
+  padding: .5rem 1rem .5rem .5rem;
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 100rem;
+  background: rgba(248, 248, 248, .9);
+  color: var(--black, #171717);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, .12);
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px) scale(.96);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(.22, 1, .36, 1), visibility 180ms;
+  -webkit-tap-highlight-color: transparent;
+}
+.scroll-jump[data-visible="true"] { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; visibility: visible; }
+.scroll-jump-icon { display: grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: var(--green, #cbfb45); }
+.scroll-jump:focus-visible { outline: 2px solid var(--black, #171717); outline-offset: 4px; }
+@media (hover: hover) { .scroll-jump:hover { background: var(--white, #fff); } }
+@media screen and (max-width: 767px) { .scroll-jump { right: max(1.25rem, env(safe-area-inset-right)); bottom: max(1.25rem, env(safe-area-inset-bottom), var(--scroll-jump-clearance, 0px)); } }
+@media (prefers-reduced-motion: reduce) { .scroll-jump { transition: none; transform: none; } }

@@ -2,6 +2,7 @@
 import { BreadcrumbSchema } from "@/components/seo/schemas";
 
 import { useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -90,19 +91,19 @@ export default function ContactPage() {
                 <div className="contact-content">
                   <div className="margin-bottom margin-medium">
                     <div className="contact-heading-wrapper">
-                      <ScrollReveal>
+                      <ScrollReveal priority>
                         <div className="tagline-pill">
                           <div>Get in touch</div>
                         </div>
                       </ScrollReveal>
                       <div className="margin-bottom margin-xsmall">
-                        <ScrollReveal delay={0.1}>
+                        <ScrollReveal priority delay={0.1}>
                           <h1 className="heading-style-h1 weight-medium">
                             Contact us
                           </h1>
                         </ScrollReveal>
                       </div>
-                      <ScrollReveal delay={0.2}>
+                      <ScrollReveal priority delay={0.2}>
                         <p className="text-size-medium" style={{ maxWidth: "28rem" }}>
                           Ready to transform your brand&apos;s digital presence
                           and unlock the full potential of social media
@@ -112,7 +113,7 @@ export default function ContactPage() {
                       </ScrollReveal>
                     </div>
                   </div>
-                  <ScrollReveal delay={0.3}>
+                  <ScrollReveal priority delay={0.3}>
                     <div className="contact-list">
                       <a
                         href={`mailto:${siteConfig.email}`}
@@ -136,6 +137,7 @@ export default function ContactPage() {
                           {siteConfig.phone}
                         </div>
                       </a>
+                      {siteConfig.whatsappNumber && <a href={`https://wa.me/${siteConfig.whatsappNumber.replace(/\D/g, "")}`} className="contact-item" target="_blank" rel="noopener noreferrer"><div className="contact-icon"><MessageCircle size={24} aria-hidden="true" /></div><div className="text-size-regular">WhatsApp: {siteConfig.whatsappNumber}</div></a>}
                       <div className="contact-item">
                         <div className="contact-icon">
                           <LocationIcon />
@@ -148,7 +150,7 @@ export default function ContactPage() {
                   </ScrollReveal>
                 </div>
 
-                <ScrollReveal delay={0.2}>
+                <ScrollReveal priority delay={0.2}>
                   <div className="contact-form-block">
                     {isSuccess ? (
                       <div className="contact-success" role="status">

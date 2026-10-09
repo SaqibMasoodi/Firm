@@ -59,7 +59,8 @@ export default function PageScrollbar({ enabled = true }: { enabled?: boolean })
     const offset = isThumb ? event.clientY - thumbRef.current!.getBoundingClientRect().top : metrics.thumb / 2;
     dragRef.current = { id: event.pointerId, offset };
     event.currentTarget.setPointerCapture(event.pointerId);
-    event.currentTarget.focus({ preventScroll: true });
+    // Touch dragging should not focus the full-height track.
+    if (event.pointerType === "mouse") event.currentTarget.focus({ preventScroll: true });
     setDragging(true);
     scrollToPointer(event.clientY, offset);
   };

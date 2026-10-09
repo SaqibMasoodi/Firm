@@ -54,7 +54,6 @@ export default async function SitemapPage() {
   const corePages = [
     { title: "Home", href: "/", desc: "Homepage & hero introduction" },
     { title: "About Us", href: "/about", desc: "Our team, vision, and agency story" },
-    { title: "Services", href: "/services", desc: "Full-service digital capabilities" },
     { title: "Our Work", href: "/our-work", desc: "Client work & transformations" },
     { title: "Blog", href: "/blog", desc: "Insights, industry trends & news" },
     { title: "Contact", href: "/contact", desc: "Inquiries & project kick-offs" },
@@ -197,7 +196,7 @@ export default async function SitemapPage() {
                         {services.map((service) => (
                           <Link
                             key={service.slug || service.title}
-                            href="/services"
+                            href={`/#${service.slug}`}
                             className="sitemap-link-item"
                           >
                             <div className="sitemap-link-info">
@@ -205,7 +204,7 @@ export default async function SitemapPage() {
                                 {service.title}
                               </span>
                               <span className="sitemap-link-url">
-                                /services · {service.features?.[0] || "Specialized capability"}
+                                Home · {service.features?.[0] || "Specialized capability"}
                               </span>
                             </div>
                             <div className="sitemap-link-arrow">

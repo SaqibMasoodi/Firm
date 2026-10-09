@@ -1,3 +1,4 @@
+import { HomePageSettingsSchema } from "@/lib/schemas/home-page-settings";
 import { revalidatePath } from "next/cache";
 import { OurWorkPageSettingsSchema } from "@/lib/schemas/our-work-page-settings";
 import { NextRequest, NextResponse } from "next/server";
@@ -93,6 +94,11 @@ export async function POST(req: NextRequest) {
       validatedData = ServiceSchema.parse(data);
     } else if (type === "our-work") {
       validatedData = WorkProjectSchema.parse(data);
+      const pageSettings = OurWorkPageSettingsSchema.parse(JSON.parse(await fs.readFile(path.join(CONTENT_DIR, "site/our-work-page.json"), "utf-8")));
+      const projectCategories = validatedData as { category: string; additionalCategories: string[] };
+      if ([projectCategories.category, ...projectCategories.additionalCategories].some(category => !Object.hasOwn(pageSettings.sections, category))) {
+        return NextResponse.json({ error: "Choose an existing work category. Refresh the editor if categories have changed." }, { status: 400 });
+      }
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || (oldSlug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(oldSlug))) {
         return NextResponse.json({ error: "Use lowercase letters, numbers, and hyphens for project slugs" }, { status: 400 });
       }
@@ -108,8 +114,13 @@ export async function POST(req: NextRequest) {
     } else if (type === "blog") {
       validatedData = BlogPostSchema.parse(data);
     } else if (type === "site") {
-      if (slug === "our-work-page") {
+      if (slug === "home-page") {
+        validatedData = HomePageSettingsSchema.parse(data);
+      } else if (slug === "our-work-page") {
         validatedData = OurWorkPageSettingsSchema.parse(data);
+        await saveWorkCategories(validatedData as z.infer<typeof OurWorkPageSettingsSchema>);
+        refreshWorkPages(type, slug);
+        return NextResponse.json({ success: true, message: "Saved work categories and page settings" });
       } else if (slug === "team") {
         validatedData = z.array(TeamMemberSchema).parse(data);
       } else if (slug === "faqs") {
@@ -223,6 +234,37 @@ async function updateFeaturedProject(oldSlug: string, newSlug?: string) {
 function refreshWorkPages(type: string, slug: string) {
   if (type === "site" && slug === "config") { revalidatePath("/", "layout"); return; }
   if (type !== "our-work" && !(type === "site" && ["our-work-page", "featured-work"].includes(slug))) return;
-  for (const page of ["/our-work", "/", "/services", "/sitemap", "/sitemap.xml"]) revalidatePath(page);
+  for (const page of ["/our-work", "/", "/sitemap", "/sitemap.xml"]) revalidatePath(page);
   revalidatePath("/our-work/[slug]", "page");
+}
+
+// Save category changes together with reassignment of projects from removed categories.
+async function saveWorkCategories(settings: z.infer<typeof OurWorkPageSettingsSchema>) {
+  const changes: { file: string; previous: string; next: string }[] = [];
+  const fallback = Object.keys(settings.sections)[0];
+  const projectDir = path.join(CONTENT_DIR, "our-work");
+  for (const filename of (await fs.readdir(projectDir)).filter(name => name.endsWith(".json"))) {
+    const file = path.join(projectDir, filename);
+    const previous = await fs.readFile(file, "utf-8");
+    const project = JSON.parse(previous);
+    const category = Object.hasOwn(settings.sections, project.category || "websites") ? project.category || "websites" : fallback;
+    const additionalCategories = (project.additionalCategories || []).filter((id: string) => Object.hasOwn(settings.sections, id) && id !== category);
+    if (category !== (project.category || "websites") || additionalCategories.length !== (project.additionalCategories || []).length) {
+      changes.push({ file, previous, next: JSON.stringify({ ...project, category, additionalCategories }, null, 2) });
+    }
+  }
+  const settingsFile = path.join(CONTENT_DIR, "site/our-work-page.json");
+  changes.push({ file: settingsFile, previous: await fs.readFile(settingsFile, "utf-8"), next: JSON.stringify(settings, null, 2) });
+  const written: typeof changes = [];
+  try {
+    for (const change of changes) {
+      written.push(change);
+      await fs.writeFile(change.file, change.next, "utf-8");
+    }
+  } catch (error) {
+    // Restore original files if any part of the category save fails.
+    const restored = await Promise.allSettled(written.map(change => fs.writeFile(change.file, change.previous, "utf-8")));
+    if (restored.some(result => result.status === "rejected")) console.error("Category save rollback failed");
+    throw error;
+  }
 }

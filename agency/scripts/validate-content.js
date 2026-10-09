@@ -20,9 +20,11 @@ const WorkProjectSchema = z.object({
   description: z.string(),
   image: z.string().default(""),
   slug: z.string(),
-  category: z.enum(["websites", "apps", "social-media"]).default("websites"),
+  category: z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/).refine(value => value !== "all", "All work is reserved").default("websites"),
   siteUrl: ExternalUrl,
   playStoreUrl: ExternalUrl,
+  appDownloadUrl: ExternalUrl,
+  additionalCategories: z.array(z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/).refine(value => value !== "all")).default([]),
   tags: z.array(z.string()).default([]),
   client: z.string().default(""),
   challenge: z.string().default(""),
@@ -87,7 +89,7 @@ const HeaderConfigSchema = z.object({
 const SiteHeadersSchema = z.object({
   home: HeaderConfigSchema,
   about: HeaderConfigSchema,
-  services: HeaderConfigSchema,
+  "our-work": HeaderConfigSchema,
 });
 const headers = JSON.parse(fs.readFileSync('content/site/headers.json', 'utf8'));
 SiteHeadersSchema.parse(headers);
@@ -123,15 +125,18 @@ const SectionSchema = z.object({
 });
 
 const OurWorkPageSettingsSchema = z.object({
+  filterLabel: z.string().default("Filter by:"),
+  searchEnabled: z.boolean().default(true),
+  searchPlaceholder: z.string().default("Search projects…"),
+  searchEmptyText: z.string().default("No projects match your search."),
+
+  allWorkLabel: z.string().trim().min(1).default("All work"),
+  allWorkEmptyText: z.string().default("No projects to show yet."),
   title: z.string().trim().min(1),
   description: z.string(),
   ctaTitle: z.string().trim().min(1),
   ctaDescription: z.string(),
-  sections: z.object({
-    websites: SectionSchema,
-    apps: SectionSchema,
-    "social-media": SectionSchema,
-  }),
+  sections: z.record(z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/).refine(value => value !== "all", "All work is reserved"), SectionSchema).refine(sections => Object.keys(sections).length > 0, "Keep at least one category"),
 });
 
 

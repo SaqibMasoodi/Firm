@@ -1,4 +1,10 @@
 {
+  "filterLabel": "Filter by:",
+  "searchEnabled": true,
+  "searchPlaceholder": "Search projects…",
+  "searchEmptyText": "No projects match your search.",
+  "allWorkLabel": "All work",
+  "allWorkEmptyText": "No projects to show yet.",
   "title": "Our Work",
   "description": "Websites, apps, and social media. Explore what we build and the pages we manage.",
   "ctaTitle": "Let's work together",

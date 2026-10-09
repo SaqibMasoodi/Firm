@@ -38,7 +38,7 @@ export default async function AboutPage() {
     <div className="page-wrapper">
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
       {/* 1. Subpage Hero */}
-      <header className="section-subpage-hero-header">
+      <header className="section-subpage-hero-header balanced-hero">
         <div className="padding-global">
           <div className="container-large">
             <div className="section-padding-large">

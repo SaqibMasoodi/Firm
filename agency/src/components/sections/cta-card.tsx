@@ -21,7 +21,7 @@ export default function CtaCard({
   buttonHref = "/contact",
   secondaryButtonText = "Book a call",
   secondaryButtonHref = "/contact",
-  imageSrc = "/images/placeholder.svg",
+  imageSrc = "/images/cta/lets-work-together.webp",
 }: CtaCardProps) {
   return (
     <section className="section-cta">
@@ -60,9 +60,9 @@ export default function CtaCard({
                   <div className="cta-image-wrapper">
                     <Image
                       src={imageSrc}
-                      alt="Work together"
-                      width={1440}
-                      height={960}
+                      alt="People bringing puzzle pieces together"
+                      width={1536}
+                      height={1024}
                       className="cta-image"
                       sizes="(max-width: 479px) 80vw, (max-width: 767px) 82vw, (max-width: 991px) 84vw, 44vw"
                     />

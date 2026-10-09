@@ -3,7 +3,8 @@ import { BreadcrumbSchema } from "@/components/seo/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { getWorkProjects, getOurWorkPageSettings } from "@/lib/content";
+import { getWorkProjects, getOurWorkPageSettings, getSiteHeader } from "@/lib/content";
+import CtaCard from "@/components/sections/cta-card";
 import OurWorkPortfolio from "@/components/sections/our-work-portfolio";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -30,18 +31,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function OurWorkPage() {
-  const [workProjects, settings] = await Promise.all([getWorkProjects(), getOurWorkPageSettings()]);
+  const [workProjects, settings, header] = await Promise.all([getWorkProjects(), getOurWorkPageSettings(), getSiteHeader("our-work")]);
   return (
     <div className="page-wrapper">
       <BreadcrumbSchema items={[{ name: "Home", href: "/" }, { name: "Our Work", href: "/our-work" }]} />
       {/* Hero Header */}
-      <header className="section-hero-header">
+      <header className="section-subpage-hero-header balanced-hero">
         <div className="padding-global">
           <div className="container-large">
             <div className="section-padding-large">
-              <div className="header-component">
-                <div className="text-align-center">
-                  <div className="max-width-large align-center">
+              <div className="subpage-header-component">
+                <div className="header-content">
                     <ScrollReveal>
                       <div className="tagline-pill">
                         <div>Our Work</div>
@@ -61,7 +61,7 @@ export default async function OurWorkPage() {
                     </ScrollReveal>
                     <div className="margin-top margin-medium">
                       <ScrollReveal delay={0.3}>
-                        <div className="button-group is-center">
+                        <div className="button-group">
                           <Link href="/contact" className="button">
                             <div className="button-text-item">Get in touch</div>
                           </Link>
@@ -71,8 +71,12 @@ export default async function OurWorkPage() {
                         </div>
                       </ScrollReveal>
                     </div>
-                  </div>
                 </div>
+                <ScrollReveal delay={0.2}>
+                  <div className="subpage-header-image-wrapper">
+                    <Image src={header.image || "/images/headers/our-work-main.webp"} alt={header.alt || "Our Work"} width={720} height={540} className="subpage-header-image" priority sizes="(max-width: 991px) 90vw, 42vw" style={{ objectPosition: header.objectPosition || "50% 50%" }} />
+                  </div>
+                </ScrollReveal>
               </div>
             </div>
           </div>
@@ -81,56 +85,7 @@ export default async function OurWorkPage() {
 
       <OurWorkPortfolio projects={workProjects} settings={settings} />
 
-      {/* Bottom CTA Card Banner */}
-      <section className="section-cta">
-        <div className="padding-global">
-          <div className="container-large">
-            <div className="padding-bottom padding-small">
-              <div className="cta-component">
-                <ScrollReveal>
-                  <div className="cta-card">
-                    <div className="cta-card-conent">
-                      <div className="tagline-pill">
-                        <div>Get in touch</div>
-                      </div>
-                      <div className="cta-card-content-top">
-                        <div className="margin-bottom margin-small">
-                          <h2 className="heading-style-h2 weight-medium">
-                            {settings.ctaTitle}
-                          </h2>
-                        </div>
-                        <p className="text-size-medium">
-                          {settings.ctaDescription}
-                        </p>
-                      </div>
-                      <div className="margin-top margin-medium">
-                        <div className="button-group">
-                          <Link href="/contact" className="button">
-                            <div className="button-text-item">Get in touch</div>
-                          </Link>
-                          <Link href="/contact" className="button-secondary">
-                            <div className="button-text-item">Book a call</div>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="cta-image-wrapper">
-                      <Image
-                        src="/images/placeholder.svg"
-                        alt="Collaboration"
-                        width={700}
-                        height={500}
-                        className="cta-image"
-                        sizes="(max-width: 479px) 80vw, (max-width: 767px) 82vw, (max-width: 991px) 84vw, 44vw"
-                      />
-                    </div>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CtaCard heading={settings.ctaTitle} description={settings.ctaDescription} />
     </div>
   );
 }

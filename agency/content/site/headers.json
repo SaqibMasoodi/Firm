@@ -9,9 +9,9 @@
     "objectPosition": "46% 36%",
     "alt": "Modern office lobby"
   },
-  "services": {
-    "image": "/images/headers/services-main.webp",
+  "our-work": {
+    "image": "/images/headers/our-work-main.webp",
     "objectPosition": "75% 53%",
-    "alt": "Our services"
+    "alt": "Our Work"
   }
 }

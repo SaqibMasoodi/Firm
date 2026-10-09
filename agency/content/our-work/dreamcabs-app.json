@@ -1,0 +1,28 @@
+{
+  "id": "dreamcabs-app",
+  "title": "DreamCabs — App",
+  "description": "The DreamCabs customer app for booking rides, with real-time tracking and integrated payments, available on Google Play.",
+  "image": "/images/our-work/dreamcabs/cover-optimized.webp",
+  "slug": "dreamcabs-app",
+  "siteUrl": "",
+  "tags": [
+    "Android App",
+    "Dashboard",
+    "Automation"
+  ],
+  "client": "DreamCabs",
+  "challenge": "Build a scalable ride-hailing platform that could support multiple cities, three distinct ride modes, real-time driver dispatch, integrated payments, financial operations, and role-based administration within a single ecosystem.",
+  "solution": "Developed a Laravel-based REST API powering two Ionic/Angular mobile apps for customers and drivers, alongside an Angular admin dashboard with real-time WebSockets, Razorpay integration, Firebase authentication, Google Maps, dynamic pricing, and comprehensive financial management.",
+  "results": [
+    "Built a Laravel REST API with 200+ endpoints",
+    "Implemented three ride modes: Private, Fixed Route, and Shuttle",
+    "Delivered two cross-platform mobile apps and a unified admin dashboard",
+    "Added real-time driver tracking and dispatch via WebSockets",
+    "Integrated Razorpay payments, driver wallets, and a complete financial ledger",
+    "Designed a multi-city architecture with role-based access control"
+  ],
+  "category": "apps",
+  "playStoreUrl": "https://play.google.com/store/apps/details?id=product.customer.dreamcab&pcampaignid=web_share",
+  "appDownloadUrl": "",
+  "additionalCategories": []
+}
