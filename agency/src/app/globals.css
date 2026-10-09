@@ -1231,10 +1231,10 @@ button,
 
 .logo-component {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   align-items: stretch;
   width: 100%;
-  gap: 1.75rem;
+  gap: 1.25rem;
   box-sizing: border-box;
 }
 
@@ -1244,9 +1244,10 @@ button,
   justify-content: center;
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 1.35rem;
-  padding: 2.5rem 2rem;
-  min-height: 12.5rem;
+  border-radius: 1.25rem;
+  padding: 1.75rem 1rem;
+  min-height: 9.5rem;
+  aspect-ratio: 1 / 1;
   width: 100%;
   box-sizing: border-box;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1262,15 +1263,27 @@ button,
 
 .client-logo {
   width: auto;
-  max-width: 80%;
-  max-height: 5.75rem;
+  max-width: 82%;
+  max-height: 4.5rem;
   height: auto;
   object-fit: contain;
   transition: transform 0.25s ease;
 }
 
 .client-logo-card:hover .client-logo {
-  transform: scale(1.03);
+  transform: scale(1.04);
+}
+
+@media screen and (max-width: 1100px) {
+  .logo-component {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .client-logo-card {
+    aspect-ratio: auto;
+    min-height: 9rem;
+    padding: 1.75rem 1.25rem;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -1287,21 +1300,22 @@ button,
     font-size: 1rem;
   }
   .logo-component {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
   }
   .client-logo-card {
-    min-height: 10rem;
-    padding: 2rem 1.5rem;
+    aspect-ratio: auto;
+    min-height: 8.5rem;
+    padding: 1.5rem 1rem;
     border-radius: 1.15rem;
   }
   .client-logo {
-    max-height: 4.75rem;
+    max-height: 4.25rem;
     max-width: 82%;
   }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 640px) {
   .section-client-logos {
     padding: 2.5rem 0 2rem;
   }
@@ -1320,7 +1334,8 @@ button,
     gap: 0.875rem;
   }
   .client-logo-card {
-    min-height: 8rem;
+    aspect-ratio: auto;
+    min-height: 7.75rem;
     padding: 1.25rem 0.875rem;
     border-radius: 1rem;
   }
