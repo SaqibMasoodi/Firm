@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Logo from "@/components/ui/logo";
 import type { OurWorkPageSettings } from "@/lib/schemas/our-work-page-settings";
+import BrandLogosEditor from "@/components/admin/brand-logos-editor";
 import WorkCategoriesEditor from "@/components/admin/work-categories-editor";
 
 type Tab = "our-work" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
@@ -2435,6 +2436,7 @@ export default function AdminPage() {
 
                 {activeTab === "site-config" && (
                   <>
+                    <BrandLogosEditor />
                     {[
                       {key:"url",label:"Website URL"}, {key:"phone",label:"Phone number"}, {key:"whatsappNumber",label:"WhatsApp number"},
                       {key:"address.line1",label:"Office / business name"}, {key:"address.line2",label:"Street / locality"}, {key:"address.city",label:"City / region"},

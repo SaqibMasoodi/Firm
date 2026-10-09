@@ -1,8 +1,9 @@
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/scroll-reveal";
-import { clientLogos } from "@/lib/constants";
+import { getClientLogos } from "@/lib/content";
 
-export default function ClientLogos() {
+export default async function ClientLogos() {
+  const clientLogos = await getClientLogos();
   return (
     <section className="section-client-logos">
       <div className="padding-global">
@@ -23,8 +24,8 @@ export default function ClientLogos() {
                   key={index}
                   src={logo.src}
                   alt={logo.alt}
-                  width={120}
-                  height={32}
+                  width={240}
+                  height={120}
                   className="client-logo"
                   unoptimized
                 />

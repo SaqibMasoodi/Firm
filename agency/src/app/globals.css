@@ -1203,43 +1203,35 @@ button,
 }
 
 .logo-component {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
+  justify-items: center;
   width: 100%;
   padding: 1.5rem 0;
-  gap: 1.5rem;
+  gap: 2rem;
   box-sizing: border-box;
 }
 
 .client-logo {
-  height: 2.5rem;
-  max-height: 2.75rem;
-  width: auto;
-  opacity: 0.85;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  width: 100%;
+  max-width: 15rem;
+  max-height: none;
+  height: 7.5rem;
   object-fit: contain;
+  transition: transform 0.25s ease;
 }
-
-.client-logo:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
+.client-logo:hover { transform: scale(1.04); }
 @media screen and (max-width: 991px) {
-  .logo-component {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    gap: 2.5rem;
-  }
+  .logo-component { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
 }
-
 @media screen and (max-width: 540px) {
-  .logo-component {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
+  .logo-component { gap: 1.5rem; }
+  .client-logo { height: 6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .client-logo { transition: none; }
+  .client-logo:hover { transform: none; }
 }
 
 /* ===== SERVICES ACCORDION ===== */

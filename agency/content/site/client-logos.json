@@ -1,26 +1,18 @@
 [
   {
-    "src": "/images/logos/client-logo-1.svg",
-    "alt": "Client logo 1"
+    "src": "/images/brands/ministry-of-science-and-technology.webp",
+    "alt": "Ministry of Science and Technology, Government of India"
   },
   {
-    "src": "/images/logos/client-logo-2.svg",
-    "alt": "Client logo 2"
+    "src": "/images/brands/dst-nidhi.webp",
+    "alt": "DST NIDHI — Start to Scale"
   },
   {
-    "src": "/images/logos/client-logo-1.svg",
-    "alt": "Client logo 3"
+    "src": "/images/brands/greenovator-incubation-foundation.webp",
+    "alt": "Greenovator Incubation Foundation"
   },
   {
-    "src": "/images/logos/client-logo-2.svg",
-    "alt": "Client logo 4"
-  },
-  {
-    "src": "/images/logos/client-logo-1.svg",
-    "alt": "Client logo 5"
-  },
-  {
-    "src": "/images/logos/client-logo-2.svg",
-    "alt": "Client logo 6"
+    "src": "/images/brands/nit-srinagar.webp",
+    "alt": "National Institute of Technology Srinagar"
   }
 ]
