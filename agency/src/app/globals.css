@@ -1198,40 +1198,149 @@ button,
 
 /* ===== CLIENT LOGOS ===== */
 .section-client-logos {
-  padding: 3rem 0;
+  padding: 4.5rem 0 4rem;
   width: 100%;
+}
+
+.client-logos-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 2.75rem;
+}
+
+.client-logos-header .tagline-pill {
+  margin-bottom: 0.85rem;
+}
+
+.client-logos-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--black, #171717);
+}
+
+.client-logos-header p {
+  color: var(--grey-text, #666666);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  margin: 0;
 }
 
 .logo-component {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: center;
-  justify-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
   width: 100%;
-  padding: 1.5rem 0;
-  gap: 2rem;
+  gap: 1.75rem;
   box-sizing: border-box;
 }
 
-.client-logo {
+.client-logo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1.35rem;
+  padding: 2.5rem 2rem;
+  min-height: 12.5rem;
   width: 100%;
-  max-width: 15rem;
-  max-height: none;
-  height: 7.5rem;
+  box-sizing: border-box;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease;
+}
+
+.client-logo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.16);
+}
+
+.client-logo {
+  width: auto;
+  max-width: 80%;
+  max-height: 5.75rem;
+  height: auto;
   object-fit: contain;
   transition: transform 0.25s ease;
 }
-.client-logo:hover { transform: scale(1.04); }
+
+.client-logo-card:hover .client-logo {
+  transform: scale(1.03);
+}
+
 @media screen and (max-width: 991px) {
-  .logo-component { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .section-client-logos {
+    padding: 3.5rem 0 3rem;
+  }
+  .client-logos-header {
+    margin-bottom: 2rem;
+  }
+  .client-logos-header h2 {
+    font-size: 2rem;
+  }
+  .client-logos-header p {
+    font-size: 1rem;
+  }
+  .logo-component {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .client-logo-card {
+    min-height: 10rem;
+    padding: 2rem 1.5rem;
+    border-radius: 1.15rem;
+  }
+  .client-logo {
+    max-height: 4.75rem;
+    max-width: 82%;
+  }
 }
+
 @media screen and (max-width: 540px) {
-  .logo-component { gap: 1.5rem; }
-  .client-logo { height: 6rem; }
+  .section-client-logos {
+    padding: 2.5rem 0 2rem;
+  }
+  .client-logos-header {
+    margin-bottom: 1.5rem;
+  }
+  .client-logos-header h2 {
+    font-size: 1.65rem;
+  }
+  .client-logos-header p {
+    font-size: 0.925rem;
+    line-height: 1.45;
+  }
+  .logo-component {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem;
+  }
+  .client-logo-card {
+    min-height: 8rem;
+    padding: 1.25rem 0.875rem;
+    border-radius: 1rem;
+  }
+  .client-logo {
+    max-height: 3.75rem;
+    max-width: 85%;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .client-logo { transition: none; }
-  .client-logo:hover { transform: none; }
+  .client-logo-card,
+  .client-logo {
+    transition: none;
+  }
+  .client-logo-card:hover {
+    transform: none;
+  }
+  .client-logo-card:hover .client-logo {
+    transform: none;
+  }
 }
 
 /* ===== SERVICES ACCORDION ===== */
