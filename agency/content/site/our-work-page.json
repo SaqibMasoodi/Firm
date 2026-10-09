@@ -1,8 +1,5 @@
 {
   "filterLabel": "Filter by:",
-  "searchEnabled": true,
-  "searchPlaceholder": "Search projects…",
-  "searchEmptyText": "No projects match your search.",
   "allWorkLabel": "All work",
   "allWorkEmptyText": "No projects to show yet.",
   "title": "Our Work",

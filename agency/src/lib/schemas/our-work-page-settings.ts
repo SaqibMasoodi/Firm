@@ -9,9 +9,6 @@ const SectionSchema = z.object({
 
 export const OurWorkPageSettingsSchema = z.object({
   filterLabel: z.string().default("Filter by:"),
-  searchEnabled: z.boolean().default(true),
-  searchPlaceholder: z.string().default("Search projects…"),
-  searchEmptyText: z.string().default("No projects match your search."),
 
   allWorkLabel: z.string().trim().min(1).default("All work"),
   allWorkEmptyText: z.string().default("No projects to show yet."),

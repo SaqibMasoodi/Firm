@@ -38,6 +38,44 @@ function LocationIcon() {
   );
 }
 
+function ContactDetails({className}: {className: string}) {
+  return (<ScrollReveal priority delay={0.3} className={className}>
+                    <div className="contact-list">
+                      <a
+                        href={`mailto:${siteConfig.email}`}
+                        className="contact-item"
+                      >
+                        <div className="contact-icon">
+                          <EmailIcon />
+                        </div>
+                        <div className="text-size-regular">
+                          {siteConfig.email}
+                        </div>
+                      </a>
+                      <a
+                        href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                        className="contact-item"
+                      >
+                        <div className="contact-icon">
+                          <PhoneIcon />
+                        </div>
+                        <div className="text-size-regular">
+                          {siteConfig.phone}
+                        </div>
+                      </a>
+                      {siteConfig.whatsappNumber && <a href={`https://wa.me/${siteConfig.whatsappNumber.replace(/\D/g, "")}`} className="contact-item" target="_blank" rel="noopener noreferrer"><div className="contact-icon"><MessageCircle size={24} aria-hidden="true" /></div><div className="text-size-regular">WhatsApp: {siteConfig.whatsappNumber}</div></a>}
+                      <div className="contact-item">
+                        <div className="contact-icon">
+                          <LocationIcon />
+                        </div>
+                        <div className="text-size-regular">
+                          {siteConfig.address.line1}, {siteConfig.address.line2}, {siteConfig.address.city}
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>);
+}
+
 export default function ContactPage() {
   const [submitError, setSubmitError] = useState("");
 
@@ -83,53 +121,20 @@ export default function ContactPage() {
                         </ScrollReveal>
                       </div>
                       <ScrollReveal priority delay={0.2}>
-                        <p className="text-size-medium" style={{ maxWidth: "28rem" }}>
+                        <p className="text-size-medium contact-description-desktop" style={{ maxWidth: "28rem" }}>
                           Ready to transform your brand&apos;s digital presence
                           and unlock the full potential of social media
                           marketing? Reach out today, and let&apos;s start
                           crafting your success story together.
                         </p>
+                      <p className="text-size-medium contact-description-mobile">Tell us about your project. Send your details and continue on WhatsApp.</p>
                       </ScrollReveal>
                     </div>
                   </div>
-                  <ScrollReveal priority delay={0.3}>
-                    <div className="contact-list">
-                      <a
-                        href={`mailto:${siteConfig.email}`}
-                        className="contact-item"
-                      >
-                        <div className="contact-icon">
-                          <EmailIcon />
-                        </div>
-                        <div className="text-size-regular">
-                          {siteConfig.email}
-                        </div>
-                      </a>
-                      <a
-                        href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                        className="contact-item"
-                      >
-                        <div className="contact-icon">
-                          <PhoneIcon />
-                        </div>
-                        <div className="text-size-regular">
-                          {siteConfig.phone}
-                        </div>
-                      </a>
-                      {siteConfig.whatsappNumber && <a href={`https://wa.me/${siteConfig.whatsappNumber.replace(/\D/g, "")}`} className="contact-item" target="_blank" rel="noopener noreferrer"><div className="contact-icon"><MessageCircle size={24} aria-hidden="true" /></div><div className="text-size-regular">WhatsApp: {siteConfig.whatsappNumber}</div></a>}
-                      <div className="contact-item">
-                        <div className="contact-icon">
-                          <LocationIcon />
-                        </div>
-                        <div className="text-size-regular">
-                          {siteConfig.address.line1}, {siteConfig.address.line2}, {siteConfig.address.city}
-                        </div>
-                      </div>
-                    </div>
-                  </ScrollReveal>
+                  <ContactDetails className="contact-details-desktop" />
                 </div>
 
-                <ScrollReveal priority delay={0.2}>
+                <ScrollReveal priority delay={0.2} className="contact-form-reveal">
                   <div className="contact-form-block">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
@@ -184,7 +189,7 @@ export default function ContactPage() {
                           </div>
                         </div>
 
-                        <div className="form-field-2col">
+                        <div className="form-field-2col contact-optional-fields">
                           <div className="form-field-wrapper">
                             <label htmlFor="phone" className="form-field-label">Phone <span>(optional)</span></label>
                             <input
@@ -193,7 +198,7 @@ export default function ContactPage() {
                               autoComplete="tel"
                               inputMode="tel"
                               className="input-form"
-                              placeholder="Enter your phone number"
+                              placeholder="Phone"
                               {...register("phone")}
                             />
                           </div>
@@ -203,7 +208,7 @@ export default function ContactPage() {
                               id="subject"
                               type="text"
                               className="input-form"
-                              placeholder="Enter subject"
+                              placeholder="Subject"
                               {...register("subject")}
                             />
                           </div>
@@ -243,6 +248,7 @@ export default function ContactPage() {
                       </form>
                   </div>
                 </ScrollReveal>
+                <ContactDetails className="contact-details-mobile" />
               </div>
             </div>
           </div>
@@ -254,3 +260,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

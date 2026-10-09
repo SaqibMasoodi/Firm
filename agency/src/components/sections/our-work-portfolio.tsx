@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { OurWorkPageSettings } from "@/lib/schemas/our-work-page-settings";
 import Image from "next/image";
 import Link from "next/link";
-import { Globe, Smartphone, Users, SlidersHorizontal, Search } from "lucide-react";
+import { Globe, Smartphone, Users, SlidersHorizontal, ChevronDown, Check } from "lucide-react";
 import type { WorkProject } from "@/types";
 
 function ProjectCard({ project }: { project: WorkProject }) {
@@ -47,13 +47,21 @@ function ProjectCard({ project }: { project: WorkProject }) {
 
 export default function OurWorkPortfolio({ projects, settings }: { projects: WorkProject[]; settings: OurWorkPageSettings }) {
   const [selected, setSelected] = useState("all");
-  const [query, setQuery] = useState("");
+  const dropdown = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    const closeOutside = (event: PointerEvent) => { if (!dropdown.current?.contains(event.target as Node) && dropdown.current) dropdown.current.open = false; };
+    const closeEscape = (event: KeyboardEvent) => { if (event.key === "Escape" && dropdown.current?.open) { dropdown.current.open = false; dropdown.current.querySelector("summary")?.focus(); } };
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("keydown", closeEscape);
+    return () => { document.removeEventListener("pointerdown", closeOutside); document.removeEventListener("keydown", closeEscape); };
+  }, []);
   const visibleSections = Object.entries(settings.sections).filter(([, section]) => section.visible).map(([id, section]) => ({ id, ...section }));
   const activeSection = visibleSections.find(section => section.id === selected);
   const filter = activeSection ? activeSection.id : "all";
   const allLabel = settings.allWorkLabel || "All work";
-  const search = query.trim().toLocaleLowerCase();
-  const items = projects.filter(project => [project.category, ...project.additionalCategories].some(category => settings.sections[category]?.visible && (filter === "all" || category === filter)) && (!search || [project.title, project.description, project.client, ...project.tags].join(" ").toLocaleLowerCase().includes(search)));
+  const choices = [{ id: "all", title: allLabel }, ...visibleSections];
+  const items = projects.filter(project => [project.category, ...project.additionalCategories].some(category => settings.sections[category]?.visible && (filter === "all" || category === filter)));
+
   return (
     <div className="section-our-work our-work-portfolio">
       <div className="our-work-component-wrapper">
@@ -63,13 +71,18 @@ export default function OurWorkPortfolio({ projects, settings }: { projects: Wor
               <div className="our-work-filter-bar">
                 <div className="our-work-filter-label"><SlidersHorizontal size={17} aria-hidden="true" /><span>{settings.filterLabel || "Filter by:"}</span></div>
                 <div className="our-work-filter-options" role="group" aria-label="Filter Our Work">
-                  {[{ id: "all", title: allLabel }, ...visibleSections].map(section => <button type="button" key={section.id} className="our-work-filter-pill" aria-pressed={filter === section.id} onClick={() => setSelected(section.id)}>{section.title}</button>)}
+                  {choices.map(section => <button type="button" key={section.id} className="our-work-filter-pill" aria-pressed={filter === section.id} onClick={() => setSelected(section.id)}>{section.title}</button>)}
                 </div>
-                {settings.searchEnabled !== false && <label className="our-work-search"><Search size={17} aria-hidden="true" /><input type="search" aria-label="Search projects" placeholder={settings.searchPlaceholder || "Search projects…"} value={query} onChange={event => setQuery(event.target.value)} /></label>}
+                <details ref={dropdown} className="our-work-filter-dropdown">
+                  <summary aria-label={`Filter Our Work: ${activeSection?.title || allLabel}`}><span>{activeSection?.title || allLabel}</span><ChevronDown size={18} aria-hidden="true" /></summary>
+                  <div className="our-work-filter-menu" role="group" aria-label="Choose work category">
+                    {choices.map(section => <button type="button" key={section.id} aria-pressed={filter === section.id} onClick={() => { setSelected(section.id); if (dropdown.current) dropdown.current.open = false; }}><span>{section.title}</span>{filter === section.id && <Check size={17} aria-hidden="true" />}</button>)}
+                  </div>
+                </details>
               </div>
               {activeSection?.description && <p className="our-work-filter-description text-size-regular">{activeSection.description}</p>}
               <span className="our-work-filter-status" role="status" aria-live="polite">{items.length} {items.length === 1 ? "project" : "projects"} shown</span>
-              {items.length ? <div className="our-work-list">{items.map(project => <ProjectCard key={project.id} project={project} />)}</div> : <p className="our-work-empty">{search ? settings.searchEmptyText || "No projects match your search." : activeSection?.emptyText || settings.allWorkEmptyText || "No projects to show yet."}</p>}
+              {items.length ? <div className="our-work-list">{items.map(project => <ProjectCard key={project.id} project={project} />)}</div> : <p className="our-work-empty">{activeSection?.emptyText || settings.allWorkEmptyText || "No projects to show yet."}</p>}
             </div>
           </div>
         </div>
