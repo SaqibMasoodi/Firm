@@ -6,6 +6,9 @@ import { ContactMessageSchema, formatContactMessage } from "@/lib/contact-messag
 const requestSchema = ContactMessageSchema.extend({ requestId: z.string().uuid().optional() });
 
 export async function POST(request: Request) {
+  if (process.env.CONTACT_EMAIL_ENABLED !== "true") {
+    return NextResponse.json({ message: "Email enquiries are disabled for now. Please use the WhatsApp contact form." }, { status: 503 });
+  }
   let data: z.infer<typeof requestSchema>;
   try {
     const raw = await request.text();

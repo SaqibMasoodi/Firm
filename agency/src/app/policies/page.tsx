@@ -81,7 +81,7 @@ export default function PoliciesPage() {
             <section id="privacy" className="policies-section" aria-labelledby="privacy-heading">
               <h2 id="privacy-heading" className="heading-style-h3 weight-medium">Privacy</h2>
               <p>When you use our contact form, you provide your name, email address, message, and any optional information you choose to include. Newsletter submissions include your email address. Please share only what is needed for your enquiry.</p>
-              <p>Contact enquiries are sent to our team by email through Resend. If you choose to continue on WhatsApp after submitting, the same form details are included in a prefilled WhatsApp message; you decide whether to send it. Newsletter submissions are processed separately by this website. Our hosting infrastructure may also process technical information such as IP addresses and request details to deliver and maintain the website.</p>
+              <p>Our contact form opens WhatsApp with the details you entered in a prefilled message. You decide whether to send it in WhatsApp. Contact-form email delivery is currently disabled. Newsletter submissions are processed separately by this website. Our hosting infrastructure may also process technical information such as IP addresses and request details to deliver and maintain the website.</p>
               <p>For questions about information you have submitted, or to request access, correction, deletion, or an end to newsletter communications, email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
             </section>
             <section id="cookies" className="policies-section" aria-labelledby="cookies-heading">

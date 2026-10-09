@@ -1,3 +1,7 @@
+# Current status: WhatsApp only
+
+The contact form redirects directly to WhatsApp with all form details. It does not call the email endpoint or display a popup. Email delivery is disabled by default (`CONTACT_EMAIL_ENABLED=false`). The email integration below is retained for future setup; enabling it also requires reconnecting the form to the email endpoint.
+
 # Contact email and WhatsApp setup
 
 The old endpoint only logged submissions. It now sends one email per enquiry through Resend's HTTPS API (`https://api.resend.com/emails`). It uses a retry idempotency key so retrying the same submission does not create duplicate emails.
@@ -9,6 +13,7 @@ The recipient defaults to the contact email in Admin → Site Settings, currentl
 1. Create your Resend account and API key: https://resend.com/api-keys
 2. Verify a domain you own in Resend by adding its required DNS records. Use an address on that verified domain as the sender. You cannot verify `gmail.com` or the shared `vercel.app` domain as your own sender domain.
 3. Set these server-only environment variables in Vercel's project settings and in `.env.local` for local development:
+   - `CONTACT_EMAIL_ENABLED`: set to `true` when ready to re-enable email.
    - `RESEND_API_KEY`: your Resend API key.
    - `CONTACT_FROM_EMAIL`: your approved sender, e.g. `Northforge Labs <enquiries@your-owned-domain.com>`.
    - `CONTACT_TO_EMAIL`: optional; defaults to the site contact email.

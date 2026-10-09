@@ -5444,15 +5444,7 @@ body:has(.policies-page) { overflow-x: clip; }
 
 
 
-.contact-whatsapp-dialog { width: min(30rem, calc(100vw - 2.5rem)); margin: auto; padding: clamp(1.5rem, 4vw, 2.25rem); border: 1px solid rgba(0,0,0,.08); border-radius: 2rem; background: var(--light-grey, #f8f8f8); color: var(--black, #171717); box-shadow: 0 16px 60px rgba(0,0,0,.2); }
-.contact-whatsapp-dialog[open] { animation: contactPromptEnter 240ms cubic-bezier(.22,1,.36,1) both; }
-.contact-whatsapp-dialog::backdrop { background: rgba(0,0,0,.35); backdrop-filter: blur(5px); }
-.contact-whatsapp-dialog .tagline-pill { margin-bottom: 1rem; }
-.contact-whatsapp-dialog h2 { margin-bottom: .75rem; }
-.contact-whatsapp-dialog p { margin-bottom: 1.5rem; }
-.contact-whatsapp-dialog .button-group { flex-wrap: wrap; gap: .75rem; }
-@keyframes contactPromptEnter { from { opacity: 0; transform: translateY(12px) scale(.96); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .contact-whatsapp-dialog[open] { animation: none; } }
+
 
 /* Matching, readable footer contact rows. The address is informational. */
 .footer-contact-row { display: flex; align-items: center; gap: .75rem; min-height: 44px; padding: .5rem .75rem; border-radius: 1rem; color: var(--black, #171717); font-size: .875rem; font-weight: 500; line-height: 1.5; text-decoration: none; transition: background-color 180ms ease; }
