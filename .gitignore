@@ -16,6 +16,11 @@ scratch/
 .system_generated/
 skills-lock.json
 
+# Temporary & Generated Artifacts
+tmp/
+output/
+*.pdf
+
 # Local utility scripts
 *.bat
 
@@ -38,6 +43,9 @@ dist/
 
 # Testing / Coverage
 /coverage
+test.html
+test*.html
+*.test.html
 
 # Misc & OS
 .DS_Store
