@@ -78,5 +78,16 @@
     "bio": "Hazar works with AI, machine learning, and data. He enjoys exploring new models and building useful things with modern AI.",
     "image": "/images/avatar.svg",
     "socials": {}
+  },
+  {
+    "id": "member-mv683l5i-3rn0",
+    "name": "Abdul Waris",
+    "role": "CEO",
+    "bio": "Abdul Waris leads the team and helps shape the company's vision and direction. He focuses on bringing ideas to life, building meaningful client relationships, and guiding the team toward creating practical, impactful digital solutions.",
+    "image": "/images/avatar.svg",
+    "socials": {
+      "linkedin": "",
+      "twitter": ""
+    }
   }
 ]
