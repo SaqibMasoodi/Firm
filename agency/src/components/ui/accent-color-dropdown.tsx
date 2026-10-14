@@ -4,6 +4,20 @@ import React, { useState, useEffect, useRef, useCallback, useSyncExternalStore }
 import { Pipette, ChevronsUpDown, X } from "lucide-react";
 
 export const DEFAULT_BRAND_COLOR = "#CBFB45";
+export const BASE_TEAM_HUE = 71; // Base accent hue of team artwork (Chartreuse / Lime Green, #C2D473)
+
+export function getTeamHueRotation(targetHue: number, hex?: string): number {
+  if (hex && hex.toUpperCase() === DEFAULT_BRAND_COLOR.toUpperCase()) {
+    return 0;
+  }
+  return Math.round((targetHue - BASE_TEAM_HUE + 360) % 360);
+}
+
+export function setTeamAccentHue(targetHue: number, hex?: string) {
+  if (typeof document === "undefined") return;
+  const rotationDeg = getTeamHueRotation(targetHue, hex);
+  document.documentElement.style.setProperty("--team-hue-rotate", `${rotationDeg}deg`);
+}
 
 function useIsMobile() {
   return useSyncExternalStore(
@@ -117,6 +131,17 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
   const isDraggingHue = useRef(false);
   const isDraggingAlpha = useRef(false);
 
+  // Ensure --team-hue-rotate is in sync on mount
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const current = document.documentElement.style.getPropertyValue("--green").trim() || DEFAULT_BRAND_COLOR;
+    const rgb = hexToRgb(current);
+    if (rgb) {
+      const [h] = rgbToHsv(...rgb);
+      setTeamAccentHue(h, current);
+    }
+  }, []);
+
   // Sync with current document --green variable on open
   useEffect(() => {
     if (!isOpen || typeof document === "undefined") return;
@@ -129,6 +154,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
         setSaturation(s);
         setValue(v);
         setHexInput(current.toUpperCase());
+        setTeamAccentHue(h, current);
       }
     });
     return () => cancelAnimationFrame(frame);
@@ -141,6 +167,7 @@ export default function AccentColorDropdown({ isOpen, onClose }: AccentColorDrop
     setHexInput(hex);
     if (typeof document !== "undefined") {
       document.documentElement.style.setProperty("--green", hex);
+      setTeamAccentHue(h, hex);
     }
   }, []);
 

@@ -15,6 +15,7 @@ html.splash-viewed .splash-overlay:not(.force-play) {
   --border-gray: #c5c5c5;
   --grey: #f2f2f2;
   --grey-text: #818181;
+  --team-hue-rotate: 0deg;
 }
 
 html {
@@ -1664,11 +1665,15 @@ button,
   margin-bottom: 1rem;
 }
 
-.team-image {
+.team-image,
+.team-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 1.5rem;
+  filter: hue-rotate(var(--team-hue-rotate, 0deg));
+  transition: filter 0.3s ease;
+  will-change: filter;
 }
 
 @media screen and (max-width: 767px) {

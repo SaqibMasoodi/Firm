@@ -166,7 +166,7 @@ export default function Team({ initialLimit = 4, showAll = false }: TeamProps) {
                               alt={member.name}
                               width={400}
                               height={400}
-                              className="team-image"
+                              className="team-image team-photo"
                               unoptimized={!(member.image && member.image.endsWith(".webp"))}
                               sizes="(max-width: 639px) 43vw, (max-width: 991px) 42vw, 19vw"
                             />
