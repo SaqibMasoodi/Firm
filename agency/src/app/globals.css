@@ -1623,6 +1623,8 @@ button,
 .team-list {
   display: flex;
   gap: 1.5rem;
+  perspective: 1200px;
+  perspective-origin: center 45%;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.25rem 0 1.25rem;
@@ -1639,7 +1641,7 @@ button,
 
 .team-item {
   position: relative;
-  flex: 0 0 8.875rem;
+  flex: 0 0 12rem;
   height: 23rem;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -1649,7 +1651,9 @@ button,
   overflow: hidden;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  transition: flex-basis 0.65s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.65s ease, box-shadow 0.35s ease;
+  transform: perspective(1200px) rotateY(-5deg) rotateX(1deg);
+  transform-style: preserve-3d;
+  transition: flex-basis 0.65s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.65s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .team-item:hover,
@@ -1657,11 +1661,9 @@ button,
 .team-item:focus-within {
   flex-basis: 22rem;
   border-radius: 2rem;
-}
-
-.team-item.is-featured {
-  flex-basis: 22rem;
-  border-radius: 2rem;
+  transform: none;
+  transform-style: flat;
+  z-index: 5;
 }
 
 .team-item:focus-visible {
@@ -1669,9 +1671,56 @@ button,
   outline-offset: 4px;
 }
 
+.team-card-arc-labels {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  transform: translateZ(36px);
+  transform-style: preserve-3d;
+  color: var(--green);
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.18), transparent 24%, transparent 76%, rgb(0 0 0 / 0.18));
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease, visibility 0s;
+}
+
+.team-card-arc-labels text {
+  fill: currentColor;
+  paint-order: stroke;
+  stroke: rgb(23 23 23 / 0.82);
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+}
+
+.team-card-arc-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.team-card-arc-role {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.35px;
+}
+
+.team-item:hover .team-card-arc-labels,
+.team-item:focus .team-card-arc-labels,
+.team-item:focus-within .team-card-arc-labels {
+  transform: none;
+  transform-style: flat;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.16s ease, visibility 0s linear 0.16s;
+}
+
 @media screen and (max-width: 991px) {
   .team-item {
-    flex-basis: 7.75rem;
+    flex-basis: 11rem;
     height: 21rem;
   }
 
@@ -1679,10 +1728,7 @@ button,
   .team-item:focus,
   .team-item:focus-within {
     flex-basis: 19rem;
-  }
-
-  .team-item.is-featured {
-    flex-basis: 19rem;
+    transform: none;
   }
 }
 
@@ -1692,7 +1738,7 @@ button,
   }
 
   .team-item {
-    flex-basis: 6.75rem;
+    flex-basis: 10rem;
     height: 18rem;
   }
 
@@ -1700,10 +1746,7 @@ button,
   .team-item:focus,
   .team-item:focus-within {
     flex-basis: min(78vw, 20rem);
-  }
-
-  .team-item.is-featured {
-    flex-basis: min(78vw, 20rem);
+    transform: none;
   }
 }
 
@@ -1718,6 +1761,8 @@ button,
 .team-image-wrapper {
   position: absolute;
   inset: 0;
+  transform: translateZ(8px);
+  transform-style: preserve-3d;
   border-radius: inherit;
   overflow: hidden;
 }
@@ -1729,8 +1774,24 @@ button,
   object-fit: cover;
   border-radius: inherit;
   filter: hue-rotate(var(--team-hue-rotate, 0deg));
-  transition: filter 0.3s ease;
-  will-change: filter;
+  transform: perspective(1000px) rotateY(-3deg) translateZ(8px) scale(1.055);
+  transform-style: preserve-3d;
+  transition: filter 0.3s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: filter, transform;
+}
+
+.team-item:hover .team-image,
+.team-item:focus .team-image,
+.team-item:focus-within .team-image {
+  transform: scale(1.035);
+  transform-style: flat;
+}
+
+.team-item:hover .team-image-wrapper,
+.team-item:focus .team-image-wrapper,
+.team-item:focus-within .team-image-wrapper {
+  transform: none;
+  transform-style: flat;
 }
 
 .team-card-reveal {
@@ -1740,15 +1801,15 @@ button,
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
   padding: 2rem 1.25rem;
   color: white;
-  background: linear-gradient(0deg, rgb(0 0 0 / 0.68) 0%, rgb(0 0 0 / 0.4) 24%, transparent 62%);
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.58) 34%, rgb(0 0 0 / 0.08) 76%, transparent 100%);
   opacity: 0;
   transform: translateY(0.75rem);
   visibility: hidden;
-  text-align: center;
+  text-align: left;
   transition: opacity 0.24s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.24s;
 }
 
@@ -1759,13 +1820,6 @@ button,
   transform: translateY(0);
   visibility: visible;
   transition: opacity 0.24s ease 0.3s, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, visibility 0s;
-}
-
-.team-item.is-featured .team-card-reveal {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  transition: none;
 }
 
 .team-card-reveal p {
@@ -1781,7 +1835,7 @@ button,
 .team-card-name-role {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.125rem;
   color: #fff;
 }
@@ -1799,6 +1853,9 @@ button,
 
 .team-card-reveal .team-socials {
   margin-top: 0.25rem;
+  justify-content: flex-start;
+  align-self: flex-start;
+  gap: 0.625rem;
 }
 
 .team-carousel-controls {
@@ -5429,7 +5486,7 @@ button,
   .team-card-reveal .team-socials {
     margin-top: 0.25rem;
     padding: 0;
-    justify-content: center;
+    justify-content: flex-start;
     background: transparent;
   }
 

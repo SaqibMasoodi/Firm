@@ -21,6 +21,19 @@ function TwitterIcon() {
   );
 }
 
+function getCompactTeamRole(role: string) {
+  const compactRoles: Record<string, string> = {
+    "Senior Developer & Team Lead": "Senior Developer",
+    "Hardware Specialist": "Hardware Spec.",
+    "Operations Manager": "Ops Manager",
+    "3D Visualization & Digital Art Specialist": "3D Artist",
+    "Software Developer": "Software Dev.",
+    "AI & Data Science Specialist": "AI & Data",
+  };
+
+  return compactRoles[role] ?? role;
+}
+
 export default function Team() {
   const listRef = useRef<HTMLDivElement>(null);
   const members = [...teamMembers].sort((a, b) => Number(b.id === "saqib") - Number(a.id === "saqib"));
@@ -74,7 +87,19 @@ export default function Team() {
               <ScrollReveal delay={0.1}>
                 <div className="team-list" ref={listRef} role="region" aria-label="Swipeable team member cards">
                   {members.map((member) => (
-                    <article key={member.id} className={`team-item ${member.id === "saqib" ? "is-featured" : ""}`} tabIndex={0}>
+                    <article key={member.id} className="team-item" tabIndex={0}>
+                      <svg className="team-card-arc-labels" viewBox="0 0 176 368" preserveAspectRatio="none" aria-hidden="true">
+                        <defs>
+                          <path id={`team-name-arc-${member.id}`} d="M 22 76 Q 88 44 154 76" />
+                          <path id={`team-role-arc-${member.id}`} d="M 22 292 Q 88 324 154 292" />
+                        </defs>
+                        <text className="team-card-arc-name">
+                          <textPath href={`#team-name-arc-${member.id}`} startOffset="50%" textAnchor="middle">{member.name}</textPath>
+                        </text>
+                        <text className="team-card-arc-role">
+                          <textPath href={`#team-role-arc-${member.id}`} startOffset="50%" textAnchor="middle">{getCompactTeamRole(member.role)}</textPath>
+                        </text>
+                      </svg>
                       <div className="team-image-wrapper">
                         <Image
                           src={member.image || "/images/avatar.svg"}
