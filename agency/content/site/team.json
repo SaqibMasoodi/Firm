@@ -80,6 +80,17 @@
     "socials": {}
   },
   {
+    "id": "aman-kar",
+    "name": "Aman Kar",
+    "role": "Full Stack Developer",
+    "bio": "Aman builds scalable web applications across the stack. He focuses on clean code, efficient problem solving, and exploring new technologies.",
+    "image": "/images/avatar.svg",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/aman05",
+      "github": "https://github.com/amankar05"
+    }
+  },
+  {
     "id": "member-mv683l5i-3rn0",
     "name": "Abdul Waris",
     "role": "CEO",

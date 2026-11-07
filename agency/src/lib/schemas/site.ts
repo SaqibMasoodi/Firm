@@ -9,6 +9,7 @@ export const TeamMemberSchema = z.object({
   socials: z.object({
     linkedin: z.string().optional(),
     twitter: z.string().optional(),
+    github: z.string().optional(),
   }).default({}),
 });
 
