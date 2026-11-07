@@ -285,16 +285,22 @@ export default function ImageFocalScaleSelector({
 
           <div className="portfolio-card-footer" style={{ marginTop: "auto", paddingTop: "0.75rem" }}>
             <span
-              className="portfolio-case-study-link"
+              className="portfolio-case-study-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.25rem",
-                color: "var(--black, #171717)",
-                fontSize: "0.825rem",
+                justifyContent: "center",
+                gap: "0.4rem",
+                backgroundColor: "var(--black, #171717)",
+                color: "var(--white, #ffffff)",
+                border: "1px solid var(--black, #171717)",
+                borderRadius: "100rem",
+                padding: "0.55rem 1.25rem",
+                fontSize: "0.8125rem",
                 fontWeight: 600,
-                textDecoration: "underline",
-                textUnderlineOffset: "3px",
+                lineHeight: 1.2,
+                width: "fit-content",
+                whiteSpace: "nowrap",
               }}
             >
               View case study{" "}

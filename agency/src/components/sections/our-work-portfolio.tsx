@@ -106,7 +106,7 @@ function PortfolioCardItem({ project }: { project: ConsolidatedProject }) {
         </div>
 
         <div className="portfolio-card-footer">
-          <Link href={primaryUrl} className="portfolio-case-study-link">
+          <Link href={primaryUrl} className="portfolio-case-study-btn">
             View case study{" "}
             <span className="portfolio-arrow-icon" aria-hidden="true">
               ↗
@@ -180,8 +180,11 @@ function MobileCardItem({ project }: { project: ConsolidatedProject }) {
             )}
           </div>
           <div className="project-button-wrapper">
-            <Link href={primaryUrl} className="button-link">
-              View project ↗
+            <Link href={primaryUrl} className="portfolio-case-study-btn is-mobile">
+              View case study{" "}
+              <span className="portfolio-arrow-icon" aria-hidden="true">
+                ↗
+              </span>
             </Link>
           </div>
         </div>

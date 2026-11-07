@@ -2432,31 +2432,54 @@ button,
   padding-top: 0.65rem;
 }
 
+.portfolio-case-study-btn,
 .portfolio-case-study-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.875rem;
+  justify-content: center;
+  gap: 0.4rem;
+  background-color: var(--black, #171717);
+  color: var(--white, #ffffff);
+  border: 1px solid var(--black, #171717);
+  border-radius: 100rem;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--black, #171717);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: opacity 0.2s ease;
+  text-decoration: none;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s ease;
+  width: fit-content;
+  white-space: nowrap;
 }
 
+.portfolio-case-study-btn:hover,
 .portfolio-case-study-link:hover {
-  opacity: 0.75;
+  color: var(--green, #cbfb45);
+  background-color: var(--black, #171717);
+  border-color: var(--black, #171717);
+  transform: translateY(-1px);
 }
 
 .portfolio-arrow-icon {
   display: inline-block;
-  transition: transform 0.2s ease;
-  font-size: 1.05em;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  font-size: 0.95em;
   line-height: 1;
 }
 
+.portfolio-case-study-btn:hover .portfolio-arrow-icon,
+.portfolio-case-study-link:hover .portfolio-arrow-icon,
 .portfolio-card:hover .portfolio-arrow-icon {
   transform: translate(2px, -2px);
+}
+
+.portfolio-case-study-btn.is-mobile {
+  width: 100%;
+  justify-content: center;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 /* Right Column: Visual Preview Cutout (Natural 5-10% overflow clipped ONLY by the outer card boundary) */
@@ -5727,6 +5750,11 @@ button,
     font-size: 1.05rem !important;
     line-height: 1.25 !important;
     margin-bottom: 0.2rem !important;
+  }
+  .our-work-portfolio .project-button-wrapper {
+    margin-top: 0.65rem !important;
+    padding-top: 0 !important;
+    border-top: none !important;
   }
   .our-work-portfolio .button-link {
     font-size: 0.8125rem !important;
