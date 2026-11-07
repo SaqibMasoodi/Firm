@@ -2301,6 +2301,37 @@ button,
     box-sizing: border-box;
     height: 100% !important;
   }
+  .portfolio-mobile-cards .mobile-card-cutout-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 11 !important;
+    border-radius: 0.875rem !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    padding: 0.5rem !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0.25rem !important;
+  }
+  .portfolio-mobile-cards .mobile-card-cutout-img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    aspect-ratio: auto !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    display: block !important;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  }
+  .portfolio-mobile-cards .work-project-item:hover .mobile-card-cutout-img {
+    transform: scale(1.05) !important;
+  }
 }
 
 /* Individual Portfolio Card (Reduced height by ~1/5th, uniform editorial design) */

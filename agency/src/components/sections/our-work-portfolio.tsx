@@ -138,20 +138,22 @@ function PortfolioCardItem({ project }: { project: ConsolidatedProject }) {
 
 function MobileCardItem({ project }: { project: ConsolidatedProject }) {
   const primaryUrl = project.links.caseStudy;
-  const coverImage = project.coverImage || `/images/our-work/${project.slug}/cover-optimized.webp`;
+  const cutoutImage = project.image || `/images/projects/${project.slug}.png`;
 
   return (
     <article className="work-project-item">
       <div className="work-project-item-link">
         <Link href={primaryUrl} className="our-work-image-link" aria-label={project.title}>
-          <div className="work-project-image-wrapper">
+          <div className="work-project-image-wrapper mobile-card-cutout-wrapper">
             <Image
-              src={coverImage}
+              key={cutoutImage}
+              src={cutoutImage}
               alt={project.title}
-              width={720}
-              height={405}
-              className="work-project-image"
+              width={700}
+              height={480}
+              className="work-project-image mobile-card-cutout-img"
               sizes="(max-width: 767px) 50vw, 42vw"
+              unoptimized
             />
           </div>
         </Link>
