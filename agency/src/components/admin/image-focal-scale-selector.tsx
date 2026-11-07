@@ -74,7 +74,9 @@ export default function ImageFocalScaleSelector({
 
   // Keep latest onChange in a ref so pointer listener never drops or re-attaches during active drag
   const onChangeRef = useRef(onChange);
-  onChangeRef.current = onChange;
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
 
   // Active tags fallback (capped at max 2 pills)
   const displayTags = (tags && tags.length > 0 ? tags : ["Mobile App", "Website"]).slice(0, 2);

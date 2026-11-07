@@ -724,11 +724,10 @@ export default function AdminPage() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Upload failed");
 
-      const rawUrl = result.url || result.path;
-      if (!rawUrl) {
+      const uploadedUrl = result.url || result.path;
+      if (!uploadedUrl) {
         throw new Error("Upload succeeded but no image URL was returned");
       }
-      const uploadedUrl = rawUrl.includes("?v=") ? rawUrl : `${rawUrl}?v=${Date.now()}`;
 
       showToast(`Uploaded ${result.filename || file.name}`);
 
@@ -765,11 +764,10 @@ export default function AdminPage() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Upload failed");
 
-      const rawUrl = result.url || result.path;
-      if (!rawUrl) {
+      const uploadedUrl = result.url || result.path;
+      if (!uploadedUrl) {
         throw new Error("Upload succeeded but no image URL was returned");
       }
-      const uploadedUrl = rawUrl.includes("?v=") ? rawUrl : `${rawUrl}?v=${Date.now()}`;
 
       showToast(`Uploaded cutout ${result.filename || file.name}`);
       if (editForm && typeof editForm === "object") {

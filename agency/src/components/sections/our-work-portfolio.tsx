@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ui/scroll-reveal";
@@ -56,18 +56,15 @@ function ProjectCutoutImage({
   position?: string;
   scale?: number;
 }) {
-  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
   const pos = parsePosition(position);
   const normalizedScale = typeof scale === "number" && !isNaN(scale) && scale > 0 ? scale : 1;
-
-  useEffect(() => {
-    setImgSrc(src);
-  }, [src]);
+  const displaySrc = hasError ? "/images/projects/placeholder.png" : src;
 
   return (
     <Image
-      key={imgSrc}
-      src={imgSrc}
+      key={src}
+      src={displaySrc}
       alt={alt}
       width={700}
       height={520}
@@ -77,9 +74,7 @@ function ProjectCutoutImage({
         transformOrigin: "center",
       }}
       onError={() => {
-        if (imgSrc !== "/images/projects/placeholder.png") {
-          setImgSrc("/images/projects/placeholder.png");
-        }
+        setHasError(true);
       }}
       unoptimized
       sizes="(max-width: 639px) 90vw, (max-width: 900px) 90vw, 40vw"
