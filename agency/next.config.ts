@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Redirect merged app/website duplicate slugs to unified project pages
+      { source: "/our-work/dashit-app", destination: "/our-work/dashit", permanent: true },
+      { source: "/our-work/dreamcabs-app", destination: "/our-work/dreamcabs", permanent: true },
+      { source: "/our-work/pockethost-website", destination: "/our-work/pockethost", permanent: true },
       // Preserve existing bookmarks and indexed project URLs.
       { source: "/case-studies/:path*", destination: "/our-work/:path*", permanent: true },
       {
@@ -61,7 +65,15 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "no-cache, no-store, must-revalidate",
+          },
+          {
+            key: "Pragma",
+            value: "no-cache",
+          },
+          {
+            key: "Expires",
+            value: "0",
           },
         ],
       },

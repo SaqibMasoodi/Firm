@@ -1,11 +1,22 @@
 {
   "id": "dreamcabs",
-  "title": "DreamCabs — Website",
+  "title": "DreamCabs",
   "description": "The website and administration side of DreamCabs, a ride-hailing and fleet management platform with real-time dispatch and integrated payments.",
   "image": "/images/our-work/dreamcabs/cover-optimized.webp",
+  "cutoutImage": "/images/projects/dreamcabs.png",
+  "imagePosition": "59% 44%",
+  "imageScale": 1.4,
   "slug": "dreamcabs",
+  "category": "websites",
   "siteUrl": "https://dreamcabs.in",
+  "playStoreUrl": "https://play.google.com/store/apps/details?id=product.customer.dreamcab&pcampaignid=web_share",
+  "appDownloadUrl": "",
+  "additionalCategories": [
+    "apps"
+  ],
   "tags": [
+    "Mobile App",
+    "Website",
     "Web App",
     "Dashboard",
     "Automation"
@@ -20,9 +31,5 @@
     "Added real-time driver tracking and dispatch via WebSockets",
     "Integrated Razorpay payments, driver wallets, and a complete financial ledger",
     "Designed a multi-city architecture with role-based access control"
-  ],
-  "category": "websites",
-  "playStoreUrl": "",
-  "appDownloadUrl": "",
-  "additionalCategories": []
+  ]
 }

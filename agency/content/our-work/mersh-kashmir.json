@@ -3,8 +3,15 @@
   "title": "Mersh Kashmir",
   "description": "A modern e-commerce catalog for authentic Kashmiri products, showcasing wearables, shawls, dry fruits, saffron, and handcrafted goods through a streamlined shopping experience.",
   "image": "/images/our-work/mersh-kashmir/cover-optimized.webp",
+  "cutoutImage": "/images/projects/mershkashmir.png",
+  "imagePosition": "28% 63%",
+  "imageScale": 1.35,
   "slug": "mersh-kashmir",
+  "category": "websites",
   "siteUrl": "https://mershkashmir.in",
+  "playStoreUrl": "",
+  "appDownloadUrl": "",
+  "additionalCategories": [],
   "tags": [
     "Website",
     "Web App",
@@ -23,7 +30,5 @@
     "PDF order receipt generation implemented",
     "Product gallery and detail modal experience built",
     "SEO and social sharing metadata included"
-  ],
-  "category": "websites",
-  "playStoreUrl": ""
+  ]
 }

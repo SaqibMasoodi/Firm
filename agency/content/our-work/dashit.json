@@ -1,15 +1,22 @@
 {
   "id": "dashit",
-  "title": "DASHit — Website",
+  "title": "DASHit",
   "description": "A hyperlocal quick-commerce website for ordering groceries and daily essentials across Anantnag, Kashmir.",
   "image": "/images/our-work/dashit/cover-optimized.webp",
+  "cutoutImage": "/images/projects/dashit.png",
+  "imagePosition": "32% 58%",
+  "imageScale": 1.45,
   "slug": "dashit",
   "category": "websites",
   "siteUrl": "https://dashit.co.in",
   "playStoreUrl": "",
+  "appDownloadUrl": "https://dashit.co.in/DASHit.apk",
+  "additionalCategories": [
+    "apps"
+  ],
   "tags": [
+    "Mobile App",
     "Website",
-    "Web App",
     "Dashboard",
     "UI/UX",
     "SEO",
@@ -25,7 +32,5 @@
     "OpenStreetMap integration reduced dependency on paid mapping services",
     "Automated product catalog import workflow integrated",
     "PWA support and SEO foundations implemented with sitemap generation"
-  ],
-  "appDownloadUrl": "",
-  "additionalCategories": []
+  ]
 }

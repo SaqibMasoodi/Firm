@@ -3,8 +3,15 @@
   "title": "Wolf Adventures Kashmir",
   "description": "A modern ski and snowboard booking platform for Gulmarg, showcasing adventure packages, accommodations, instructors, and streamlined online trip planning.",
   "image": "/images/our-work/wolf-adventures-kashmir/cover-optimized.webp",
+  "cutoutImage": "/images/projects/wolf-adventures.png",
+  "imagePosition": "49% 54%",
+  "imageScale": 1.05,
   "slug": "wolf-adventures-kashmir",
+  "category": "websites",
   "siteUrl": "https://wolfadventureskashmir.com",
+  "playStoreUrl": "",
+  "appDownloadUrl": "",
+  "additionalCategories": [],
   "tags": [
     "Website",
     "Web App",
@@ -25,7 +32,5 @@
     "Payload CMS collection architecture prepared",
     "Automated itinerary generation with PPTX exports implemented",
     "SEO foundations added, including metadata, sitemap, robots.txt, and structured data"
-  ],
-  "category": "websites",
-  "playStoreUrl": ""
+  ]
 }

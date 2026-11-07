@@ -3,8 +3,15 @@
   "title": "The Balam Reserve",
   "description": "A luxury Caribbean destination in northern Belize, presenting a 9,500-acre masterplan that brings hospitality, residences, and a protected Art & Nature Park together.",
   "image": "/images/our-work/balam-reserve/cover.jpg",
+  "cutoutImage": "/images/projects/balam-reserve.png",
+  "imagePosition": "55% 63%",
+  "imageScale": 1.25,
   "slug": "balam-reserve",
+  "category": "websites",
   "siteUrl": "https://thebalamreserve.com/",
+  "playStoreUrl": "",
+  "appDownloadUrl": "",
+  "additionalCategories": [],
   "tags": [
     "Website",
     "Luxury Hospitality",
@@ -20,9 +27,5 @@
     "Explained the planned balance of 2,500 development acres and 7,000 conservation acres",
     "Organized masterplan, Art & Nature Park, sustainability, and investment information into dedicated sections",
     "Made project inquiries easy to find for qualified visitors"
-  ],
-  "category": "websites",
-  "playStoreUrl": "",
-  "appDownloadUrl": "",
-  "additionalCategories": []
+  ]
 }

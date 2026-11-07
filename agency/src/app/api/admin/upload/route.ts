@@ -41,11 +41,13 @@ export async function POST(req: NextRequest) {
     await fs.writeFile(filePath, buffer);
 
     const publicUrl = `/images/${subfolder.replace(/\\/g, "/")}/${originalName}`;
+    const cacheBustedUrl = `${publicUrl}?v=${Date.now()}`;
 
     return NextResponse.json({
       success: true,
-      url: publicUrl,
-      path: publicUrl,
+      url: cacheBustedUrl,
+      path: cacheBustedUrl,
+      rawPath: publicUrl,
       filename: originalName,
       size: buffer.length,
     });

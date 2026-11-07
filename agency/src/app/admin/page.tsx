@@ -6,6 +6,7 @@ import Logo from "@/components/ui/logo";
 import type { OurWorkPageSettings } from "@/lib/schemas/our-work-page-settings";
 import BrandLogosEditor from "@/components/admin/brand-logos-editor";
 import WorkCategoriesEditor from "@/components/admin/work-categories-editor";
+import ImageFocalScaleSelector from "@/components/admin/image-focal-scale-selector";
 
 type Tab = "our-work" | "featured-work" | "headers" | "blog" | "services" | "team" | "testimonials" | "site-config" | "upload";
 
@@ -133,6 +134,8 @@ export default function AdminPage() {
 
   // Page Headers state & focal position
   const [selectedHeaderKey, setSelectedHeaderKey] = useState<"home" | "about" | "our-work">("home");
+  const [headersSection, setHeadersSection] = useState<"banners" | "portfolio">("banners");
+  const [selectedPortfolioSlug, setSelectedPortfolioSlug] = useState<string>("dashit");
   const [headersData, setHeadersData] = useState<{
     home: { image: string; objectPosition: string; alt?: string };
     about: { image: string; objectPosition: string; alt?: string };
@@ -142,6 +145,24 @@ export default function AdminPage() {
     about: { image: "/images/headers/about-main.webp", objectPosition: "46% 36%", alt: "Modern office lobby" },
     "our-work": { image: "/images/headers/our-work-main.webp", objectPosition: "75% 53%", alt: "Our Work" },
   });
+
+  const updatePortfolioFramingInHeaders = (slug: string, updates: { position?: string; scale?: number; image?: string; cutoutImage?: string }) => {
+    setAllWorkProjects((prev) =>
+      prev.map((item) => {
+        if (item.slug === slug) {
+          const nextData = {
+            ...item.data,
+            ...(updates.position !== undefined ? { imagePosition: updates.position } : {}),
+            ...(updates.scale !== undefined ? { imageScale: updates.scale } : {}),
+            ...(updates.cutoutImage !== undefined ? { cutoutImage: updates.cutoutImage } : {}),
+            ...(updates.image !== undefined ? { image: updates.image } : {}),
+          };
+          return { ...item, data: nextData };
+        }
+        return item;
+      })
+    );
+  };
 
   const parsePosition = (posStr: string = "50% 50%") => {
     const parts = posStr.trim().split(/\s+/);
@@ -322,7 +343,7 @@ export default function AdminPage() {
       case "featured-work":
         return "Homepage Featured Work";
       case "headers":
-        return "Page Headers";
+        return headersSection === "portfolio" ? "Portfolio Image Framing" : "Page Headers & Hero Framing";
       case "blog":
         return "Blog Posts";
       case "services":
@@ -539,12 +560,19 @@ export default function AdminPage() {
         setFeaturedSlugs(slugs);
         setRawJsonText(JSON.stringify(slugs, null, 2));
       } else if (tab === "headers") {
-        const res = await fetch("/api/admin/content?type=site&slug=headers");
-        const data = await res.json();
+        const [headersRes, workRes] = await Promise.all([
+          fetch("/api/admin/content?type=site&slug=headers"),
+          fetch("/api/admin/content?type=our-work"),
+        ]);
+        const data = await headersRes.json();
+        const workData = await workRes.json();
         if (requestVersion !== tabLoadVersion.current) return;
         if (data && data.home) {
           setHeadersData(data);
           updateEditForm(data);
+        }
+        if (Array.isArray(workData)) {
+          setAllWorkProjects(workData);
         }
         setSelectedSlug("headers");
       } else if (tab === "site-config") {
@@ -696,10 +724,11 @@ export default function AdminPage() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Upload failed");
 
-      const uploadedUrl = result.url || result.path;
-      if (!uploadedUrl) {
+      const rawUrl = result.url || result.path;
+      if (!rawUrl) {
         throw new Error("Upload succeeded but no image URL was returned");
       }
+      const uploadedUrl = rawUrl.includes("?v=") ? rawUrl : `${rawUrl}?v=${Date.now()}`;
 
       showToast(`Uploaded ${result.filename || file.name}`);
 
@@ -713,6 +742,43 @@ export default function AdminPage() {
     } finally {
       setUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
+      if (e.target) e.target.value = "";
+    }
+  };
+
+  const handleCutoutUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("section", "projects");
+      formData.append("category", "projects");
+
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Upload failed");
+
+      const rawUrl = result.url || result.path;
+      if (!rawUrl) {
+        throw new Error("Upload succeeded but no image URL was returned");
+      }
+      const uploadedUrl = rawUrl.includes("?v=") ? rawUrl : `${rawUrl}?v=${Date.now()}`;
+
+      showToast(`Uploaded cutout ${result.filename || file.name}`);
+      if (editForm && typeof editForm === "object") {
+        updateEditForm({ ...editForm, cutoutImage: uploadedUrl });
+      }
+    } catch (err) {
+      showToast((err as Error).message, "error");
+    } finally {
+      setUploading(false);
       if (e.target) e.target.value = "";
     }
   };
@@ -942,32 +1008,51 @@ export default function AdminPage() {
   };
 
   const saveHeaders = async () => {
-    let dataToSave = headersData;
-    if (isJsonMode) {
-      try {
-        dataToSave = JSON.parse(rawJsonText);
-      } catch (err) {
-        showToast("Invalid JSON: " + (err as Error).message, "error");
-        return;
-      }
-    }
-
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/content", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "site",
-          slug: "headers",
-          data: dataToSave,
-        }),
-      });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || "Save failed");
-      showToast("Page headers updated successfully!");
-      setHeadersData(dataToSave);
-      setRawJsonText(JSON.stringify(dataToSave, null, 2));
+      if (headersSection === "portfolio") {
+        const projectItem = allWorkProjects.find((p) => p.slug === selectedPortfolioSlug);
+        if (projectItem) {
+          const res = await fetch("/api/admin/content", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              type: "our-work",
+              slug: projectItem.slug,
+              data: projectItem.data,
+            }),
+          });
+          const result = await res.json();
+          if (!res.ok) throw new Error(result.error || "Save failed");
+          showToast(`Saved framing for ${projectItem.data?.title || projectItem.slug}!`);
+        }
+      } else {
+        let dataToSave = headersData;
+        if (isJsonMode) {
+          try {
+            dataToSave = JSON.parse(rawJsonText);
+          } catch (err) {
+            showToast("Invalid JSON: " + (err as Error).message, "error");
+            setLoading(false);
+            return;
+          }
+        }
+
+        const res = await fetch("/api/admin/content", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "site",
+            slug: "headers",
+            data: dataToSave,
+          }),
+        });
+        const result = await res.json();
+        if (!res.ok) throw new Error(result.error || "Save failed");
+        showToast("Page headers updated successfully!");
+        setHeadersData(dataToSave);
+        setRawJsonText(JSON.stringify(dataToSave, null, 2));
+      }
     } catch (err) {
       showToast((err as Error).message, "error");
     } finally {
@@ -1735,6 +1820,54 @@ export default function AdminPage() {
             </div>
           ) : activeTab === "headers" ? (
             <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
+              {/* Section Mode Toggle: Page Hero Banners vs Portfolio Cutouts */}
+              <div style={{
+                display: "flex",
+                gap: "0.5rem",
+                backgroundColor: "#f4f5f7",
+                padding: "0.4rem",
+                borderRadius: "100rem",
+                width: "fit-content",
+                border: "1px solid #e5e7eb",
+              }}>
+                <button
+                  type="button"
+                  onClick={() => setHeadersSection("banners")}
+                  style={{
+                    padding: "0.5rem 1.25rem",
+                    borderRadius: "100rem",
+                    border: "none",
+                    backgroundColor: headersSection === "banners" ? "var(--black, #171717)" : "transparent",
+                    color: headersSection === "banners" ? "#ffffff" : "#4b5563",
+                    fontWeight: 700,
+                    fontSize: "0.85rem",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  Page Hero Banners (3)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setHeadersSection("portfolio")}
+                  style={{
+                    padding: "0.5rem 1.25rem",
+                    borderRadius: "100rem",
+                    border: "none",
+                    backgroundColor: headersSection === "portfolio" ? "var(--black, #171717)" : "transparent",
+                    color: headersSection === "portfolio" ? "#ffffff" : "#4b5563",
+                    fontWeight: 700,
+                    fontSize: "0.85rem",
+                    cursor: "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  Our Works Portfolio Images (7)
+                </button>
+              </div>
+
+              {headersSection === "banners" ? (
+                <>
               {/* Hero Selection Cards */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
                 {[
@@ -2113,6 +2246,157 @@ export default function AdminPage() {
                   </div>
                 );
               })()}
+                </>
+              ) : (
+                /* Portfolio Project Cutouts Framing Editor */
+                <>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "0.85rem" }}>
+                    {[
+                      { slug: "dashit", label: "DASHit" },
+                      { slug: "dreamcabs", label: "DreamCabs" },
+                      { slug: "pockethost", label: "PocketHost" },
+                      { slug: "mersh-kashmir", label: "Mersh Kashmir" },
+                      { slug: "soulspeed-mc", label: "SoulSpeed MC" },
+                      { slug: "wolf-adventures-kashmir", label: "Wolf Adventures" },
+                      { slug: "balam-reserve", label: "Balam Reserve" },
+                    ].map((item) => {
+                      const isSelected = selectedPortfolioSlug === item.slug;
+                      const project = allWorkProjects.find((p) => p.slug === item.slug);
+                      return (
+                        <button
+                          key={item.slug}
+                          type="button"
+                          onClick={() => setSelectedPortfolioSlug(item.slug)}
+                          style={{
+                            padding: "1rem 1.1rem",
+                            borderRadius: "16px",
+                            border: isSelected ? "2px solid var(--black, #171717)" : "1px solid #e5e7eb",
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            transition: "all 0.15s ease",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "0.35rem",
+                          }}
+                        >
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <span style={{ fontWeight: 700, fontSize: "0.9rem", color: isSelected ? "#111827" : "#374151" }}>
+                              {item.label}
+                            </span>
+                            {isSelected && (
+                              <span style={{
+                                backgroundColor: "var(--green, #cbfb45)",
+                                color: "var(--black, #171717)",
+                                fontSize: "0.65rem",
+                                fontWeight: 800,
+                                padding: "0.15rem 0.5rem",
+                                borderRadius: "100rem",
+                                textTransform: "uppercase"
+                              }}>
+                                Active
+                              </span>
+                            )}
+                          </div>
+                          <span style={{ fontSize: "0.75rem", color: "#9ca3af" }}>
+                            {project?.data?.imagePosition || "50% 50%"} • {project?.data?.imageScale ? `${project.data.imageScale}x` : "1.0x"}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {(() => {
+                    const currentProject = allWorkProjects.find((p) => p.slug === selectedPortfolioSlug) || allWorkProjects[0];
+                    if (!currentProject) {
+                      return (
+                        <div style={{ backgroundColor: "#ffffff", borderRadius: "24px", padding: "2rem", border: "1px solid #e5e7eb", textAlign: "center", color: "#6b7280" }}>
+                          Loading portfolio projects...
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div style={{
+                        backgroundColor: "#ffffff",
+                        borderRadius: "32px",
+                        border: "1px solid #e5e7eb",
+                        padding: "2.5rem 3rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1.75rem",
+                      }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+                          <div>
+                            <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#111827", margin: 0 }}>
+                              {currentProject.data?.title || currentProject.slug}
+                            </h2>
+                            <p style={{ fontSize: "0.85rem", color: "#6b7280", margin: "0.25rem 0 0 0" }}>
+                              Adjust Position (X/Y) and Scale/Zoom inside the portfolio card visual container
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => saveHeaders()}
+                            style={{
+                              backgroundColor: "var(--green, #cbfb45)",
+                              color: "var(--black, #171717)",
+                              border: "none",
+                              borderRadius: "100rem",
+                              padding: "0.6rem 1.4rem",
+                              fontSize: "0.85rem",
+                              fontWeight: 700,
+                              cursor: "pointer",
+                            }}
+                          >
+                            Save Framing
+                          </button>
+                        </div>
+
+                        <div>
+                          <label style={{ display: "block", fontSize: "0.825rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>
+                            Cutout Image Path
+                          </label>
+                          <input
+                            type="text"
+                            value={currentProject.data?.cutoutImage || ""}
+                            onChange={(e) => updatePortfolioFramingInHeaders(currentProject.slug, { cutoutImage: e.target.value })}
+                            placeholder={`/images/projects/${currentProject.slug}.png`}
+                            style={{
+                              width: "100%",
+                              padding: "0.85rem 1.2rem",
+                              borderRadius: "16px",
+                              border: "1px solid #e5e7eb",
+                              backgroundColor: "#ffffff",
+                              color: "#111827",
+                              fontSize: "0.95rem",
+                              fontWeight: 600,
+                              boxSizing: "border-box",
+                              outline: "none",
+                            }}
+                          />
+                        </div>
+
+                        <ImageFocalScaleSelector
+                          image={currentProject.data?.cutoutImage || `/images/projects/${currentProject.slug}.png`}
+                          alt={currentProject.data?.title || currentProject.slug}
+                          title={currentProject.data?.title || currentProject.slug}
+                          description={currentProject.data?.description || ""}
+                          tags={currentProject.data?.tags || []}
+                          blobColor={currentProject.data?.blobColor || "#EDE9FE"}
+                          blobRadius={currentProject.data?.blobRadius}
+                          position={currentProject.data?.imagePosition || "50% 50%"}
+                          scale={currentProject.data?.imageScale ?? 1}
+                          containerLabel="PORTFOLIO CARD CONTAINER"
+                          onChange={({ position, scale }) => {
+                            updatePortfolioFramingInHeaders(currentProject.slug, { position, scale });
+                          }}
+                        />
+                      </div>
+                    );
+                  })()}
+                </>
+              )}
             </div>
           ) : editForm ? (
             <div style={{
@@ -2187,14 +2471,23 @@ export default function AdminPage() {
                       />
                     </div>
 
-                    <div>
-                      <label htmlFor="work-image" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#374151", marginBottom: "0.45rem" }}>Cover Image Path</label>
-                      <div style={{ display: "flex", gap: "0.75rem" }}>
+                    {/* 1. Cover Image (Homepage 'See our work' & Case Study Header) */}
+                    <div style={{ backgroundColor: "#f9fafb", padding: "1.25rem 1.5rem", borderRadius: "20px", border: "1px solid #e5e7eb" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.35rem" }}>
+                        <label htmlFor="work-image" style={{ fontSize: "0.875rem", fontWeight: 700, color: "#111827" }}>
+                          1. Homepage & Case Study Cover Image
+                        </label>
+                        <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>
+                          Used on Homepage &apos;See our work&apos; cards and Case Study headers
+                        </span>
+                      </div>
+                      <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
                         <input
-                        id="work-image"
+                          id="work-image"
                           type="text"
                           value={editForm.image || ""}
                           onChange={(e) => updateEditForm({ ...editForm, image: e.target.value })}
+                          placeholder="/images/our-work/project/cover-optimized.webp"
                           style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
                         />
                         <input
@@ -2220,14 +2513,75 @@ export default function AdminPage() {
                             alignItems: "center"
                           }}
                         >
-                          {uploading ? "Uploading..." : "Upload New"}
+                          {uploading ? "Uploading..." : "Upload Cover"}
                         </label>
                       </div>
-                      {editForm.image && (
-                        <div style={{ marginTop: "0.75rem", borderRadius: "18px", overflow: "hidden", width: "140px", height: "75px", position: "relative", border: "1px solid #e5e7eb" }}>
-                          <Image src={editForm.image} alt="Preview" fill sizes="140px" style={{ objectFit: "cover" }} />
-                        </div>
-                      )}
+                    </div>
+
+                    {/* 2. Portfolio Cutout Mockup & Framing for /our-work */}
+                    <div style={{ backgroundColor: "#f9fafb", padding: "1.25rem 1.5rem", borderRadius: "20px", border: "1px solid #e5e7eb" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.35rem" }}>
+                        <label htmlFor="work-cutout-image" style={{ fontSize: "0.875rem", fontWeight: 700, color: "#111827" }}>
+                          2. Our Works Page Cutout Mockup & Framing
+                        </label>
+                        <span style={{ fontSize: "0.75rem", color: "#6b7280" }}>
+                          Transparent PNG mockup shown on /our-work cards
+                        </span>
+                      </div>
+                      <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem", marginBottom: "1.25rem" }}>
+                        <input
+                          id="work-cutout-image"
+                          type="text"
+                          value={editForm.cutoutImage || ""}
+                          onChange={(e) => updateEditForm({ ...editForm, cutoutImage: e.target.value })}
+                          placeholder={`/images/projects/${editForm.slug}.png`}
+                          style={{ flex: 1, padding: "0.85rem 1.2rem", backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", color: "#111827", fontSize: "0.95rem", fontWeight: 600, boxSizing: "border-box", outline: "none" }}
+                        />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleCutoutUpload}
+                          style={{ display: "none" }}
+                          id="cutout-field-upload"
+                        />
+                        <label
+                          htmlFor="cutout-field-upload"
+                          style={{
+                            padding: "0.85rem 1.5rem",
+                            backgroundColor: "var(--black, #171717)",
+                            color: "var(--white, #ffffff)",
+                            borderRadius: "100rem",
+                            cursor: "pointer",
+                            fontSize: "0.85rem",
+                            fontWeight: 600,
+                            whiteSpace: "nowrap",
+                            display: "inline-flex",
+                            alignItems: "center"
+                          }}
+                        >
+                          {uploading ? "Uploading..." : "Upload Cutout"}
+                        </label>
+                      </div>
+
+                      <ImageFocalScaleSelector
+                        image={editForm.cutoutImage || `/images/projects/${editForm.slug}.png`}
+                        alt={editForm.title || "Project preview"}
+                        title={editForm.title || "Project Title"}
+                        description={editForm.description || ""}
+                        tags={editForm.tags || (editForm.category ? [editForm.category] : [])}
+                        blobColor={editForm.blobColor || "#EDE9FE"}
+                        blobRadius={editForm.blobRadius}
+                        position={editForm.imagePosition || "50% 50%"}
+                        scale={editForm.imageScale ?? 1}
+                        containerLabel="OUR WORKS CARD PREVIEW"
+                        onChange={({ position, scale }) => {
+                          updateEditForm({
+                            ...editForm,
+                            ...(position !== undefined ? { imagePosition: position } : {}),
+                            ...(scale !== undefined ? { imageScale: scale } : {}),
+                          });
+                        }}
+                      />
                     </div>
 
                     <div>

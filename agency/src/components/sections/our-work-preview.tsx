@@ -11,6 +11,19 @@ function ArrowIcon() {
   );
 }
 
+const HOME_PAGE_OLD_COVER_IMAGES: Record<string, string> = {
+  "balam-reserve": "/images/our-work/balam-reserve/cover.jpg",
+  "dashit": "/images/our-work/dashit/cover-optimized.webp",
+  "dashit-app": "/images/our-work/dashit/cover-optimized.webp",
+  "dreamcabs": "/images/our-work/dreamcabs/cover-optimized.webp",
+  "dreamcabs-app": "/images/our-work/dreamcabs/cover-optimized.webp",
+  "mersh-kashmir": "/images/our-work/mersh-kashmir/cover-optimized.webp",
+  "pockethost": "/images/our-work/pockethost/cover-optimized.webp",
+  "pockethost-website": "/images/our-work/pockethost/cover-optimized.webp",
+  "soulspeed-mc": "/images/our-work/soulspeed-mc/cover-optimized.webp",
+  "wolf-adventures-kashmir": "/images/our-work/wolf-adventures-kashmir/cover-optimized.webp",
+};
+
 interface OurWorkPreviewProps {
   workProjects?: WorkProject[];
 }
@@ -68,7 +81,12 @@ export default function OurWorkPreview({
                               >
                                 <div className="project-image-wrapper">
                                   <Image
-                                    src={study.image || "/images/og/og-image.png"}
+                                    src={
+                                      (study.image && !study.image.startsWith("/images/projects/") ? study.image : null) ||
+                                      HOME_PAGE_OLD_COVER_IMAGES[study.slug] ||
+                                      study.image ||
+                                      "/images/og/og-image.png"
+                                    }
                                     alt={study.title}
                                     width={600}
                                     height={338}
