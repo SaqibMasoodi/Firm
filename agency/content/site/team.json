@@ -55,6 +55,16 @@
     }
   },
   {
+    "id": "mubashir",
+    "name": "Mubashir",
+    "role": "Senior Developer & Team Lead",
+    "bio": "Mubashir works across the stack and leads the development team. He likes building solid systems and helping turn ideas into working products.",
+    "image": "/images/team/mubashir/mubashir-editorial.webp",
+    "socials": {
+      "linkedin": "/404"
+    }
+  },
+  {
     "id": "humayun",
     "name": "Humayun",
     "role": "3D Visualization & Digital Art Specialist",
@@ -70,16 +80,6 @@
     "image": "/images/avatar.svg",
     "socials": {
       "linkedin": "https://www.linkedin.com/in/farhan-azad-958595257/"
-    }
-  },
-  {
-    "id": "mubashir",
-    "name": "Mubashir",
-    "role": "Senior Developer & Team Lead",
-    "bio": "Mubashir works across the stack and leads the development team. He likes building solid systems and helping turn ideas into working products.",
-    "image": "/images/team/mubashir/mubashir-editorial.webp",
-    "socials": {
-      "linkedin": "/404"
     }
   },
   {
