@@ -1,10 +1,10 @@
 [
   {
-    "id": "ifham",
-    "name": "Ifham",
-    "role": "Hardware Specialist",
-    "bio": "Ifham works with hardware, electronics, and prototypes. He enjoys building things, testing ideas, and figuring out how to make them work.",
-    "image": "/images/team/ifham/quiet-soldering-studio.webp",
+    "id": "afan",
+    "name": "Afaan",
+    "role": "Operations Manager",
+    "bio": "Afaan keeps things moving behind the scenes, from coordinating the team to making sure projects stay on track.",
+    "image": "/images/team/afan/biker.webp",
     "socials": {
       "linkedin": "/404",
       "twitter": "/404"
@@ -44,11 +44,11 @@
     }
   },
   {
-    "id": "afan",
-    "name": "Afaan",
-    "role": "Operations Manager",
-    "bio": "Afaan keeps things moving behind the scenes, from coordinating the team to making sure projects stay on track.",
-    "image": "/images/team/afan/biker.webp",
+    "id": "ifham",
+    "name": "Ifham",
+    "role": "Hardware Specialist",
+    "bio": "Ifham works with hardware, electronics, and prototypes. He enjoys building things, testing ideas, and figuring out how to make them work.",
+    "image": "/images/team/ifham/quiet-soldering-studio.webp",
     "socials": {
       "linkedin": "/404",
       "twitter": "/404"
