@@ -22,14 +22,14 @@
     }
   },
   {
-    "id": "afan",
-    "name": "Afaan",
-    "role": "Operations Manager",
-    "bio": "Afaan keeps things moving behind the scenes, from coordinating the team to making sure projects stay on track.",
-    "image": "/images/team/afan/biker.webp",
+    "id": "aman-kar",
+    "name": "Aman Kar",
+    "role": "Full Stack Developer",
+    "bio": "Aman builds scalable web applications across the stack. He focuses on clean code, efficient problem solving, and exploring new technologies.",
+    "image": "/images/avatar.svg",
     "socials": {
-      "linkedin": "/404",
-      "twitter": "/404"
+      "linkedin": "https://linkedin.com/in/aman05",
+      "github": "https://github.com/amankar05"
     }
   },
   {
@@ -38,6 +38,17 @@
     "role": "Design Lead",
     "bio": "Saqib cares about how things look, feel, and work. He creates clean, practical designs that make ideas easy to understand.",
     "image": "/images/team/saqib/saqib.webp",
+    "socials": {
+      "linkedin": "/404",
+      "twitter": "/404"
+    }
+  },
+  {
+    "id": "afan",
+    "name": "Afaan",
+    "role": "Operations Manager",
+    "bio": "Afaan keeps things moving behind the scenes, from coordinating the team to making sure projects stay on track.",
+    "image": "/images/team/afan/biker.webp",
     "socials": {
       "linkedin": "/404",
       "twitter": "/404"
@@ -78,17 +89,6 @@
     "bio": "Hazar works with AI, machine learning, and data. He enjoys exploring new models and building useful things with modern AI.",
     "image": "/images/avatar.svg",
     "socials": {}
-  },
-  {
-    "id": "aman-kar",
-    "name": "Aman Kar",
-    "role": "Full Stack Developer",
-    "bio": "Aman builds scalable web applications across the stack. He focuses on clean code, efficient problem solving, and exploring new technologies.",
-    "image": "/images/avatar.svg",
-    "socials": {
-      "linkedin": "https://linkedin.com/in/aman05",
-      "github": "https://github.com/amankar05"
-    }
   },
   {
     "id": "member-mv683l5i-3rn0",
